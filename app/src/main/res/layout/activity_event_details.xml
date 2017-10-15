@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:orientation="vertical"
+                android:layout_weight="1.2"
+                android:weightSum="2.2">
+
+                <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.1"
+                    android:scrollbarStyle="insideInset" />
+
+                <LinearLayout
+                    android:id="@+id/layoutDots"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dots_height"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:layout_weight=".1"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/event_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="event title"
+                    android:textColor="@color/GrayDark"
+                    android:textSize="@dimen/font_size_xlarge"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/event_item_date_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/event_item_date_indicator"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_calender_from_to_page_eventdetails" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/From_"
+                        android:textSize="@dimen/font_size_med" />
+
+                    <TextView
+                        android:id="@+id/event_item_date_from"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/font_size_med" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/To_"
+                        android:textSize="@dimen/font_size_med" />
+
+                    <TextView
+                        android:id="@+id/event_item_date_to"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_8dp"
+                        android:layout_marginRight="@dimen/margin_8dp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/font_size_med" />
+
+                    <TextView
+                        android:id="@+id/tv_event_item_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_8dp"
+                        android:layout_marginRight="@dimen/margin_8dp"
+                        android:layout_weight="1"
+                        android:text="10:00AM"
+                        android:textSize="@dimen/font_size_med" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/event_item_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_location_page_eventsdetails"
+                    android:drawablePadding="@dimen/d10"
+                    android:drawableStart="@drawable/ic_location_page_eventsdetails"
+                    android:gravity="start|top"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:text=""
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/font_size_med" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:text="@string/description"
+                    android:textColor="@color/GrayDark"
+                    android:textSize="@dimen/font_size_large"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/event_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:textColor="@color/GrayLight"
+                    android:textSize="15sp" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/download_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_8dp"
+                        android:layout_marginLeft="@dimen/margin_16dp"
+                        android:layout_marginRight="@dimen/margin_8dp"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_download" />
+
+                    <TextView
+                        android:id="@+id/download_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Download_file"
+                        android:textColor="@color/GreenLight"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center|bottom"
+                    android:layout_weight=".4"
+                    android:gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_share_event_detail" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:layout_marginLeft="@dimen/margin_small_4dp"
+                        android:layout_marginStart="@dimen/margin_small_4dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center|center_horizontal"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_call_event_detail" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_small_4dp"
+                        android:layout_marginStart="@dimen/margin_small_4dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center|center_horizontal"
+                            android:contentDescription="@null"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_mail_event_details" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_small_4dp"
+                        android:layout_marginStart="@dimen/margin_small_4dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_mark" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+
+</LinearLayout>

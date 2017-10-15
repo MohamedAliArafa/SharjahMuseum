@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+
+    android:orientation="vertical">
+
+
+    <include layout="@layout/layout_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/box_admian"
+            android:hint="@string/your_email"
+            android:maxLines="2"
+            android:padding="2dp"
+            android:text=""
+            android:textColor="@color/GrayDark"
+            android:textColorHint="@color/GrayLight"
+            android:textSize="@dimen/font_size_large" />
+
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText
+            android:id="@+id/tv_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@drawable/box_data"
+            android:hint="@string/your_review"
+            android:padding="2dp"
+            android:text=""
+            android:textColor="@color/GrayDark"
+            android:textColorHint="@color/GrayLight"
+            android:textSize="@dimen/font_size_large" />
+
+    </LinearLayout>
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:paddingEnd="40dp"
+        android:paddingStart="40dp"
+        android:text="@string/rate_your_experience"
+        android:textColor="@color/GrayDark"
+        android:textColorHint="@color/GrayLight"
+        android:textSize="@dimen/font_size_large" />
+
+    <RatingBar
+        android:id="@+id/bar_review_stars"
+        android:layout_width="wrap_content"
+        style="@style/myRatingBar"
+        android:layout_marginStart="40dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="@dimen/d4"
+        android:stepSize="1.0"
+        android:numStars="5"
+        android:layout_marginEnd="40dp" />
+
+    <Button
+        android:id="@+id/btn_post"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_post"
+        android:text="@string/post"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:textAllCaps="false"
+        android:textColor="@color/White" />
+</LinearLayout>

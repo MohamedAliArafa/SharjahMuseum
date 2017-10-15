@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <AutoCompleteTextView
+        android:id="@+id/auto_complete_search_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:background="@drawable/search_bar"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawableStart="@drawable/ic_search"
+        android:paddingLeft="@dimen/d10"
+        android:paddingRight="@dimen/d10" />
+
+    <LinearLayout
+        android:id="@+id/filter_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/auto_complete_search_event"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@id/event_switch_to_calender"
+        android:layout_toStartOf="@id/event_switch_to_calender"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:gravity="center"
+            android:text="Filter"
+            android:textColor="@color/GreenLight" />
+
+
+        <ImageView
+            android:id="@+id/arrowIV"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_dropdown_tap" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="2dp"
+            android:background="@color/GrayLight" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/event_switch_to_calender"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/filter_layout"
+        android:layout_marginEnd="@dimen/d60"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="@dimen/d60"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_calender_tap" />
+
+    <LinearLayout
+        android:id="@+id/main_filter_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/auto_complete_search_event"
+        android:layout_alignLeft="@id/filter_layout"
+        android:layout_alignRight="@id/auto_complete_search_event"
+        android:layout_alignStart="@id/filter_layout"
+        android:layout_below="@id/filter_layout"
+        android:background="@drawable/event_share_layout_background"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:visibility="gone">
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/header_recycler"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--android:layout_height="wrap_content"/>-->
+        <!--<LinearLayout-->
+        <!--android:layout_margin="@dimen/margin_8dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/event_layout"-->
+        <!--android:orientation="horizontal">-->
+        <!--<ImageView-->
+        <!--android:layout_width="15dp"-->
+        <!--android:layout_height="15dp"-->
+        <!--android:background="@drawable/event_color_pallete_indicator_events"-->
+        <!--android:layout_marginEnd="@dimen/margin_8dp"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Events"/>-->
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+        <!--android:layout_margin="@dimen/margin_8dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/exhibition_layout"-->
+        <!--android:orientation="horizontal">-->
+        <!--<ImageView-->
+        <!--android:layout_width="15dp"-->
+        <!--android:layout_height="15dp"-->
+        <!--android:background="@drawable/event_color_pallete_indicator_exhibtions"-->
+        <!--android:layout_marginEnd="@dimen/margin_8dp"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Exhibtions"/>-->
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+        <!--android:layout_margin="@dimen/margin_8dp"-->
+        <!--android:id="@+id/programmes_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+        <!--<ImageView-->
+        <!--android:layout_width="15dp"-->
+        <!--android:layout_height="15dp"-->
+        <!--android:background="@drawable/event_color_pallete_indicator_programmes"-->
+        <!--android:layout_marginEnd="@dimen/margin_8dp"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Programmes"/>-->
+        <!--</LinearLayout>-->
+    </LinearLayout>
+
+</RelativeLayout>

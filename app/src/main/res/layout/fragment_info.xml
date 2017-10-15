@@ -1,0 +1,126 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/d40"
+    tools:context="com.asgatech.sharjahmuseums.Fragments.InfoFragment">
+
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/d20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/call_img"
+        android:padding="7dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/event_share_layout_background"
+        android:src="@drawable/ic_call"/>
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/call_txt"
+        android:layout_toEndOf="@+id/call_img"
+        android:layout_alignTop="@id/call_img"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/d4"
+        android:text="971 20102456878"
+        />
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/d10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_img"
+        android:padding="7dp"
+
+        android:layout_below="@id/call_img"
+        android:background="@drawable/event_share_layout_background"
+        android:src="@drawable/ic_mail"/>
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_txt"
+        android:layout_toEndOf="@+id/email_img"
+        android:layout_marginTop="@dimen/d2"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:text="email@test.com"
+        android:layout_alignTop="@id/email_img"
+        />
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/d10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_img"
+        android:padding="6dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:layout_below="@id/email_img"
+        android:background="@drawable/event_share_layout_background"
+        android:src="@drawable/ic_location"/>
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_txt"
+        android:layout_toEndOf="@+id/location_img"
+        android:layout_marginTop="@dimen/d2"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:text="Location"
+        android:layout_alignTop="@id/location_img"
+        />
+
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_main"
+        android:text="@string/lorem"
+        android:layout_marginTop="@dimen/d10"
+        android:layout_below="@id/location_img"
+        />
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/d30"
+        android:layout_below="@id/location_main">
+
+        <com.asgatech.sharjahmuseums.Tools.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d14"
+            android:id="@+id/fbImg"
+            android:src="@drawable/ic_facebook"/>
+
+        <com.asgatech.sharjahmuseums.Tools.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d14"
+            android:id="@+id/twitterImg"
+            android:src="@drawable/ic_tweeter"/>
+
+        <com.asgatech.sharjahmuseums.Tools.CircleImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/instaImg"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d14"
+            android:src="@drawable/ic_instagram"/>
+
+        <com.asgatech.sharjahmuseums.Tools.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/youtubeImg"
+            android:src="@drawable/ic_youtube"/>
+    </LinearLayout>
+</RelativeLayout>

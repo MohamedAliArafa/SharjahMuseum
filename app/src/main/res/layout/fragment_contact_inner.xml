@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.asgatech.sharjahmuseums.Fragments.ContactInnerFragment">
+
+
+
+    <EditText
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:gravity="center|start"
+        android:paddingStart="5dp"
+        android:background="@drawable/event_share_layout_background"
+        android:layout_marginEnd="@dimen/d20"
+        android:layout_marginStart="@dimen/d20"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:id="@+id/name_et"/>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:gravity="center|start"
+        android:inputType="textEmailAddress"
+        android:paddingStart="5dp"
+        android:background="@drawable/event_share_layout_background"
+        android:layout_marginEnd="@dimen/d20"
+        android:layout_marginStart="@dimen/d20"
+        android:hint="@string/email"
+        android:id="@+id/email_et"/>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/event_share_layout_background"
+        android:layout_marginEnd="@dimen/d20"
+        android:gravity="center|start"
+        android:paddingStart="5dp"
+        android:inputType="phone"
+        android:layout_marginStart="@dimen/d20"
+        android:hint="@string/phone"
+        android:id="@+id/phone_et"/>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/event_share_layout_background"
+        android:layout_marginEnd="@dimen/d20"
+        android:inputType="text"
+        android:layout_marginStart="@dimen/d20"
+        android:gravity="top|start"
+        android:paddingTop="5dp"
+        android:paddingStart="5dp"
+        android:hint="@string/message"
+        android:id="@+id/message_et"/>
+    
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/contact_button_green"
+        android:layout_marginTop="@dimen/d36"
+        android:layout_marginEnd="@dimen/d20"
+        android:text="@string/send"
+        android:textAllCaps="false"
+        android:textColor="@color/White"
+        android:layout_marginStart="@dimen/d20"
+        android:id="@+id/send_btn"/>
+
+</LinearLayout>

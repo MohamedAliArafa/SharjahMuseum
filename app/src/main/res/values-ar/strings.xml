@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">SharjahMuseums</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="vision">الرؤية</string>
+    <string name="mission">الرسالة</string>
+    <string name="policy">سياسات قسم متاحف الشارقة</string>
+    <!--side menu-->
+    <string name="home">الرئيسية</string>
+    <string name="our_museums">متاحفنا</string>
+    <string name="plan_your_visit">خطط زيارتك</string>
+    <string name="Events">أحداث</string>
+    <string name="near_by_facilities">المرافق القريبة</string>
+    <string name="education">التعليم</string>
+    <string name="about_us">معلومات عنا</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="setting">الاعدادات</string>
+    <string name="demo">عرض</string>
+
+    <string name="description">الوصف</string>
+    <string name="Download_file">تنزيل الملف</string>
+    <string name="From_">من:</string>
+    <string name="To_">:إلى</string>
+    <string name="addto_Calender">إضافه إلى التقويم</string>
+
+    <!--errors-->
+    <string name="no_connection">لا يوجد انترنت حاليا برجاء المحاولة فى وقت اخر</string>
+    <!-- museums details -->
+    <string name="about_museums">عن المتحف</string>
+    <string name="opening_hours">ساعات العمل</string>
+    <string name="entry_fees">رسوم الدخول</string>
+    <string name="high_lights">الابرز</string>
+    <string name="our_facilities">منشأتنا</string>
+    <string name="closed">مغلق</string>
+    <string name="opened">مفتوح</string>
+    <string name="language">اللغه</string>
+    <string name="arabic">العربيه</string>
+
+    <!--nearby-->
+    <string name="cafe">كافيه</string>
+    <string name="resturant">مطاعم</string>
+    <string name="atm">ماكينة الصراف الآلي</string>
+    <string name="banks">البنوك</string>
+    <string name="book_store">متاجر الكتب</string>
+    <string name="parkings">مواقف سيارات</string>
+    <string name="bus_station">محطات الحافلات </string>
+    <string name="airports">المطارات</string>
+
+    <!--plan_visits-->
+    <string name="book_nw">احجز الان</string>
+    <string name="Group_visits">زيارات المجموعة</string>
+
+    <!--titles-->
+    <string name="now">الأن</string>
+    <string name="sharjah_museums_department">Sharjah Museums Department</string>
+
+    <!--addRate-->
+    <string name="rate_your_experience">قيم تجربتك </string>
+    <string name="post">نشر</string>
+    <string name="your_email">عنوانك البريدي</string>
+    <string name="your_review">تعليقك</string>
+
+    <!--//messages-->
+    <string name="no_notification">لا يوجد اشعارات لك فى الوقت الحالى </string>
+</resources>

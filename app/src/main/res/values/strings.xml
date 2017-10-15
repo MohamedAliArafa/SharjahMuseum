@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">SharjahMuseums</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="vision">Vision</string>
+    <string name="mission">Mission</string>
+    <string name="policy">Policy</string>
+    <!--side menu-->
+    <string name="home">الرئيسية</string>
+    <string name="our_museums">متاحفنا</string>
+    <string name="plan_your_visit">خطط زيارتك</string>
+    <string name="Events">أحداث</string>
+    <string name="near_by_facilities">المرافق القريبة</string>
+    <string name="education">التعليم</string>
+    <string name="about_us">معلومات عنا</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="setting">الاعدادات</string>
+    <string name="demo">عرض</string>
+
+    <string name="description">Description</string>
+    <string name="Download_file">Download file</string>
+    <!-- errors-->
+    <string name="no_connection">لا يوجد انترنت حاليا برجاء المحاولة فى وقت اخر</string>
+
+    <!-- museums details -->
+    <string name="about_museums">عن المتحف</string>
+    <string name="opening_hours">ساعات العمل</string>
+    <string name="entry_fees">رسوم الدخول</string>
+    <string name="high_lights">الابرز</string>
+    <string name="our_facilities">منشأتنا</string>
+    <string name="closed">مغلق</string>
+    <string name="opened">مفتوح</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="arabic">العربيه</string>
+
+    <!--nearby-->
+    <string name="cafe">cafe</string>
+    <string name="resturant">Restaurants</string>
+    <string name="atm">ATM</string>
+    <string name="banks">Banks</string>
+    <string name="book_store">Book stores</string>
+    <string name="parkings">Parkings</string>
+    <string name="bus_station">Bus stations</string>
+    <string name="airports">Airports</string>
+
+    <!--plan_visits-->
+    <string name="book_nw">Book now</string>
+    <string name="Group_visits">Group Visits</string>
+
+    <!--titles-->
+    <string name="now">Now</string>
+    <string name="sharjah_museums_department">Sharjah Museums Department</string>
+
+    <!--//messages-->
+    <string name="no_notification">You do not have any notifications at this time</string>
+
+    <!--addRate-->
+    <string name="rate_your_experience">Rate your experience</string>
+    <string name="post">Post</string>
+    <string name="your_email">Your Email</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s
+    </string>
+    <string name="title_activity_view_location_map">ViewLocationMapActivity</string>
+    <string name="title_activity_add_review">AddReviewActivity</string>
+</resources>

@@ -1,0 +1,117 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+
+    android:orientation="vertical"
+  >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="40dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/notifications"
+        android:textColor="@color/GrayDark"
+        android:textAlignment="viewStart"
+        android:layout_weight="1"
+        android:gravity="start" />
+    <Switch
+        android:id="@+id/togle_btn_notifi_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        style="@style/Widget.AppCompat.CompoundButton.Switch"
+
+        />
+</LinearLayout>
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/language"
+            android:textColor="@color/GrayDark"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="start"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:weightSum="1">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+
+                android:orientation="vertical">
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:id="@+id/change_language_radio_groub"
+
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".2"
+                        android:id="@+id/change_language_english_radio_button"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight=".2"
+                        android:id="@+id/change_language_arabic_radio_button"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:orientation="vertical">
+
+                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@string/english"
+                    android:layout_gravity="center"
+
+                    android:layout_weight=".5"
+
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/GrayDark" />
+
+                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@string/arabic"
+                    android:layout_gravity="center"
+                    android:layout_weight=".5"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/GrayDark" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

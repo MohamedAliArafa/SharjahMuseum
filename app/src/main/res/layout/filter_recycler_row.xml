@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+
+    android:orientation="horizontal">
+
+    <!--<com.asgatech.sharjahmuseums.Tools.CircularTextView-->
+        <!--android:id="@+id/pallete_for_filter_item"-->
+        <!--android:layout_width="8dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:background="@drawable/event_color_pallete_indicator_programmes"-->
+        <!--android:layout_height="8dp" />-->
+
+    <com.asgatech.sharjahmuseums.Tools.CircleImageView
+        android:id="@+id/pallete_for_filter_item"
+        android:layout_width="8dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/event_color_pallete_indicator_programmes"
+        android:layout_height="8dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="4dp"
+        android:textSize="@dimen/font_size_med"
+        android:textColor="@color/GrayLight"
+        android:id="@+id/name_for_filter_item"
+        android:layout_marginLeft="4dp" />
+
+</LinearLayout>

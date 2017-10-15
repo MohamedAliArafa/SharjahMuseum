@@ -1,0 +1,228 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:visibility="gone"
+            android:id="@+id/loading_layout"
+            layout="@layout/loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+            <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_alignParentTop="true" />
+
+            <LinearLayout
+                android:id="@+id/layoutDots"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dots_height"
+                android:layout_below="@id/viewpager"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"></LinearLayout>
+
+            <TextView
+                android:id="@+id/event_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/layoutDots"
+                android:text="event title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/event_date_indicator"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/event_title"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_toEndOf="@id/event_item_image"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_calender_from_to_page_eventdetails" />
+
+            <LinearLayout
+                android:id="@+id/event_date_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/event_date_indicator"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_toEndOf="@id/event_date_indicator"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/event_item_date_from"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:layout_weight="1"
+                    android:text="From :18/10/2017" />
+
+                <TextView
+                    android:id="@+id/event_item_date_to"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:layout_weight="1"
+                    android:text="To :18/10/2017" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/event_item_place_indicator"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/event_date_layout"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_toEndOf="@id/event_item_image"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_location_page_eventsdetails" />
+
+            <TextView
+                android:id="@+id/event_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/event_item_place_indicator"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_toEndOf="@id/event_item_place_indicator"
+                android:text="saft elenab  -kom hamada behira" />
+
+            <TextView
+                android:id="@+id/event_description_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_place"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:text="Description"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/event_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_description_title"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="Description"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/download_indicator"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/event_description"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_toEndOf="@id/event_item_image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_download" />
+
+            <TextView
+                android:layout_marginStart="4dp"
+                android:id="@+id/download_text"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/download_indicator"
+                android:layout_toEndOf="@id/download_indicator"
+                android:text="Download file"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/actions"
+            android:layout_below="@id/download_text"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/share"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/event_share_layout_background">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center|center_horizontal"
+                    android:src="@drawable/ic_share_btn"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:id="@+id/call"
+                android:background="@drawable/event_share_layout_background">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center|center_horizontal"
+                    android:src="@drawable/ic_call"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:id="@+id/mail"
+                android:background="@drawable/event_share_layout_background">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center|center_horizontal"
+                    android:src="@drawable/ic_mail"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:id="@+id/mark"
+                android:background="@drawable/event_share_layout_background">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center|center_horizontal"
+                    android:src="@drawable/ic_mark"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</ScrollView>

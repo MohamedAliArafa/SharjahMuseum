@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:weightSum="2.5"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+    </LinearLayout>
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+        android:id="@+id/tv_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/no_notification"
+        android:visibility="gone" />
+
+    <com.asgatech.sharjahmuseums.Tools.CircleImageView
+        android:id="@+id/iv_add_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_add_review_circle"
+        android:layout_gravity="bottom|end"
+        />
+</FrameLayout>
+
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|end"-->
+
+    <!--android:background="@color/GrayLight"-->
+    <!--android:src="@drawable/ic_admain" />-->
+
+
+</LinearLayout>
