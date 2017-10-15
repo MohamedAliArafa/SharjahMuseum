@@ -315,6 +315,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         }, 3000, 3000);
 
 
+
         new CoverFlow.Builder().with(viewPager)
                 .scale(0.5f)
                 .pagerMargin(R.dimen.overlap)
