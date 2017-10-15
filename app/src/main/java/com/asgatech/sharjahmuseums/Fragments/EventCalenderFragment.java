@@ -11,19 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Adapters.AutoCompleteAdapter;
-import com.asgatech.sharjahmuseums.Adapters.EventsAdapter;
 import com.asgatech.sharjahmuseums.Fragments.CalenderHelper.EventDecorator;
 import com.asgatech.sharjahmuseums.Fragments.CalenderHelper.OneDayDecorator;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
-import com.asgatech.sharjahmuseums.Tools.CircularTextView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -31,7 +27,6 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
-import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,11 +40,11 @@ import okhttp3.ResponseBody;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventCalenderFragment extends Fragment implements OnDateSelectedListener, OnMonthChangedListener{
+public class EventCalenderFragment extends Fragment implements OnDateSelectedListener, OnMonthChangedListener {
 
     @BindView(R.id.calendarView)
     MaterialCalendarView widget;
-    
+
     @BindView(R.id.main_filter_layout)
     LinearLayout mainFilterLayout;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
@@ -64,7 +59,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event_calender, container, false);
-        ButterKnife.bind(this , view);
+        ButterKnife.bind(this, view);
 
         widget.setOnDateChangedListener(this);
         widget.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
@@ -142,17 +137,18 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
             CalendarDay day = CalendarDay.from(cal);
             dates.add(day);
 
-            try{
-                int colr = Color.parseColor("#"+models.get(i).getColor());
+            try {
+                int colr = Color.parseColor("#" + models.get(i).getColor());
 //                int colr  = Integer.parseInt("#"+models.get(i).getColor(), 16);
 //                int n = (int) Long.parseLong(models.get(i).getColor(), 16);
 
                 widget.addDecorator(new EventDecorator(colr, dates));
-            }catch (NumberFormatException ex){
+            } catch (NumberFormatException ex) {
                 widget.addDecorator(new EventDecorator(Color.RED, dates));
             }
             dates.clear();
-        }    }
+        }
+    }
 
     private void setCategoryData(List<EventCategoryModel> list) {
 
@@ -169,8 +165,8 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
             itemView.setTag(list.get(i).getEventCatID());
 
             Drawable background = pallete.getBackground();
-            if (list.get(i).getColor()!=null){
-                Log.e("colorCode",list.get(i).getColor());
+            if (list.get(i).getColor() != null) {
+                Log.e("colorCode", list.get(i).getColor());
                 background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.DARKEN);
             }
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -188,6 +184,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
             mainFilterLayout.addView(itemView);
         }
     }
+
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
         oneDayDecorator.setDate(date.getDate());

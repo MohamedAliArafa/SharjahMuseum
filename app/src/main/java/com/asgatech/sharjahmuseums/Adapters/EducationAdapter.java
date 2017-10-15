@@ -9,21 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.MuseumsDetailsActivity;
 import com.asgatech.sharjahmuseums.Activities.OpenWebViewActivity;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
-import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.R;
-import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
-import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
-import com.asgatech.sharjahmuseums.Tools.Utils;
-import com.bumptech.glide.Glide;
+import com.asgatech.sharjahmuseums.Tools.GlideApp;
 
 import java.util.List;
 
@@ -56,7 +50,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
         Log.e("image Link", URLS.URL_BASE + allMuseumsList.get(position).getImage());
 //        Utils.loadSimplePic(context, URLS.URL_BASE + allMuseumsList.get(position).getImage(), holder.edcationImageView);
 
-        Glide.with(context).load(URLS.URL_BASE + allMuseumsList.get(position).getImage())
+        GlideApp.with(context).load(URLS.URL_BASE + allMuseumsList.get(position).getImage())
                 .placeholder(R.drawable.image).into(holder.edcationImageView);
 
         bookLink= allMuseumsList.get(position).getBooklink();

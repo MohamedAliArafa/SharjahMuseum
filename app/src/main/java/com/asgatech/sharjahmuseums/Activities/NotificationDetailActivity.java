@@ -1,24 +1,21 @@
 package com.asgatech.sharjahmuseums.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Models.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
-import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
-import com.bumptech.glide.Glide;
 
 import okhttp3.ResponseBody;
 
@@ -70,7 +67,7 @@ void setUpView(){
     }
     tvDescription.setText(text);
     tvTitle.setText(title);
-    Glide.with(this).load(URLS.URL_BASE + image).placeholder(R.drawable.image_m).into(ivMainimage);
+//    Glide.with(this).load(URLS.URL_BASE + image).placeholder(R.drawable.image_m).into(ivMainimage);
     UpdateRequestModel updateRequestModel= new UpdateRequestModel(id);
     UpdateNotifiList(updateRequestModel);
 

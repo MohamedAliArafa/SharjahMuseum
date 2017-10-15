@@ -21,13 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.EventDetailsActivity;
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
-import com.asgatech.sharjahmuseums.Fragments.EventDetailsFragment;
 import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
+import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.asgatech.sharjahmuseums.Tools.Utils;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +102,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
         holder.mDateFromTextView.setText(Utils.spliteDate(startDate));
         holder.mDateToTextView.setText(Utils.spliteDate(endDate));
         holder.mPlaceTextView.setText(model.getAdress());
-        Glide.with(context).load(URLS.URL_BASE + model.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.mImageEventImageView);
+        GlideApp.with(context).load(URLS.URL_BASE + model.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.mImageEventImageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

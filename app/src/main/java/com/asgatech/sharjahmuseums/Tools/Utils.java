@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -16,14 +15,12 @@ import android.provider.MediaStore;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.R;
 import com.bumptech.glide.Glide;
@@ -152,9 +149,7 @@ public class Utils {
     }
 
     public static void loadSimplePic(final Context context, Object url, final ImageView pic) {
-        Glide.with(context)
-                .load(url).
-                asBitmap().into(new BitmapImageViewTarget(pic) {
+        Glide.with(context).asBitmap().load(url).into(new BitmapImageViewTarget(pic) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable circularBitmapDrawable =
@@ -168,8 +163,9 @@ public class Utils {
 
     public static void loadSimplePic(final Context context, Object url, final ImageView pic, Drawable drawable) {
         Glide.with(context)
-                .load(url).
-                asBitmap().into(new BitmapImageViewTarget(pic) {
+                .asBitmap()
+                .load(url)
+                .into(new BitmapImageViewTarget(pic) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable circularBitmapDrawable =

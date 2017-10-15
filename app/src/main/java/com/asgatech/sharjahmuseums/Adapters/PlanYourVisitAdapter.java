@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.asgatech.sharjahmuseums.Models.PlanYourVisitsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
-import com.bumptech.glide.Glide;
+import com.asgatech.sharjahmuseums.Tools.GlideApp;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
 
     private void fillView(final ViewHolder holder, final int position) {
 
-        Glide.with(context).load(URLS.URL_BASE + allPlanVisitsList.get(position).getImage())
+        GlideApp.with(context).load(URLS.URL_BASE + allPlanVisitsList.get(position).getImage())
                 .placeholder(R.drawable.image).into(holder.planImageView);
 
         holder.titleTextView.setText(allPlanVisitsList.get(position).getTitle());
