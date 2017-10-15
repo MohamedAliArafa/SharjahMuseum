@@ -68,4 +68,5 @@
     </string>
     <string name="title_activity_view_location_map">ViewLocationMapActivity</string>
     <string name="title_activity_add_review">AddReviewActivity</string>
+    <string name="title_activity_hight_light_detail">HightLightDetailActivity</string>
 </resources>

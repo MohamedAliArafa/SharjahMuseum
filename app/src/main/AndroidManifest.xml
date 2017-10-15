@@ -67,13 +67,12 @@
             android:name=".Activities.NotificationDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBase.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
-
-        <activity android:name=".Activities.HighLightOverlapingActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".Activities.HightLightDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBase.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
     </application>
 
 </manifest>

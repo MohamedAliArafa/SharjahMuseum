@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Adapters.FaciltsAdapter;
 import com.asgatech.sharjahmuseums.Adapters.HighLightAdapter;
@@ -71,6 +73,8 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     public ImageView toolbarHomeImageView;
     private HighLightAdapter mAdapter;
     private int currentPage = 0;
+    private int currentPage2 = 0;
+    int NUM_PAGES2;
     String tetephoneNum, emailString;
     Timer timer;
     double longtude, latitude;
@@ -232,21 +236,25 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             selectDot(0, data.getHightLight().size());
 
 
-            int currentPage = 0;
-            int NUM_PAGES = 0;
             PagerContainer pagerContainer = (PagerContainer) findViewById(R.id.pager_container);
             if (pagerContainer != null) {
                 pagerContainer.setOverlapEnabled(true);
 
             }
 
-            final ViewPager viewPager = pagerContainer.getViewPager();
-            MyFragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),data.getHightLight());
-            viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
-            viewPager.setAdapter(pagerAdapter);
+            final ViewPager viewPager = pagerContainer != null ? pagerContainer.getViewPager() : null;
+            MyFragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), data.getHightLight());
+            if (viewPager != null) {
+                viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
+            }
+            if (viewPager != null) {
+                viewPager.setAdapter(pagerAdapter);
+            }
+//            Toast.makeText(MuseumsDetailsActivity.this,"hshshsh",Toast.LENGTH_LONG).show();
 
-            NUM_PAGES = data.getHightLight().size();
-            autoStartOfViewPager(NUM_PAGES, viewPager);
+
+            NUM_PAGES2 = data.getHightLight().size();
+            autoStartOfViewPager(NUM_PAGES2, viewPager);
 
         }
 
@@ -292,34 +300,54 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         }
     }
 
-    void autoStartOfViewPager(final int NUM_PAGES, final ViewPager viewPager) {
+    void autoStartOfViewPager(final int NUM_PAGES2, final ViewPager viewPager) {
 
 // Auto start of viewpager
-        final Handler handler;
-        handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
+//        final Handler handler;
+//        handler = new Handler();
+//        final Runnable Update = new Runnable() {
+//            public void run() {
+//
+//                if (currentPage2 == NUM_PAGES2) {
+//                    currentPage2 = 0;
+//                }
+//                viewPager.setCurrentItem(currentPage2++, true);
+////                viewPager.setCurrentItem(10,true);
+//            }
+//        };
 
-                if (currentPage == NUM_PAGES) {
-                    currentPage = 0;
-                }
-                viewPager.setCurrentItem(currentPage++, true);
-            }
-        };
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new TimerTask() {
+//        Timer swipeTimer = new Timer();
+//        swipeTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                handler.post(Update);
+//            }
+//        }, 3000, 3000);
+        if (NUM_PAGES2 > 2) {
+            viewPager.setCurrentItem(1, true);
+
+        }
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void run() {
-                handler.post(Update);
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
-        }, 3000, 3000);
 
+            @Override
+            public void onPageSelected(int position) {
 
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         new CoverFlow.Builder().with(viewPager)
-                .scale(0.5f)
-                .pagerMargin(R.dimen.overlap)
-                .spaceSize(0f)
+                .scale(0.3f)
+                .pagerMargin(-60)
+                .spaceSize(2f)
                 .rotationY(0f)
                 .build();
 //<dimen name="overlap_pager_margin">-60dp</dimen>
@@ -335,21 +363,24 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
-        public MyFragmentPagerAdapter(FragmentManager fm,ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
+
+        public MyFragmentPagerAdapter(FragmentManager fm, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
             super(fm);
-            this.highlightList=highlightList;
+            this.highlightList = highlightList;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return HighLightOverlapingFragment.newInstance(String.valueOf(highlightList.get(position).getPhoto()));
+            return HighLightOverlapingFragment.newInstance(highlightList.get(position).getPhoto(), highlightList);
         }
 
         @Override
         public int getCount() {
             return highlightList.size();
         }
+
     }
+
     @Override
     public void onClick(View view) {
 
