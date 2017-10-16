@@ -38,6 +38,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/layout_group_visits"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
@@ -48,6 +49,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="10dp"
+        android:visibility="gone"
         >
 
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
@@ -72,7 +74,7 @@
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.ButtonLight
             android:id="@+id/book_nw"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_weight=".3"
             android:background="@drawable/btn_booknow"

@@ -8,8 +8,7 @@ import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.R;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class ValidationTool {
 
@@ -95,28 +94,6 @@ public class ValidationTool {
         return true;
     }
 
-
-
-
-    public boolean validWebsiteUrl_ifexist(EditText editText, String errorMassage) {
-        String websiteUrl = editText.getText().toString();
-        if (isNotEmpty(websiteUrl)) {
-            if (Patterns.WEB_URL.matcher(websiteUrl).matches()) {
-                return true;
-            } else {
-                editText.setError(errorMassage);
-                return false;
-            }
-        } else {
-           // editText.setError(context.getResources().getString(R.string.enter_website_field));
-            return true;
-        }
-    }
-
-
-
-
-
     private boolean isMinimum6Char(String text) {
         if (text.length() < 6) {
             return false;
@@ -163,19 +140,6 @@ public class ValidationTool {
         return false;
     }
 
-    private static boolean checkIsNational(String content) {
-        String regex = "[0-9]+";
-        if (content.matches(regex)) {
-            if (content.toString().length() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-
-    }
 
     public boolean validateRequiredField(EditText editText, String error) {
         String content = editText.getText().toString();

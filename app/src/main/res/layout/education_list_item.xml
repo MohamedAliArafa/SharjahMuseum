@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/d210"
         android:scaleType="centerCrop"
-        android:src="@drawable/image"
         android:layout_marginBottom="@dimen/d4"
         android:id="@+id/education_image"/>
 
@@ -26,7 +25,6 @@
         android:layout_marginEnd="@dimen/d10"
         android:textColor="@color/White"
         android:layout_toStartOf="@+id/arrowIV"
-        android:text="@string/hello_blank_fragment"
         android:textSize="15sp" />
 
 

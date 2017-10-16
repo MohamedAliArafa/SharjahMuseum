@@ -82,12 +82,16 @@
     <string name="add_your_review">Rate Your Experience</string>
     <string name="add_review">Add Review</string>
 
-
+    <string name="duplicate_email">Dublicated email or  email used before</string>
     <string name="website_hint">Please enter website link</string>
     <string name="email_hint">Please enter your email</string>
     <string name="phone_hint">Please enter your phone number</string>
-    <string name="invalid_email">invalid email </string>
+    <string name="invalid_email"> email </string>
     <string name="invalid_phone">invalid phone number</string>
+    <string name="name_hint">please type your name  </string>
+    <string name="messeage_hint">please type your messeage </string>
+    <string name="send_messege_fail">Failed to send message</string>
+    <string name="send_messege_succsess">Message sent successfully</string>
 <!--titles-->
     <string name="now">Now</string>
     <string name="sharjah_museums_department">Sharjah Museums Department</string>

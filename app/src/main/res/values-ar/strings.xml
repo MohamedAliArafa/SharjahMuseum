@@ -74,9 +74,15 @@
     <string name="loading">"تحميل ... "</string>
 
 
-
+    <string name="duplicate_email">البريد الالكتروني مستخدم من قبل</string>
+    <string name="send_messege_fail">فشل ارسال الرساله</string>
+    <string name="send_messege_succsess"> تم إرسال الرساله بنجاح</string>
     <string name="website_hint">من فضلك أدخل لينك الموقع</string>
     <string name="email_hint">من فضلك أدخل البريد الالكتروني</string>
     <string name="phone_hint">من فضلك أدخل رقم الهاتف </string>
+    <string name="name_hint">من فضلك أدخل إسمك </string>
+    <string name="messeage_hint">من فضلك اكتب رسالتك </string>
+
+
     <string name="invalid_email">من فضلك أدخل بريد الكتروني صحيح </string>
 </resources>

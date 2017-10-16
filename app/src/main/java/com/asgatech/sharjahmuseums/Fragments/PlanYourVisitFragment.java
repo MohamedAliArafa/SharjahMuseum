@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Activities.OpenWebViewActivity;
@@ -34,6 +35,7 @@ public class PlanYourVisitFragment extends Fragment {
     private  TextViewLight planDescriptionTextView,groupVisitsDescriptionTextView;
     private  Button bookNowBtn;
     private String bookLink;
+    private LinearLayout groupVisitsLinear;
 
 
     public PlanYourVisitFragment() {
@@ -67,6 +69,7 @@ public class PlanYourVisitFragment extends Fragment {
 
     private void initView(View view) {
         ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.plan_your_visit));
+        groupVisitsLinear=view.findViewById(R.id.layout_group_visits);
         recyclerView = view.findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -91,7 +94,7 @@ public class PlanYourVisitFragment extends Fragment {
                 Log.e("",response.getPlanViste().size()+"");
 
                  recyclerView.setAdapter(new PlanYourVisitAdapter(getActivity() , response.getPlanViste() ,recyclerView));
-
+                groupVisitsLinear.setVisibility(View.VISIBLE);
             }
 
             @Override
