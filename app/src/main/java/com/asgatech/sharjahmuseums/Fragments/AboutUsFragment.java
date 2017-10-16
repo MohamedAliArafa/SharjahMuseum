@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Models.AboutUsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -65,7 +65,7 @@ public class AboutUsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about_us, container, false);
         ButterKnife.bind(this, view);
-        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.about_us));
+        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.about_us));
         getAboutUs(new UserData().getLocalization(getActivity()));
         return view;
     }

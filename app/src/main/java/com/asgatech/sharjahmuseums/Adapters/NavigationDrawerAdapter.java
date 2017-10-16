@@ -1,6 +1,6 @@
 package com.asgatech.sharjahmuseums.Adapters;
 
-import android.support.v4.view.GravityCompat;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.ContactUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
@@ -18,7 +18,6 @@ import com.asgatech.sharjahmuseums.Fragments.EventsFragment;
 import com.asgatech.sharjahmuseums.Fragments.HomeFragment;
 import com.asgatech.sharjahmuseums.Fragments.NearbyFragment;
 import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
-import com.asgatech.sharjahmuseums.Fragments.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Fragments.PlanYourVisitFragment;
 import com.asgatech.sharjahmuseums.Fragments.SettingFragment;
 import com.asgatech.sharjahmuseums.Models.NavigationDrawerItem;
@@ -32,18 +31,22 @@ import java.util.List;
  * Created by halima.reda on 12/15/2015.
  */
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private HomeContract.UserAction presenter;
     private int selectedItem = 2;
-    public static final int HEADER_VIEW_TYPE = 1;
-    public static final int MENU_TYPE = 2;
-    public static final int FOOTER_VIEW_TYPE = 3;
-    List<NavigationDrawerItem> data = Collections.emptyList();
+    private static final int HEADER_VIEW_TYPE = 1;
+    private static final int MENU_TYPE = 2;
+    private static final int FOOTER_VIEW_TYPE = 3;
+    private List<NavigationDrawerItem> data = Collections.emptyList();
     private LayoutInflater inflater;
-    private HomeActivity context;
+    private HomeContract.ModelView view;
+    private Context context;
 
-    public NavigationDrawerAdapter(HomeActivity context, List<NavigationDrawerItem> data) {
+    public NavigationDrawerAdapter(Context context, HomeContract.ModelView view,HomeContract.UserAction presenter, List<NavigationDrawerItem> data) {
+        this.presenter = presenter;
+        this.view = view;
         this.context = context;
-        inflater = LayoutInflater.from(context);
         this.data = data;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -75,12 +78,11 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                     ((HeaderViewHolder) holder).menu.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            context.navigationViewdrawerLayout.closeDrawer(GravityCompat.START);
+                            view.closeDrawer();
 
                         }
                     });
                     break;
-
                 case MENU_TYPE:
                     ((MenuViewHolder) holder).mTitle.setText(object.getTitle());
                     ((MenuViewHolder) holder).linear.setOnClickListener(new View.OnClickListener() {
@@ -88,56 +90,37 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                         public void onClick(View v) {
                             switch (position) {
                                 case 1:
-                                    context.toolbarHomeImageView.setVisibility(View.GONE);
-                                    context.toolbarLogoImageView.setVisibility(View.VISIBLE);
-                                    context.openFragment(HomeFragment.class, null);
-                                    context.ToolbarTitleTextView.setText(" ");
+                                    presenter.openFragment(new HomeFragment(), null);
                                     break;
                                 case 2:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(OurMuseumsFragment.class, null);
+//                                    view.toolbarHomeImageView.setVisibility(View.VISIBLE);
+//                                    view.toolbarLogoImageView.setVisibility(View.GONE);
+//                                    view.openFragment(OurMuseumsFragment.class, null);
                                     break;
                                 case 3:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(PlanYourVisitFragment.class, null);
+                                    presenter.openFragment(new PlanYourVisitFragment(), null);
                                     break;
                                 case 4:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(EventsFragment.class, null);
+                                    presenter.openFragment(new EventsFragment(), null);
                                     break;
                                 case 5:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(NearbyFragment.class, null);
+                                    presenter.openFragment(new NearbyFragment(), null);
                                     break;
                                 case 6:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(EducationListFragment.class, null);
+                                    presenter.openFragment(new EducationListFragment(), null);
                                     break;
                                 case 7:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(AboutUsFragment.class, null);
+                                    presenter.openFragment(new AboutUsFragment(), null);
                                     break;
                                 case 8:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(ContactUsFragment.class, null);
+                                    presenter.openFragment(new ContactUsFragment(), null);
                                     break;
 
                                 case 9:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(NotificationListFragment.class, null);
+                                    presenter.openFragment(new NotificationListFragment(), null);
                                     break;
                                 case 10:
-                                    context.toolbarHomeImageView.setVisibility(View.VISIBLE);
-                                    context.toolbarLogoImageView.setVisibility(View.GONE);
-                                    context.openFragment(SettingFragment.class, null);
+                                    presenter.openFragment(new SettingFragment(), null);
                                     break;
                             }
                         }
@@ -148,8 +131,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                     ((FooterViewHolder) holder).footerImage.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            context.navigationViewdrawerLayout.closeDrawer(GravityCompat.START);
-
+                            view.closeDrawer();
                         }
                     });
                     break;

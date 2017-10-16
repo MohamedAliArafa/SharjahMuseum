@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.HomeActivity"
+            android:name=".Activities.Home.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.MuseumsDetailsActivity"

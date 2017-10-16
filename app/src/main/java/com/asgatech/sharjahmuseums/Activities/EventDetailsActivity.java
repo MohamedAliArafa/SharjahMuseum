@@ -72,9 +72,9 @@ private String attachUrl,eventTitleToolbar;
     }
 
     public void setToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
+        toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
         ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(eventTitleToolbar);
         toolbarHomeImageView.setVisibility(View.VISIBLE);

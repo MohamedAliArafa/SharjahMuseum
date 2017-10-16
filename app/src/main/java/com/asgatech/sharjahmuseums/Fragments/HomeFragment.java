@@ -1,6 +1,7 @@
 package com.asgatech.sharjahmuseums.Fragments;
 
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Adapters.HomeSliderImagesAdapter;
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.R;
@@ -69,8 +71,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         dotsLayout = (LinearLayout) view.findViewById(R.id.layout_dots);
         education_layout = (LinearLayout) view.findViewById(R.id.education_layout);
         about_us_layout = (LinearLayout) view.findViewById(R.id.about_us_layout);
-
-
         dot = null;
         dots = null;
         meusemsLinear.setOnClickListener(this);
@@ -98,6 +98,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onFailed(int statusCode, ResponseBody responseBody) {
             }
         });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        if (context instanceof HomeContract.ModelView)
+            ((HomeContract.ModelView) context).showLogo();
+        super.onAttach(context);
     }
 
     private void setData(final List<AllSliderModel> response) {
@@ -185,25 +192,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.meusems_linear:
-                ((HomeActivity) getActivity()).openFragment(OurMuseumsFragment.class, null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new OurMuseumsFragment(), null);
                 break;
             case R.id.event_layout:
-                ((HomeActivity) getActivity()).openFragment(EventsFragment.class, null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new EventsFragment(), null);
                 break;
             case R.id.plan_visits_linear:
-                ((HomeActivity) getActivity()).openFragment(PlanYourVisitFragment.class, null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new PlanYourVisitFragment(), null);
                 break;
             case R.id.notifications_linear:
-                ((HomeActivity) getActivity()).openFragment(NotificationListFragment.class, null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new NotificationListFragment(), null);
                 break;
             case R.id.education_layout:
-                ((HomeActivity) getActivity()).openFragment(EducationListFragment.class, null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new EducationListFragment(), null);
                 break;
             case R.id.about_us_layout:
-                ((HomeActivity) getActivity()).openFragment(AboutUsFragment.class, null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new AboutUsFragment(), null);
                 break;
-
-
         }
     }
 }

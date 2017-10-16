@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.AutoCompleteAdapter;
 import com.asgatech.sharjahmuseums.Adapters.EventsAdapter;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
@@ -89,11 +89,8 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ((HomeActivity) getActivity()).ToolbarTitleTextView.setText(getString(R.string.Events));
-
+        ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.Events));
         assignControls();
-
-
         getEventCategories(new UserData().getLocalization(getActivity()));
         return view;
     }
@@ -125,7 +122,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
                         setCategoryData(response);
                     if (response.size() > 0) {
                         if (isAdded())
-                            getEvents(response.get(0).getEventCatID(), 1, 15, langauge);
+                            getEvents(0, 1, 15, langauge);
                     }
                 }
             }
@@ -144,28 +141,20 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setCategoryData(List<EventCategoryModel> list) {
-
-
+        addReset();
         for (int i = 0; i < list.size(); i++) {
-
             final View itemView = LayoutInflater.from(getActivity())
                     .inflate(R.layout.filter_recycler_row, null);
-
             CircleImageView pallete = itemView.findViewById(R.id.pallete_for_filter_item);
-
             TextView name = itemView.findViewById(R.id.name_for_filter_item);
 //            pallete.setSolidColor(list.get(i).getColor()); //throws exception becouse server data is dummy
-
             name.setText(list.get(i).getTitle().trim());
             itemView.setTag(list.get(i).getEventCatID());
-
             Drawable background = pallete.getBackground();
             if (list.get(i).getColor() != null) {
-                Log.e("colorCode", list.get(i).getColor());
-                background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.DARKEN);
+                Log.e("colorCode", list.get(i).getTitle() + ":" + list.get(i).getColor());
+                background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.SRC_IN);
             }
-
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -182,6 +171,30 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void addReset() {
+        final View itemView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.filter_recycler_row, null);
+        CircleImageView pallete = itemView.findViewById(R.id.pallete_for_filter_item);
+        TextView name = itemView.findViewById(R.id.name_for_filter_item);
+        name.setText("All");
+        itemView.setTag("#000000");
+        Drawable background = pallete.getBackground();
+        Log.e("colorCode", "#000000");
+        background.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_IN);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainFilterLayout.setVisibility(View.GONE);
+                getEvents(0, 1, 15, new UserData().getLocalization(getActivity()));
+            }
+        });
+        //otherwise throw exception java.lang.IllegalStateException: The specified
+        // child already has a parent. You must call removeView() on the child's parent first.
+        if (itemView.getParent() != null) {
+            ((ViewGroup) itemView.getParent()).removeView(itemView);
+        }
+        mainFilterLayout.addView(itemView);
+    }
 
     private void assignControls() {
         filterLayout.setOnClickListener(this);
@@ -211,7 +224,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
 //                        .addToBackStack(null)
 //                        .commit();
 
-                ((HomeActivity) getActivity()).openFragment(EventCalenderFragment.class, null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
                 break;
 
 //            case R.id.event_layout:

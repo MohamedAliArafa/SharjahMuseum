@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
-import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,7 +49,7 @@ public class NearbyFragment extends Fragment {
 
     }
     private void initView(View view){
-        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.near_by_facilities));
+        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.near_by_facilities));
         musuemsIv = (ImageView) view.findViewById(R.id.musuems_iv);
         cafeIv = (ImageView) view.findViewById(R.id.cafe_iv);
         resturantIv = (ImageView) view.findViewById(R.id.resturant_iv);

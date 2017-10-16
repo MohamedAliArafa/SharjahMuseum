@@ -115,18 +115,18 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
                 Bundle bundle = new Bundle();
                 bundle.putInt("eventId", model.getEventsID());
 //                ((HomeActivity) context).openFragment(EventDetailsFragment.class, bundle);
-                Intent intent= new Intent(context, EventDetailsActivity.class);
-                intent.putExtra("eventId",model.getEventsID());
-                intent.putExtra("eventTitle",model.getTitle());
+                Intent intent = new Intent(context, EventDetailsActivity.class);
+                intent.putExtra("eventId", model.getEventsID());
+                intent.putExtra("eventTitle", model.getTitle());
                 context.startActivity(intent);
             }
         });
-       // holder.mPalleteColorTextView.setBackgroundColor(Color.parseColor(model.getColor()));
+        // holder.mPalleteColorTextView.setBackgroundColor(Color.parseColor(model.getColor()));
 
         Drawable background = holder.mPalleteColorTextView.getBackground();
-        if (model.getColor()!=null){
-            Log.e("colorCodett",model.getColor());
-            background.setColorFilter(Color.parseColor(model.getColor()), PorterDuff.Mode.DARKEN);
+        if (model.getColor() != null) {
+            Log.e("colorCodett", model.getTitle() + ":" + model.getColor());
+            background.setColorFilter(Color.parseColor(model.getColor()), PorterDuff.Mode.SRC_IN);
         }
 //        holder.mPalleteColorTextView.setSolidColor("#"+model.getColor());   // throws exception as data is dummy from server
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +150,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
             }
         });
     }
-
 
 
     @Override

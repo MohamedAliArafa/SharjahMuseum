@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.AllMuseumsAdapter;
 import com.asgatech.sharjahmuseums.Models.ALLMuseumsModel;
 import com.asgatech.sharjahmuseums.Models.PagingModel;
@@ -49,10 +49,8 @@ public class OurMuseumsFragment extends Fragment {
     }
 
     private void setupViews(View view) {
-        ourMuseumsRecyclerView = (RecyclerView) view.findViewById(R.id.our_museums_recycler_view);
-        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.our_museums));
-        ((HomeActivity)getActivity()).toolbarHomeImageView.setVisibility(View.VISIBLE);
-        ((HomeActivity)getActivity()).toolbarLogoImageView.setVisibility(View.GONE);
+        ourMuseumsRecyclerView = view.findViewById(R.id.our_museums_recycler_view);
+        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.our_museums));
         ourMuseumsRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         ourMuseumsRecyclerView.setLayoutManager(mLayoutManager);

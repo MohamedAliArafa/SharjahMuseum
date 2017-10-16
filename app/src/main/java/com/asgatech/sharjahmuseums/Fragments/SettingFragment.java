@@ -2,7 +2,6 @@ package com.asgatech.sharjahmuseums.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.Localization;
@@ -45,7 +44,7 @@ public class SettingFragment extends Fragment {
     }
 
     private void initView(View view) {
-        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.setting));
+        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.setting));
         changeLanguageRadioGroub = (RadioGroup) view.findViewById(R.id.change_language_radio_groub);
         changeLanguageArabicRadioButton = (RadioButton) view.findViewById(R.id.change_language_arabic_radio_button);
         changeLanguageEnglishRadioButton = (RadioButton) view.findViewById(R.id.change_language_english_radio_button);

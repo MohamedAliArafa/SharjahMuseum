@@ -7,7 +7,7 @@ import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 
 import java.util.Locale;

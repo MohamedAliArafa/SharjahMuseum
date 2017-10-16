@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Activities.OpenWebViewActivity;
 import com.asgatech.sharjahmuseums.Adapters.PlanYourVisitAdapter;
 import com.asgatech.sharjahmuseums.Models.PlanYourVisitsModel;
@@ -66,7 +66,7 @@ public class PlanYourVisitFragment extends Fragment {
     }
 
     private void initView(View view) {
-        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.plan_your_visit));
+        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.plan_your_visit));
         recyclerView = view.findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);

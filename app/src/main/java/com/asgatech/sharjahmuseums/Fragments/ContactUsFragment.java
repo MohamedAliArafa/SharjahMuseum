@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class ContactUsFragment extends Fragment {
 
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.contact_us));
+        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.contact_us));
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         reduceMarginsInTabs(tabLayout , 50);
