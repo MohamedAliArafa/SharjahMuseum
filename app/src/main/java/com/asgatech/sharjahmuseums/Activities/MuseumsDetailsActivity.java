@@ -30,6 +30,7 @@ import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.PermissionTool;
@@ -49,7 +50,7 @@ import okhttp3.ResponseBody;
 public class MuseumsDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     public ImageView toolbarHomeImageView;
     int NUM_PAGES2;
-    String tetephoneNum, emailString;
+    String tetephoneNum, emailString,museumTitle;
     Timer timer;
     double longtude, latitude;
     private int museumsID;
@@ -69,6 +70,8 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     private LinearLayout layoutDotsGallery;
     private RecyclerView facilitiesList;
     private HighLightAdapter mAdapter;
+    private TextViewBold ToolbarTitleTextView;
+
     private int currentPage = 0;
     private int currentPage2 = 0;
 
@@ -77,6 +80,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_museums_details);
+
         setToolBar();
         setUpView();
     }
@@ -85,6 +89,11 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
+
+        museumTitle=getIntent().getStringExtra("museumTitle");
+        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        ToolbarTitleTextView.setText(museumTitle);
+
         toolbarHomeImageView.setVisibility(View.VISIBLE);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

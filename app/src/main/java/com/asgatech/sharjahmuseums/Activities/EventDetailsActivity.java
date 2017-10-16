@@ -21,6 +21,7 @@ import com.asgatech.sharjahmuseums.Adapters.ViewPagerAdapter;
 import com.asgatech.sharjahmuseums.Models.EventdetatailsResponceModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -50,20 +51,22 @@ public class EventDetailsActivity extends AppCompatActivity {
     private LinearLayout call;
     private LinearLayout mail;
     private LinearLayout mark;
+    private TextViewBold ToolbarTitleTextView;
     int NUM_PAGES = 0;
     private int currentPage = 0;
     Timer timer;
     private List<ImageView> dots;
     private ImageView dot;
-private String attachUrl;
+private String attachUrl,eventTitleToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_event_details);
+        eventTitleToolbar=getIntent().getStringExtra("eventTitle");
+        int id = getIntent().getIntExtra("eventId", 0);
         setToolBar();
         initView();
-        int id = getIntent().getIntExtra("eventId", 0);
         getEventDetails(id, new UserData().getLocalization(EventDetailsActivity.this));
 
     }
@@ -72,6 +75,8 @@ private String attachUrl;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
+        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        ToolbarTitleTextView.setText(eventTitleToolbar);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

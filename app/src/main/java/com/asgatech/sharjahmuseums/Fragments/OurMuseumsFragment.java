@@ -50,7 +50,9 @@ public class OurMuseumsFragment extends Fragment {
 
     private void setupViews(View view) {
         ourMuseumsRecyclerView = (RecyclerView) view.findViewById(R.id.our_museums_recycler_view);
-
+        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.our_museums));
+        ((HomeActivity)getActivity()).toolbarHomeImageView.setVisibility(View.VISIBLE);
+        ((HomeActivity)getActivity()).toolbarLogoImageView.setVisibility(View.GONE);
         ourMuseumsRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         ourMuseumsRecyclerView.setLayoutManager(mLayoutManager);

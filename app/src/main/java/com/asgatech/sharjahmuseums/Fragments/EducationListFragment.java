@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.asgatech.sharjahmuseums.Activities.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.EducationAdapter;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.R;
@@ -44,6 +45,7 @@ public class EducationListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.education));
 
         getEducationList(new UserData().getLocalization(getActivity()));
         return view;

@@ -57,6 +57,7 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
             public void onClick(View view) {
                 Intent intent = new Intent(context, MuseumsDetailsActivity.class);
                 intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
+                intent.putExtra("museumTitle",allMuseumsList.get(position).getTitle().trim());
                 context.startActivity(intent);
             }
         });

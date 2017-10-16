@@ -38,6 +38,7 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
     ReviewVisitorsRequest reviewVisitorsRequest;
     private CircleImageView addReview;
    TextViewBold ErrorMessageTextView;
+    private TextViewBold ToolbarTitleTextView;
     int museumsID;
     private String email;
 
@@ -55,6 +56,9 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
+
+        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        ToolbarTitleTextView.setText(getString(R.string.visitors_reviews));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

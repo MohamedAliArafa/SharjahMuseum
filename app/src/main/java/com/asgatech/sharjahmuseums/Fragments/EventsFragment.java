@@ -92,6 +92,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.Events));
 
         assignControls();
 

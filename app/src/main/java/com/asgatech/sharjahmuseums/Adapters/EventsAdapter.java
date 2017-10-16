@@ -117,6 +117,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
 //                ((HomeActivity) context).openFragment(EventDetailsFragment.class, bundle);
                 Intent intent= new Intent(context, EventDetailsActivity.class);
                 intent.putExtra("eventId",model.getEventsID());
+                intent.putExtra("eventTitle",model.getTitle());
                 context.startActivity(intent);
             }
         });

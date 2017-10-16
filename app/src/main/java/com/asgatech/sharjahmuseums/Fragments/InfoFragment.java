@@ -15,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.asgatech.sharjahmuseums.Activities.HomeActivity;
-import com.asgatech.sharjahmuseums.Activities.MuseumsDetailsActivity;
 import com.asgatech.sharjahmuseums.Activities.ViewLocationMapActivity;
 import com.asgatech.sharjahmuseums.Models.ContactUsModel;
 import com.asgatech.sharjahmuseums.R;
@@ -25,14 +23,7 @@ import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+
 
 import java.util.List;
 import java.util.Locale;

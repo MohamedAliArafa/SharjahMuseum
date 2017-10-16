@@ -25,6 +25,7 @@ import com.asgatech.sharjahmuseums.Adapters.NavigationDrawerAdapter;
 import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.ContactUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
+import com.asgatech.sharjahmuseums.Fragments.EventCalenderFragment;
 import com.asgatech.sharjahmuseums.Fragments.EventsFragment;
 import com.asgatech.sharjahmuseums.Fragments.HomeFragment;
 import com.asgatech.sharjahmuseums.Fragments.NearbyFragment;
@@ -98,6 +99,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerRecyclerView.setAdapter(adapter);
         toolbarHomeImageView.setVisibility(View.GONE);
         toolbarLogoImageView.setVisibility(View.VISIBLE);
+
         openFragment(HomeFragment.class, null);
         if (!userData.getUserStateOfInsertToken(this)){
             insertDeviceToken();
@@ -196,28 +198,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        } else
             if (fragment instanceof EventsFragment) {
             openFragment(HomeFragment.class, null);
+                ToolbarTitleTextView.setText(" ");
+
         } else if (fragment instanceof ContactUsFragment) {
             openFragment(HomeFragment.class, null);
+                ToolbarTitleTextView.setText(" ");
 
         } else if (fragment instanceof NotificationListFragment) {
             openFragment(HomeFragment.class, null);
+                ToolbarTitleTextView.setText(" ");
 
         } else if (fragment instanceof SettingFragment) {
             openFragment(HomeFragment.class, null);
+                ToolbarTitleTextView.setText(" ");
 
         } else if (fragment instanceof OurMuseumsFragment) {
             openFragment(HomeFragment.class, null);
+                ToolbarTitleTextView.setText(" ");
 
         }else if (fragment instanceof EducationListFragment) {
                 openFragment(HomeFragment.class,null);
+                ToolbarTitleTextView.setText(" ");
 
         }else if (fragment instanceof AboutUsFragment) {
             openFragment(HomeFragment.class,null);
+                ToolbarTitleTextView.setText(" ");
 
         }else if (fragment instanceof NearbyFragment) {
             openFragment(HomeFragment.class,null);
+                ToolbarTitleTextView.setText(" ");
+
         }else if (fragment instanceof PlanYourVisitFragment) {
             openFragment(HomeFragment.class,null);
+                ToolbarTitleTextView.setText(" ");
+            }else if (fragment instanceof EventCalenderFragment) {
+                openFragment(EventsFragment.class,null);
+
         } else  {
 
             super.onBackPressed();

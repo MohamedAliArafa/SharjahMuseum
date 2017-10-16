@@ -17,6 +17,7 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText;
+import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
@@ -31,6 +32,7 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     private RatingBar barReviewStars;
     private int museumsID;
     float rateValue;
+    private TextViewBold ToolbarTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,10 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
+
+        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        ToolbarTitleTextView.setText(getString(R.string.add_review));
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

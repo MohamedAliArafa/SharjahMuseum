@@ -91,6 +91,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                     context.toolbarHomeImageView.setVisibility(View.GONE);
                                     context.toolbarLogoImageView.setVisibility(View.VISIBLE);
                                     context.openFragment(HomeFragment.class, null);
+                                    context.ToolbarTitleTextView.setText(" ");
                                     break;
                                 case 2:
                                     context.toolbarHomeImageView.setVisibility(View.VISIBLE);

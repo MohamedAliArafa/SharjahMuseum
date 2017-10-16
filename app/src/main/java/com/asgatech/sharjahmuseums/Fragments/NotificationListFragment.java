@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.asgatech.sharjahmuseums.Activities.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.NotificationListAdapter;
 import com.asgatech.sharjahmuseums.Adapters.ViewVisitorsReviewAdapter;
 import com.asgatech.sharjahmuseums.Models.NotificationListRequestModel;
@@ -45,6 +46,7 @@ public class NotificationListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initRecyclerView(view);
+        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.notifications));
         String androidID = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
 //        AddDeviceModel addDeviceModel = new AddDeviceModel(androidID, FirebaseInstanceId.getInstance().getToken());
 

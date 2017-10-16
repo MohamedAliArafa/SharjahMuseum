@@ -22,8 +22,9 @@ import okhttp3.ResponseBody;
 public class NotificationDetailActivity extends AppCompatActivity {
     public ImageView toolbarHomeImageView;
     private CircleImageView ivMainimage;
-    private TextViewBold tvTitle;
+    private TextViewBold tvTitle,ToolbarTitleTextView;
     private TextViewLight tvDescription;
+
     String title,text,image;
     int id;
 
@@ -41,6 +42,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
+        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
