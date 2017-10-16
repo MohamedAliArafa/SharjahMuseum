@@ -7,7 +7,7 @@
     <string name="home">Home</string>
     <string name="our_museums">Our Museums</string>
     <string name="plan_your_visit">Plan Your Visit</string>
-    <string name="visitors_reviews"></string>
+    <string name="visitors_reviews">visitors Reviews </string>
     <string name="Events">Events</string>
     <string name="near_by_facilities">Nearby Facilities</string>
     <string name="education">Education</string>
@@ -77,9 +77,10 @@
 
     <!--addRate-->
     <string name="rate_your_experience">Rate your experience</string>
-    <string name="post">Post</string>
+
     <string name="your_email">Your Email</string>
-    <string name="your_review">Your Review</string>
+    <string name="add_your_review">Rate Your Experience</string>
+    <string name="add_review">Add Review</string>
 
 
 

@@ -2,6 +2,7 @@ package com.asgatech.sharjahmuseums.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -36,7 +37,7 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     ReviewVisitorsRequest reviewVisitorsRequest;
-    private CircleImageView addReview;
+    private FloatingActionButton addReview;
    TextViewBold ErrorMessageTextView;
     private TextViewBold ToolbarTitleTextView;
     int museumsID;
@@ -72,7 +73,7 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
         layoutManager = new LinearLayoutManager(ViewVisitorsReviewActivity.this);
         recyclerViewReviews.setLayoutManager(layoutManager);
         recyclerViewReviews.setItemAnimator(new DefaultItemAnimator());
-        addReview = (CircleImageView) findViewById(R.id.iv_add_review);
+        addReview = (FloatingActionButton) findViewById(R.id.iv_add_review);
         addReview.setOnClickListener(this);
 
 

@@ -60,6 +60,7 @@
     <string name="rate_your_experience">قيم تجربتك </string>
     <string name="visitors_reviews">تقييم الزوار</string>
     <string name="add_your_review">إضافه تقييمك</string>
+    <string name="post">إرسال</string>
     <string name="add_review">إضافة تقييم</string>
     <!--//messages-->
     <string name="no_notification">لا يوجد اشعارات لك فى الوقت الحالى </string>

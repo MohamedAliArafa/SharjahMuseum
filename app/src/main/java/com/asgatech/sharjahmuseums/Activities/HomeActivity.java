@@ -183,6 +183,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_home_image_view:
+                openFragment(HomeFragment.class, null);
+                ToolbarTitleTextView.setText(" ");
                 break;
         }
     }
