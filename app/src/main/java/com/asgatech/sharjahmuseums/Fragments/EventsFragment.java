@@ -16,8 +16,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.asgatech.sharjahmuseums.Activities.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.AutoCompleteAdapter;
@@ -26,7 +24,6 @@ import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
-import com.asgatech.sharjahmuseums.Tools.CircularTextView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -92,7 +89,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ((HomeActivity)getActivity()).ToolbarTitleTextView.setText(getString(R.string.Events));
+        ((HomeActivity) getActivity()).ToolbarTitleTextView.setText(getString(R.string.Events));
 
         assignControls();
 
@@ -124,9 +121,11 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(List<EventCategoryModel> response) {
                 if (Utils.validList(response)) {
-                    setCategoryData(response);
+                    if (isAdded())
+                        setCategoryData(response);
                     if (response.size() > 0) {
-                        getEvents(response.get(0).getEventCatID(), 1, 15, langauge);
+                        if (isAdded())
+                            getEvents(response.get(0).getEventCatID(), 1, 15, langauge);
                     }
                 }
             }
@@ -161,8 +160,8 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
             itemView.setTag(list.get(i).getEventCatID());
 
             Drawable background = pallete.getBackground();
-            if (list.get(i).getColor()!=null){
-                Log.e("colorCode",list.get(i).getColor());
+            if (list.get(i).getColor() != null) {
+                Log.e("colorCode", list.get(i).getColor());
                 background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.DARKEN);
             }
 
@@ -200,9 +199,9 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
                 } else {
                     mainFilterLayout.setVisibility(View.VISIBLE);
                 }
-                if (arrowImg.getRotation() == 0){
+                if (arrowImg.getRotation() == 0) {
                     arrowImg.setRotation(180);
-                }else {
+                } else {
                     arrowImg.setRotation(arrowImg.getRotation() + 180);
                 }
                 break;
