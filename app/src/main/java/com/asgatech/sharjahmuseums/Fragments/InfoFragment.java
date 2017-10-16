@@ -23,6 +23,7 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.PermissionTool;
+import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -94,7 +95,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
 
 
-        getContactData(1);
+        getContactData(new UserData().getLocalization(getActivity()));
         return view;
     }
 
@@ -107,7 +108,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                     callTextView.setText(response.getPhone());
                     emailTextView.setText(response.getEmail());
                     locationTextView.setText(getCompleteAddressString(response.getLatitude(),
-                           response.getLongitute()));
+                            response.getLongitute()));
 
                     tetephoneNum = response.getPhone();
                     emailString = response.getEmail();
@@ -116,8 +117,8 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                     facebookString = response.getInstgram();
                     twitterString = response.getInstgram();
                     youtubeString = response.getInstgram();
-latitude=response.getLatitude();
-longtude=response.getLongitute();
+                    latitude = response.getLatitude();
+                    longtude = response.getLongitute();
 
                     assignControls();
                 } else {
@@ -127,6 +128,7 @@ longtude=response.getLongitute();
 
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
+                Toast.makeText(getActivity(), "failure to get data", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -193,8 +195,8 @@ longtude=response.getLongitute();
 
             case R.id.location_img:
                 Intent intent1 = new Intent(getActivity(), ViewLocationMapActivity.class);
-                intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_lATITUDE,latitude);
-                intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_LONGTUDE,longtude);
+                intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_lATITUDE, latitude);
+                intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_LONGTUDE, longtude);
                 startActivity(intent1);
                 break;
 

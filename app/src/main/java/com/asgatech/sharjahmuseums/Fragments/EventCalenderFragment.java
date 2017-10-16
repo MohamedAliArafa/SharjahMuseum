@@ -21,6 +21,7 @@ import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -84,11 +85,11 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
 //                oneDayDecorator
 //        );
 
-        getEventCategories(1);
+        getEventCategories(new UserData().getLocalization(getActivity()));
         return view;
     }
 
-    private void getEventCategories(int langauge) {
+    private void getEventCategories(final int langauge) {
 
         ServerTool.getEventsCategories(getActivity(), langauge, new ServerTool.APICallBack<List<EventCategoryModel>>() {
             @Override
@@ -96,7 +97,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                 if (Utils.validList(response)) {
                     setCategoryData(response);
                     if (response.size() > 0) {
-                        getEvents(response.get(0).getEventCatID(), 1, 15, 1);
+                        getEvents(response.get(0).getEventCatID(), 1, 20, langauge);
                     }
                 }
             }
@@ -173,7 +174,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                 @Override
                 public void onClick(View view) {
                     mainFilterLayout.setVisibility(View.GONE);
-                    getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 15, 1);
+                    getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 20, new UserData().getLocalization(getActivity()));
                 }
             });
             //otherwise throw exception java.lang.IllegalStateException: The specified

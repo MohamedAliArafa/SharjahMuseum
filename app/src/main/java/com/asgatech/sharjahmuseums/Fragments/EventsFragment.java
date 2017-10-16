@@ -117,7 +117,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    private void getEventCategories(int langauge) {
+    private void getEventCategories(final int langauge) {
 
         ServerTool.getEventsCategories(getActivity(), langauge, new ServerTool.APICallBack<List<EventCategoryModel>>() {
             @Override
@@ -125,7 +125,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
                 if (Utils.validList(response)) {
                     setCategoryData(response);
                     if (response.size() > 0) {
-                        getEvents(response.get(0).getEventCatID(), 1, 15, 1);
+                        getEvents(response.get(0).getEventCatID(), 1, 15, langauge);
                     }
                 }
             }
@@ -170,7 +170,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(View view) {
                     mainFilterLayout.setVisibility(View.GONE);
-                    getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 15, 1);
+                    getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 15, new UserData().getLocalization(getActivity()));
                 }
             });
             //otherwise throw exception java.lang.IllegalStateException: The specified

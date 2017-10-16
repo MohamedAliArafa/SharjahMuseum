@@ -63,14 +63,8 @@ public class HightLightDetailActivity extends AppCompatActivity {
 
 
         FragmentManager fm = getSupportFragmentManager();
-
-        /** Instantiating FragmentPagerAdapter */
         MyFragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(fm,highlightList);
-
-        /** Setting the pagerAdapter to the pager object */
         imagesViewPager.setAdapter(pagerAdapter);
-
-
 
     }
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {

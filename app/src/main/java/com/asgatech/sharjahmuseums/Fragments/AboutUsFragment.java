@@ -15,6 +15,7 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import butterknife.BindView;
@@ -61,7 +62,7 @@ public class AboutUsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about_us, container, false);
         ButterKnife.bind(this, view);
 
-        getAboutUs(1);
+        getAboutUs(new UserData().getLocalization(getActivity()));
         return view;
     }
 

@@ -97,8 +97,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerRecyclerView.setLayoutManager(mLayoutManager);
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(this, getData());
         drawerRecyclerView.setAdapter(adapter);
-        toolbarHomeImageView.setVisibility(View.VISIBLE);
-        toolbarLogoImageView.setVisibility(View.GONE);
+        toolbarHomeImageView.setVisibility(View.GONE);
+        toolbarLogoImageView.setVisibility(View.VISIBLE);
         openFragment(HomeFragment.class, null);
         if (!userData.getUserStateOfInsertToken(this)){
             insertDeviceToken();

@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private LinearLayout dotsLayout;
     private int currentPage = 0;
     Timer timer;
-    private LinearLayout meusemsLinear,event_layout,planVisitsLinear,notifications_linear;
+    private LinearLayout meusemsLinear,event_layout,planVisitsLinear,notifications_linear,about_us_layout,education_layout;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -67,12 +67,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         notifications_linear = (LinearLayout) view.findViewById(R.id.notifications_linear);
         event_layout = (LinearLayout) view.findViewById(R.id.event_layout);
         dotsLayout = (LinearLayout) view.findViewById(R.id.layout_dots);
+        education_layout = (LinearLayout) view.findViewById(R.id.education_layout);
+        about_us_layout = (LinearLayout) view.findViewById(R.id.about_us_layout);
+
+
         dot = null;
         dots = null;
         meusemsLinear.setOnClickListener(this);
         event_layout.setOnClickListener(this);
         planVisitsLinear.setOnClickListener(this);
         notifications_linear.setOnClickListener(this);
+        about_us_layout.setOnClickListener(this);
+        education_layout.setOnClickListener(this);
+
         getAllSlider(new UserData().getLocalization(getActivity()));
     }
 
@@ -187,6 +194,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.notifications_linear:
                 ((HomeActivity) getActivity()).openFragment(NotificationListFragment.class, null);
                 break;
+            case R.id.education_layout:
+                ((HomeActivity) getActivity()).openFragment(EducationListFragment.class, null);
+                break;
+            case R.id.about_us_layout:
+                ((HomeActivity) getActivity()).openFragment(AboutUsFragment.class, null);
+                break;
+
 
         }
     }

@@ -80,7 +80,7 @@ public class HighLightOverlapingFragment extends Fragment {
 //                Toast.makeText(getActivity(),"hshshsh"+highlightList.size(), Toast.LENGTH_LONG).show();
                 Intent intent1 = new Intent(getActivity(), HightLightDetailActivity.class);
                 intent1.putExtra(ConstantUtils.HIGHLIGHT_LIST, highlightList);
-                startActivity(intent1);
+              //  startActivity(intent1);
 
             }
         });
