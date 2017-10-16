@@ -1,8 +1,10 @@
 package com.asgatech.sharjahmuseums.Activities;
 
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,23 +13,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.design.widget.NavigationView;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Adapters.NavigationDrawerAdapter;
 import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.ContactUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
-import com.asgatech.sharjahmuseums.Fragments.EventDetailsFragment;
 import com.asgatech.sharjahmuseums.Fragments.EventsFragment;
 import com.asgatech.sharjahmuseums.Fragments.HomeFragment;
 import com.asgatech.sharjahmuseums.Fragments.NearbyFragment;
@@ -35,7 +32,6 @@ import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
 import com.asgatech.sharjahmuseums.Fragments.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Fragments.PlanYourVisitFragment;
 import com.asgatech.sharjahmuseums.Fragments.SettingFragment;
-import com.asgatech.sharjahmuseums.Models.AddReviewRequest;
 import com.asgatech.sharjahmuseums.Models.InsertDevicetokenRequestModel;
 import com.asgatech.sharjahmuseums.Models.NavigationDrawerItem;
 import com.asgatech.sharjahmuseums.R;
@@ -63,7 +59,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_home);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setUpNavigation();
         initView();
     }
