@@ -10,8 +10,11 @@ import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Models.EventImage;
 import com.asgatech.sharjahmuseums.R;
+import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -42,7 +45,9 @@ public class ViewPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.view_pager_item_imageview, collection, false);
         ImageView img = layout.findViewById(R.id.view_paget_image);
-        GlideApp.with(context).load(URLS.URL_BASE +items.get(position).getImage()).placeholder(R.mipmap.ic_launcher).into(img);
+        GlideApp.with(context).load(URLS.URL_BASE +items.get(position).getImage())
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .placeholder(R.mipmap.ic_launcher).into(img);
 //        List<EventImage> list = new ArrayList<>();
 //        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerView);
 //        for (int i = indexIndecator; i < indexIndecator + 4; i++) {

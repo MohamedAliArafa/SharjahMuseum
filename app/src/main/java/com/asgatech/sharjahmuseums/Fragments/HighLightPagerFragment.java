@@ -14,6 +14,8 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -54,7 +56,9 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
         final ImageView coverImageView = (ImageView) rootView.findViewById(R.id.image_cover);
 //        coverImageView.setImageDrawable(ContextCompat.getDrawable(getContext(), resourceId));
         GlideApp.with(getActivity())
-                .load(URLS.URL_BASE +image).placeholder(R.drawable.no_image).into((coverImageView));
+                .load(URLS.URL_BASE +image).placeholder(R.drawable.no_image)
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .into((coverImageView));
 
         return rootView;
     }

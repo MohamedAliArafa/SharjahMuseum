@@ -16,8 +16,11 @@ import android.widget.TextView;
 import com.asgatech.sharjahmuseums.Activities.OpenWebViewActivity;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.R;
+import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -51,6 +54,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
 //        Utils.loadSimplePic(context, URLS.URL_BASE + allMuseumsList.get(position).getImage(), holder.edcationImageView);
 
         GlideApp.with(context).load(URLS.URL_BASE + allMuseumsList.get(position).getImage())
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .placeholder(R.drawable.image).into(holder.edcationImageView);
 
         bookLink= allMuseumsList.get(position).getBooklink();

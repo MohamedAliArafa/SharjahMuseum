@@ -5,9 +5,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -20,10 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Adapters.FaciltsAdapter;
 import com.asgatech.sharjahmuseums.Adapters.HighLightAdapter;
@@ -40,12 +36,10 @@ import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 import me.crosswall.lib.coverflow.CoverFlow;
@@ -53,8 +47,12 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
 import okhttp3.ResponseBody;
 
 public class MuseumsDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+    public ImageView toolbarHomeImageView;
+    int NUM_PAGES2;
+    String tetephoneNum, emailString;
+    Timer timer;
+    double longtude, latitude;
     private int museumsID;
-
     private ViewPager imagesViewPager;
     private LinearLayout layoutDots;
     private LinearLayout addReviewLinear;
@@ -70,14 +68,9 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     private FeatureCoverFlow highLightGallery;
     private LinearLayout layoutDotsGallery;
     private RecyclerView facilitiesList;
-    public ImageView toolbarHomeImageView;
     private HighLightAdapter mAdapter;
     private int currentPage = 0;
     private int currentPage2 = 0;
-    int NUM_PAGES2;
-    String tetephoneNum, emailString;
-    Timer timer;
-    double longtude, latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +212,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             imagesViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    currentPage = position;
                 }
 
                 @Override
@@ -361,26 +355,6 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         });
     }
 
-    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-        ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
-
-        public MyFragmentPagerAdapter(FragmentManager fm, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
-            super(fm);
-            this.highlightList = highlightList;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return HighLightOverlapingFragment.newInstance(highlightList.get(position).getPhoto(), highlightList);
-        }
-
-        @Override
-        public int getCount() {
-            return highlightList.size();
-        }
-
-    }
-
     @Override
     public void onClick(View view) {
 
@@ -422,5 +396,25 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             case R.id.share_linear:
                 break;
         }
+    }
+
+    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+        ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
+
+        public MyFragmentPagerAdapter(FragmentManager fm, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
+            super(fm);
+            this.highlightList = highlightList;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return HighLightOverlapingFragment.newInstance(highlightList.get(position).getPhoto(), highlightList);
+        }
+
+        @Override
+        public int getCount() {
+            return highlightList.size();
+        }
+
     }
 }

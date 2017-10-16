@@ -19,6 +19,8 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.util.ArrayList;
@@ -60,7 +62,9 @@ public class HighLightOverlapingFragment extends Fragment {
 //        coverImageView.setImageDrawable(ContextCompat.getDrawable(getContext(), resourceId));
         GlideApp.with(getActivity())
                 .asBitmap()
-                .load(URLS.URL_BASE + image).override(400, 400).placeholder(R.drawable.no_image).into(new BitmapImageViewTarget(coverImageView) {
+                .load(URLS.URL_BASE + image).override(400, 400)
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .placeholder(R.drawable.no_image).into(new BitmapImageViewTarget(coverImageView) {
             @Override
             protected void setResource(Bitmap resource) {
                 if (getActivity() != null) {

@@ -11,10 +11,13 @@ import com.asgatech.sharjahmuseums.Activities.NotificationDetailActivity;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
+import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -49,7 +52,9 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         holder.describtionTv.setText(data.get(position).getText());
         holder.titleTv.setText(data.get(position).getTitle());
 //
-        GlideApp.with(context).load(URLS.URL_BASE + data.get(position).getImage()).placeholder(R.drawable.no_image).into(holder.notificationIv);
+        GlideApp.with(context).load(URLS.URL_BASE + data.get(position).getImage())
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .placeholder(R.drawable.no_image).into(holder.notificationIv);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

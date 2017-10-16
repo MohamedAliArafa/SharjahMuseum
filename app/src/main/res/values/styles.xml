@@ -1,14 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:editTextColor">@color/White</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="AppBase" parent="@style/Base.Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBase" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/GreenLight</item>
         <item name="colorPrimaryDark">@color/GreenLight</item>

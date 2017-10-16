@@ -10,6 +10,5 @@ public class ConstantUtils {
     public static  final String EXTRA_MUSEUMS_lATITUDE = "latitude_musem";
     public static final String HIGHLIGHT_LIST = "highLightList";
     public static final String IMAGE_PATH = "IMAGE_PATH";
-
-
+    public static final String GLIDE_TIMEOUT = "com.bumptech.glide.load.model.stream.HttpGlideUrlLoader.Timeout";
 }

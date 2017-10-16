@@ -23,7 +23,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.asgatech.sharjahmuseums.R;
-import com.bumptech.glide.Glide;
+import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.io.ByteArrayOutputStream;
@@ -149,7 +151,9 @@ public class Utils {
     }
 
     public static void loadSimplePic(final Context context, Object url, final ImageView pic) {
-        Glide.with(context).asBitmap().load(url).into(new BitmapImageViewTarget(pic) {
+        GlideApp.with(context).asBitmap()
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .load(url).into(new BitmapImageViewTarget(pic) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable circularBitmapDrawable =
@@ -162,8 +166,9 @@ public class Utils {
     }
 
     public static void loadSimplePic(final Context context, Object url, final ImageView pic, Drawable drawable) {
-        Glide.with(context)
+        GlideApp.with(context)
                 .asBitmap()
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .load(url)
                 .into(new BitmapImageViewTarget(pic) {
             @Override

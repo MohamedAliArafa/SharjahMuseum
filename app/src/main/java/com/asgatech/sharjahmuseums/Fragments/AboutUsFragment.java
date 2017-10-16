@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.Models.AboutUsModel;
 import com.asgatech.sharjahmuseums.R;
+import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,8 +76,12 @@ public class AboutUsFragment extends Fragment {
             @Override
             public void onSuccess(AboutUsModel response) {
                 if (Utils.validObject(response)) {
-                    GlideApp.with(getActivity()).load(URLS.URL_BASE + response.getImage()).placeholder(R.drawable.image_about_default).into(mainImage);
-                    GlideApp.with(getActivity()).load(URLS.URL_BASE + response.getOfficialImage()).placeholder(R.drawable.image_m).into(memberImage);
+                    GlideApp.with(getActivity()).load(URLS.URL_BASE + response.getImage())
+                            .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                            .placeholder(R.drawable.image_about_default).into(mainImage);
+                    GlideApp.with(getActivity()).load(URLS.URL_BASE + response.getOfficialImage())
+                            .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                            .placeholder(R.drawable.image_m).into(memberImage);
 
                     Log.e("Image" , URLS.URL_BASE+response.getImage());
                     Log.e("Image" , URLS.URL_BASE+response.getOfficialImage());

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.asgatech.sharjahmuseums.Adapters.AllMuseumsAdapter;
 import com.asgatech.sharjahmuseums.Models.ALLMuseumsModel;
-import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.Models.PagingModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;

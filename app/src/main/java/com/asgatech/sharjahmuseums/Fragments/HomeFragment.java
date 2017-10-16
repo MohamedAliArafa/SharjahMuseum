@@ -88,7 +88,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(List<AllSliderModel> response) {
                 if (Utils.validList(response)) {
-                    setData(response);
+                    if (isAdded())
+                        setData(response);
                 }
 
             }
@@ -126,6 +127,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         imagesViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                currentPage = position;
             }
 
             @Override
