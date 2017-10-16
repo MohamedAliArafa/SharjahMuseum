@@ -105,9 +105,9 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                     emailString = response.getEmail();
 
                     instgramString = response.getInstgram();
-                    facebookString = response.getInstgram();
-                    twitterString = response.getInstgram();
-                    youtubeString = response.getInstgram();
+                    facebookString = response.getFB();
+                    twitterString = response.getTwitter();
+                    youtubeString = response.getYoutube();
                     latitude = response.getLatitude();
                     longtude = response.getLongitute();
 

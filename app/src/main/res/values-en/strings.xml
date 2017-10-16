@@ -83,7 +83,11 @@
     <string name="add_review">Add Review</string>
 
 
-
+    <string name="website_hint">Please enter website link</string>
+    <string name="email_hint">Please enter your email</string>
+    <string name="phone_hint">Please enter your phone number</string>
+    <string name="invalid_email">invalid email </string>
+    <string name="invalid_phone">invalid phone number</string>
 <!--titles-->
     <string name="now">Now</string>
     <string name="sharjah_museums_department">Sharjah Museums Department</string>

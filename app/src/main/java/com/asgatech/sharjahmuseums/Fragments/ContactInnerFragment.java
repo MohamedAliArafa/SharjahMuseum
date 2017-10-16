@@ -101,6 +101,7 @@ public class ContactInnerFragment extends Fragment {
                     public void onSuccess(Integer response) {
                         if (response==1){
                             Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                            emptyFields();
                         }else {
                             Toast.makeText(getActivity(), "failure to send feedback", Toast.LENGTH_SHORT).show();
                         }
@@ -114,6 +115,12 @@ public class ContactInnerFragment extends Fragment {
         });
 
         return view;
+    }
+    void emptyFields(){
+        nameEditText.setText(" ");
+      phoneEditText.setText(" ");
+         emailEditText.setText(" ");
+       messageEditText.setText(" ");;
     }
 
 }

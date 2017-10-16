@@ -1,5 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -75,6 +76,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     private TextViewBold ToolbarTitleTextView;
     private int currentPage = 0;
     private int currentPage2 = 0;
+    private ImageView ivLine1,ivLine2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,8 +137,21 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         imagesViewPager = (ViewPager) findViewById(R.id.images_view_pager);
         layoutDots = (LinearLayout) findViewById(R.id.layout_dots);
         layoutDotsGallery = (LinearLayout) findViewById(R.id.layout_dots_gallery);
+        ivLine1 = (ImageView) findViewById(R.id.iv_line1);
+        ivLine2 = (ImageView) findViewById(R.id.iv_line2);
         dot = null;
         dots = null;
+        Drawable background = ivLine1.getBackground();
+        if (museumColor != null) {
+
+            background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+        }
+        Drawable background2 = ivLine2.getBackground();
+        if (museumColor != null) {
+
+            background2.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+        }
+
         addReviewLinear = (LinearLayout) findViewById(R.id.add_review_linear);
         locationLinear = (LinearLayout) findViewById(R.id.location_linear);
         callLinear = (LinearLayout) findViewById(R.id.call_linear);
@@ -279,24 +294,15 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             for (int i = 0; i < size; i++) {
                 if (dot == null) {
                     dot = new ImageView(this);
-                    dot.setImageDrawable(getResources().getDrawable(R.drawable.dot_slider_active));
-
+                    dot.setImageDrawable(getResources().getDrawable(R.drawable.dot_slider_unactive));
+//                    Drawable drawable = res.getDrawable(R.drawable.dot_slider_unactive);
 //                    dot.setBackgroundColor(Color.parseColor(museumColor));
-//                    Drawable background = dot.getBackground();
-//                    if (museumColor != null) {
-//                        Log.e("museumColor",museumColor);
-//                        background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
-//                    }
 
                 } else {
                     dot = new ImageView(this);
 //                    dot.setBackgroundColor(Color.parseColor(museumColor));
-                    dot.setImageDrawable(getResources().getDrawable(R.drawable.dot_slider_active));
-//                    Drawable background = dot.getBackground();
-//                    if (museumColor != null) {
-//                        Log.e("museumColor",museumColor);
-//                        background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
-//                    }
+                    dot.setImageDrawable(getResources().getDrawable(R.drawable.dot_slider_unactive));
+//
                 }
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -313,20 +319,28 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
     }
 
+    @SuppressLint("ResourceAsColor")
     public void selectDot(int idx, int size) {
         try {
             Resources res = getResources();
             if (size != 0) {
                 for (int i = 0; i < size; i++) {
-//                    int drawableId = (i == idx) ? (R.drawable.dot_slider_active) : (R.drawable.dot_slider_unactive);
-                    if (i == idx) {
-//                        Drawable drawable = res.getDrawable(R.drawable.dot_slider_active);
+                    int drawableId = (i == idx) ? Color.parseColor(museumColor) : (R.color.colorPrimary);
+//                    Drawable drawable = res.getDrawable(drawableId);
+//                        dots.get(i).setImageDrawable(drawableId);
+                    dots.get(i).setBackgroundColor(drawableId);
+
+
+//                    if (i == idx) {
+////                        Drawable drawable = res.getDrawable(R.drawable.dot_slider_active);
+////                        dots.get(i).setImageDrawable(drawable);
+//                        dots.get(i).setBackgroundColor(Color.parseColor(museumColor));
+//                    } else {
+////                        dots.get(i).setBackgroundColor(getResources().getColor(R.color.White));
+//
+//                        Drawable drawable = res.getDrawable(R.drawable.dot_slider_unactive);
 //                        dots.get(i).setImageDrawable(drawable);
-                        dot.setBackgroundColor(Color.parseColor(museumColor));
-                    } else {
-                        Drawable drawable = res.getDrawable(R.drawable.dot_slider_unactive);
-                        dots.get(i).setImageDrawable(drawable);
-                    }
+//                    }
                 }
             }
         } catch (Exception e) {
