@@ -48,16 +48,15 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.e("image Link", URLS.URL_BASE + allMuseumsList.get(position).getImage());
         Utils.loadSimplePic(context, URLS.URL_BASE + allMuseumsList.get(position).getImage(), holder.museumsImageView);
-//        Drawable background = holder.colorBackgroundImageView.getBackground();
-        allMuseumsList.get(position).setColor("#99e40d62"); // for test
-//        background.setColorFilter(Color.parseColor(allMuseumsList.get(position).getColor().trim()), PorterDuff.Mode.LIGHTEN);
+
         holder.museumsNameTextView.setText(allMuseumsList.get(position).getTitle());
         holder.museumsItemLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MuseumsDetailsActivity.class);
                 intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
-                intent.putExtra("museumTitle",allMuseumsList.get(position).getTitle().trim());
+                intent.putExtra(ConstantUtils.MUSEUM_TITLE,allMuseumsList.get(position).getTitle().trim());
+                intent.putExtra(ConstantUtils.MUSEUM_COLOR,allMuseumsList.get(position).getColor());
                 context.startActivity(intent);
             }
         });

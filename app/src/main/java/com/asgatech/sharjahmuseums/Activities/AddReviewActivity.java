@@ -1,5 +1,8 @@
 package com.asgatech.sharjahmuseums.Activities;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -29,10 +33,12 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     private ImageView toolbarHomeImageView;
     private EditText tvEmail;
     private EditText tvReview;
+    private Button postButton;
     private RatingBar barReviewStars;
     private int museumsID;
     float rateValue;
     private TextViewBold ToolbarTitleTextView;
+    private String museumColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +54,12 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
-
+        museumColor=getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
+        Drawable background = toolbar.getBackground();
+        if (museumColor != null) {
+            Log.e("museumColor",museumColor);
+            background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+        }
         ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(getString(R.string.add_review));
 
@@ -62,8 +73,14 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         tvEmail = (EditText) findViewById(R.id.tv_email);
         tvReview = (EditText) findViewById(R.id.tv_review);
         barReviewStars = (RatingBar) findViewById(R.id.bar_review_stars);
-        findViewById(R.id.btn_post).setOnClickListener(this);
+        postButton=findViewById(R.id.btn_post);
+        postButton.setOnClickListener(this);
 
+        Drawable background = postButton.getBackground();
+        if (museumColor != null) {
+            Log.e("museumColor",museumColor);
+            background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+        }
 
         barReviewStars.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 

@@ -2,6 +2,8 @@ package com.asgatech.sharjahmuseums.Activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,7 +52,7 @@ import okhttp3.ResponseBody;
 public class MuseumsDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     public ImageView toolbarHomeImageView;
     int NUM_PAGES2;
-    String tetephoneNum, emailString,museumTitle;
+    String tetephoneNum, emailString, museumTitle, museumColor;
     Timer timer;
     double longtude, latitude;
     private int museumsID;
@@ -71,7 +73,6 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     private RecyclerView facilitiesList;
     private HighLightAdapter mAdapter;
     private TextViewBold ToolbarTitleTextView;
-
     private int currentPage = 0;
     private int currentPage2 = 0;
 
@@ -90,8 +91,15 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
 
-        museumTitle=getIntent().getStringExtra("museumTitle");
-        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        museumTitle = getIntent().getStringExtra(ConstantUtils.MUSEUM_TITLE);
+        museumColor = getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
+        Drawable background = toolbar.getBackground();
+        if (museumColor != null) {
+            Log.e("museumColor", museumColor);
+            background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+        }
+
+        ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(museumTitle);
 
         toolbarHomeImageView.setVisibility(View.VISIBLE);
@@ -197,6 +205,9 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             facilitiesList.setAdapter(faciltsAdapter);
         }
         if (Utils.validList(data.getImageList())) {
+            addDots(data.getImageList().size());
+            selectDot(0, data.getImageList().size());
+
             HomeSliderImagesAdapter imagesAdapter = new HomeSliderImagesAdapter(data.getImageList(), this, 2);
             imagesViewPager.setAdapter(imagesAdapter);
             final int NUM_PAGES = data.getImageList().size();
@@ -234,10 +245,8 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 }
             });
         }
-        if (Utils.validList(data.getHightLight())) {
-            addDots(data.getHightLight().size());
-            selectDot(0, data.getHightLight().size());
 
+        if (Utils.validList(data.getHightLight())) {
 
             PagerContainer pagerContainer = (PagerContainer) findViewById(R.id.pager_container);
             if (pagerContainer != null) {
@@ -265,14 +274,29 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
     public void addDots(int size) {
         dots = new ArrayList<>();
+
         if (size != 0) {
             for (int i = 0; i < size; i++) {
                 if (dot == null) {
                     dot = new ImageView(this);
                     dot.setImageDrawable(getResources().getDrawable(R.drawable.dot_slider_active));
+
+//                    dot.setBackgroundColor(Color.parseColor(museumColor));
+//                    Drawable background = dot.getBackground();
+//                    if (museumColor != null) {
+//                        Log.e("museumColor",museumColor);
+//                        background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+//                    }
+
                 } else {
                     dot = new ImageView(this);
+//                    dot.setBackgroundColor(Color.parseColor(museumColor));
                     dot.setImageDrawable(getResources().getDrawable(R.drawable.dot_slider_active));
+//                    Drawable background = dot.getBackground();
+//                    if (museumColor != null) {
+//                        Log.e("museumColor",museumColor);
+//                        background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+//                    }
                 }
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -294,9 +318,15 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             Resources res = getResources();
             if (size != 0) {
                 for (int i = 0; i < size; i++) {
-                    int drawableId = (i == idx) ? (R.drawable.dot_slider_active) : (R.drawable.dot_slider_unactive);
-                    Drawable drawable = res.getDrawable(drawableId);
-                    dots.get(i).setImageDrawable(drawable);
+//                    int drawableId = (i == idx) ? (R.drawable.dot_slider_active) : (R.drawable.dot_slider_unactive);
+                    if (i == idx) {
+//                        Drawable drawable = res.getDrawable(R.drawable.dot_slider_active);
+//                        dots.get(i).setImageDrawable(drawable);
+                        dot.setBackgroundColor(Color.parseColor(museumColor));
+                    } else {
+                        Drawable drawable = res.getDrawable(R.drawable.dot_slider_unactive);
+                        dots.get(i).setImageDrawable(drawable);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -371,6 +401,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             case R.id.add_review_linear:
                 Intent intent = new Intent(new Intent(this, ViewVisitorsReviewActivity.class));
                 intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, museumsID);
+                intent.putExtra(ConstantUtils.MUSEUM_COLOR, museumColor);
                 startActivity(intent);
                 break;
 

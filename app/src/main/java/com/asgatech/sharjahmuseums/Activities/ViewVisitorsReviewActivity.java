@@ -1,6 +1,9 @@
 package com.asgatech.sharjahmuseums.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +45,7 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
    TextViewBold ErrorMessageTextView;
     private TextViewBold ToolbarTitleTextView;
     int museumsID;
-    private String email;
+    private String email,museumColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,13 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
+
+        museumColor=getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
+        Drawable background = toolbar.getBackground();
+        if (museumColor != null) {
+            Log.e("museumColor",museumColor);
+            background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+        }
 
         ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(getString(R.string.visitors_reviews));
@@ -76,6 +87,11 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
         addReview = (FloatingActionButton) findViewById(R.id.iv_add_review);
         addReview.setOnClickListener(this);
 
+        Drawable background = addReview.getBackground();
+        if (museumColor != null) {
+            Log.e("museumColor",museumColor);
+            background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
+        }
 
         if (getIntent().hasExtra(ConstantUtils.EXTRA_MUSEUMS_ID)) {
             museumsID = getIntent().getIntExtra((ConstantUtils.EXTRA_MUSEUMS_ID), 0);
@@ -151,6 +167,7 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
     public void onClick(View view) {
         Intent intent = new Intent(ViewVisitorsReviewActivity.this, AddReviewActivity.class);
         intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, museumsID);
+        intent.putExtra(ConstantUtils.MUSEUM_COLOR,museumColor);
         startActivity(intent);
     }
 }
