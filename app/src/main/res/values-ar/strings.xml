@@ -8,14 +8,14 @@
     <string name="policy">سياسات قسم متاحف الشارقة</string>
     <!--side menu-->
     <string name="home">الرئيسية</string>
-    <string name="our_museums">متاحفنا</string>
+    <string name="our_museums">المتاحف</string>
     <string name="plan_your_visit">خطط زيارتك</string>
-    <string name="Events">أحداث</string>
-    <string name="near_by_facilities">المرافق القريبة</string>
+    <string name="Events">الفعاليات</string>
+    <string name="near_by_facilities">الأماكن القريبة</string>
     <string name="education">التعليم</string>
-    <string name="about_us">معلومات عنا</string>
-    <string name="contact_us">اتصل بنا</string>
-    <string name="notifications">الاشعارات</string>
+    <string name="about_us">عن الإدارة</string>
+    <string name="contact_us"> تواصل معنا</string>
+    <string name="notifications">الإشعارات</string>
     <string name="setting">الاعدادات</string>
     <string name="demo">عرض</string>
 
@@ -30,9 +30,9 @@
     <!-- museums details -->
     <string name="about_museums">عن المتحف</string>
     <string name="opening_hours">ساعات العمل</string>
-    <string name="entry_fees">رسوم الدخول</string>
-    <string name="high_lights">الابرز</string>
-    <string name="our_facilities">منشأتنا</string>
+    <string name="entry_fees">قيمةالدخول</string>
+    <string name="high_lights">المعالم</string>
+    <string name="our_facilities">الخدمات</string>
     <string name="closed">مغلق</string>
     <string name="opened">مفتوح</string>
     <string name="language">اللغه</string>
@@ -64,4 +64,12 @@
 
     <!--//messages-->
     <string name="no_notification">لا يوجد اشعارات لك فى الوقت الحالى </string>
+    <string name="contact">تواصل معنا</string>
+    <string name="send">إرسال</string>
+    <string name="message">الرسالة</string>
+    <string name="phone">الهاتف</string>
+    <string name="email">البريد الإلكترونى</string>
+    <string name="name">الإسم</string>
+    <string name="info">البيانات</string>
+    <string name="loading">"تحميل ... "</string>
 </resources>

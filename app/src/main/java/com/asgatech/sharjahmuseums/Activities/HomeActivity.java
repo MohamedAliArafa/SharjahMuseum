@@ -40,6 +40,7 @@ import com.asgatech.sharjahmuseums.Models.InsertDevicetokenRequestModel;
 import com.asgatech.sharjahmuseums.Models.NavigationDrawerItem;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 
 import java.util.ArrayList;
@@ -52,6 +53,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle toogleButtonActionBarDrawerToggle;
     public Toolbar toolbar;
     public ImageView toolbarLogoImageView, toolbarHomeImageView;
+    public TextViewBold ToolbarTitleTextView;
+
     private RecyclerView drawerRecyclerView;
     UserData userData;
 
@@ -72,6 +75,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationViewdrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbarLogoImageView = (ImageView) findViewById(R.id.toolbar_logo_image_view);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
+        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
         toolbarHomeImageView.setOnClickListener(this);
         toogleButtonActionBarDrawerToggle = new ActionBarDrawerToggle(this, navigationViewdrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toogleButtonActionBarDrawerToggle.setDrawerIndicatorEnabled(false);

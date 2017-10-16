@@ -16,6 +16,7 @@
         android:weightSum="2">
 
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+            android:id="@+id/tv_toolbar_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="start|center"
@@ -34,6 +35,7 @@
             android:visibility="gone"
             android:contentDescription="@null"
             android:src="@drawable/logo_bar" />
+
 
         <ImageView
             android:id="@+id/toolbar_home_image_view"
