@@ -3,26 +3,26 @@ package com.asgatech.sharjahmuseums.Activities;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Models.AddReviewRequest;
-import com.asgatech.sharjahmuseums.Models.ReviewVisitorsRequest;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
-import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -58,6 +58,12 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         Drawable background = toolbar.getBackground();
         if (museumColor != null) {
             Log.e("museumColor",museumColor);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.setStatusBarColor(Utils.getDarkColor(Color.parseColor(museumColor)));
+            }
             background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
         ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -76,7 +79,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     private TextViewBold ToolbarTitleTextView;
     private int currentPage = 0;
     private int currentPage2 = 0;
-    private ImageView ivLine1,ivLine2;
+    private ImageView ivLine1, ivLine2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +151,12 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         }
         Drawable background2 = ivLine2.getBackground();
         if (museumColor != null) {
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.setStatusBarColor(Utils.getDarkColor(Color.parseColor(museumColor)));
+            }
             background2.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
 

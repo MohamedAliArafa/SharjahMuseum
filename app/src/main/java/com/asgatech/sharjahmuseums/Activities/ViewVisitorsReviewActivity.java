@@ -4,26 +4,25 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Adapters.ViewVisitorsReviewAdapter;
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsRequest;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
 import com.asgatech.sharjahmuseums.R;
-import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
@@ -90,6 +89,12 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
         Drawable background = addReview.getBackground();
         if (museumColor != null) {
             Log.e("museumColor",museumColor);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.setStatusBarColor(Utils.getDarkColor(Color.parseColor(museumColor)));
+            }
             background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
 

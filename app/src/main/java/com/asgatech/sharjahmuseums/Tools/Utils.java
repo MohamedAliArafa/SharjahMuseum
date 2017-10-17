@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -47,6 +48,13 @@ public class Utils {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    public static int getDarkColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] *= 0.8f; // value component
+        return Color.HSVToColor(hsv);
     }
 
     public static Bitmap decodeUri(Uri selectedImage, Context context) throws FileNotFoundException {
@@ -112,12 +120,14 @@ public class Utils {
 
         }
     }
+
     public static String spliteDate(String date) {
         String[] parts = date.split("T");
         String part1 = parts[0]; // date
         String part2 = parts[1]; // time
         return part1;
     }
+
     public static boolean validObject(Object myObject) {
         if (myObject != null) {
             return true;
@@ -138,6 +148,7 @@ public class Utils {
         }
 
     }
+
     public static void openWebPage(Context context, String url) {
         try {
             if (!url.startsWith("http://") && !url.startsWith("https://"))
@@ -171,14 +182,14 @@ public class Utils {
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .load(url)
                 .into(new BitmapImageViewTarget(pic) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                circularBitmapDrawable.setCornerRadius(20);
-                pic.setImageDrawable(circularBitmapDrawable);
-            }
-        });
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                        circularBitmapDrawable.setCornerRadius(20);
+                        pic.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
     }
 
 
@@ -190,10 +201,10 @@ public class Utils {
             return true;
         } else {
             customToastView((Activity) context, context.getString(R.string.no_connection));
-        return false;
-    }
+            return false;
+        }
 
-}
+    }
 
     public static Animation expand(final View item) {
         if (item.getVisibility() != View.VISIBLE) {
@@ -291,7 +302,6 @@ public class Utils {
         String formattedTime = output.format(d);
         return formattedTime;
     }
-
 
 
 }
