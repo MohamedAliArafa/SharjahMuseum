@@ -18,6 +18,7 @@ import com.asgatech.sharjahmuseums.Fragments.EventsFragment;
 import com.asgatech.sharjahmuseums.Fragments.HomeFragment;
 import com.asgatech.sharjahmuseums.Fragments.NearbyFragment;
 import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
+import com.asgatech.sharjahmuseums.Fragments.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Fragments.PlanYourVisitFragment;
 import com.asgatech.sharjahmuseums.Fragments.SettingFragment;
 import com.asgatech.sharjahmuseums.Models.NavigationDrawerItem;
@@ -95,7 +96,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                 case 2:
 //                                    view.toolbarHomeImageView.setVisibility(View.VISIBLE);
 //                                    view.toolbarLogoImageView.setVisibility(View.GONE);
-//                                    view.openFragment(OurMuseumsFragment.class, null);
+                                    presenter.openFragment(new OurMuseumsFragment(), null);
                                     break;
                                 case 3:
                                     presenter.openFragment(new PlanYourVisitFragment(), null);
