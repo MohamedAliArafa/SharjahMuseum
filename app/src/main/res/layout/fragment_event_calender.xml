@@ -21,10 +21,12 @@
         android:id="@+id/filter_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/filter_layout"
         android:layout_below="@+id/auto_complete_search_event"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="40dp"
         android:layout_marginTop="8dp"
-        android:layout_toLeftOf="@id/event_switch_to_calender"
-        android:layout_toStartOf="@id/event_switch_to_calender"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingEnd="5dp"
@@ -44,9 +46,9 @@
             android:id="@+id/arrowIV"
             android:layout_width="10dp"
             android:layout_height="10dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:layout_gravity="center"
             android:layout_marginTop="2dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_dropdown_tap" />
@@ -57,18 +59,15 @@
             android:layout_marginEnd="2dp"
             android:layout_marginStart="2dp"
             android:background="@color/GrayLight" />
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/event_switch_to_calender"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignTop="@id/filter_layout"
-        android:layout_marginEnd="@dimen/d60"
-        android:layout_marginStart="4dp"
-        android:src="@drawable/ic_calender_tap" />
+        <ImageView
+            android:id="@+id/event_switch_to_calender"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_calender_tap" />
+    </LinearLayout>
 
 
     <include

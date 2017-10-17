@@ -1,4 +1,4 @@
-package com.asgatech.sharjahmuseums.Fragments;
+package com.asgatech.sharjahmuseums.Activities.OurMuseums;
 
 
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Adapters.AllMuseumsAdapter;
 import com.asgatech.sharjahmuseums.Models.ALLMuseumsModel;
 import com.asgatech.sharjahmuseums.Models.PagingModel;
@@ -63,10 +64,9 @@ public class OurMuseumsFragment extends Fragment {
             @Override
             public void onSuccess(List<ALLMuseumsModel> response) {
                 if (Utils.validList(response)) {
-                    AllMuseumsAdapter museumsAdapter = new AllMuseumsAdapter(getActivity(), response);
+                    AllMuseumsAdapter museumsAdapter = new AllMuseumsAdapter(getActivity(), response, ((HomeContract.ModelView) getActivity()).getPresenter());
                     ourMuseumsRecyclerView.setAdapter(museumsAdapter);
                 }
-
             }
 
             @Override

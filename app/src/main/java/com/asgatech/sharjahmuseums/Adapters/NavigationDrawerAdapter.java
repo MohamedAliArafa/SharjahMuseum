@@ -10,15 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.asgatech.sharjahmuseums.Activities.Events.EventsListFragment;
 import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
+import com.asgatech.sharjahmuseums.Activities.OurMuseums.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.ContactUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
-import com.asgatech.sharjahmuseums.Fragments.EventsFragment;
-import com.asgatech.sharjahmuseums.Fragments.HomeFragment;
 import com.asgatech.sharjahmuseums.Fragments.NearbyFragment;
 import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
-import com.asgatech.sharjahmuseums.Fragments.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Fragments.PlanYourVisitFragment;
 import com.asgatech.sharjahmuseums.Fragments.SettingFragment;
 import com.asgatech.sharjahmuseums.Models.NavigationDrawerItem;
@@ -91,7 +90,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                         public void onClick(View v) {
                             switch (position) {
                                 case 1:
-                                    presenter.openFragment(new HomeFragment(), null);
+                                    presenter.openHome();
                                     break;
                                 case 2:
 //                                    view.toolbarHomeImageView.setVisibility(View.VISIBLE);
@@ -102,7 +101,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                     presenter.openFragment(new PlanYourVisitFragment(), null);
                                     break;
                                 case 4:
-                                    presenter.openFragment(new EventsFragment(), null);
+                                    presenter.openFragment(new EventsListFragment(), null);
                                     break;
                                 case 5:
                                     presenter.openFragment(new NearbyFragment(), null);

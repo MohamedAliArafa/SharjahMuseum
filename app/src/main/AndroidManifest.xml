@@ -13,6 +13,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name="com.asgatech.sharjahmuseums.MyApplication"
         android:theme="@style/AppBase">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -31,14 +32,13 @@
             android:name=".Activities.Home.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.MuseumsDetailsActivity"
+            android:name=".Activities.OurMuseums.MuseumDetails.MuseumsDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".Activities.EventDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".Activities.HighLightActivity" />
         <activity
             android:name=".Activities.ViewVisitorsReviewActivity"
             android:screenOrientation="portrait"
@@ -58,7 +58,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".Activities.HightLightDetailActivity"
+            android:name=".Activities.OurMuseums.MuseumDetails.HighlightDetails.HighlightsDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
     </application>

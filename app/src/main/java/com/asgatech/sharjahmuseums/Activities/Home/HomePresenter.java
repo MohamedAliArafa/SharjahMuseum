@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.asgatech.sharjahmuseums.R;
+import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 
 /**
  * Created by mohamed.arafa on 10/16/2017.
@@ -23,13 +24,29 @@ public class HomePresenter implements HomeContract.UserAction {
 
     @Override
     public void openFragment(Fragment fragment, Bundle bundle) {
+        mView.changeToolbarTitle("");
+        mView.restToolbarColor();
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
         transaction.replace(R.id.content_main, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
         mView.closeDrawer();
         mView.hideLogo();
+    }
+
+    @Override
+    public void openHome() {
+        mView.changeToolbarTitle("");
+        mView.restToolbarColor();
+        mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        HomeFragment fragment = new HomeFragment();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        transaction.replace(R.id.content_main, fragment, ConstantUtils.HOMEPAGE_FRAGMENT_KEY);
+        transaction.commit();
+        mView.closeDrawer();
+        mView.showLogo();
     }
 }

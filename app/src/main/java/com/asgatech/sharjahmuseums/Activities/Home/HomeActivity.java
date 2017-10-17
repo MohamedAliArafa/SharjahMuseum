@@ -1,8 +1,9 @@
 package com.asgatech.sharjahmuseums.Activities.Home;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,26 +15,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Adapters.NavigationDrawerAdapter;
-import com.asgatech.sharjahmuseums.Fragments.HomeFragment;
-import com.asgatech.sharjahmuseums.Models.InsertDevicetokenRequestModel;
 import com.asgatech.sharjahmuseums.Models.NavigationDrawerItem;
 import com.asgatech.sharjahmuseums.R;
-import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
-import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
+import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.ResponseBody;
 
 public class HomeActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, HomeContract.ModelView {
@@ -53,7 +51,6 @@ public class HomeActivity extends AppCompatActivity implements
     @BindView(R.id.drawer_layout)
     DrawerLayout mNavigationViewDrawerLayout;
 
-    UserData mUserData;
     private HomePresenter mPresenter;
 
     @Override
@@ -65,36 +62,6 @@ public class HomeActivity extends AppCompatActivity implements
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         initView();
         setupNavigationDrawer();
-    }
-
-    public void insertDeviceToken() {
-        String androidID = Settings.Secure.getString(HomeActivity.this.getContentResolver(), Settings.Secure.ANDROID_ID);
-
-//        InsertDevicetokenRequestModel insertDevicetokenRequestModel=new InsertDevicetokenRequestModel(androidID, FirebaseInstanceId.getInstance().getToken());
-        InsertDevicetokenRequestModel insertDevicetokenRequestModel = new InsertDevicetokenRequestModel(androidID, "");
-        InsertDeviceToken(insertDevicetokenRequestModel);
-    }
-
-    private void InsertDeviceToken(InsertDevicetokenRequestModel insertDevicetokenRequestModel) {
-        ServerTool.InsertDeviceToken(this, insertDevicetokenRequestModel, new ServerTool.APICallBack<Integer>() {
-            @Override
-            public void onSuccess(Integer response) {
-                if (response == 1) {
-                    Log.e("InsertDeviceToken", "Success");
-                    mUserData.saveUserStateOfInsertToken(HomeActivity.this, true, mUserData.TAG_INSERT_TOKEN);
-
-                } else {
-                    Log.e("InsertDeviceToken", "failure to insert token");
-//                    Toast.makeText(HomeActivity.this, "failure to insert token", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailed(int statusCode, ResponseBody responseBody) {
-
-            }
-        });
-
     }
 
     public List<NavigationDrawerItem> getData() {
@@ -124,8 +91,8 @@ public class HomeActivity extends AppCompatActivity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_home_image_view:
-                mPresenter.openFragment(new HomeFragment(), null);
-                mToolbarTitleTextView.setText(" ");
+                mPresenter.openHome();
+                mToolbarTitleTextView.setText("");
                 break;
         }
     }
@@ -133,33 +100,31 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_main);
-        if (!(fragment instanceof HomeFragment)) {
-            mPresenter.openFragment(new HomeFragment(), null);
-            mToolbarTitleTextView.setText("");
-            mToolbarHomeImageView.setVisibility(View.GONE);
-            mToolbarLogoImageView.setVisibility(View.VISIBLE);
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            if (getSupportFragmentManager().popBackStackImmediate()) {
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_main);
+                if ((fragment instanceof HomeFragment)) {
+                    mToolbarTitleTextView.setText("");
+                    showLogo();
+                }else {
+                    hideLogo();
+                }
+            }
+            restToolbarColor();
         } else {
             super.onBackPressed();
         }
-
     }
 
     @Override
     public void initView() {
-        mUserData = new UserData();
         mDrawerRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mDrawerRecyclerView.setLayoutManager(mLayoutManager);
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(getApplicationContext(), this, mPresenter, getData());
         mDrawerRecyclerView.setAdapter(adapter);
-        mToolbarHomeImageView.setVisibility(View.GONE);
-        mToolbarLogoImageView.setVisibility(View.VISIBLE);
-        mPresenter.openFragment(new HomeFragment(), null);
-        if (!mUserData.getUserStateOfInsertToken(this)) {
-            insertDeviceToken();
-        }
+        showLogo();
+        mPresenter.openHome();
     }
 
     @Override
@@ -183,28 +148,37 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void setupToolbar() {
-
-    }
-
-    @Override
     public void closeDrawer() {
         mNavigationViewDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
     public void changeToolbarTitle(String title) {
         mToolbarTitleTextView.setText(title);
+    }
+
+    @Override
+    public void changeToolbarColor(String color) {
+        if (color != null) {
+            mToolbar.setBackgroundColor(Color.parseColor(color));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.setStatusBarColor(Utils.getDarkColor(Color.parseColor(color)));
+            }
+        }
+    }
+
+    @Override
+    public void restToolbarColor() {
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.GreenLight));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utils.getDarkColor(getResources().getColor(R.color.GreenLight)));
+        }
     }
 
     @Override
@@ -222,5 +196,12 @@ public class HomeActivity extends AppCompatActivity implements
     public void showLogo() {
         mToolbarHomeImageView.setVisibility(View.GONE);
         mToolbarLogoImageView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public HomeContract.UserAction getPresenter() {
+        if (mPresenter != null)
+            return mPresenter;
+        return null;
     }
 }

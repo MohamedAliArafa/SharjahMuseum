@@ -1,4 +1,4 @@
-package com.asgatech.sharjahmuseums.Fragments;
+package com.asgatech.sharjahmuseums.Activities.Events.EventDetails;
 
 
 import android.annotation.SuppressLint;
@@ -15,17 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Adapters.ViewPagerAdapter;
-import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.Models.EventdetatailsResponceModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,13 +89,10 @@ public class EventDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_event_details, container, false);
         ButterKnife.bind(this, view);
-
         int id = getArguments().getInt("eventId");
         mDownloadTextView.setPaintFlags(mDownloadTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
       //  mTextView.setText("This text will be underlined");
-
         getEventDetails(id ,new UserData().getLocalization(getActivity()));
-
         return view;
     }
 

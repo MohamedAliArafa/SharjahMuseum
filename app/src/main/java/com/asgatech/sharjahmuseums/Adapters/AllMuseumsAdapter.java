@@ -2,9 +2,6 @@ package com.asgatech.sharjahmuseums.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.MuseumsDetailsActivity;
+import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
+import com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.MuseumsDetailsActivity;
 import com.asgatech.sharjahmuseums.Models.ALLMuseumsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -30,12 +26,14 @@ import java.util.List;
  */
 
 public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.ViewHolder> {
+    private HomeContract.UserAction presenter;
     private Context context;
     private List<ALLMuseumsModel> allMuseumsList;
 
-    public AllMuseumsAdapter(Context context, List<ALLMuseumsModel> response) {
+    public AllMuseumsAdapter(Context context, List<ALLMuseumsModel> response, HomeContract.UserAction presenter) {
         this.context = context;
         this.allMuseumsList = response;
+        this.presenter = presenter;
     }
 
     @Override
@@ -53,6 +51,11 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
         holder.museumsItemLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Bundle bundle = new Bundle();
+//                bundle.putInt(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
+//                bundle.putString(ConstantUtils.MUSEUM_TITLE, allMuseumsList.get(position).getTitle().trim());
+//                bundle.putString(ConstantUtils.MUSEUM_COLOR, allMuseumsList.get(position).getColor());
+//                presenter.openFragment(new MuseumDetailsFragment(), bundle);
                 Intent intent = new Intent(context, MuseumsDetailsActivity.class);
                 intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
                 intent.putExtra(ConstantUtils.MUSEUM_TITLE,allMuseumsList.get(position).getTitle().trim());

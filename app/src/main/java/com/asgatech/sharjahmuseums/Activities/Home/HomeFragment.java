@@ -1,4 +1,4 @@
-package com.asgatech.sharjahmuseums.Fragments;
+package com.asgatech.sharjahmuseums.Activities.Home;
 
 
 import android.content.Context;
@@ -15,9 +15,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
-import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
+import com.asgatech.sharjahmuseums.Activities.OurMuseums.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Adapters.HomeSliderImagesAdapter;
+import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
+import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
+import com.asgatech.sharjahmuseums.Activities.Events.EventsListFragment;
+import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
+import com.asgatech.sharjahmuseums.Fragments.PlanYourVisitFragment;
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
@@ -195,7 +199,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ((HomeActivity) getActivity()).openFragmentFromChild(new OurMuseumsFragment(), null);
                 break;
             case R.id.event_layout:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new EventsFragment(), null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new EventsListFragment(), null);
                 break;
             case R.id.plan_visits_linear:
                 ((HomeActivity) getActivity()).openFragmentFromChild(new PlanYourVisitFragment(), null);

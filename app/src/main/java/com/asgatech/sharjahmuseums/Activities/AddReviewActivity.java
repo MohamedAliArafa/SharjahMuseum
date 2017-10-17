@@ -50,14 +50,14 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void setToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
+        toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
-        museumColor=getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
+        museumColor = getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
         Drawable background = toolbar.getBackground();
         if (museumColor != null) {
-            Log.e("museumColor",museumColor);
+            Log.e("museumColor", museumColor);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -66,7 +66,7 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
             }
             background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
-        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(getString(R.string.add_review));
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
@@ -76,15 +76,15 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
 
     private void setUpView() {
 
-        tvEmail = (EditText) findViewById(R.id.tv_email);
-        tvReview = (EditText) findViewById(R.id.tv_review);
-        barReviewStars = (RatingBar) findViewById(R.id.bar_review_stars);
-        postButton=findViewById(R.id.btn_post);
+        tvEmail = findViewById(R.id.tv_email);
+        tvReview = findViewById(R.id.tv_review);
+        barReviewStars = findViewById(R.id.bar_review_stars);
+        postButton = findViewById(R.id.btn_post);
         postButton.setOnClickListener(this);
 
         Drawable background = postButton.getBackground();
         if (museumColor != null) {
-            Log.e("museumColor",museumColor);
+            Log.e("museumColor", museumColor);
             background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
 
@@ -92,24 +92,23 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-
-                 rateValue = barReviewStars.getRating();
+                rateValue = barReviewStars.getRating();
                 // System.out.println("Rate for Module is"+rateValue);
-                switch ((int) rateValue){
+                switch ((int) rateValue) {
                     case 1:
-                        rateValue=20;
+                        rateValue = 20;
                         break;
                     case 2:
-                        rateValue=40;
+                        rateValue = 40;
                         break;
                     case 3:
-                        rateValue=60;
+                        rateValue = 60;
                         break;
                     case 4:
-                        rateValue=80;
+                        rateValue = 80;
                         break;
                     case 5:
-                        rateValue=100;
+                        rateValue = 100;
                         break;
 
 

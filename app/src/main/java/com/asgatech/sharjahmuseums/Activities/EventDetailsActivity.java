@@ -5,10 +5,10 @@ import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -57,13 +57,14 @@ public class EventDetailsActivity extends AppCompatActivity {
     Timer timer;
     private List<ImageView> dots;
     private ImageView dot;
-private String attachUrl,eventTitleToolbar;
+    private String attachUrl, eventTitleToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_event_details);
-        eventTitleToolbar=getIntent().getStringExtra("eventTitle");
+        eventTitleToolbar = getIntent().getStringExtra("eventTitle");
         int id = getIntent().getIntExtra("eventId", 0);
         setToolBar();
         initView();
@@ -75,7 +76,7 @@ private String attachUrl,eventTitleToolbar;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
-        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(eventTitleToolbar);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
@@ -105,18 +106,18 @@ private String attachUrl,eventTitleToolbar;
         downloadText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
-                Log.e("attachUrl",attachUrl);
-                intent.putExtra("attachUrl",attachUrl);
+                Intent intent = new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
+                Log.e("attachUrl", attachUrl);
+                intent.putExtra("attachUrl", attachUrl);
                 startActivity(intent);
             }
         });
         downloadIndicator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
-                Log.e("bookLink",attachUrl);
-                intent.putExtra("bookLink",attachUrl);
+                Intent intent = new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
+                Log.e("bookLink", attachUrl);
+                intent.putExtra("bookLink", attachUrl);
                 startActivity(intent);
             }
         });
@@ -140,7 +141,7 @@ private String attachUrl,eventTitleToolbar;
 
                     eventDescription.setText(model.getDescrption());
                     eventItemPlace.setText(model.getAdress());
-                    attachUrl=model.getAttach();
+                    attachUrl = model.getAttach();
                     viewpager.setAdapter(new ViewPagerAdapter(EventDetailsActivity.this, model.getEventImages()));
                     NUM_PAGES = model.getEventImages().size();
 

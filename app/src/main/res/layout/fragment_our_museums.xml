@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.asgatech.sharjahmuseums.Fragments.OurMuseumsFragment">
+    tools:context="com.asgatech.sharjahmuseums.Activities.OurMuseums.OurMuseumsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/our_museums_recycler_view"

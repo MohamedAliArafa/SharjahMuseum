@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Base64;
@@ -23,6 +24,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.asgatech.sharjahmuseums.Models.InsertDevicetokenRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.bumptech.glide.load.Option;
@@ -55,6 +57,12 @@ public class Utils {
         Color.colorToHSV(color, hsv);
         hsv[2] *= 0.8f; // value component
         return Color.HSVToColor(hsv);
+    }
+
+    public static InsertDevicetokenRequestModel insertDeviceToken(Context context) {
+        String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+//        InsertDevicetokenRequestModel insertDevicetokenRequestModel=new InsertDevicetokenRequestModel(androidID, FirebaseInstanceId.getInstance().getToken());
+        return new InsertDevicetokenRequestModel(androidID, "");
     }
 
     public static Bitmap decodeUri(Uri selectedImage, Context context) throws FileNotFoundException {

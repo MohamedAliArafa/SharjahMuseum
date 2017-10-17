@@ -1,4 +1,4 @@
-package com.asgatech.sharjahmuseums.Fragments;
+package com.asgatech.sharjahmuseums.Activities.Events;
 
 
 import android.graphics.Color;
@@ -11,9 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Fragments.CalenderHelper.EventDecorator;
 import com.asgatech.sharjahmuseums.Fragments.CalenderHelper.OneDayDecorator;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
@@ -41,13 +43,17 @@ import okhttp3.ResponseBody;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventCalenderFragment extends Fragment implements OnDateSelectedListener, OnMonthChangedListener {
+public class EventCalenderFragment extends Fragment implements OnDateSelectedListener,
+        OnMonthChangedListener, View.OnClickListener {
 
     @BindView(R.id.calendarView)
     MaterialCalendarView widget;
 
     @BindView(R.id.main_filter_layout)
     LinearLayout mainFilterLayout;
+
+    @BindView(R.id.arrowIV)
+    ImageView arrowImg;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
 
     public EventCalenderFragment() {
@@ -152,8 +158,6 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
     }
 
     private void setCategoryData(List<EventCategoryModel> list) {
-
-
         for (int i = 0; i < list.size(); i++) {
             final View itemView = LayoutInflater.from(getActivity())
                     .inflate(R.layout.filter_recycler_row, null);
@@ -195,5 +199,29 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
     @Override
     public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
 
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.filter_layout:
+
+                if (mainFilterLayout.getVisibility() == View.VISIBLE) {
+                    mainFilterLayout.setVisibility(View.GONE);
+
+                } else {
+                    mainFilterLayout.setVisibility(View.VISIBLE);
+                }
+                if (arrowImg.getRotation() == 0) {
+                    arrowImg.setRotation(180);
+                } else {
+                    arrowImg.setRotation(arrowImg.getRotation() + 180);
+                }
+                break;
+            case R.id.event_switch_to_calender:
+                ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
+                break;
+        }
     }
 }

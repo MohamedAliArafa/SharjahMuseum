@@ -1,4 +1,4 @@
-package com.asgatech.sharjahmuseums.Activities;
+package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,11 +27,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
+import com.asgatech.sharjahmuseums.Activities.ViewLocationMapActivity;
+import com.asgatech.sharjahmuseums.Activities.ViewVisitorsReviewActivity;
 import com.asgatech.sharjahmuseums.Adapters.FaciltsAdapter;
 import com.asgatech.sharjahmuseums.Adapters.HighLightAdapter;
 import com.asgatech.sharjahmuseums.Adapters.HomeSliderImagesAdapter;
 import com.asgatech.sharjahmuseums.Adapters.TextAdapter;
-import com.asgatech.sharjahmuseums.Fragments.HighLightOverlapingFragment;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -92,9 +94,9 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     }
 
     public void setToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
+        toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
 
         museumTitle = getIntent().getStringExtra(ConstantUtils.MUSEUM_TITLE);
         museumColor = getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
@@ -108,6 +110,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         ToolbarTitleTextView.setText(museumTitle);
 
         toolbarHomeImageView.setVisibility(View.VISIBLE);
+        toolbarHomeImageView.setOnClickListener(this);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -457,6 +460,12 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.share_linear:
                 break;
+
+            case R.id.toolbar_home_image_view:
+                Intent in = new Intent(this, HomeActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+                break;
         }
     }
 
@@ -470,7 +479,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
         @Override
         public Fragment getItem(int position) {
-            return HighLightOverlapingFragment.newInstance(highlightList.get(position).getPhoto(), highlightList);
+            return HighLightOverlapingFragment.newInstance(highlightList.get(position).getPhoto(), highlightList, position);
         }
 
         @Override

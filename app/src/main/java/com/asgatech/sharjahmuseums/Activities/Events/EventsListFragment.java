@@ -1,4 +1,4 @@
-package com.asgatech.sharjahmuseums.Fragments;
+package com.asgatech.sharjahmuseums.Activities.Events;
 
 
 import android.graphics.Color;
@@ -37,7 +37,7 @@ import okhttp3.ResponseBody;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventsFragment extends Fragment implements View.OnClickListener {
+public class EventsListFragment extends Fragment implements View.OnClickListener {
 
 
     protected final String TAG = getClass().getSimpleName();
@@ -49,16 +49,6 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.event_switch_to_calender)
     ImageView switchToCalender;
-
-
-//    @BindView(R.id.event_layout)
-//    LinearLayout event_layout_filter;
-//
-//    @BindView(R.id.exhibition_layout)
-//    LinearLayout exhibition_layout_filter;
-//
-//    @BindView(R.id.programmes_layout)
-//    LinearLayout programes_layout_filter;
 
     @BindView(R.id.auto_complete_search_event)
     AutoCompleteTextView autoCompleteSearchView;
@@ -77,7 +67,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.arrowIV)
     ImageView arrowImg;
 
-    public EventsFragment() {
+    public EventsListFragment() {
         // Required empty public constructor
     }
 
@@ -86,7 +76,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_events_list, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.Events));

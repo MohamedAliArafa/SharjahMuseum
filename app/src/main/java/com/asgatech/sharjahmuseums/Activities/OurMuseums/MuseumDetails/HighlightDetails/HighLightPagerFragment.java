@@ -1,4 +1,4 @@
-package com.asgatech.sharjahmuseums.Fragments;
+package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.HighlightDetails;
 
 
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
@@ -17,8 +18,6 @@ import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.bumptech.glide.load.Option;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.ArrayList;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,13 +25,13 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
 
     String image;
 
-    ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
+    MuseumsDetailsModel.HightLightEntity highlight;
 
-    public static HighLightPagerFragment newInstance(String image,ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
+    public static HighLightPagerFragment newInstance(String image, MuseumsDetailsModel.HightLightEntity highlight) {
         HighLightPagerFragment highLightPagerFragment = new HighLightPagerFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtils.IMAGE_PATH, image);
-        bundle.putParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST, highlightList);
+        bundle.putParcelable(ConstantUtils.HIGHLIGHT_LIST, highlight);
         highLightPagerFragment.setArguments(bundle);
         return highLightPagerFragment;
     }
@@ -45,7 +44,7 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         image = getArguments().getString(ConstantUtils.IMAGE_PATH);
-        highlightList=getArguments().getParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST);
+        highlight = getArguments().getParcelable(ConstantUtils.HIGHLIGHT_LIST);
     }
 
     @Override
@@ -53,10 +52,13 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_high_light_pager, container, false);
-        final ImageView coverImageView = (ImageView) rootView.findViewById(R.id.image_cover);
-//        coverImageView.setImageDrawable(ContextCompat.getDrawable(getContext(), resourceId));
+        ImageView coverImageView = rootView.findViewById(R.id.image_cover);
+        TextView titleTextView = rootView.findViewById(R.id.tv_title);
+        TextView descTextView = rootView.findViewById(R.id.tv_text_desc);
+        titleTextView.setText(highlight.getTitle());
+        descTextView.setText(highlight.getText());
         GlideApp.with(getActivity())
-                .load(URLS.URL_BASE +image).placeholder(R.drawable.no_image)
+                .load(URLS.URL_BASE + image).placeholder(R.drawable.no_image)
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .into((coverImageView));
 

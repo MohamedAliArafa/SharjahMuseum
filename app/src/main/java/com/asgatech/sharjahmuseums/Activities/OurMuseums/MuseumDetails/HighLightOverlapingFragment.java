@@ -1,28 +1,22 @@
-package com.asgatech.sharjahmuseums.Fragments;
+package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.asgatech.sharjahmuseums.Activities.HightLightDetailActivity;
+import com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.HighlightDetails.HighlightsDetailActivity;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
-import com.bumptech.glide.load.Option;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.util.ArrayList;
 
@@ -33,12 +27,14 @@ public class HighLightOverlapingFragment extends Fragment {
     String image;
 
     ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
+    private int mPosition;
 
-    public static HighLightOverlapingFragment newInstance(String image, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
+    public static HighLightOverlapingFragment newInstance(String image, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList, int position) {
         HighLightOverlapingFragment highLightOverlapingFragment = new HighLightOverlapingFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtils.IMAGE_PATH, image);
         bundle.putParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST, highlightList);
+        bundle.putInt(ConstantUtils.HIGHLIGHT_LIST_POSITION, position);
         highLightOverlapingFragment.setArguments(bundle);
         return highLightOverlapingFragment;
     }
@@ -51,8 +47,8 @@ public class HighLightOverlapingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         image = getArguments().getString(ConstantUtils.IMAGE_PATH);
-        Log.e("imaaaaaag",image);
         highlightList = getArguments().getParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST);
+        mPosition = getArguments().getInt(ConstantUtils.HIGHLIGHT_LIST_POSITION, 0);
     }
 
     @Override
@@ -60,34 +56,16 @@ public class HighLightOverlapingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_high_light_overlaping, container, false);
-        final ImageView coverImageView = (ImageView) rootView.findViewById(R.id.image_cover);
-//        coverImageView.setImageDrawable(ContextCompat.getDrawable(getContext(), resourceId));
-//        GlideApp.with(getActivity())
-//                .asBitmap()
-//                .load(URLS.URL_BASE + image)
-//                .placeholder(R.drawable.no_image).into(new BitmapImageViewTarget(coverImageView) {
-//            @Override
-//            protected void setResource(Bitmap resource) {
-//                if (getActivity() != null) {
-//                    RoundedBitmapDrawable circularBitmapDrawable =
-//                            RoundedBitmapDrawableFactory.create(getActivity().getResources(), resource);
-//                    circularBitmapDrawable.setCornerRadius(20);
-//
-////
-//                }
-//            }
-//        });
+        ImageView coverImageView = rootView.findViewById(R.id.image_cover);
         GlideApp.with(getActivity()).load(URLS.URL_BASE +image ).placeholder(R.drawable.no_image).into(coverImageView);
-
         Log.e("imaaaaaag",URLS.URL_BASE +image);
         coverImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(getActivity(),"hshshsh"+highlightList.size(), Toast.LENGTH_LONG).show();
-                Intent intent1 = new Intent(getActivity(), HightLightDetailActivity.class);
+                Intent intent1 = new Intent(getActivity(), HighlightsDetailActivity.class);
                 intent1.putExtra(ConstantUtils.HIGHLIGHT_LIST, highlightList);
-//                startActivity(intent1);
-
+                intent1.putExtra(ConstantUtils.HIGHLIGHT_LIST_POSITION, mPosition);
+                startActivity(intent1);
             }
         });
 

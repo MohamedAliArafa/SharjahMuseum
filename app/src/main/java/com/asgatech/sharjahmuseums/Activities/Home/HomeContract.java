@@ -13,24 +13,26 @@ public interface HomeContract {
 
         void setupNavigationDrawer();
 
-        void setupToolbar();
-
         void closeDrawer();
 
-        void showLoading();
-
-        void hideLoading();
-
         void changeToolbarTitle(String title);
+
+        void changeToolbarColor(String color);
+
+        void restToolbarColor();
 
         void openFragmentFromChild(Fragment fragment, Bundle bundle);
 
         void hideLogo();
 
         void showLogo();
+
+        HomeContract.UserAction getPresenter();
     }
 
     interface UserAction {
         void openFragment(Fragment fragment, Bundle bundle);
+
+        void openHome();
     }
 }

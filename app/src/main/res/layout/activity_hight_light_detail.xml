@@ -1,47 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context="com.asgatech.sharjahmuseums.Activities.HightLightDetailActivity">
+    tools:context="com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.HighlightDetails.HighlightsDetailActivity">
 
     <include layout="@layout/layout_toolbar" />
-    <LinearLayout
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/images_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:scrollbarStyle="insideInset" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/images_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbarStyle="insideInset" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="1.9"
-        android:orientation="vertical">
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_med"
-            android:textColor="@color/GrayDark"/>
-
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-            android:id="@+id/tv_text_descreption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_small"
-            android:textColor="@color/GrayLight"/>
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
