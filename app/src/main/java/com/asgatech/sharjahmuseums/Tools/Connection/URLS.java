@@ -6,7 +6,10 @@ package com.asgatech.sharjahmuseums.Tools.Connection;
 public class URLS {
 
 //        public static final String URL_BASE = "http://108.179.204.213:8071/"; // online
-        public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
+//        public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
+    public static final String URL_BASE = "http://23.236.154.106:8075/"; // online
+
+
 //    public static final String URL_BASE = "http://192.168.20.86:8070/"; // local
 
     public static final String TAG_ARABIC_String = "ar";
@@ -30,6 +33,9 @@ public class URLS {
     public static final String URL_INSERT_DEVICE_Token= "/api/Notfcation/InsertDevicetoken";
     public static final String URL_UPDATE_NOTIFICATION_STATE= "/api/Notfcation/UpdateSate";
 
+    public static final String URL_GET_ALLMUSEUM_CATEGORY= "api/MuseumCategray/GetALLMuseumCategray";
+
+//    api/MuseumCategray/GetALLMuseumCategray?lang=1
 
 
 

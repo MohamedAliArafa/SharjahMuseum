@@ -60,6 +60,7 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
                 intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
                 intent.putExtra(ConstantUtils.MUSEUM_TITLE,allMuseumsList.get(position).getTitle().trim());
                 intent.putExtra(ConstantUtils.MUSEUM_COLOR,allMuseumsList.get(position).getColor());
+                intent.putExtra(ConstantUtils.MUSEUM_IMAGE,allMuseumsList.get(position).getImage());
                 context.startActivity(intent);
             }
         });

@@ -38,6 +38,7 @@ import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Localization;
@@ -59,7 +60,7 @@ import okhttp3.ResponseBody;
 public class MuseumsDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     public ImageView toolbarHomeImageView;
     int NUM_PAGES2;
-    String tetephoneNum, emailString, museumTitle, museumColor;
+    String tetephoneNum, emailString, museumTitle, museumColor,museumsImage;
     Timer timer;
     double longtude, latitude;
     private int museumsID;
@@ -194,6 +195,12 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             if (museumsID > 0) {
                 getMuseumsDetails(museumsID, new UserData().getLocalization(MuseumsDetailsActivity.this));
             }
+        }
+
+
+        if (getIntent().hasExtra(ConstantUtils.MUSEUM_IMAGE)) {
+            museumsImage = getIntent().getStringExtra((ConstantUtils.MUSEUM_IMAGE));
+
         }
     }
 
@@ -460,6 +467,16 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
                 break;
             case R.id.share_linear:
+
+                Intent intentShare = new Intent(Intent.ACTION_SEND);
+                intentShare.setType("text/plain");
+                intentShare.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE +  museumsImage+ "\n" +
+                        "\n" + getResources().getString(R.string.about_museums) +":"+ aboutMuseumsTextView.getText().toString());
+                Intent chooser = Intent.createChooser(intentShare, "share");
+                    chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(chooser);
+
                 break;
 
             case R.id.toolbar_home_image_view:

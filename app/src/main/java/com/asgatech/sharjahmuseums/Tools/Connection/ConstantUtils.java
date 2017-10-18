@@ -13,6 +13,8 @@ public class ConstantUtils {
     public static final String IMAGE_PATH = "IMAGE_PATH";
     public static final String MUSEUM_COLOR = "color";
     public static final String MUSEUM_TITLE = "museumTitle";
+    public static final String MUSEUM_IMAGE = "museumImage";
+
 
     public static final String GLIDE_TIMEOUT = "com.bumptech.glide.load.model.stream.HttpGlideUrlLoader.Timeout";
 

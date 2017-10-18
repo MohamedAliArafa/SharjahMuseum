@@ -21,6 +21,7 @@ import com.asgatech.sharjahmuseums.Adapters.ViewPagerAdapter;
 import com.asgatech.sharjahmuseums.Models.EventdetatailsResponceModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
@@ -57,7 +58,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     Timer timer;
     private List<ImageView> dots;
     private ImageView dot;
-    private String attachUrl, eventTitleToolbar;
+    private String attachUrl, eventTitleToolbar,eventImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +143,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                     eventDescription.setText(model.getDescrption());
                     eventItemPlace.setText(model.getAdress());
                     attachUrl = model.getAttach();
+                    eventImage=model.getEventImages().get(0).getImage();
                     viewpager.setAdapter(new ViewPagerAdapter(EventDetailsActivity.this, model.getEventImages()));
                     NUM_PAGES = model.getEventImages().size();
 
@@ -216,12 +218,25 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void shareAction() {
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        String shareBody = "share our app..";
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+//        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+//        sharingIntent.setType("text/plain");
+//        String shareBody = "share our app..";
+//        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+//        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+//        sharingIntent.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE +  eventImage+ "\n" +
+//                "\n" + getResources().getString(R.string.description) +":"+ eventDescription.getText().toString());
+//
+//        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+
+        Intent intentShare = new Intent(Intent.ACTION_SEND);
+        intentShare.setType("text/plain");
+
+        intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE +  eventImage+ "\n" +
+                "\n" + getResources().getString(R.string.description) +":"+ eventDescription.getText().toString());
+        Intent chooser = Intent.createChooser(intentShare, "share");
+        chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(chooser);
 
     }
 

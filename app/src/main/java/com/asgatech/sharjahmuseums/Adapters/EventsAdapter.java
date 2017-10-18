@@ -121,6 +121,20 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
                 context.startActivity(intent);
             }
         });
+
+        holder.mShareLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentShare = new Intent(Intent.ACTION_SEND);
+                intentShare.setType("text/plain");
+                intentShare.putExtra(android.content.Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
+                intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE +  model.getImage()+ "\n" +
+                        "\n" + context.getResources().getString(R.string.about_museums) +":"+ model.getTitle());
+                Intent chooser = Intent.createChooser(intentShare, "share");
+                chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(chooser);
+            }
+        });
         // holder.mPalleteColorTextView.setBackgroundColor(Color.parseColor(model.getColor()));
 
         Drawable background = holder.mPalleteColorTextView.getBackground();

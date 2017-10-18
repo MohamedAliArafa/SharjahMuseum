@@ -153,11 +153,9 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         tvEmail.setText(" ");
         tvReview.setText(" ");
         barReviewStars.setRating(0);
-//        barReviewStars.setRating();
-//        messageEditText.setText(" ");
+
 
     }
-    //    GetReviewList
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\SharjahMuseums\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "source": "D:\\SharjahMuseums\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "from": {
                         "startLines": "5",
                         "startColumns": "4",

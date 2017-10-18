@@ -7,6 +7,7 @@ import android.util.Log;
 import com.asgatech.sharjahmuseums.Models.ALLMuseumsModel;
 import com.asgatech.sharjahmuseums.Models.AboutUsModel;
 import com.asgatech.sharjahmuseums.Models.AddReviewRequest;
+import com.asgatech.sharjahmuseums.Models.AllMuseumCategrayResponse;
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.Models.ContactUsModel;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
@@ -96,6 +97,9 @@ public class ServerTool {
 
         @POST(URLS.URL_UPDATE_NOTIFICATION_STATE)
         Call<Integer> UpdateNotifiList(@Body UpdateRequestModel updateRequestModel);
+
+        @GET(URLS.URL_GET_ALLMUSEUM_CATEGORY)
+        Call<List<AllMuseumCategrayResponse>> getALLMuseumCategray(@Query("lang") int lang);
 
     }
 
@@ -227,6 +231,12 @@ public class ServerTool {
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).UpdateNotifiList(updateRequestModel);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
+    public static void getALLMuseumCategray(Context context, int lang, final APICallBack apiCallBack) {
+        final RetrofitTool retrofitTool = new RetrofitTool();
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getALLMuseumCategray(lang);
+        makeRequest(context, call, apiCallBack, retrofitTool);
+    }
+
 
     private static <M> void makeRequest(final Context context, Call call, final APICallBack apiCallBack, final RetrofitTool retrofitTool) {
         final Dialog dialogsLoading = new loadingDialog().showDialog(context);

@@ -17,6 +17,8 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.asgatech.sharjahmuseums.Tools.RoundedCornersTransformation;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -58,6 +60,11 @@ public class HighLightOverlapingFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_high_light_overlaping, container, false);
         ImageView coverImageView = rootView.findViewById(R.id.image_cover);
         GlideApp.with(getActivity()).load(URLS.URL_BASE +image ).placeholder(R.drawable.no_image).into(coverImageView);
+
+//        GlideApp.with(this)
+//                .load(URLS.URL_BASE +image).transform(new RoundedCornersTransformation(getActivity(), 20, 0, "#e40d62", 50))
+//                .into(coverImageView);
+
         Log.e("imaaaaaag",URLS.URL_BASE +image);
         coverImageView.setOnClickListener(new View.OnClickListener() {
             @Override
