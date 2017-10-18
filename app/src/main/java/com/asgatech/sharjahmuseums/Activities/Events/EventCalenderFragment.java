@@ -11,11 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Fragments.CalenderHelper.EventDecorator;
 import com.asgatech.sharjahmuseums.Fragments.CalenderHelper.OneDayDecorator;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
@@ -46,11 +46,24 @@ import okhttp3.ResponseBody;
 public class EventCalenderFragment extends Fragment implements OnDateSelectedListener,
         OnMonthChangedListener, View.OnClickListener {
 
+
+    @BindView(R.id.filter_layout)
+    LinearLayout filterLayout;
+
     @BindView(R.id.calendarView)
     MaterialCalendarView widget;
 
     @BindView(R.id.main_filter_layout)
     LinearLayout mainFilterLayout;
+
+    @BindView(R.id.event_switch_to_calender)
+    ImageView switchToCalender;
+
+    @BindView(R.id.auto_complete_search_event)
+    AutoCompleteTextView autoCompleteSearchView;
+
+    @BindView(R.id.loading_layout)
+    View loadingView;
 
     @BindView(R.id.arrowIV)
     ImageView arrowImg;
@@ -67,7 +80,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event_calender, container, false);
         ButterKnife.bind(this, view);
-
+        assignControls();
         widget.setOnDateChangedListener(this);
         widget.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
 
@@ -103,7 +116,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                 if (Utils.validList(response)) {
                     setCategoryData(response);
                     if (response.size() > 0) {
-                        getEvents(response.get(0).getEventCatID(), 1, 20, langauge);
+                        getEvents(0, 1, 20, langauge);
                     }
                 }
             }
@@ -131,6 +144,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
     }
 
     private void setData(List<EventModel> models) {
+        widget.removeDecorators();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         Calendar cal;
         ArrayList<CalendarDay> dates = new ArrayList<>();
@@ -145,7 +159,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
             dates.add(day);
 
             try {
-                int colr = Color.parseColor("#" + models.get(i).getColor());
+                int colr = Color.parseColor(models.get(i).getColor());
 //                int colr  = Integer.parseInt("#"+models.get(i).getColor(), 16);
 //                int n = (int) Long.parseLong(models.get(i).getColor(), 16);
 
@@ -158,6 +172,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
     }
 
     private void setCategoryData(List<EventCategoryModel> list) {
+        addReset();
         for (int i = 0; i < list.size(); i++) {
             final View itemView = LayoutInflater.from(getActivity())
                     .inflate(R.layout.filter_recycler_row, null);
@@ -190,6 +205,31 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
         }
     }
 
+    private void addReset() {
+        final View itemView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.filter_recycler_row, null);
+        CircleImageView pallete = itemView.findViewById(R.id.pallete_for_filter_item);
+        TextView name = itemView.findViewById(R.id.name_for_filter_item);
+        name.setText("All");
+        itemView.setTag("#000000");
+        Drawable background = pallete.getBackground();
+        Log.e("colorCode", "#000000");
+        background.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_IN);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainFilterLayout.setVisibility(View.GONE);
+                getEvents(0, 1, 15, new UserData().getLocalization(getActivity()));
+            }
+        });
+        //otherwise throw exception java.lang.IllegalStateException: The specified
+        // child already has a parent. You must call removeView() on the child's parent first.
+        if (itemView.getParent() != null) {
+            ((ViewGroup) itemView.getParent()).removeView(itemView);
+        }
+        mainFilterLayout.addView(itemView);
+    }
+
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
         oneDayDecorator.setDate(date.getDate());
@@ -201,6 +241,10 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
 
     }
 
+    private void assignControls() {
+        filterLayout.setOnClickListener(this);
+        switchToCalender.setOnClickListener(this);
+    }
 
     @Override
     public void onClick(View v) {
@@ -220,7 +264,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                 }
                 break;
             case R.id.event_switch_to_calender:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
+//                ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
                 break;
         }
     }

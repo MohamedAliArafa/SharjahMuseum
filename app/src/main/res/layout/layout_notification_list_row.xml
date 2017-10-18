@@ -55,6 +55,7 @@
         <com.asgatech.sharjahmuseums.Tools.CircleImageView
             android:id="@+id/notification_iv"
             android:layout_width="100dp"
+            android:layout_margin="5dp"
             android:scaleType="centerCrop"
             android:layout_height="80dp"
             android:src="@drawable/no_image" />
@@ -68,7 +69,9 @@
                 android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:gravity="start"
                 android:maxLines="1"
                 android:ellipsize="end"

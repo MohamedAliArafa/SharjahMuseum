@@ -1,21 +1,6 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SharjahMuseums\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
-            "map": [
-                {
-                    "source": "D:\\SharjahMuseums\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "5",
-                        "startColumns": "4",
-                        "startOffsets": "462",
-                        "endColumns": "51",
-                        "endOffsets": "509"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
             "map": [
                 {

@@ -57,7 +57,7 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
     View loadingView;
 
 //    private final StateMaintainer mStateMaintainer =
-//            new StateMaintainer(this.getFragmentManager(), TAG);
+//    new StateMaintainer(this.getFragmentManager(), TAG);
 
 
     @BindView(R.id.recyclerView)
