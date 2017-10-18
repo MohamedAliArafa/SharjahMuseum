@@ -30,15 +30,11 @@ public class URLS {
     public static final String URL_ADD_REVIEW = "api/Reviews/AddReviews";
     public static final String URL_GET_NOTIFICATION_LIST = "api/Notfcation/NotfactionList";
 
-    public static final String URL_INSERT_DEVICE_Token= "/api/Notfcation/InsertDevicetoken";
-    public static final String URL_UPDATE_NOTIFICATION_STATE= "/api/Notfcation/UpdateSate";
+    public static final String URL_INSERT_DEVICE_Token = "/api/Notfcation/InsertDevicetoken";
+    public static final String URL_UPDATE_NOTIFICATION_STATE = "/api/Notfcation/UpdateSate";
 
     public static final String URL_GET_ALLMUSEUM_CATEGORY= "api/MuseumCategray/GetALLMuseumCategray";
 
 //    api/MuseumCategray/GetALLMuseumCategray?lang=1
-
-
-
-
 
 }

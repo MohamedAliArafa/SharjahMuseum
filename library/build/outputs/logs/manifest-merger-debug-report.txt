@@ -1,41 +1,41 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:1-29:12
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:1-29:12
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:1-29:12
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:1-29:12
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:1-29:12
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:1-29:12
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:1-29:12
+ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:1-29:12
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:1-29:12
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:1-29:12
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:1-29:12
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:1-29:12
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:1-29:12
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:1-29:12
 	package
-		ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:20:7-48
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
+		ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:20:7-48
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:22:7-32
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
+		ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:22:7-32
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:19:11-69
+		ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:19:11-69
 	android:versionCode
-		ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:21:7-30
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
+		ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:21:7-30
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
 uses-sdk
-ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:24:5-72
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:24:5-72
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:24:5-72
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:24:5-72
-INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:24:5-72
+ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:24:5-72
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:24:5-72
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:24:5-72
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:24:5-72
+INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:24:5-72
 	android:targetSdkVersion
-		ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:24:41-70
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
+		ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:24:41-70
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:24:15-40
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
-		INJECTED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml
+		ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:24:15-40
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
+		INJECTED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml
 application
-ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:26:5-28:19
+ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:26:5-28:19
 	android:label
-		ADDED from D:\SharjahMuseums\library\src\main\AndroidManifest.xml:26:18-50
+		ADDED from E:\700Apps projects\Arafa\Sharjah Museum\library\src\main\AndroidManifest.xml:26:18-50
