@@ -27,12 +27,15 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.booking.rtlviewpager.RtlViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 
 /**
@@ -40,7 +43,8 @@ import okhttp3.ResponseBody;
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private ViewPager imagesViewPager;
+    @BindView(R.id.images_view_pager)
+    RtlViewPager imagesViewPager;
     private List<ImageView> dots;
     private ImageView dot;
     private LinearLayout dotsLayout;
@@ -57,7 +61,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -67,14 +73,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setupViews(View view) {
-        imagesViewPager = (ViewPager) view.findViewById(R.id.images_view_pager);
-        meusemsLinear = (LinearLayout) view.findViewById(R.id.meusems_linear);
-        planVisitsLinear = (LinearLayout) view.findViewById(R.id.plan_visits_linear);
-        notifications_linear = (LinearLayout) view.findViewById(R.id.notifications_linear);
-        event_layout = (LinearLayout) view.findViewById(R.id.event_layout);
-        dotsLayout = (LinearLayout) view.findViewById(R.id.layout_dots);
-        education_layout = (LinearLayout) view.findViewById(R.id.education_layout);
-        about_us_layout = (LinearLayout) view.findViewById(R.id.about_us_layout);
+        meusemsLinear = view.findViewById(R.id.meusems_linear);
+        planVisitsLinear = view.findViewById(R.id.plan_visits_linear);
+        notifications_linear = view.findViewById(R.id.notifications_linear);
+        event_layout = view.findViewById(R.id.event_layout);
+        dotsLayout = view.findViewById(R.id.layout_dots);
+        education_layout = view.findViewById(R.id.education_layout);
+        about_us_layout = view.findViewById(R.id.about_us_layout);
         dot = null;
         dots = null;
         meusemsLinear.setOnClickListener(this);

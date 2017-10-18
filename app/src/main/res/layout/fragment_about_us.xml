@@ -69,8 +69,7 @@
         android:id="@+id/about_visionMain"
         android:layout_marginEnd="@dimen/d20"
         android:layout_alignStart="@+id/about_memberImage"
-        android:layout_below="@+id/about_visionHeader"
-        android:layout_marginStart="@dimen/d20" />
+        android:layout_below="@+id/about_visionHeader" />
 
 
     <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold

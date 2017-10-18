@@ -49,9 +49,9 @@ dependencies {
 
     // custom calender view
     compile 'com.prolificinteractive:material-calendarview:1.4.2'
-    // for coverflow images
-//    compile "com.github.semoncat.featureCoverFlow:library:+"
-//    compile 'com.github.moondroid.coverflow:library:+'
+
+    //RTL Pager
+    compile 'com.booking:rtlviewpager:1.0.1'
 
     compile 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
     compile 'com.android.support:cardview-v7:26.1.0'

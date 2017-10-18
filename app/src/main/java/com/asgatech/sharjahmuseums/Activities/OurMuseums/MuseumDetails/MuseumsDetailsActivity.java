@@ -44,6 +44,7 @@ import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.booking.rtlviewpager.RtlViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     Timer timer;
     double longtude, latitude;
     private int museumsID;
-    private ViewPager imagesViewPager;
+    private RtlViewPager imagesViewPager;
     private LinearLayout layoutDots;
     private LinearLayout addReviewLinear;
     private LinearLayout locationLinear;
@@ -140,11 +141,11 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     }
 
     private void setUpView() {
-        imagesViewPager = (ViewPager) findViewById(R.id.images_view_pager);
-        layoutDots = (LinearLayout) findViewById(R.id.layout_dots);
-        layoutDotsGallery = (LinearLayout) findViewById(R.id.layout_dots_gallery);
-        ivLine1 = (ImageView) findViewById(R.id.iv_line1);
-        ivLine2 = (ImageView) findViewById(R.id.iv_line2);
+        imagesViewPager = findViewById(R.id.images_view_pager);
+        layoutDots = findViewById(R.id.layout_dots);
+        layoutDotsGallery = findViewById(R.id.layout_dots_gallery);
+        ivLine1 = findViewById(R.id.iv_line1);
+        ivLine2 = findViewById(R.id.iv_line2);
         dot = null;
         dots = null;
         Drawable background = ivLine1.getBackground();
@@ -163,15 +164,15 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             background2.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
 
-        addReviewLinear = (LinearLayout) findViewById(R.id.add_review_linear);
-        locationLinear = (LinearLayout) findViewById(R.id.location_linear);
-        callLinear = (LinearLayout) findViewById(R.id.call_linear);
-        mailLinear = (LinearLayout) findViewById(R.id.mail_linear);
-        shareLinear = (LinearLayout) findViewById(R.id.share_linear);
-        aboutMuseumsTextView = (TextViewLight) findViewById(R.id.about_museums_text_view);
-        openingHoursList = (RecyclerView) findViewById(R.id.opening_hours_list);
-        entryFeesList = (RecyclerView) findViewById(R.id.entry_fees_list);
-        facilitiesList = (RecyclerView) findViewById(R.id.facilities_list);
+        addReviewLinear = findViewById(R.id.add_review_linear);
+        locationLinear = findViewById(R.id.location_linear);
+        callLinear = findViewById(R.id.call_linear);
+        mailLinear = findViewById(R.id.mail_linear);
+        shareLinear = findViewById(R.id.share_linear);
+        aboutMuseumsTextView = findViewById(R.id.about_museums_text_view);
+        openingHoursList = findViewById(R.id.opening_hours_list);
+        entryFeesList = findViewById(R.id.entry_fees_list);
+        facilitiesList = findViewById(R.id.facilities_list);
 //        highLightGallery =  (FeatureCoverFlow)findViewById(R.id.coverflow);
         addReviewLinear.setOnClickListener(this);
         locationLinear.setOnClickListener(this);
@@ -274,7 +275,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
         if (Utils.validList(data.getHightLight())) {
 
-            PagerContainer pagerContainer = (PagerContainer) findViewById(R.id.pager_container);
+            PagerContainer pagerContainer = findViewById(R.id.pager_container);
             if (pagerContainer != null) {
                 pagerContainer.setOverlapEnabled(true);
 

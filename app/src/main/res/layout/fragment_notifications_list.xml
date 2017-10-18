@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_margin="10dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        />
 
     <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
         android:id="@+id/notifi_list_error_message"
