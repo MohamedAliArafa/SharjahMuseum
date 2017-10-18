@@ -52,28 +52,29 @@ public class ViewVisitorsReviewAdapter extends RecyclerView.Adapter<ViewVisitors
     void getRate(ViewHolder holder, int position) {
         if (data.get(position).getRate() != 0) {
 
-            if (data.get(position).getRate() <40) {
-                holder.tvReviewNumber.setText(data.get(position).getRate() + "%");
+            if (data.get(position).getRate() ==1) {
+
+                holder.tvReviewNumber.setText("20%");
                holder.barReviewStars.setRating(5f);
                holder.barReviewStars.setNumStars(1);
 
-        }else if (data.get(position).getRate() <60) {
-                holder.tvReviewNumber.setText(data.get(position).getRate() + "%");
+        }else if (data.get(position).getRate() ==2) {
+                holder.tvReviewNumber.setText("40%");
                 holder.barReviewStars.setNumStars(2);
                 holder.barReviewStars.setRating(5f);
 
-          } else if (data.get(position).getRate() <80) {
-                holder.tvReviewNumber.setText(data.get(position).getRate() + "%");
+          } else if (data.get(position).getRate() ==3) {
+                holder.tvReviewNumber.setText("60%");
                 holder.barReviewStars.setRating(5f);
                 holder.barReviewStars.setNumStars(3);
 
-        } else if (data.get(position).getRate() <100) {
-                holder.tvReviewNumber.setText(data.get(position).getRate() + "%");
+        } else if (data.get(position).getRate() ==4) {
+                holder.tvReviewNumber.setText("80%");
                 holder.barReviewStars.setRating(5f);
                 holder.barReviewStars.setNumStars(4);
 
-            }else if (data.get(position).getRate() ==100){
-                holder.tvReviewNumber.setText(data.get(position).getRate() + "%");
+            }else if (data.get(position).getRate() ==5){
+                holder.tvReviewNumber.setText("100%");
                 holder.barReviewStars.setRating(5f);
                 holder.barReviewStars.setNumStars(5);
 
@@ -81,7 +82,7 @@ public class ViewVisitorsReviewAdapter extends RecyclerView.Adapter<ViewVisitors
         } else {
             holder.tvReviewNumber.setVisibility(View.GONE);
             holder.barReviewStars.setVisibility(View.GONE);
-            holder.barReviewStars.setRating(0f);
+//            holder.barReviewStars.setRating(0f);
         }
 
 // else if (response.getItem().getRate() == 1) {

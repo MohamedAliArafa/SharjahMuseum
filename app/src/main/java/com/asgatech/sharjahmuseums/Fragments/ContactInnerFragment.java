@@ -102,7 +102,7 @@ public class ContactInnerFragment extends Fragment {
         phoneEditText.setText(" ");
         emailEditText.setText(" ");
         messageEditText.setText(" ");
-        ;
+
     }
 
     void setupView(View view) {

@@ -1,5 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -7,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Models.AddReviewRequest;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -54,6 +57,8 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
         toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
+        toolbarHomeImageView.setOnClickListener(this);
+
         museumColor = getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
         Drawable background = toolbar.getBackground();
         if (museumColor != null) {
@@ -77,7 +82,11 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     private void setUpView() {
 
         tvEmail = findViewById(R.id.tv_email);
+        tvEmail.setMovementMethod(new ScrollingMovementMethod());
+
         tvReview = findViewById(R.id.tv_review);
+        tvReview.setMovementMethod(new ScrollingMovementMethod());
+
         barReviewStars = findViewById(R.id.bar_review_stars);
         postButton = findViewById(R.id.btn_post);
         postButton.setOnClickListener(this);
@@ -96,19 +105,19 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
                 // System.out.println("Rate for Module is"+rateValue);
                 switch ((int) rateValue) {
                     case 1:
-                        rateValue = 20;
+                        rateValue = 1;
                         break;
                     case 2:
-                        rateValue = 40;
+                        rateValue = 2;
                         break;
                     case 3:
-                        rateValue = 60;
+                        rateValue = 3;
                         break;
                     case 4:
-                        rateValue = 80;
+                        rateValue = 4;
                         break;
                     case 5:
-                        rateValue = 100;
+                        rateValue = 5;
                         break;
 
 
@@ -125,9 +134,10 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onSuccess(Integer response) {
                 if (response == 1) {
-                    Toast.makeText(AddReviewActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddReviewActivity.this, getString(R.string.success_send_review), Toast.LENGTH_SHORT).show();
+                    emptyFields();
                 } else {
-                    Toast.makeText(AddReviewActivity.this, "failure to send review", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddReviewActivity.this, getString(R.string.failed_send_review), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -136,6 +146,15 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
+
+    }
+
+    void emptyFields() {
+        tvEmail.setText(" ");
+        tvReview.setText(" ");
+        barReviewStars.setRating(0);
+//        barReviewStars.setRating();
+//        messageEditText.setText(" ");
 
     }
     //    GetReviewList
@@ -192,6 +211,13 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
 //                        return;
 //                    }
 //                    AddReview()
+                break;
+
+
+            case R.id.toolbar_home_image_view:
+                Intent in = new Intent(this, HomeActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
                 break;
         }
     }

@@ -21,7 +21,12 @@ public class loadingDialog {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.layout_dialog_loading);
         dialog.setCancelable(false);
-        dialog.show();
+        try {
+            dialog.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return dialog;
     }
 

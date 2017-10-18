@@ -62,8 +62,14 @@
     <string name="add_your_review">إضافه تقييمك</string>
     <string name="post">إرسال</string>
     <string name="add_review">إضافة تقييم</string>
+    <string name="success_send_review">تم إرسال تقييمك بنجاح</string>
+    <string name="failed_send_review">فشل إرسال تقييمك </string>
+
+
+
     <!--//messages-->
     <string name="no_notification">لا يوجد اشعارات لك فى الوقت الحالى </string>
+    <string name="no_reviews">لا يوجد لك فى الوقت الحالى تقييمات من الزوار</string>
     <string name="contact">تواصل معنا</string>
     <string name="send">إرسال</string>
     <string name="message">الرسالة</string>
@@ -82,7 +88,5 @@
     <string name="phone_hint">من فضلك أدخل رقم الهاتف </string>
     <string name="name_hint">من فضلك أدخل إسمك </string>
     <string name="messeage_hint">من فضلك اكتب رسالتك </string>
-
-
     <string name="invalid_email">من فضلك أدخل بريد الكتروني صحيح </string>
 </resources>

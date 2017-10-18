@@ -7,37 +7,43 @@
 >
     <include layout="@layout/layout_toolbar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <com.asgatech.sharjahmuseums.Tools.CircleImageView
-            android:id="@+id/iv_mainimage"
-            android:scaleType="centerCrop"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:src="@drawable/image_m"
-            android:layout_height="@dimen/d250" />
-
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/GrayDark"
-            android:layout_margin="20dp"
-            android:text="title"
-            android:textSize="@dimen/font_size_xlarge"/>
+            android:orientation="vertical">
+            <com.asgatech.sharjahmuseums.Tools.CircleImageView
+                android:id="@+id/iv_mainimage"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:src="@drawable/image_m"
+                android:layout_height="@dimen/d250" />
+
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/GrayDark"
+                android:layout_margin="20dp"
+                android:text="title"
+                android:textSize="@dimen/font_size_xlarge"/>
 
 
 
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-            android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/GrayDark"
-            android:layout_margin="20dp"
-            android:text="@string/description"
-            android:textSize="@dimen/font_size_large"/>
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/GrayDark"
+                android:layout_margin="20dp"
+                android:text="@string/description"
+                android:textSize="@dimen/font_size_large"/>
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

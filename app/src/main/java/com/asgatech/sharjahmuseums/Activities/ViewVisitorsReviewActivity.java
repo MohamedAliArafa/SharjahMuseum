@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.ViewVisitorsReviewAdapter;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsRequest;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
@@ -41,10 +42,10 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
     private RecyclerView.Adapter adapter;
     ReviewVisitorsRequest reviewVisitorsRequest;
     private FloatingActionButton addReview;
-   TextViewBold ErrorMessageTextView;
+    TextViewBold ErrorMessageTextView;
     private TextViewBold ToolbarTitleTextView;
     int museumsID;
-    private String email,museumColor;
+    private String email, museumColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +61,16 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
         setSupportActionBar(toolbar);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
+        toolbarHomeImageView.setOnClickListener(this);
 
-        museumColor=getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
+        museumColor = getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
         Drawable background = toolbar.getBackground();
         if (museumColor != null) {
-            Log.e("museumColor",museumColor);
+            Log.e("museumColor", museumColor);
             background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
 
-        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(getString(R.string.visitors_reviews));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -88,7 +90,7 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
 
         Drawable background = addReview.getBackground();
         if (museumColor != null) {
-            Log.e("museumColor",museumColor);
+            Log.e("museumColor", museumColor);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -116,7 +118,7 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
             public void onSuccess(List<ReviewVisitorsResponse> response) {
                 if (response.size() != 0) {
                     setData(response);
-                }else {
+                } else {
                     recyclerViewReviews.setVisibility(View.GONE);
                     ErrorMessageTextView.setVisibility(View.VISIBLE);
 
@@ -170,9 +172,25 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(ViewVisitorsReviewActivity.this, AddReviewActivity.class);
-        intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, museumsID);
-        intent.putExtra(ConstantUtils.MUSEUM_COLOR,museumColor);
-        startActivity(intent);
+
+        switch (view.getId()) {
+            case R.id.iv_add_review:
+                Intent intent = new Intent(ViewVisitorsReviewActivity.this, AddReviewActivity.class);
+                intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, museumsID);
+                intent.putExtra(ConstantUtils.MUSEUM_COLOR, museumColor);
+                startActivity(intent);
+                break;
+
+
+            case R.id.toolbar_home_image_view:
+                Intent in = new Intent(this, HomeActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+                break;
+
+        }
+
+//
+//
     }
 }

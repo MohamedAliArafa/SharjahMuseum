@@ -1,5 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Models.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
@@ -19,7 +21,7 @@ import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import okhttp3.ResponseBody;
 
-public class NotificationDetailActivity extends AppCompatActivity {
+public class NotificationDetailActivity extends AppCompatActivity implements View.OnClickListener{
     public ImageView toolbarHomeImageView;
     private CircleImageView ivMainimage;
     private TextViewBold tvTitle,ToolbarTitleTextView;
@@ -44,6 +46,8 @@ public class NotificationDetailActivity extends AppCompatActivity {
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
         ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
+        toolbarHomeImageView.setOnClickListener(this);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -116,4 +120,15 @@ void UpdateNotifiList(UpdateRequestModel updateRequestModel){
         super.onResume();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.toolbar_home_image_view:
+                Intent in = new Intent(this, HomeActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+                break;
+        }
+    }
 }
