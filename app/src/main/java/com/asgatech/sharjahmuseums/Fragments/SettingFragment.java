@@ -53,8 +53,7 @@ public class SettingFragment extends Fragment {
     }
 
     private void setUpView() {
-        userData = new UserData();
-        language = userData.getLocalization(getActivity());
+        language = UserData.getLocalization(getActivity());
         switch (language) {
             case Localization.ARABIC_VALUE:
                 changeLanguageArabicRadioButton.setChecked(true);

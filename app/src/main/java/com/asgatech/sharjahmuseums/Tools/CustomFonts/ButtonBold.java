@@ -18,7 +18,7 @@ public class ButtonBold extends android.support.v7.widget.AppCompatButton {
 
     public ButtonBold(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if (new UserData().getLocalization(context) == Localization.ARABIC_VALUE) {
+        if ( UserData.getLocalization(context) == Localization.ARABIC_VALUE) {
             setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/arabic_bold.otf"));
         } else {
             setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/english_bold.TTF"));

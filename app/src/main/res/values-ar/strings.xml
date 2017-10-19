@@ -89,4 +89,5 @@
     <string name="name_hint">من فضلك أدخل إسمك </string>
     <string name="messeage_hint">من فضلك اكتب رسالتك </string>
     <string name="invalid_email">من فضلك أدخل بريد الكتروني صحيح </string>
+    <string name="title_btn_skip">تخطى</string>
 </resources>

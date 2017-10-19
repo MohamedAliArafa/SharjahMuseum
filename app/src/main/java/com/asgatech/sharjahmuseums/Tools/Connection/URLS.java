@@ -21,6 +21,7 @@ public class URLS {
     public static final String URL_GET_EVENTS = "api/Events/getAllEvents";
     public static final String URL_GET_EVENTS_CATS = "api/EventCategray/GetEventCategrayList?lang=1";
     public static final String URL_GET_EVENTS_DETAILS = "api/Events/GetEventById";
+    public static final String URL_GET_DEMO = "/api/Demo/GetAllDemo";
     public static final String URL_GET_ABOUT_US = "api/Settings/GetAboutUs";
     public static final String URL_SEND_FEEDBACK = "api/Settings/FeedBack";
     public static final String URL_GET_CONTACTS = "api/Settings/GetContactUs";

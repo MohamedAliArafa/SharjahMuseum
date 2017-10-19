@@ -102,7 +102,7 @@ public class HighlightsDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        new Localization().setLanguage(HighlightsDetailActivity.this, new UserData().getLocalization(HighlightsDetailActivity.this));
+        new Localization().setLanguage(HighlightsDetailActivity.this, UserData.getLocalization(HighlightsDetailActivity.this));
         super.onResume();
     }
 }

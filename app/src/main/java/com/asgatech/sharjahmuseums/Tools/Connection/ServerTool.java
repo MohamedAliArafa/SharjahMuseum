@@ -10,6 +10,7 @@ import com.asgatech.sharjahmuseums.Models.AddReviewRequest;
 import com.asgatech.sharjahmuseums.Models.AllMuseumCategrayResponse;
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.Models.ContactUsModel;
+import com.asgatech.sharjahmuseums.Models.DemoImage;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
@@ -35,7 +36,6 @@ import retrofit2.Retrofit;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -64,6 +64,8 @@ public class ServerTool {
         @GET(URLS.URL_GET_EVENTS_DETAILS)
         Call<EventdetatailsResponceModel> getEventsDetails(@Query("eventid") int eventId, @Query("lang") int lang);
 
+        @GET(URLS.URL_GET_DEMO)
+        Call<List<DemoImage>> getDemo(@Query("lang") int lang);
 
         @GET(URLS.URL_GET_ABOUT_US)
         Call<AboutUsModel> getAbout(@Query("lang") int lang);
@@ -151,6 +153,13 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
+    public static void getDemo(Context context, int lang, final APICallBack apiCallBack) {
+        final RetrofitTool retrofitTool = new RetrofitTool();
+        JsonObject obj = new JsonObject();
+        obj.addProperty("lang", lang);
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getDemo(lang);
+        makeRequest(context, call, apiCallBack, retrofitTool);
+    }
 
     public static void getAbout(Context context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();

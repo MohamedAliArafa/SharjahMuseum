@@ -121,7 +121,7 @@ public class MuseumDetailsFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onResume() {
-        new Localization().setLanguage(getActivity(), new UserData().getLocalization(getActivity()));
+        new Localization().setLanguage(getActivity(),  UserData.getLocalization(getActivity()));
         super.onResume();
     }
 
@@ -149,7 +149,7 @@ public class MuseumDetailsFragment extends Fragment implements View.OnClickListe
 
         museumsID = getArguments().getInt(ConstantUtils.EXTRA_MUSEUMS_ID, 0);
         if (museumsID > 0) {
-            getMuseumsDetails(museumsID, new UserData().getLocalization(getActivity()));
+            getMuseumsDetails(museumsID,  UserData.getLocalization(getActivity()));
         }
     }
 

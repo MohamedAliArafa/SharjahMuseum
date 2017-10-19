@@ -69,7 +69,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         int id = getIntent().getIntExtra("eventId", 0);
         setToolBar();
         initView();
-        getEventDetails(id, new UserData().getLocalization(EventDetailsActivity.this));
+        getEventDetails(id, UserData.getLocalization(EventDetailsActivity.this));
 
     }
 
@@ -86,23 +86,23 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
-        layoutDots = (LinearLayout) findViewById(R.id.layoutDots);
-        eventTitle = (TextView) findViewById(R.id.event_title);
-        eventItemDateLayout = (LinearLayout) findViewById(R.id.event_item_date_layout);
-        eventItemDateIndicator = (ImageView) findViewById(R.id.event_item_date_indicator);
-        eventItemDateFrom = (TextView) findViewById(R.id.event_item_date_from);
-        eventItemDateTo = (TextView) findViewById(R.id.event_item_date_to);
-        tvEventItemTime = (TextView) findViewById(R.id.tv_event_item_time);
-        eventItemPlace = (TextView) findViewById(R.id.event_item_place);
-        eventDescription = (TextView) findViewById(R.id.event_description);
+        viewpager = findViewById(R.id.viewpager);
+        layoutDots = findViewById(R.id.layoutDots);
+        eventTitle = findViewById(R.id.event_title);
+        eventItemDateLayout = findViewById(R.id.event_item_date_layout);
+        eventItemDateIndicator = findViewById(R.id.event_item_date_indicator);
+        eventItemDateFrom = findViewById(R.id.event_item_date_from);
+        eventItemDateTo = findViewById(R.id.event_item_date_to);
+        tvEventItemTime = findViewById(R.id.tv_event_item_time);
+        eventItemPlace = findViewById(R.id.event_item_place);
+        eventDescription = findViewById(R.id.event_description);
 //        eventDescription.setMovementMethod(new ScrollingMovementMethod());
-        downloadIndicator = (ImageView) findViewById(R.id.download_indicator);
-        downloadText = (TextView) findViewById(R.id.download_text);
-        share = (LinearLayout) findViewById(R.id.share);
-        call = (LinearLayout) findViewById(R.id.call);
-        mail = (LinearLayout) findViewById(R.id.mail);
-        mark = (LinearLayout) findViewById(R.id.mark);
+        downloadIndicator = findViewById(R.id.download_indicator);
+        downloadText = findViewById(R.id.download_text);
+        share = findViewById(R.id.share);
+        call = findViewById(R.id.call);
+        mail = findViewById(R.id.mail);
+        mark = findViewById(R.id.mark);
 
         downloadText.setOnClickListener(new View.OnClickListener() {
             @Override

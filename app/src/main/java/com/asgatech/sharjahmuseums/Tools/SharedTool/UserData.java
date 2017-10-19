@@ -8,20 +8,20 @@ import android.content.Context;
  */
 public class UserData {
 
-    public String TAG_SAVE_LOGIN_DATA = "login_data";
-    public String TAG_LANGUAGE_SCREEN = "language";
-    public String TAG_SHOPPING_CART = "shopping_carts";
-    public String TAG_LOCALIZATION = "localization";
-    public String TAG_NOTIFICATION_STATE = "notification_state";
+    public static String TAG_SAVE_LOGIN_DATA = "login_data";
+    public static String TAG_LANGUAGE_SCREEN = "language";
+    public static String TAG_SHOPPING_CART = "shopping_carts";
+    public static String TAG_LOCALIZATION = "localization";
+    public static String TAG_NOTIFICATION_STATE = "notification_state";
 
-    public String TAG_CURRENCY = "Currency";
-    public String TAG_USER_CODE = "user_code";
-    public String TAG_USER_PASSWORD = "user_password";
-    public String TAG_REMEMBER_ME = "remmeber_me";
-    public String TAG_SAVE_PROFILE_INFO = "profile_info";
+    public static String TAG_CURRENCY = "Currency";
+    public static String TAG_USER_CODE = "user_code";
+    public static String TAG_USER_PASSWORD = "user_password";
+    public static String TAG_REMEMBER_ME = "remmeber_me";
+    public static String TAG_SAVE_PROFILE_INFO = "profile_info";
 
-    public String TAG_INSERT_TOKEN= "insert_token";
-    public Boolean TAG_TOKEN_INSERT_STATE= false;
+    public static String TAG_INSERT_TOKEN= "insert_token";
+    public static Boolean TAG_TOKEN_INSERT_STATE= false;
 
 
 
@@ -34,75 +34,75 @@ public class UserData {
 //        return SharedPreferencesTool.getObject(context, TAG_SAVE_LOGIN_DATA, LoginResponse.class);
 //    }
 
-    public boolean getRemmemberMe(Context context) {
+    public static boolean getRemmemberMe(Context context) {
         return SharedPreferencesTool.getBoolean(context, TAG_REMEMBER_ME);
     }
 
-    public void saveRemmemberMe(Context context, boolean rememberMe) {
+    public static void saveRemmemberMe(Context context, boolean rememberMe) {
         SharedPreferencesTool.setBoolean(context, rememberMe, TAG_REMEMBER_ME);
     }
 
-    public void saveLocalization(Context context, int value) {
+    public static void saveLocalization(Context context, int value) {
         SharedPreferencesTool.setInt(context, TAG_LOCALIZATION, value);
     }
 
-    public int getLocalization(Context context) {
+    public static int getLocalization(Context context) {
         return SharedPreferencesTool.getInt(context, TAG_LOCALIZATION);
     }
 
-    public void saveNotificationState(Context context, int value) {
+    public static void saveNotificationState(Context context, int value) {
         SharedPreferencesTool.setInt(context, TAG_NOTIFICATION_STATE, value);
     }
-    public int getNotificationState(Context context) {
+    public static int getNotificationState(Context context) {
         return SharedPreferencesTool.getInt(context, TAG_NOTIFICATION_STATE);
     }
 
-    public void saveUserCurrencyID(Context context, int value) {
+    public static void saveUserCurrencyID(Context context, int value) {
         SharedPreferencesTool.setInt(context, TAG_CURRENCY, value);
     }
 
-    public int getUserCurrencyID(Context context) {
+    public static int getUserCurrencyID(Context context) {
         return SharedPreferencesTool.getInt(context, TAG_CURRENCY);
     }
-    public void saveUserStateOfInsertToken(Context context, boolean state,String value) {
+    public static void saveUserStateOfInsertToken(Context context, boolean state,String value) {
         SharedPreferencesTool.setBoolean(context, state, value);
     }
-    public Boolean getUserStateOfInsertToken(Context context) {
+    public static Boolean getUserStateOfInsertToken(Context context) {
         return SharedPreferencesTool.getBoolean(context, TAG_INSERT_TOKEN);
     }
-    public void saveUserCode(Context context, String value) {
+    public static void saveUserCode(Context context, String value) {
         SharedPreferencesTool.setString(context, TAG_USER_CODE, value);
     }
 
-    public String getUserCode(Context context) {
+    public static String getUserCode(Context context) {
         return SharedPreferencesTool.getString(context, TAG_USER_CODE);
     }
 
-    public void saveUserPassword(Context context, String value) {
+    public static void saveUserPassword(Context context, String value) {
         SharedPreferencesTool.setString(context, TAG_USER_PASSWORD, value);
     }
 
-    public String getUserPassword(Context context) {
+    public static String getUserPassword(Context context) {
         return SharedPreferencesTool.getString(context, TAG_USER_PASSWORD);
     }
 
-    public void clearShared(Context context) {
+    public static void clearShared(Context context) {
         SharedPreferencesTool.clearObject(context);
     }
 
-    public void setLanguageScreen(Context context, boolean isShown) {
+    public static void setLanguageScreen(Context context, boolean isShown) {
         SharedPreferencesTool.setBoolean(context, isShown, TAG_LANGUAGE_SCREEN);
     }
 
-    public boolean isLanguageShown(Context context) {
+    public static boolean isLanguageShown(Context context) {
         return SharedPreferencesTool.getBooleanlang(context, TAG_LANGUAGE_SCREEN);
     }
 
-    public void saveReadyShoppingCart(Context context, boolean isShown) {
+    public static void saveReadyShoppingCart(Context context, boolean isShown) {
         SharedPreferencesTool.setBoolean(context, isShown, TAG_SHOPPING_CART);
     }
 
-    public boolean getReadyShoppingCart(Context context) {
+    public static boolean getReadyShoppingCart(Context context) {
         return SharedPreferencesTool.getBoolean(context, TAG_SHOPPING_CART);
     }
 }

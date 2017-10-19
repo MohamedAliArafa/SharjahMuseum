@@ -1,7 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities.Events.EventDetails;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
@@ -92,7 +91,7 @@ public class EventDetailsFragment extends Fragment {
         int id = getArguments().getInt("eventId");
         mDownloadTextView.setPaintFlags(mDownloadTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
       //  mTextView.setText("This text will be underlined");
-        getEventDetails(id ,new UserData().getLocalization(getActivity()));
+        getEventDetails(id , UserData.getLocalization(getActivity()));
         return view;
     }
 
@@ -181,7 +180,6 @@ public class EventDetailsFragment extends Fragment {
 
     }
 
-    @SuppressLint("NewApi")
     private void addBottomDots(int currentPage) {
         dots = new TextView[size];
 

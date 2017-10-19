@@ -46,7 +46,7 @@ public class EducationListFragment extends Fragment {
 
         ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.education));
 
-        getEducationList(new UserData().getLocalization(getActivity()));
+        getEducationList( UserData.getLocalization(getActivity()));
         return view;
     }
 

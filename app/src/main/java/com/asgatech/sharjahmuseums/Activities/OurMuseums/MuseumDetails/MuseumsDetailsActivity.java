@@ -137,7 +137,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     protected void onResume() {
-        new Localization().setLanguage(MuseumsDetailsActivity.this, new UserData().getLocalization(MuseumsDetailsActivity.this));
+        new Localization().setLanguage(MuseumsDetailsActivity.this,  UserData.getLocalization(MuseumsDetailsActivity.this));
         super.onResume();
     }
 
@@ -193,7 +193,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         if (getIntent().hasExtra(ConstantUtils.EXTRA_MUSEUMS_ID)) {
             museumsID = getIntent().getIntExtra((ConstantUtils.EXTRA_MUSEUMS_ID), 0);
             if (museumsID > 0) {
-                getMuseumsDetails(museumsID, new UserData().getLocalization(MuseumsDetailsActivity.this));
+                getMuseumsDetails(museumsID,  UserData.getLocalization(MuseumsDetailsActivity.this));
             }
         }
 

@@ -28,6 +28,10 @@ public interface HomeContract {
         void showLogo();
 
         HomeContract.UserAction getPresenter();
+
+        void hideToolbar();
+
+        void showToolbar();
     }
 
     interface UserAction {

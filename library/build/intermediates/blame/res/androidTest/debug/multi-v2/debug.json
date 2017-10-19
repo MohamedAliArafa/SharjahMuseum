@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SharjahMuseums\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "outputFile": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/D:\\SharjahMuseums\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "D:\\SharjahMuseums\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "source": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/D:\\SharjahMuseums\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "from": {
                         "startLines": "5",
                         "startColumns": "4",
@@ -16,10 +16,25 @@
             ]
         },
         {
-            "outputFile": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "outputFile": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/library/build/intermediates/res/merged/androidTest/debug/values_values.arsc.flat",
             "map": [
                 {
-                    "source": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "source": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "from": {
+                        "startLines": "5",
+                        "startColumns": "4",
+                        "startOffsets": "462",
+                        "endColumns": "51",
+                        "endOffsets": "509"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/E:\\700Apps projects\\Arafa\\Sharjah Museum\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/E:\\700Apps projects\\Arafa\\Sharjah Museum\\library\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "from": {
                         "startLines": "5",
                         "startColumns": "4",

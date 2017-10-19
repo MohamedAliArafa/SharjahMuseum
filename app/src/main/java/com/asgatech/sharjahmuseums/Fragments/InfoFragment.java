@@ -86,7 +86,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
 
 
-        getContactData(new UserData().getLocalization(getActivity()));
+        getContactData( UserData.getLocalization(getActivity()));
         return view;
     }
 

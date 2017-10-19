@@ -101,7 +101,7 @@
     <!--//messages-->
     <string name="no_notification">You do not have any notifications at this time</string>
     <string name="no_reviews">You do not have any  visitor reviews at this time</string>
-
+    <string name="title_btn_skip">Skip</string>
 
 
 </resources>

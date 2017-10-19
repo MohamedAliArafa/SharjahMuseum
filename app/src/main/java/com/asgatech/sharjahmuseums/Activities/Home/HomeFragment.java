@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         about_us_layout.setOnClickListener(this);
         education_layout.setOnClickListener(this);
 
-        getAllSlider(new UserData().getLocalization(getActivity()));
+        getAllSlider( UserData.getLocalization(getActivity()));
     }
 
     private void getAllSlider(int langauge) {

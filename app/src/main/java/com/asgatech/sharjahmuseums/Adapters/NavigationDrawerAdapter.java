@@ -15,6 +15,7 @@ import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Activities.OurMuseums.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.ContactUsFragment;
+import com.asgatech.sharjahmuseums.Fragments.DemoFragment;
 import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
 import com.asgatech.sharjahmuseums.Fragments.NearbyFragment;
 import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
@@ -121,6 +122,9 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                     break;
                                 case 10:
                                     presenter.openFragment(new SettingFragment(), null);
+                                    break;
+                                case 11:
+                                    presenter.openFragment(new DemoFragment(), null);
                                     break;
                             }
                         }

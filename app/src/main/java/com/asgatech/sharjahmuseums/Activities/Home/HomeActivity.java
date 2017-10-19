@@ -110,6 +110,7 @@ public class HomeActivity extends AppCompatActivity implements
                     hideLogo();
                 }
             }
+            showToolbar();
             restToolbarColor();
         } else {
             super.onBackPressed();
@@ -203,5 +204,15 @@ public class HomeActivity extends AppCompatActivity implements
         if (mPresenter != null)
             return mPresenter;
         return null;
+    }
+
+    @Override
+    public void hideToolbar() {
+        mToolbar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showToolbar() {
+        mToolbar.setVisibility(View.VISIBLE);
     }
 }

@@ -24,6 +24,7 @@ public class HomePresenter implements HomeContract.UserAction {
 
     @Override
     public void openFragment(Fragment fragment, Bundle bundle) {
+        mView.showToolbar();
         mView.changeToolbarTitle("");
         mView.restToolbarColor();
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
@@ -39,6 +40,7 @@ public class HomePresenter implements HomeContract.UserAction {
 
     @Override
     public void openHome() {
+        mView.showToolbar();
         mView.changeToolbarTitle("");
         mView.restToolbarColor();
         mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
