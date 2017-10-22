@@ -1,8 +1,9 @@
 package com.asgatech.sharjahmuseums.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -21,34 +22,35 @@ public class SplashActivity extends AppCompatActivity {
     private static final int TIME_ANIMATION_START = 500;//millis
 
     private ImageView SplashImageView;
-    private UserData userData;
+    Runnable mRunnable;
+    Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        userData = new UserData();
         setupViews();
     }
 
     private void setupViews() {
-        SplashImageView = (ImageView) findViewById(R.id.splash_image_view);
+        SplashImageView = findViewById(R.id.splash_image_view);
         animateFadeIN(SplashImageView);
-        Thread timer = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    sleep(TIME_ANIMATION_DURATION);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finish();
-                }
-            }
+        mRunnable = () -> {
+            /* Create an Intent that will start the Menu-Activity. */
+            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            finish();
         };
-        timer.start();
+        mHandler = new Handler();
+        mHandler.postDelayed(mRunnable, TIME_ANIMATION_DURATION);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mRunnable != null) {
+            mHandler.removeCallbacks(mRunnable);
+        }
     }
 
     private void animateFadeIN(ImageView imgv) {
@@ -63,14 +65,14 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        if (userData.getLocalization(SplashActivity.this) == -1) { // no found lang before .. first set up application
-            if (new Localization().getDefaultLocal(SplashActivity.this) == Localization.ARABIC_VALUE) { //RTL
-                userData.saveLocalization(SplashActivity.this, Localization.ARABIC_VALUE);
+        if (UserData.getLocalization(SplashActivity.this) == -1) { // no found lang before .. first set up application
+            if (Localization.getDefaultLocal(SplashActivity.this) == Localization.ARABIC_VALUE) { //RTL
+                UserData.saveLocalization(SplashActivity.this, Localization.ARABIC_VALUE);
             } else {
-                userData.saveLocalization(SplashActivity.this, Localization.ENGLISH_VALUE);
+                UserData.saveLocalization(SplashActivity.this, Localization.ENGLISH_VALUE);
             }
         }
-        new Localization().setLanguage(SplashActivity.this, userData.getLocalization(SplashActivity.this));
+        Localization.setLanguage(SplashActivity.this, UserData.getLocalization(SplashActivity.this));
         super.onResume();
     }
 

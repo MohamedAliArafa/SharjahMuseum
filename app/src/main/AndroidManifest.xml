@@ -61,7 +61,7 @@
             android:name=".Activities.OurMuseums.MuseumDetails.HighlightDetails.HighlightsDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".Activities.SearchMuseumActivity"
+        <activity android:name=".Activities.Search.SearchMuseumActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden|stateAlwaysHidden"
 

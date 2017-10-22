@@ -4,10 +4,14 @@ import android.app.Application;
 import android.util.Log;
 
 import com.asgatech.sharjahmuseums.Models.InsertDevicetokenRequestModel;
+import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.scand.realmbrowser.RealmBrowser;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import okhttp3.ResponseBody;
 
 /**
@@ -20,6 +24,18 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded().build();
+        Realm.setDefaultConfiguration(config);
+
+                new RealmBrowser.Builder(this)
+                        // add class, you want to view
+                        .add(Realm.getDefaultInstance(), MuseumsDetailsModel.class)
+//                        .add(Realm.getDefaultInstance(), ProgramResultModel.class)
+                        // call method showNotification()
+                        .showNotification();
         mUserData = new UserData();
         if (!mUserData.getUserStateOfInsertToken(this)) {
             insertDeviceToken(Utils.insertDeviceToken(getApplicationContext()));

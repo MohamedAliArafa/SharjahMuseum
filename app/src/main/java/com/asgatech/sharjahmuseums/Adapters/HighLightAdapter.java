@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.HightLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -20,9 +20,9 @@ import java.util.List;
 
 public class HighLightAdapter extends BaseAdapter {
     private Context context;
-    private List<MuseumsDetailsModel.HightLightEntity> hightLightList = new ArrayList<>();
+    private List<HightLightEntity> hightLightList = new ArrayList<>();
 
-    public HighLightAdapter(Context context,List<MuseumsDetailsModel.HightLightEntity> hightLightList ) {
+    public HighLightAdapter(Context context,List<HightLightEntity> hightLightList ) {
         this.context = context;
         this.hightLightList=hightLightList;
     }
@@ -30,7 +30,7 @@ public class HighLightAdapter extends BaseAdapter {
     public HighLightAdapter() {
     }
 
-    public void setData(List<MuseumsDetailsModel.HightLightEntity> data) {
+    public void setData(List<HightLightEntity> data) {
         this.hightLightList = data;
     }
 

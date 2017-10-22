@@ -20,30 +20,29 @@ public class Localization {
     public static final int ARABIC_VALUE = 1;
     public static final int ENGLISH_VALUE = 2;
 
-    public void setLanguage(Context context, int langaugeId) {
-        Localization localization = new Localization();
+    public static void setLanguage(Context context, int langaugeId) {
         if (langaugeId == ARABIC_VALUE) {
             //arabic
-            localization.changeLocale(context, new Locale("ar"), Localization.ARABIC_VALUE);
+            changeLocale(context, new Locale("ar"), Localization.ARABIC_VALUE);
         } else if (langaugeId == ENGLISH_VALUE) {
             //english
-            localization.changeLocale(context, new Locale("en"), Localization.ENGLISH_VALUE);
+            changeLocale(context, new Locale("en"), Localization.ENGLISH_VALUE);
         }
-        new UserData().saveLocalization(context, langaugeId);
+        UserData.saveLocalization(context, langaugeId);
     }
 
-    public void changeLocale(Context context, Locale locale, int langaugeId) {
+    private static void changeLocale(Context context, Locale locale, int langaugeId) {
         Configuration conf = context.getResources().getConfiguration();
         conf.locale = locale;
         Locale.setDefault(locale);
-        new UserData().saveLocalization(context, langaugeId);
+        UserData.saveLocalization(context, langaugeId);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             conf.setLayoutDirection(conf.locale);
         }
         context.getResources().updateConfiguration(conf, context.getResources().getDisplayMetrics());
     }
 
-    public int getDefaultLocal(Context context) {
+    public static int getDefaultLocal(Context context) {
         Configuration config = context.getResources().getConfiguration();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
@@ -58,7 +57,7 @@ public class Localization {
         }
     }
 
-    public  void changeLanguage(String language, Context context) {
+    public static void changeLanguage(String language, Context context) {
 
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
@@ -71,7 +70,7 @@ public class Localization {
         context.startActivity(intent);
     }
     // return current Language ID
-    public int getCurrentLanguageID(Context context) {
+    public static int getCurrentLanguageID(Context context) {
         /**
          * 0 = arabic
          * 1 = english */

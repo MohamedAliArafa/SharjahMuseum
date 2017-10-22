@@ -79,7 +79,7 @@ void setUpView(){
 
 }
 void UpdateNotifiList(UpdateRequestModel updateRequestModel){
-    ServerTool.UpdateNotifiList(NotificationDetailActivity.this, updateRequestModel, new ServerTool.APICallBack<Integer>() {
+    ServerTool.UpdateNotificationList(NotificationDetailActivity.this, updateRequestModel, new ServerTool.APICallBack<Integer>() {
         @Override
         public void onSuccess(Integer response) {
             if (response==1){

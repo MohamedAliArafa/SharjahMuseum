@@ -11,16 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
-import com.asgatech.sharjahmuseums.Activities.SearchMuseumActivity;
+import com.asgatech.sharjahmuseums.Activities.Search.SearchMuseumActivity;
 import com.asgatech.sharjahmuseums.Adapters.AllMuseumsAdapter;
-import com.asgatech.sharjahmuseums.Models.ALLMuseumsModel;
+import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Models.PagingModel;
-import com.asgatech.sharjahmuseums.Models.PlanYourVisitsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
@@ -65,14 +63,14 @@ public class OurMuseumsFragment extends Fragment implements OnClickListener {
         ourMuseumsRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         ourMuseumsRecyclerView.setLayoutManager(mLayoutManager);
-        pagingModel = new PagingModel(1, 1000, new UserData().getLocalization(getActivity()));
+        pagingModel = new PagingModel(1, 1000, UserData.getLocalization(getActivity()));
         getAllMuseums(pagingModel);
     }
 
     private void getAllMuseums(PagingModel pagingModel) {
-        ServerTool.getAllMuseums(getActivity(), pagingModel, new ServerTool.APICallBack<List<ALLMuseumsModel>>() {
+        ServerTool.getAllMuseums(getActivity(), pagingModel, new ServerTool.APICallBack<List<MuseumsDetailsModel>>() {
             @Override
-            public void onSuccess(List<ALLMuseumsModel> response) {
+            public void onSuccess(List<MuseumsDetailsModel> response) {
                 if (Utils.validList(response)) {
                     AllMuseumsAdapter museumsAdapter = new AllMuseumsAdapter(getActivity(), response, ((HomeContract.ModelView) getActivity()).getPresenter());
                     ourMuseumsRecyclerView.setAdapter(museumsAdapter);
@@ -90,6 +88,5 @@ public class OurMuseumsFragment extends Fragment implements OnClickListener {
     public void onClick(View view) {
         Utils.hideKeypad(getActivity());
         startActivity(new Intent(getActivity(), SearchMuseumActivity.class));
-
     }
 }

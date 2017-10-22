@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.HightLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
@@ -25,9 +25,9 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
 
     String image;
 
-    MuseumsDetailsModel.HightLightEntity highlight;
+    HightLightEntity highlight;
 
-    public static HighLightPagerFragment newInstance(String image, MuseumsDetailsModel.HightLightEntity highlight) {
+    public static HighLightPagerFragment newInstance(String image, HightLightEntity highlight) {
         HighLightPagerFragment highLightPagerFragment = new HighLightPagerFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtils.IMAGE_PATH, image);

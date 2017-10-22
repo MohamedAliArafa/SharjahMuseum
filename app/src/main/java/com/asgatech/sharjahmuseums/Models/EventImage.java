@@ -8,8 +8,11 @@ package com.asgatech.sharjahmuseums.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.annotations.PrimaryKey;
+
 public class EventImage {
 
+    @PrimaryKey
     @SerializedName("EventsImageID")
     @Expose
     private Integer eventsImageID;

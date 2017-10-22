@@ -70,4 +70,6 @@
     <string name="title_activity_add_review">AddReviewActivity</string>
     <string name="title_activity_hight_light_detail">HightLightDetailActivity</string>
     <string name="title_btn_skip">Skip</string>
+    <string name="search">Search</string>
+    <string name="suggestions">Suggestions</string>
 </resources>

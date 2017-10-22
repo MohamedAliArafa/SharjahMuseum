@@ -17,6 +17,7 @@ public class URLS {
 
     public static final String URL_ALL_SLIDER = "api/Slider/GetAllSlider";
     public static final String URL_ALL_MUSEUMS = "api/Museum/GetALLMuseums";
+    public static final String URL_ALL_SEARCH_MUSEUMS = "/api/Museum/GetALLMuseumsWithsearch";
     public static final String URL_MUSEUMS_DETAILS = "api/Museum/GetMuseumById";
     public static final String URL_GET_EVENTS = "api/Events/getAllEvents";
     public static final String URL_GET_EVENTS_CATS = "api/EventCategray/GetEventCategrayList?lang=1";

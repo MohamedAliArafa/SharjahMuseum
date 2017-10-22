@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.MuseumsDetailsActivity;
+import com.asgatech.sharjahmuseums.Activities.Search.SearchContract;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -25,12 +25,12 @@ import java.util.List;
  * Created by halima.reda on 9/12/2017.
  */
 
-public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.ViewHolder> {
-    private HomeContract.UserAction presenter;
+public class SearchMuseumsAdapter extends RecyclerView.Adapter<SearchMuseumsAdapter.ViewHolder> {
+    private SearchContract.UserAction presenter;
     private Context context;
     private List<MuseumsDetailsModel> allMuseumsList;
 
-    public AllMuseumsAdapter(Context context, List<MuseumsDetailsModel> response, HomeContract.UserAction presenter) {
+    public SearchMuseumsAdapter(Context context, List<MuseumsDetailsModel> response, SearchContract.UserAction presenter) {
         this.context = context;
         this.allMuseumsList = response;
         this.presenter = presenter;
@@ -77,10 +77,10 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
 
         ViewHolder(View view) {
             super(view);
-            museumsItemLinear = (FrameLayout) view.findViewById(R.id.museums_item_linear);
-            museumsImageView = (ImageView) view.findViewById(R.id.museums_image_view);
+            museumsItemLinear = view.findViewById(R.id.museums_item_linear);
+            museumsImageView = view.findViewById(R.id.museums_image_view);
 //            colorBackgroundImageView = (ImageView) view.findViewById(R.id.color_background_image_view);
-            museumsNameTextView = (TextViewBold) view.findViewById(R.id.museums_name_text_view);
+            museumsNameTextView = view.findViewById(R.id.museums_name_text_view);
         }
     }
 }

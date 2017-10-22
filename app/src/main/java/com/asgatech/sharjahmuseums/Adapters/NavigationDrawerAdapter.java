@@ -94,8 +94,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                     presenter.openHome();
                                     break;
                                 case 2:
-//                                    view.toolbarHomeImageView.setVisibility(View.VISIBLE);
-//                                    view.toolbarLogoImageView.setVisibility(View.GONE);
                                     presenter.openFragment(new OurMuseumsFragment(), null);
                                     break;
                                 case 3:

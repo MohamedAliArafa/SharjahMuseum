@@ -1,5 +1,7 @@
 package com.asgatech.sharjahmuseums.Models;
 
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by halima.reda on 9/12/2017.
  */
@@ -23,6 +25,7 @@ public class ALLMuseumsModel {
      * PageTotal : 1
      */
 
+    @PrimaryKey
     private int Mus_ID;
     private String Title;
     private String About;

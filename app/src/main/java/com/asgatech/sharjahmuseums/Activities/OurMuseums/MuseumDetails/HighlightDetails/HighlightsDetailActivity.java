@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.HightLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Localization;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class HighlightsDetailActivity extends AppCompatActivity {
     public ImageView toolbarHomeImageView;
     ViewPager imagesViewPager;
-    ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
+    ArrayList<HightLightEntity> highlightList;
     private int mPosition;
 
     @Override
@@ -63,9 +63,9 @@ public class HighlightsDetailActivity extends AppCompatActivity {
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-        ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
+        ArrayList<HightLightEntity> highlightList;
 
-        MyFragmentPagerAdapter(FragmentManager fm, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
+        MyFragmentPagerAdapter(FragmentManager fm, ArrayList<HightLightEntity> highlightList) {
             super(fm);
             this.highlightList = highlightList;
         }

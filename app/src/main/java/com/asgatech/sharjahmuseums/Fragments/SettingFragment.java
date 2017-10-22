@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -23,7 +22,6 @@ public class SettingFragment extends Fragment {
     private RadioButton changeLanguageArabicRadioButton;
     private RadioButton changeLanguageEnglishRadioButton;
     private Switch togleBtnNotifiState;
-    private UserData userData;
     private int language, state;
 
 
@@ -45,10 +43,10 @@ public class SettingFragment extends Fragment {
 
     private void initView(View view) {
         ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.setting));
-        changeLanguageRadioGroub = (RadioGroup) view.findViewById(R.id.change_language_radio_groub);
-        changeLanguageArabicRadioButton = (RadioButton) view.findViewById(R.id.change_language_arabic_radio_button);
-        changeLanguageEnglishRadioButton = (RadioButton) view.findViewById(R.id.change_language_english_radio_button);
-        togleBtnNotifiState = (Switch) view.findViewById(R.id.togle_btn_notifi_state);
+        changeLanguageRadioGroub = view.findViewById(R.id.change_language_radio_groub);
+        changeLanguageArabicRadioButton = view.findViewById(R.id.change_language_arabic_radio_button);
+        changeLanguageEnglishRadioButton = view.findViewById(R.id.change_language_english_radio_button);
+        togleBtnNotifiState = view.findViewById(R.id.togle_btn_notifi_state);
         setUpView();
     }
 
@@ -64,7 +62,7 @@ public class SettingFragment extends Fragment {
 
         }
 
-        state = userData.getNotificationState(getActivity());
+        state = UserData.getNotificationState(getActivity());
         switch (state) {
             case 1:
                 togleBtnNotifiState.setChecked(true);
@@ -74,39 +72,29 @@ public class SettingFragment extends Fragment {
                 break;
         }
 
-        changeLanguageRadioGroub.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                View radioButton = changeLanguageRadioGroub.findViewById(i);
-                int index = changeLanguageRadioGroub.indexOfChild(radioButton);
-                UserData userData = new UserData();
-                switch (index) {
-                    case 0:
-                        new Localization().changeLanguage(URLS.TAG_ENGLISH_String, getActivity());
-                        userData.saveLocalization(getActivity(), Localization.ENGLISH_VALUE);
-                        break;
-                    case 1:
-                        new Localization().changeLanguage(URLS.TAG_ARABIC_String, getActivity());
-                        userData.saveLocalization(getActivity(), Localization.ARABIC_VALUE);
+        changeLanguageRadioGroub.setOnCheckedChangeListener((radioGroup, i) -> {
+            View radioButton = changeLanguageRadioGroub.findViewById(i);
+            int index = changeLanguageRadioGroub.indexOfChild(radioButton);
+            switch (index) {
+                case 0:
+                    Localization.changeLanguage(URLS.TAG_ENGLISH_String, getActivity());
+                    UserData.saveLocalization(getActivity(), Localization.ENGLISH_VALUE);
+                    break;
+                case 1:
+                    Localization.changeLanguage(URLS.TAG_ARABIC_String, getActivity());
+                    UserData.saveLocalization(getActivity(), Localization.ARABIC_VALUE);
+                    break;
 
-                        break;
-
-                }
             }
         });
 
-        togleBtnNotifiState.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        togleBtnNotifiState.setOnCheckedChangeListener((compoundButton, b) -> {
 
-                if (b) {
-                    userData.saveNotificationState(getActivity(), 1);
-                } else {
-                    userData.saveNotificationState(getActivity(), 0);
-                }
-
+            if (b) {
+                UserData.saveNotificationState(getActivity(), 1);
+            } else {
+                UserData.saveNotificationState(getActivity(), 0);
             }
-
 
         });
 

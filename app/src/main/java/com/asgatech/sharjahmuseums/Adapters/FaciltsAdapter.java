@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.FaciltsEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -21,9 +21,9 @@ import java.util.List;
 
 public class FaciltsAdapter extends RecyclerView.Adapter<FaciltsAdapter.ViewHolder> {
     private Context context;
-    private List<MuseumsDetailsModel.FaciltsEntity> faciltsList;
+    private List<FaciltsEntity> faciltsList;
 
-    public FaciltsAdapter(Context context, List<MuseumsDetailsModel.FaciltsEntity> response) {
+    public FaciltsAdapter(Context context, List<FaciltsEntity> response) {
         this.context = context;
         this.faciltsList = response;
     }

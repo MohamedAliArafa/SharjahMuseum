@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.ImageListEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -24,7 +24,7 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
     private Activity activity;
     List<AllSliderModel> imageList;
     private int listType;
-    List<MuseumsDetailsModel.ImageListEntity> imagesList;
+    List<ImageListEntity> imagesList;
 
     public HomeSliderImagesAdapter(Activity activity, List<AllSliderModel> imagesList, int type) {
         this.activity = activity;
@@ -32,7 +32,7 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
         this.listType = type;
     }
 
-    public HomeSliderImagesAdapter(List<MuseumsDetailsModel.ImageListEntity> imagesList, Activity activity, int type) {
+    public HomeSliderImagesAdapter(List<ImageListEntity> imagesList, Activity activity, int type) {
         this.activity = activity;
         this.imagesList = imagesList;
         this.listType = type;

@@ -3,6 +3,7 @@ package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,15 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.HighlightDetails.HighlightsDetailActivity;
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.HightLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
-import com.asgatech.sharjahmuseums.Tools.RoundedCornersTransformation;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,14 +28,14 @@ import java.util.ArrayList;
 public class HighLightOverlapingFragment extends Fragment {
     String image;
 
-    ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
+    ArrayList<HightLightEntity> highlightList;
     private int mPosition;
 
-    public static HighLightOverlapingFragment newInstance(String image, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList, int position) {
+    public static HighLightOverlapingFragment newInstance(String image, List<HightLightEntity> highlightList, int position) {
         HighLightOverlapingFragment highLightOverlapingFragment = new HighLightOverlapingFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtils.IMAGE_PATH, image);
-        bundle.putParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST, highlightList);
+        bundle.putParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST, (ArrayList<? extends Parcelable>) highlightList);
         bundle.putInt(ConstantUtils.HIGHLIGHT_LIST_POSITION, position);
         highLightOverlapingFragment.setArguments(bundle);
         return highLightOverlapingFragment;

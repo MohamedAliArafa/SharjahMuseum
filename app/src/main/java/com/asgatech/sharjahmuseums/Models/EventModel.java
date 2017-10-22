@@ -7,8 +7,12 @@ package com.asgatech.sharjahmuseums.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EventModel {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
+public class EventModel extends RealmObject{
+
+    @PrimaryKey
     @SerializedName("EventsID")
     @Expose
     private Integer eventsID;

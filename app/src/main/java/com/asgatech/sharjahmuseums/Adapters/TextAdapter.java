@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.OpeningHoursListEntity;
+import com.asgatech.sharjahmuseums.Models.PriceCategorySublistEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 
@@ -18,17 +19,17 @@ import java.util.List;
 
 public class TextAdapter extends RecyclerView.Adapter<TextAdapter.ViewHolder> {
     private Context context;
-    private List<MuseumsDetailsModel.OpeningHoursListEntity> openingHoursList;
-    private List<MuseumsDetailsModel.PriceCategorySublistEntity> entryFeesList;
+    private List<OpeningHoursListEntity> openingHoursList;
+    private List<PriceCategorySublistEntity> entryFeesList;
     private int listType;
 
-    public TextAdapter(Context context, List<MuseumsDetailsModel.OpeningHoursListEntity> response, int type) {
+    public TextAdapter(Context context, List<OpeningHoursListEntity> response, int type) {
         this.context = context;
         this.openingHoursList = response;
         this.listType = type;
     }
 
-    public TextAdapter(List<MuseumsDetailsModel.PriceCategorySublistEntity> response, Context context, int type) {
+    public TextAdapter(List<PriceCategorySublistEntity> response, Context context, int type) {
         this.context = context;
         this.entryFeesList = response;
         this.listType = type;

@@ -24,6 +24,11 @@ public class HomePresenter implements HomeContract.UserAction {
 
     @Override
     public void openFragment(Fragment fragment, Bundle bundle) {
+        Fragment fragmentCheck = mFragmentManager.findFragmentById(R.id.content_main);
+        if (fragmentCheck.getClass() == fragment.getClass()) {
+            mView.closeDrawer();
+            return;
+        }
         mView.showToolbar();
         mView.changeToolbarTitle("");
         mView.restToolbarColor();

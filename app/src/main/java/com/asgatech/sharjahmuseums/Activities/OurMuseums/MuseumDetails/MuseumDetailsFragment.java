@@ -31,6 +31,7 @@ import com.asgatech.sharjahmuseums.Activities.ViewVisitorsReviewActivity;
 import com.asgatech.sharjahmuseums.Adapters.FaciltsAdapter;
 import com.asgatech.sharjahmuseums.Adapters.HomeSliderImagesAdapter;
 import com.asgatech.sharjahmuseums.Adapters.TextAdapter;
+import com.asgatech.sharjahmuseums.Models.HightLightEntity;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -368,9 +369,9 @@ public class MuseumDetailsFragment extends Fragment implements View.OnClickListe
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-        ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList;
+        List<HightLightEntity> highlightList;
 
-        public MyFragmentPagerAdapter(FragmentManager fm, ArrayList<MuseumsDetailsModel.HightLightEntity> highlightList) {
+        public MyFragmentPagerAdapter(FragmentManager fm, List<HightLightEntity> highlightList) {
             super(fm);
             this.highlightList = highlightList;
         }
