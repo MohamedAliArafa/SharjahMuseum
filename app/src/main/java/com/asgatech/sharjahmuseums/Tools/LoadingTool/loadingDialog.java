@@ -23,7 +23,6 @@ public class loadingDialog {
         dialog.setCancelable(false);
         try {
             dialog.show();
-
         }catch (Exception e){
             e.printStackTrace();
         }

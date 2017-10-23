@@ -12,7 +12,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/search_bar"
-        android:drawableLeft="@drawable/ic_search"
+        android:imeOptions="actionSearch"
         android:drawableStart="@drawable/ic_search"
         android:maxLines="1"
         android:paddingLeft="@dimen/d10"

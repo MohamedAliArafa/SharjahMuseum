@@ -347,11 +347,12 @@ public class MuseumDetailsFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.call_linear:
                 if (tetephoneNum != null) {
-                    PermissionTool.checkPermission(getActivity(), PermissionTool.PERMISSION_PHONE_CALL);
-                    String uri = "tel:" + tetephoneNum.trim();
-                    Intent intent2 = new Intent(Intent.ACTION_CALL);
-                    intent2.setData(Uri.parse(uri));
-                    startActivity(intent2);
+                    if (PermissionTool.checkPermission(getActivity(), PermissionTool.PERMISSION_PHONE_CALL)) {
+                        String uri = "tel:" + tetephoneNum.trim();
+                        Intent intent2 = new Intent(Intent.ACTION_CALL);
+                        intent2.setData(Uri.parse(uri));
+                        startActivity(intent2);
+                    }
                 }
                 break;
             case R.id.mail_linear:

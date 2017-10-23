@@ -35,8 +35,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmRecyclerViewAdapter;
+import io.realm.RealmResults;
 
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHolder> {
+public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAdapter.MyViewHolder> {
 
     private List<EventModel> mList = new ArrayList<>();
     private String startDate, endDate;
@@ -76,13 +78,18 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
 
     Context context;
 
-    public EventsAdapter(Context context, List<EventModel> list) {
-        mList = list;
+    public EventsAdapter(Context context, RealmResults<EventModel> list) {
+        super(list, true);
+        if (list != null)
+            mList.addAll(list);
         this.context = context;
     }
 
-    public void updateData(List<EventModel> list) {
-        mList = list;
+    public void updateSet(List<EventModel> list) {
+        if (list != null) {
+            mList.clear();
+            mList.addAll(list);
+        }
         this.notifyDataSetChanged();
     }
 
@@ -109,60 +116,32 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .placeholder(R.mipmap.ic_launcher).into(holder.mImageEventImageView);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("eventId", model.getEventsID());
-//                ((HomeActivity) context).openFragment(EventDetailsFragment.class, bundle);
-                Intent intent = new Intent(context, EventDetailsActivity.class);
-                intent.putExtra("eventId", model.getEventsID());
-                intent.putExtra("eventTitle", model.getTitle());
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("eventId", model.getEventsID());
+            Intent intent = new Intent(context, EventDetailsActivity.class);
+            intent.putExtra("eventId", model.getEventsID());
+            intent.putExtra("eventTitle", model.getTitle());
+            context.startActivity(intent);
         });
 
-        holder.mShareLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentShare = new Intent(Intent.ACTION_SEND);
-                intentShare.setType("text/plain");
-                intentShare.putExtra(android.content.Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
-                intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE +  model.getImage()+ "\n" +
-                        "\n" + context.getResources().getString(R.string.about_museums) +":"+ model.getTitle());
-                Intent chooser = Intent.createChooser(intentShare, "share");
-                chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(chooser);
-            }
+        holder.mShareLayout.setOnClickListener(view -> {
+            Intent intentShare = new Intent(Intent.ACTION_SEND);
+            intentShare.setType("text/plain");
+            intentShare.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
+            intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE + model.getImage() + "\n" +
+                    "\n" + context.getResources().getString(R.string.about_museums) + ":" + model.getTitle());
+            Intent chooser = Intent.createChooser(intentShare, "share");
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(chooser);
         });
-        // holder.mPalleteColorTextView.setBackgroundColor(Color.parseColor(model.getColor()));
-
         Drawable background = holder.mPalleteColorTextView.getBackground();
         if (model.getColor() != null) {
             Log.e("colorCodett", model.getTitle() + ":" + model.getColor());
             background.setColorFilter(Color.parseColor(model.getColor()), PorterDuff.Mode.SRC_IN);
         }
-//        holder.mPalleteColorTextView.setSolidColor("#"+model.getColor());   // throws exception as data is dummy from server
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mPresenter.openEventDetails(context ,model.getEventsID());
-//            }
-//        });
 
-//        holder.mShareLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mPresenter.shareActionClciked(model.getUrl());
-//            }
-//        });
-
-        holder.mAddToCalender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "replace action in adapter", Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.mAddToCalender.setOnClickListener(view -> Toast.makeText(context, "replace action in adapter", Toast.LENGTH_SHORT).show());
     }
 
 

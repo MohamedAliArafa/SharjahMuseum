@@ -14,6 +14,9 @@ import com.asgatech.sharjahmuseums.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 /**
  * Created by khaledbadawy on 9/12/2017.
  */
@@ -27,9 +30,9 @@ public class AutoCompleteAdapter extends ArrayAdapter<EventModel> {
         super(context, resource);
         this.context = context;
         this.resource = resource;
-        this.items = items;
-        tempItems = new ArrayList<EventModel>(items); // this makes the difference.
-        suggestions = new ArrayList<EventModel>();
+        this.items = Realm.getDefaultInstance().where(EventModel.class).findAll();
+        tempItems = new ArrayList<>(items); // this makes the difference.
+        suggestions = new ArrayList<>();
     }
 
     @Override
@@ -41,7 +44,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<EventModel> {
         }
         EventModel people = items.get(position);
         if (people != null) {
-            TextView lblName = (TextView) view.findViewById(R.id.lbl_name);
+            TextView lblName = view.findViewById(R.id.lbl_name);
             if (lblName != null)
                 lblName.setText(people.getTitle());
         }
@@ -66,12 +69,13 @@ public class AutoCompleteAdapter extends ArrayAdapter<EventModel> {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             if (constraint != null) {
-                suggestions.clear();
-                for (EventModel people : tempItems) {
-                    if (people.getTitle().toLowerCase().contains(constraint.toString().toLowerCase())) {
-                        suggestions.add(people);
-                    }
-                }
+                suggestions = Realm.getDefaultInstance().where(EventModel.class).contains("title", constraint.toString().toLowerCase()).findAll();
+//                suggestions.clear();
+//                for (EventModel people : tempItems) {
+//                    if (people.getTitle().toLowerCase().contains(constraint.toString().toLowerCase())) {
+//                        suggestions.add(people);
+//                    }
+//                }
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = suggestions;
                 filterResults.count = suggestions.size();
@@ -83,7 +87,8 @@ public class AutoCompleteAdapter extends ArrayAdapter<EventModel> {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            List<EventModel> filterList = (ArrayList<EventModel>) results.values;
+            List<EventModel> filterList = new ArrayList<>();
+            filterList.addAll((RealmResults) results.values);
             if (results != null && results.count > 0) {
                 clear();
                 for (EventModel people : filterList) {

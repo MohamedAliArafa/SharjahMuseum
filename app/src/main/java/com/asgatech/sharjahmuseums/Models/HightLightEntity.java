@@ -25,6 +25,18 @@ public class HightLightEntity extends RealmObject implements Parcelable {
     private String Text;
     private String Photo;
 
+    public static final Creator<HightLightEntity> CREATOR = new Creator<HightLightEntity>() {
+        @Override
+        public HightLightEntity createFromParcel(Parcel in) {
+            return new HightLightEntity(in);
+        }
+
+        @Override
+        public HightLightEntity[] newArray(int size) {
+            return new HightLightEntity[size];
+        }
+    };
+
     public void setHightlightID(int HightlightID) {
         this.HightlightID = HightlightID;
     }

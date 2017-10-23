@@ -104,7 +104,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
 //                oneDayDecorator
 //        );
 
-        getEventCategories(new UserData().getLocalization(getActivity()));
+        getEventCategories(UserData.getLocalization(getActivity()));
         return view;
     }
 
@@ -187,14 +187,11 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
             Drawable background = pallete.getBackground();
             if (list.get(i).getColor() != null) {
                 Log.e("colorCode", list.get(i).getColor());
-                background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.DARKEN);
+                background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.SRC_IN);
             }
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mainFilterLayout.setVisibility(View.GONE);
-                    getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 20, new UserData().getLocalization(getActivity()));
-                }
+            itemView.setOnClickListener(view -> {
+                mainFilterLayout.setVisibility(View.GONE);
+                getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 20, UserData.getLocalization(getActivity()));
             });
             //otherwise throw exception java.lang.IllegalStateException: The specified
             // child already has a parent. You must call removeView() on the child's parent first.
@@ -219,7 +216,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
             @Override
             public void onClick(View view) {
                 mainFilterLayout.setVisibility(View.GONE);
-                getEvents(0, 1, 15, new UserData().getLocalization(getActivity()));
+                getEvents(0, 1, 15, UserData.getLocalization(getActivity()));
             }
         });
         //otherwise throw exception java.lang.IllegalStateException: The specified

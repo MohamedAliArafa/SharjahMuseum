@@ -8,17 +8,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
-import com.asgatech.sharjahmuseums.Adapters.AutoCompleteAdapter;
 import com.asgatech.sharjahmuseums.Adapters.EventsAdapter;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
@@ -32,6 +34,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Case;
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 import okhttp3.ResponseBody;
 
 /**
@@ -51,7 +57,7 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
     ImageView switchToCalender;
 
     @BindView(R.id.auto_complete_search_event)
-    AutoCompleteTextView autoCompleteSearchView;
+    EditText mSearchEditText;
 
     @BindView(R.id.loading_layout)
     View loadingView;
@@ -63,6 +69,7 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    EventsAdapter mAdapter;
 
     @BindView(R.id.arrowIV)
     ImageView arrowImg;
@@ -79,32 +86,60 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_events_list, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new EventsAdapter(getActivity(), Realm.getDefaultInstance().where(EventModel.class).findAll());
+        recyclerView.setAdapter(mAdapter);
+        mSearchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().isEmpty())
+                    setData(Realm.getDefaultInstance().where(EventModel.class).findAll());
+                else
+                    setData(Realm.getDefaultInstance().where(EventModel.class).contains("title", s.toString(), Case.INSENSITIVE).findAll());
+            }
+        });
         ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.Events));
         assignControls();
-        getEventCategories(new UserData().getLocalization(getActivity()));
+        getEventCategories(UserData.getLocalization(getActivity()));
         return view;
     }
 
 
     private void getEvents(int catId, int pageNumber, int pageSize, int langauge) {
 
-        ServerTool.getEvents(getActivity(), catId, pageNumber, pageSize, langauge, new ServerTool.APICallBack<List<EventModel>>() {
+        ServerTool.getEvents(getActivity(), catId, pageNumber, pageSize, langauge, new ServerTool.APICallBack<RealmList<EventModel>>() {
             @Override
-            public void onSuccess(List<EventModel> response) {
+            public void onSuccess(RealmList<EventModel> response) {
                 if (Utils.validList(response)) {
-                    setData(response);
+                    Realm.getDefaultInstance().beginTransaction();
+                    Realm.getDefaultInstance().copyToRealmOrUpdate(response);
+                    Realm.getDefaultInstance().commitTransaction();
+                    if (catId == 0)
+                        setData(Realm.getDefaultInstance().where(EventModel.class).findAll());
+                    else
+                        setData(Realm.getDefaultInstance().where(EventModel.class).equalTo("catId", catId).findAll());
                 }
             }
 
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
+                Toast.makeText(getContext(), "Error: " + responseBody.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void getEventCategories(final int langauge) {
+    private void getEventCategories(final int language) {
 
-        ServerTool.getEventsCategories(getActivity(), langauge, new ServerTool.APICallBack<List<EventCategoryModel>>() {
+        ServerTool.getEventsCategories(getActivity(), language, new ServerTool.APICallBack<List<EventCategoryModel>>() {
             @Override
             public void onSuccess(List<EventCategoryModel> response) {
                 if (Utils.validList(response)) {
@@ -112,7 +147,7 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
                         setCategoryData(response);
                     if (response.size() > 0) {
                         if (isAdded())
-                            getEvents(0, 1, 15, langauge);
+                            getEvents(0, 1, 15, language);
                     }
                 }
             }
@@ -123,11 +158,9 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
         });
     }
 
-    private void setData(List<EventModel> response) {
-        EventsAdapter adapter = new EventsAdapter(getActivity(), response);
-        recyclerView.setAdapter(adapter);
-        autoCompleteSearchView.setThreshold(1);
-        autoCompleteSearchView.setAdapter(new AutoCompleteAdapter(getActivity(), R.layout.custom_text_view, response));
+    private void setData(RealmResults<EventModel> response) {
+        if (mAdapter != null)
+            mAdapter.updateSet(response);
     }
 
     private void setCategoryData(List<EventCategoryModel> list) {
@@ -145,12 +178,9 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
                 Log.e("colorCode", list.get(i).getTitle() + ":" + list.get(i).getColor());
                 background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.SRC_IN);
             }
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mainFilterLayout.setVisibility(View.GONE);
-                    getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 15, new UserData().getLocalization(getActivity()));
-                }
+            itemView.setOnClickListener(view -> {
+                mainFilterLayout.setVisibility(View.GONE);
+                getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 15, UserData.getLocalization(getActivity()));
             });
             //otherwise throw exception java.lang.IllegalStateException: The specified
             // child already has a parent. You must call removeView() on the child's parent first.
@@ -171,12 +201,9 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
         Drawable background = pallete.getBackground();
         Log.e("colorCode", "#000000");
         background.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_IN);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainFilterLayout.setVisibility(View.GONE);
-                getEvents(0, 1, 15, new UserData().getLocalization(getActivity()));
-            }
+        itemView.setOnClickListener(view -> {
+            mainFilterLayout.setVisibility(View.GONE);
+            getEvents(0, 1, 15, new UserData().getLocalization(getActivity()));
         });
         //otherwise throw exception java.lang.IllegalStateException: The specified
         // child already has a parent. You must call removeView() on the child's parent first.
@@ -209,23 +236,8 @@ public class EventsListFragment extends Fragment implements View.OnClickListener
                 }
                 break;
             case R.id.event_switch_to_calender:
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.mainContainer , new EventCalenderFragment())
-//                        .addToBackStack(null)
-//                        .commit();
-
                 ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
                 break;
-
-//            case R.id.event_layout:
-//                Toast.makeText(getActivity(), "Events", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.exhibition_layout:
-//                Toast.makeText(getActivity(), "exhibition_layout", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.programmes_layout:
-//                Toast.makeText(getActivity(), "programmes_layout", Toast.LENGTH_SHORT).show();
-//                break;
         }
     }
 }

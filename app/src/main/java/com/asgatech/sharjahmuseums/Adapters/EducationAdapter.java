@@ -2,6 +2,7 @@ package com.asgatech.sharjahmuseums.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.transition.ChangeBounds;
 import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,10 +37,10 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
 
     int mExpandedPosition = -1;
 
-    public EducationAdapter(Context context, List<EducationListModel> response , RecyclerView recyclerView) {
+    public EducationAdapter(Context context, List<EducationListModel> response, RecyclerView recyclerView) {
         this.context = context;
         this.allMuseumsList = response;
-        this.recyclerView =recyclerView;
+        this.recyclerView = recyclerView;
     }
 
     @Override
@@ -57,7 +58,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .placeholder(R.drawable.image).into(holder.edcationImageView);
 
-        bookLink= allMuseumsList.get(position).getBooklink();
+        bookLink = allMuseumsList.get(position).getBooklink();
 //        Glide.with(context).load("https://www.frostburg.edu/fsu/assets/Image/dept/educ/education_sign_resized.jpg")
 //                .placeholder(R.drawable.image).into(holder.edcationImageView);
 
@@ -66,31 +67,27 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
         holder.titleTextView.setText(allMuseumsList.get(position).getTitle());
         holder.titleTextViewExpand.setText(allMuseumsList.get(position).getTitle());
         holder.descriptionTextView.setText(allMuseumsList.get(position).getDescrption());
-        holder.bookNowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(context, OpenWebViewActivity.class);
-                Log.e("bookLink",bookLink);
-                intent.putExtra("bookLink",bookLink);
-                context.startActivity(intent);
-            }
+        holder.bookNowBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(context, OpenWebViewActivity.class);
+            Log.e("bookLink", bookLink);
+            intent.putExtra("bookLink", bookLink);
+            context.startActivity(intent);
         });
 
         //expand
-        final boolean isExpanded = position==mExpandedPosition;
-        holder.expandedLayout.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        final boolean isExpanded = position == mExpandedPosition;
+        holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.itemView.setActivated(isExpanded);
-        if (!isExpanded){
-        holder.arrowImageView.setRotation(0);
+        if (!isExpanded) {
+            holder.arrowImageView.setRotation(0);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mExpandedPosition = isExpanded ? -1:position;
-                TransitionManager.beginDelayedTransition(recyclerView);
-                notifyDataSetChanged();
-                holder.arrowImageView.setRotation(holder.arrowImageView.getRotation() + 180);
-            }
+        ChangeBounds transition = new ChangeBounds();
+        transition.setDuration(125);
+        holder.itemView.setOnClickListener(view -> {
+            mExpandedPosition = isExpanded ? -1 : position;
+            TransitionManager.beginDelayedTransition(recyclerView, transition);
+            notifyDataSetChanged();
+            holder.arrowImageView.setRotation(holder.arrowImageView.getRotation() + 180);
         });
     }
 
@@ -101,15 +98,16 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView edcationImageView , arrowImageView;
-        private TextView titleTextView , titleTextViewExpand , descriptionTextView;
+        private ImageView edcationImageView, arrowImageView;
+        private TextView titleTextView, titleTextViewExpand, descriptionTextView;
         private LinearLayout expandedLayout;
         private Button bookNowBtn;
+
         ViewHolder(View view) {
             super(view);
             edcationImageView = (ImageView) view.findViewById(R.id.education_image);
             arrowImageView = (ImageView) view.findViewById(R.id.arrowIV);
-            bookNowBtn=view.findViewById(R.id.book_nw);
+            bookNowBtn = view.findViewById(R.id.book_nw);
 
             titleTextView = view.findViewById(R.id.education_txt);
             titleTextViewExpand = view.findViewById(R.id.education_txt_expanded);

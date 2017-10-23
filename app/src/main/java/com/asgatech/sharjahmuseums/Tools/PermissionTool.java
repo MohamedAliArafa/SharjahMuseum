@@ -3,7 +3,6 @@ package com.asgatech.sharjahmuseums.Tools;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -47,21 +46,13 @@ public class PermissionTool {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(context) ;
                 alertDialog.setTitle("Pick Image From Gallery OR Camera");
                 alertDialog.setMessage("Access Permission");
-                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                alertDialog.setPositiveButton("OK", (dialog, which) -> {
 //                        Toast.makeText(context, "I need this permission", Toast.LENGTH_SHORT).show();
-                        ActivityCompat.requestPermissions(context, new String[]{permission}, 1);
-                        dialog.dismiss();
-                    }
+                    ActivityCompat.requestPermissions(context, new String[]{permission}, 1);
+                    dialog.dismiss();
                 });
 
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                alertDialog.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
                 AlertDialog alert11 = alertDialog.create();
                 alert11.show();
                 // Show an expanation to the user *asynchronously* -- don't block

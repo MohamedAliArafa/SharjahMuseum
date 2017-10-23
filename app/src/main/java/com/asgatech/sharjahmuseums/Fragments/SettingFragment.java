@@ -2,12 +2,12 @@ package com.asgatech.sharjahmuseums.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
@@ -18,10 +18,10 @@ import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 public class SettingFragment extends Fragment {
 
 
-    private RadioGroup changeLanguageRadioGroub;
+    private RadioGroup changeLanguageRadioGroup;
     private RadioButton changeLanguageArabicRadioButton;
     private RadioButton changeLanguageEnglishRadioButton;
-    private Switch togleBtnNotifiState;
+    private SwitchCompat toggleBtnNotificationState;
     private int language, state;
 
 
@@ -43,10 +43,10 @@ public class SettingFragment extends Fragment {
 
     private void initView(View view) {
         ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.setting));
-        changeLanguageRadioGroub = view.findViewById(R.id.change_language_radio_groub);
+        changeLanguageRadioGroup = view.findViewById(R.id.change_language_radio_groub);
         changeLanguageArabicRadioButton = view.findViewById(R.id.change_language_arabic_radio_button);
         changeLanguageEnglishRadioButton = view.findViewById(R.id.change_language_english_radio_button);
-        togleBtnNotifiState = view.findViewById(R.id.togle_btn_notifi_state);
+        toggleBtnNotificationState = view.findViewById(R.id.togle_btn_notifi_state);
         setUpView();
     }
 
@@ -65,16 +65,16 @@ public class SettingFragment extends Fragment {
         state = UserData.getNotificationState(getActivity());
         switch (state) {
             case 1:
-                togleBtnNotifiState.setChecked(true);
+                toggleBtnNotificationState.setChecked(true);
                 break;
             case 0:
-                togleBtnNotifiState.setChecked(false);
+                toggleBtnNotificationState.setChecked(false);
                 break;
         }
 
-        changeLanguageRadioGroub.setOnCheckedChangeListener((radioGroup, i) -> {
-            View radioButton = changeLanguageRadioGroub.findViewById(i);
-            int index = changeLanguageRadioGroub.indexOfChild(radioButton);
+        changeLanguageRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+            View radioButton = changeLanguageRadioGroup.findViewById(i);
+            int index = changeLanguageRadioGroup.indexOfChild(radioButton);
             switch (index) {
                 case 0:
                     Localization.changeLanguage(URLS.TAG_ENGLISH_String, getActivity());
@@ -88,7 +88,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        togleBtnNotifiState.setOnCheckedChangeListener((compoundButton, b) -> {
+        toggleBtnNotificationState.setOnCheckedChangeListener((compoundButton, b) -> {
 
             if (b) {
                 UserData.saveNotificationState(getActivity(), 1);

@@ -3,7 +3,6 @@ package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -35,7 +34,9 @@ public class HighLightOverlapingFragment extends Fragment {
         HighLightOverlapingFragment highLightOverlapingFragment = new HighLightOverlapingFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtils.IMAGE_PATH, image);
-        bundle.putParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST, (ArrayList<? extends Parcelable>) highlightList);
+        ArrayList<HightLightEntity> list = new ArrayList<>();
+        list.addAll(highlightList);
+        bundle.putParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST, list);
         bundle.putInt(ConstantUtils.HIGHLIGHT_LIST_POSITION, position);
         highLightOverlapingFragment.setArguments(bundle);
         return highLightOverlapingFragment;
@@ -59,13 +60,13 @@ public class HighLightOverlapingFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_high_light_overlaping, container, false);
         ImageView coverImageView = rootView.findViewById(R.id.image_cover);
-        GlideApp.with(getActivity()).load(URLS.URL_BASE +image ).placeholder(R.drawable.no_image).into(coverImageView);
+        GlideApp.with(getActivity()).load(URLS.URL_BASE + image).placeholder(R.drawable.no_image).into(coverImageView);
 
 //        GlideApp.with(this)
 //                .load(URLS.URL_BASE +image).transform(new RoundedCornersTransformation(getActivity(), 20, 0, "#e40d62", 50))
 //                .into(coverImageView);
 
-        Log.e("imaaaaaag",URLS.URL_BASE +image);
+        Log.e("imaaaaaag", URLS.URL_BASE + image);
         coverImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,6 +1,7 @@
 package com.asgatech.sharjahmuseums.Adapters;
 
 import android.content.Context;
+import android.support.transition.ChangeBounds;
 import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,17 +40,14 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.plan_your_visit_row, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-
         fillView(holder, position);
         expandRecycle(holder, position);
-
     }
 
     private void fillView(final ViewHolder holder, final int position) {
@@ -59,10 +57,11 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
                 .placeholder(R.drawable.image).into(holder.planImageView);
 
         holder.titleTextView.setText(allPlanVisitsList.get(position).getTitle());
-    //    holder.titleTextViewExpand.setText(allPlanVisitsList.get(position).getTitle());
+        //    holder.titleTextViewExpand.setText(allPlanVisitsList.get(position).getTitle());
         holder.descriptionTextView.setText(allPlanVisitsList.get(position).getText());
 
     }
+
     private void expandRecycle(final ViewHolder holder, final int position) {
         final boolean isExpanded = position == mExpandedPosition;
         holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
@@ -70,14 +69,13 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
         if (!isExpanded) {
             holder.arrowImageView.setRotation(0);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mExpandedPosition = isExpanded ? -1 : position;
-                TransitionManager.beginDelayedTransition(recyclerView);
-                notifyDataSetChanged();
-                holder.arrowImageView.setRotation(holder.arrowImageView.getRotation() + 180);
-            }
+        ChangeBounds transition = new ChangeBounds();
+        transition.setDuration(125);
+        holder.itemView.setOnClickListener(view -> {
+            mExpandedPosition = isExpanded ? -1 : position;
+            TransitionManager.beginDelayedTransition(recyclerView, transition);
+            notifyDataSetChanged();
+            holder.arrowImageView.setRotation(holder.arrowImageView.getRotation() + 180);
         });
     }
 

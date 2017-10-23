@@ -1,6 +1,5 @@
 package com.asgatech.sharjahmuseums.Tools.Connection;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -14,7 +13,7 @@ import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.Models.EventdetatailsResponceModel;
-import com.asgatech.sharjahmuseums.Models.InsertDevicetokenRequestModel;
+import com.asgatech.sharjahmuseums.Models.InsertDeviceTokenRequestModel;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Models.NotificationListRequestModel;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
@@ -24,12 +23,12 @@ import com.asgatech.sharjahmuseums.Models.ReviewVisitorsRequest;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
 import com.asgatech.sharjahmuseums.Models.SearchPagingModel;
 import com.asgatech.sharjahmuseums.Models.UpdateRequestModel;
-import com.asgatech.sharjahmuseums.Tools.LoadingTool.loadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -61,7 +60,7 @@ public class ServerTool {
         Call<MuseumsDetailsModel> getMuseumsDetails(@Query("Musid") int MuseumsID, @Query("lang") int langauge);
 
         @POST(URLS.URL_GET_EVENTS)
-        Call<List<EventModel>> getEvents(@Body JsonObject data);
+        Call<RealmList<EventModel>> getEvents(@Body JsonObject data);
 
 
         @GET(URLS.URL_GET_EVENTS_CATS)
@@ -102,7 +101,7 @@ public class ServerTool {
         Call<List<NotificationListResponseModel>> getNotificationList(@Body NotificationListRequestModel notificationListRequestModel);
 
         @POST(URLS.URL_INSERT_DEVICE_Token)
-        Call<Integer> insertDeviceToken(@Body InsertDevicetokenRequestModel insertDeviceToken);
+        Call<Integer> insertDeviceToken(@Body InsertDeviceTokenRequestModel insertDeviceToken);
 
 
         @POST(URLS.URL_UPDATE_NOTIFICATION_STATE)
@@ -130,6 +129,9 @@ public class ServerTool {
         Log.d("langaugeRequest", new Gson().toJson(pagingModel) + "");
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getAllMuseums(pagingModel);
+        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance().where(MuseumsDetailsModel.class).findAll();
+        if (model.isLoaded() && !model.isEmpty())
+            apiCallBack.onSuccess(model);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
@@ -137,7 +139,7 @@ public class ServerTool {
         Log.d("langaugeRequest", new Gson().toJson(pagingModel) + "");
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumWithSearch(pagingModel);
-        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance().where(MuseumsDetailsModel.class).contains("Title", pagingModel.getKeyword()).findAll();
+        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance().where(MuseumsDetailsModel.class).contains("Title", pagingModel.getKeyword(), Case.INSENSITIVE).findAll();
         if (model.isLoaded() && !model.isEmpty())
             apiCallBack.onSuccess(model);
         makeRequest(context, call, apiCallBack, retrofitTool);
@@ -244,7 +246,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void InsertDeviceToken(Context context, InsertDevicetokenRequestModel insertDevicetokenRequestModel, final APICallBack apiCallBack) {
+    public static void InsertDeviceToken(Context context, InsertDeviceTokenRequestModel insertDevicetokenRequestModel, final APICallBack apiCallBack) {
         //Show loading
         final Gson gson = new Gson();
         Log.d("insertDeviceToken", gson.toJson(insertDevicetokenRequestModel) + "");
@@ -269,7 +271,7 @@ public class ServerTool {
     }
 
     private static <M> void makeRequest(final Context context, Call call, final APICallBack apiCallBack, final RetrofitTool retrofitTool) {
-        final Dialog dialogsLoading = new loadingDialog().showDialog(context);
+//        final Dialog dialogsLoading = new loadingDialog().showDialog(context);
         call.enqueue(new RetrofitTool.APICallBack<M>() {
             @Override
             public void onSuccess(M response) {
@@ -285,14 +287,14 @@ public class ServerTool {
                         Realm.getDefaultInstance().commitTransaction();
                     }
                     //Hide loading
-                    if (dialogsLoading != null) {
-                        dialogsLoading.dismiss();
-                    }
+//                    if (dialogsLoading != null) {
+//                        dialogsLoading.dismiss();
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    if (dialogsLoading != null) {
-                        dialogsLoading.dismiss();
-                    }
+//                    if (dialogsLoading != null) {
+//                        dialogsLoading.dismiss();
+//                    }
                 }
             }
 
@@ -302,9 +304,9 @@ public class ServerTool {
                 try {
                     handleGeneralFailure(context, statusCode, responseBody, retrofitTool);
                     apiCallBack.onFailed(statusCode, responseBody);
-                    if (dialogsLoading != null) {
-                        dialogsLoading.dismiss();
-                    }
+//                    if (dialogsLoading != null) {
+//                        dialogsLoading.dismiss();
+//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

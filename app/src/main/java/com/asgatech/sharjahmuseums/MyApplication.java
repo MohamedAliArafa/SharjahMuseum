@@ -3,7 +3,8 @@ package com.asgatech.sharjahmuseums;
 import android.app.Application;
 import android.util.Log;
 
-import com.asgatech.sharjahmuseums.Models.InsertDevicetokenRequestModel;
+import com.asgatech.sharjahmuseums.Models.EventModel;
+import com.asgatech.sharjahmuseums.Models.InsertDeviceTokenRequestModel;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
@@ -33,7 +34,7 @@ public class MyApplication extends Application {
                 new RealmBrowser.Builder(this)
                         // add class, you want to view
                         .add(Realm.getDefaultInstance(), MuseumsDetailsModel.class)
-//                        .add(Realm.getDefaultInstance(), ProgramResultModel.class)
+                        .add(Realm.getDefaultInstance(), EventModel.class)
                         // call method showNotification()
                         .showNotification();
         mUserData = new UserData();
@@ -42,7 +43,7 @@ public class MyApplication extends Application {
         }
     }
 
-    private void insertDeviceToken(InsertDevicetokenRequestModel insertDevicetokenRequestModel) {
+    private void insertDeviceToken(InsertDeviceTokenRequestModel insertDevicetokenRequestModel) {
         ServerTool.InsertDeviceToken(this, insertDevicetokenRequestModel, new ServerTool.APICallBack<Integer>() {
             @Override
             public void onSuccess(Integer response) {

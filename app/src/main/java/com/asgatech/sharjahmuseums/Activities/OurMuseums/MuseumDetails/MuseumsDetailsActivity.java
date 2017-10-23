@@ -61,7 +61,7 @@ import okhttp3.ResponseBody;
 public class MuseumsDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     public ImageView toolbarHomeImageView;
     int NUM_PAGES2;
-    String tetephoneNum, emailString, museumTitle, museumColor,museumsImage;
+    String tetephoneNum, emailString, museumTitle, museumColor, museumsImage;
     Timer timer;
     double longtude, latitude;
     private int museumsID;
@@ -138,7 +138,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     protected void onResume() {
-        new Localization().setLanguage(MuseumsDetailsActivity.this,  UserData.getLocalization(MuseumsDetailsActivity.this));
+        new Localization().setLanguage(MuseumsDetailsActivity.this, UserData.getLocalization(MuseumsDetailsActivity.this));
         super.onResume();
     }
 
@@ -194,7 +194,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         if (getIntent().hasExtra(ConstantUtils.EXTRA_MUSEUMS_ID)) {
             museumsID = getIntent().getIntExtra((ConstantUtils.EXTRA_MUSEUMS_ID), 0);
             if (museumsID > 0) {
-                getMuseumsDetails(museumsID,  UserData.getLocalization(MuseumsDetailsActivity.this));
+                getMuseumsDetails(museumsID, UserData.getLocalization(MuseumsDetailsActivity.this));
             }
         }
 
@@ -450,12 +450,12 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
             case R.id.call_linear:
                 if (tetephoneNum != null) {
-                    PermissionTool.checkPermission(MuseumsDetailsActivity.this, PermissionTool.PERMISSION_PHONE_CALL);
-
-                    String uri = "tel:" + tetephoneNum.trim();
-                    Intent intent2 = new Intent(Intent.ACTION_CALL);
-                    intent2.setData(Uri.parse(uri));
-                    startActivity(intent2);
+                    if (PermissionTool.checkPermission(this, PermissionTool.PERMISSION_PHONE_CALL)) {
+                        String uri = "tel:" + tetephoneNum.trim();
+                        Intent intent2 = new Intent(Intent.ACTION_CALL);
+                        intent2.setData(Uri.parse(uri));
+                        startActivity(intent2);
+                    }
                 }
                 break;
             case R.id.mail_linear:
@@ -468,15 +468,14 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
                 break;
             case R.id.share_linear:
-
                 Intent intentShare = new Intent(Intent.ACTION_SEND);
                 intentShare.setType("text/plain");
                 intentShare.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-                intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE +  museumsImage+ "\n" +
-                        "\n" + getResources().getString(R.string.about_museums) +":"+ aboutMuseumsTextView.getText().toString());
+                intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE + museumsImage + "\n" +
+                        "\n" + getResources().getString(R.string.about_museums) + ":" + aboutMuseumsTextView.getText().toString());
                 Intent chooser = Intent.createChooser(intentShare, "share");
-                    chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(chooser);
+                chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(chooser);
 
                 break;
 

@@ -28,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmList;
 import okhttp3.ResponseBody;
 
 public class EventsFragment extends Fragment implements View.OnClickListener{
@@ -68,9 +69,9 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
 
     private void getEvents(int catId, int pageNumber, int pageSize, int langauge) {
 
-        ServerTool.getEvents(getActivity(), catId, pageNumber, pageSize, langauge, new ServerTool.APICallBack<List<EventModel>>() {
+        ServerTool.getEvents(getActivity(), catId, pageNumber, pageSize, langauge, new ServerTool.APICallBack<RealmList<EventModel>>() {
             @Override
-            public void onSuccess(List<EventModel> response) {
+            public void onSuccess(RealmList<EventModel> response) {
                 if (Utils.validList(response)) {
                     setData(response);
                 }

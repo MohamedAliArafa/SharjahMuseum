@@ -24,7 +24,6 @@ import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
-
 import java.util.List;
 import java.util.Locale;
 
@@ -86,7 +85,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
 
 
-        getContactData( UserData.getLocalization(getActivity()));
+        getContactData(UserData.getLocalization(getActivity()));
         return view;
     }
 
@@ -168,12 +167,12 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.call_img:
                 if (tetephoneNum != null) {
-                    PermissionTool.checkPermission(getActivity(), PermissionTool.PERMISSION_PHONE_CALL);
-
-                    String uri = "tel:" + tetephoneNum.trim();
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse(uri));
-                    startActivity(intent);
+                    if (PermissionTool.checkPermission(getActivity(), PermissionTool.PERMISSION_PHONE_CALL)) {
+                        String uri = "tel:" + tetephoneNum.trim();
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse(uri));
+                        startActivity(intent);
+                    }
                 }
 
                 break;
