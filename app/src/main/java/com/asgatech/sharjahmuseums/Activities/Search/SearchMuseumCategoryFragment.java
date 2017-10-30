@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.asgatech.sharjahmuseums.Adapters.MuseumCategoryAdapter;
-import com.asgatech.sharjahmuseums.Models.AllMuseumCategoryResponse;
+import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
@@ -54,9 +54,9 @@ public class SearchMuseumCategoryFragment extends Fragment {
     }
 
     void getALLMuseumCategory(int language) {
-        ServerTool.getALLMuseumCategory(getContext(), language, new ServerTool.APICallBack<List<AllMuseumCategoryResponse>>() {
+        ServerTool.getALLMuseumCategory(getContext(), language, new ServerTool.APICallBack<List<MuseumCategoryResponse>>() {
             @Override
-            public void onSuccess(List<AllMuseumCategoryResponse> response) {
+            public void onSuccess(List<MuseumCategoryResponse> response) {
                 if (response.size() != 0) {
                     setData(response);
                 }
@@ -69,7 +69,7 @@ public class SearchMuseumCategoryFragment extends Fragment {
         });
     }
 
-    private void setData(final List<AllMuseumCategoryResponse> data) {
+    private void setData(final List<MuseumCategoryResponse> data) {
         MuseumCategoryAdapter adapter = new MuseumCategoryAdapter(getContext(), data);
         mRecycleCategory.setAdapter(adapter);
         adapter.notifyDataSetChanged();

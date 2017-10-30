@@ -12,6 +12,8 @@ import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 
 import java.util.Locale;
 
+import io.realm.Realm;
+
 /**
  * Created by halima.reda on 3/12/2016.
  */
@@ -57,7 +59,18 @@ public class Localization {
         }
     }
 
+    public static Locale getCurrentLocale(Context context) {
+        if (UserData.getLocalization(context) == ARABIC_VALUE)
+            return new Locale("ar");
+        else
+            return new Locale("en");
+    }
+
     public static void changeLanguage(String language, Context context) {
+
+        Realm.getDefaultInstance().beginTransaction();
+        Realm.getDefaultInstance().deleteAll();
+        Realm.getDefaultInstance().commitTransaction();
 
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
@@ -69,12 +82,13 @@ public class Localization {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
+
     // return current Language ID
     public static int getCurrentLanguageID(Context context) {
         /**
          * 0 = arabic
          * 1 = english */
-        int languageID = new UserData().getLocalization(context);
+        int languageID = UserData.getLocalization(context);
         Log.i("languageID", "" + languageID);
         return languageID;
     }

@@ -4,7 +4,7 @@ package com.asgatech.sharjahmuseums.Adapters;
  * Created by khaledbadawy on 9/10/2017.
  */
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.EventDetailsActivity;
 import com.asgatech.sharjahmuseums.Models.EventModel;
@@ -26,12 +25,19 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,9 +82,9 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
         }
     }
 
-    Context context;
+    Activity context;
 
-    public EventsAdapter(Context context, RealmResults<EventModel> list) {
+    public EventsAdapter(Activity context, RealmResults<EventModel> list) {
         super(list, true);
         if (list != null)
             mList.addAll(list);
@@ -86,7 +92,7 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
     }
 
     public void updateSet(List<EventModel> list) {
-        if (list != null) {
+        if (mList != null) {
             mList.clear();
             mList.addAll(list);
         }
@@ -114,14 +120,15 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
         holder.mPlaceTextView.setText(model.getAdress());
         GlideApp.with(context).load(URLS.URL_BASE + model.getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.mipmap.ic_launcher).into(holder.mImageEventImageView);
 
         holder.itemView.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putInt("eventId", model.getEventsID());
+            bundle.putInt("id", model.getEventsID());
             Intent intent = new Intent(context, EventDetailsActivity.class);
-            intent.putExtra("eventId", model.getEventsID());
-            intent.putExtra("eventTitle", model.getTitle());
+            intent.putExtra("id", model.getEventsID());
+            intent.putExtra("title", model.getTitle());
             context.startActivity(intent);
         });
 
@@ -131,17 +138,39 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
             intentShare.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
             intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE + model.getImage() + "\n" +
                     "\n" + context.getResources().getString(R.string.about_museums) + ":" + model.getTitle());
-            Intent chooser = Intent.createChooser(intentShare, "share");
+            Intent chooser = Intent.createChooser(intentShare, context.getString(R.string.title_share_via));
             chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(chooser);
         });
         Drawable background = holder.mPalleteColorTextView.getBackground();
         if (model.getColor() != null) {
-            Log.e("colorCodett", model.getTitle() + ":" + model.getColor());
+            Log.e(context.getString(R.string.tag_color_code), model.getTitle() + ":" + model.getColor());
             background.setColorFilter(Color.parseColor(model.getColor()), PorterDuff.Mode.SRC_IN);
         }
 
-        holder.mAddToCalender.setOnClickListener(view -> Toast.makeText(context, "replace action in adapter", Toast.LENGTH_SHORT).show());
+        holder.mAddToCalender.setOnClickListener(view -> addToCalender(model));
+    }
+
+    private void addToCalender(EventModel model) {
+        if (PermissionTool.checkPermission(context, PermissionTool.PERMISSION_CALENDER)) {
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
+            Intent intent = new Intent(Intent.ACTION_EDIT);
+            intent.setType("vnd.android.cursor.item/event");
+            try {
+                Date date = sdf.parse(model.getStartDate());
+                cal.setTime(date);
+                intent.putExtra("beginTime", cal.getTimeInMillis());
+                date = sdf.parse(model.getEndDate());
+                cal.setTime(date);
+                intent.putExtra("endTime", cal.getTimeInMillis());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            intent.putExtra("allDay", true);
+            intent.putExtra("title", model.getTitle());
+            context.startActivity(intent);
+        }
     }
 
 

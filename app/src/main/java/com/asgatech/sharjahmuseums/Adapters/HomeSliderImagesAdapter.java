@@ -40,11 +40,16 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if (listType == 1) {
-            return imageList.size();
-        } else if (listType == 2) {
-            return imagesList.size();
-        } else {
+        try {
+            if (listType == 1) {
+                return imageList.size();
+            } else if (listType == 2) {
+                return imagesList.size();
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -68,12 +73,12 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
         ImageView imageItem = (ImageView) convertView.findViewById(R.id.image_view);
         if (listType == 1) {
             if (imageList.get(position) != null) {
-                Log.e("url", URLS.URL_BASE + imageList.get(position).getImage());
+                Log.e(activity.getString(R.string.tag_url), URLS.URL_BASE + imageList.get(position).getImage());
                 Utils.loadSimplePic(activity, URLS.URL_BASE + imageList.get(position).getImage(), imageItem);
             }
         } else if (listType == 2) {
             if (imagesList.get(position) != null) {
-                Log.e("url", URLS.URL_BASE + imagesList.get(position).getImage());
+                Log.e(activity.getString(R.string.tag_url), URLS.URL_BASE + imagesList.get(position).getImage());
                 Utils.loadSimplePic(activity, URLS.URL_BASE + imagesList.get(position).getImage(), imageItem);
             }
         }

@@ -13,13 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.ViewLocationMapActivity;
 import com.asgatech.sharjahmuseums.Models.ContactUsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.DialogTool.ErrorDialog;
 import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -112,13 +112,13 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
                     assignControls();
                 } else {
-                    Toast.makeText(getActivity(), "failure to get data", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "failure to get data", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
-                Toast.makeText(getActivity(), "failure to get data", Toast.LENGTH_SHORT).show();
+                new ErrorDialog().showDialog(getContext());
             }
         });
     }

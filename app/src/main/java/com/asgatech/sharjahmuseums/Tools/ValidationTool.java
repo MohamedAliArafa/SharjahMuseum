@@ -27,7 +27,6 @@ public class ValidationTool {
         return new ValidationTool(context);
     }
 
-
     public boolean validateEmail(EditText editText, String errorMassage) {
         String email = editText.getText().toString();
         if (isNotEmpty(email)) {

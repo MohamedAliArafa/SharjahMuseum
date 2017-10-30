@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "1002325637087",
+    "firebase_url": "https://sharjahmuseums-ba175.firebaseio.com",
+    "project_id": "sharjahmuseums-ba175",
+    "storage_bucket": "sharjahmuseums-ba175.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002325637087:android:7b53994904fb5a76",
+        "android_client_info": {
+          "package_name": "com.asgatech.sharjahmuseums"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002325637087-59v7fr1kn0ifp9mfkc3prn04lpf597jp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asgatech.sharjahmuseums",
+            "certificate_hash": "067bc1638ed96c26f96ffd85701c42874541eab4"
+          }
+        },
+        {
+          "client_id": "1002325637087-46etmog4jn1fcilhqm2n494t05nhl9tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_UDbNKyfCC9ZRyfvoCoJEre8oB4sWNas"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002325637087-4taeqqee71q4kek31j66gmu3mreg6p6o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "SevenHundredApps.Museums"
+              }
+            },
+            {
+              "client_id": "1002325637087-46etmog4jn1fcilhqm2n494t05nhl9tk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

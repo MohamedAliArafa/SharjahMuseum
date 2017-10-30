@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,7 +16,7 @@
             android:id="@+id/images_view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.9"
+            android:layout_weight="1"
             android:scrollbarStyle="insideInset" />
 
         <LinearLayout
@@ -24,218 +25,317 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_marginBottom="4dp"
-            android:layout_weight="0.1"
             android:gravity="center"
             android:orientation="horizontal" />
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:orientation="vertical"
-        android:weightSum="2">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/meusems_linear"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rectangle_green"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/plan_visits_linear"
+            app:layout_constraintEnd_toStartOf="@+id/plan_visits_linear"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/plan_visits_linear">
 
-            <LinearLayout
-                android:id="@+id/meusems_linear"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/iv_museum"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_green"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_our_meusems"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_our_meusems" />
-
-                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/our_museums"
-                    android:textColor="@color/GrayLight"
-                    android:textSize="@dimen/d10" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/plan_visits_linear"
-                android:layout_width="0dp"
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_museum"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_green"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_plan_u_vist" />
-
-                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-                    android:id="@+id/textViewLight2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/plan_your_visit"
-                    android:textColor="@color/GrayLight"
-                    android:textSize="@dimen/d10" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/our_museums"
+                android:textColor="@color/GrayLight"
+                android:textSize="@dimen/d10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_museum" />
 
 
-            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/event_layout"
-                android:layout_width="0dp"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/plan_visits_linear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rectangle_green"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/education_layout"
+            app:layout_constraintEnd_toStartOf="@+id/event_layout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/meusems_linear"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_plan_visit"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_green"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_plan_u_vist"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_events" />
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_plan_visit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/plan_your_visit"
+                android:textColor="@color/GrayLight"
+                android:textSize="@dimen/d10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_plan_visit" />
 
-                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/Events"
-                    android:textColor="@color/GrayLight"
-                    android:textSize="@dimen/d10" />
 
-            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/event_layout"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rectangle_green"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/plan_visits_linear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/plan_visits_linear"
+            app:layout_constraintTop_toTopOf="@+id/plan_visits_linear">
 
-            <LinearLayout
-                android:id="@+id/notifications_linear"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/iv_event"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_green"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_events"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_notification" />
-
-                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/notifications"
-                    android:textColor="@color/GrayLight"
-                    android:textSize="@dimen/d10" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/education_layout"
-                android:layout_width="0dp"
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_event"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_green"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/Events"
+                android:textColor="@color/GrayLight"
+                android:textSize="@dimen/d10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_event" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_education" />
-
-                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-                    android:id="@+id/textViewLight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/education"
-                    android:textColor="@color/GrayLight"
-                    android:textSize="@dimen/d10" />
+        </android.support.constraint.ConstraintLayout>
 
 
-            </LinearLayout>
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/notifications_linear"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rectangle_green"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/meusems_linear"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/meusems_linear"
+            app:layout_constraintTop_toTopOf="@+id/education_layout">
 
-            <LinearLayout
-                android:id="@+id/about_us_layout"
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/iv_notification"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_green"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_notification"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_aboutus" />
-
-                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/about_us"
-                    android:textColor="@color/GrayLight"
-                    android:textSize="@dimen/d10" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/notifications"
+                android:textColor="@color/GrayLight"
+                android:textSize="@dimen/d10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_notification" />
 
 
-    </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/education_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rectangle_green"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/plan_visits_linear"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/plan_visits_linear"
+            app:layout_constraintTop_toBottomOf="@+id/plan_visits_linear">
+
+            <ImageView
+                android:id="@+id/iv_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_education"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/education"
+                android:textColor="@color/GrayLight"
+                android:textSize="@dimen/d10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_education" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/about_us_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rectangle_green"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/event_layout"
+            app:layout_constraintStart_toStartOf="@+id/event_layout"
+            app:layout_constraintTop_toTopOf="@+id/education_layout">
+
+            <ImageView
+                android:id="@+id/iv_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_aboutus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/about_us"
+                android:textColor="@color/GrayLight"
+                android:textSize="@dimen/d10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_about" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </LinearLayout>

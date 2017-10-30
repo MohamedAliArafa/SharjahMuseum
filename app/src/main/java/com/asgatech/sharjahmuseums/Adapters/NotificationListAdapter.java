@@ -17,6 +17,7 @@ import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -54,19 +55,17 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 //
         GlideApp.with(context).load(URLS.URL_BASE + data.get(position).getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.no_image).into(holder.notificationIv);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent= new Intent(context, NotificationDetailActivity.class);
-                intent.putExtra("title",data.get(position).getTitle());
-                intent.putExtra("text",data.get(position).getText());
-                intent.putExtra("image",data.get(position).getImage());
-                intent.putExtra("id",data.get(position).getUserNotfactionID());
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent= new Intent(context, NotificationDetailActivity.class);
+            intent.putExtra("title",data.get(position).getTitle());
+            intent.putExtra("text",data.get(position).getText());
+            intent.putExtra("image",data.get(position).getImage());
+            intent.putExtra("id",data.get(position).getUserNotfactionID());
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
     }
 

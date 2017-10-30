@@ -21,7 +21,7 @@ import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.ViewVisitorsReviewAdapter;
-import com.asgatech.sharjahmuseums.Models.ReviewVisitorsRequest;
+import com.asgatech.sharjahmuseums.Models.Request.ReviewVisitorsRequest;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;

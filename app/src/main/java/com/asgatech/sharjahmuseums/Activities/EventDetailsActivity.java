@@ -1,11 +1,13 @@
 package com.asgatech.sharjahmuseums.Activities;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,17 +20,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.Adapters.ViewPagerAdapter;
-import com.asgatech.sharjahmuseums.Models.EventdetatailsResponceModel;
+import com.asgatech.sharjahmuseums.Models.EventDetailsResponseModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.Localization;
+import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -58,15 +66,15 @@ public class EventDetailsActivity extends AppCompatActivity {
     Timer timer;
     private List<ImageView> dots;
     private ImageView dot;
-    private String attachUrl, eventTitleToolbar,eventImage;
+    private String attachUrl, eventTitleToolbar, eventImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_event_details);
-        eventTitleToolbar = getIntent().getStringExtra("eventTitle");
-        int id = getIntent().getIntExtra("eventId", 0);
+        eventTitleToolbar = getIntent().getStringExtra("title");
+        int id = getIntent().getIntExtra("id", 0);
         setToolBar();
         initView();
         getEventDetails(id, UserData.getLocalization(EventDetailsActivity.this));
@@ -80,7 +88,8 @@ public class EventDetailsActivity extends AppCompatActivity {
         ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(eventTitleToolbar);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
@@ -104,23 +113,29 @@ public class EventDetailsActivity extends AppCompatActivity {
         mail = findViewById(R.id.mail);
         mark = findViewById(R.id.mark);
 
-        downloadText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
-                Log.e("attachUrl", attachUrl);
-                intent.putExtra("attachUrl", attachUrl);
-                startActivity(intent);
-            }
+        downloadText.setOnClickListener(view -> {
+//            Intent intent = new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
+//            Log.e("attachUrl",URLS.URL_BASE + attachUrl);
+//            intent.putExtra("attachUrl", attachUrl);
+//            startActivity(intent);
+
+            DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            Uri Download_Uri = Uri.parse(URLS.URL_BASE + attachUrl);
+            DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+            request.setTitle(eventTitleToolbar);
+            request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, eventTitleToolbar);
+            downloadManager.enqueue(request);
         });
-        downloadIndicator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
-                Log.e("bookLink", attachUrl);
-                intent.putExtra("bookLink", attachUrl);
-                startActivity(intent);
-            }
+        downloadIndicator.setOnClickListener(view -> {
+//            DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+//            Uri Download_Uri = Uri.parse("http://demo.mysamplecode.com/Sencha_Touch/CountryServlet?start=0&limit=999");
+//            DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+//            downloadManager.enqueue(request);
+
+//            Intent intent = new Intent(EventDetailsActivity.this, OpenWebViewActivity.class);
+//            Log.e("bookLink", attachUrl);
+//            intent.putExtra("bookLink", attachUrl);
+//            startActivity(intent);
         });
 
         dot = null;
@@ -131,9 +146,9 @@ public class EventDetailsActivity extends AppCompatActivity {
     private void getEventDetails(int eventId, int lang) {
 
 
-        ServerTool.getEventsDetails(EventDetailsActivity.this, eventId, lang, new ServerTool.APICallBack<EventdetatailsResponceModel>() {
+        ServerTool.getEventsDetails(EventDetailsActivity.this, eventId, lang, new ServerTool.APICallBack<EventDetailsResponseModel>() {
             @Override
-            public void onSuccess(final EventdetatailsResponceModel model) {
+            public void onSuccess(final EventDetailsResponseModel model) {
                 if (Utils.validObject(model)) {
 
                     eventTitle.setText(model.getTitle());
@@ -143,7 +158,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                     eventDescription.setText(model.getDescrption());
                     eventItemPlace.setText(model.getAdress());
                     attachUrl = model.getAttach();
-                    eventImage=model.getEventImages().get(0).getImage();
+                    eventImage = model.getEventImages().get(0).getImage();
                     viewpager.setAdapter(new ViewPagerAdapter(EventDetailsActivity.this, model.getEventImages()));
                     NUM_PAGES = model.getEventImages().size();
 
@@ -155,13 +170,11 @@ public class EventDetailsActivity extends AppCompatActivity {
                         viewpager.setAdapter(new ViewPagerAdapter(EventDetailsActivity.this, model.getEventImages()));
                         NUM_PAGES = model.getEventImages().size();
                         final Handler handler = new Handler();
-                        final Runnable Update = new Runnable() {
-                            public void run() {
-                                if (currentPage == NUM_PAGES) {
-                                    currentPage = 0;
-                                }
-                                viewpager.setCurrentItem(currentPage++, true);
+                        final Runnable Update = () -> {
+                            if (currentPage == NUM_PAGES) {
+                                currentPage = 0;
                             }
+                            viewpager.setCurrentItem(currentPage++, true);
                         };
                         timer = new Timer();
                         timer.schedule(new TimerTask() {
@@ -186,26 +199,13 @@ public class EventDetailsActivity extends AppCompatActivity {
                             }
                         });
                     }
-                    share.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            shareAction();
-                        }
-                    });
+                    share.setOnClickListener(view -> shareAction());
 
-                    call.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            callAction(model.getPhone());
-                        }
-                    });
+                    call.setOnClickListener(view -> callAction(model.getPhone()));
 
-                    mail.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            emailAction(model.getEmail());
-                        }
-                    });
+                    mail.setOnClickListener(view -> emailAction(model));
+
+                    mark.setOnClickListener(view -> addToCalender(model));
 
                 }
 
@@ -232,8 +232,8 @@ public class EventDetailsActivity extends AppCompatActivity {
         Intent intentShare = new Intent(Intent.ACTION_SEND);
         intentShare.setType("text/plain");
 
-        intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE +  eventImage+ "\n" +
-                "\n" + getResources().getString(R.string.description) +":"+ eventDescription.getText().toString());
+        intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE + eventImage + "\n" +
+                "\n" + getResources().getString(R.string.description) + ":" + eventDescription.getText().toString());
         Intent chooser = Intent.createChooser(intentShare, "share");
         chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(chooser);
@@ -245,42 +245,39 @@ public class EventDetailsActivity extends AppCompatActivity {
         sharingIntent.setData(Uri.parse("tel:" + phone));
         startActivity(sharingIntent);
 
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.title_share_via)));
     }
 
 
-    private void emailAction(String email) {
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "message");
-        sharingIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    private void emailAction(EventDetailsResponseModel email) {
+        Intent mailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", email.getEmail(), null));
+        mailIntent.putExtra(Intent.EXTRA_SUBJECT, email.getTitle());
+        mailIntent.putExtra(Intent.EXTRA_TEXT, email.getDescrption());
+        startActivity(Intent.createChooser(mailIntent, getString(R.string.title_share_via)));
 
     }
 
-
-//    @SuppressLint("NewApi")
-//    private void addBottomDots(int currentPage) {
-//        dots = new TextView[NUM_PAGES];
-//
-//        layoutDots.removeAllViews();
-//        LinearLayout.LayoutParams params = new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        params.rightMargin = 10;
-//
-//        for (int i = 0; i < dots.length; i++) {
-//            dots[i] = new TextView(EventDetailsActivity.this);
-//            dots[i].setText(Html.fromHtml("&#8226;"));
-//            dots[i].setTextSize(30);
-//            dots[i].setHeight(10);
-//            dots[i].setLayoutParams(params);
-//
-//            dots[i].setBackground(getResources().getDrawable(R.drawable.indicator_background_inactive));
-//            layoutDots.addView(dots[i]);
-//        }
-//
-//        if (dots.length > 0)
-//            dots[currentPage].setBackground(getResources().getDrawable(R.drawable.indicator_background_active));
-//    }
+    public void addToCalender(EventDetailsResponseModel model) {
+        if (PermissionTool.checkPermission(this, PermissionTool.PERMISSION_CALENDER)) {
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
+            Intent intent = new Intent(Intent.ACTION_EDIT);
+            intent.setType("vnd.android.cursor.item/event");
+            try {
+                Date date = sdf.parse(model.getStartDate());
+                cal.setTime(date);
+                intent.putExtra("beginTime", cal.getTimeInMillis());
+                date = sdf.parse(model.getEndDate());
+                cal.setTime(date);
+                intent.putExtra("endTime", cal.getTimeInMillis());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            intent.putExtra("allDay", true);
+            intent.putExtra("title", model.getTitle());
+            startActivity(intent);
+        }
+    }
 
     public void addDots(int size) {
         dots = new ArrayList<>();

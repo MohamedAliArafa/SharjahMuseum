@@ -37,10 +37,10 @@ public class ContactUsFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_contact_us, container, false);
 
 
-        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.contact_us));
-        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout = view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         reduceMarginsInTabs(tabLayout , 50);
         return view;

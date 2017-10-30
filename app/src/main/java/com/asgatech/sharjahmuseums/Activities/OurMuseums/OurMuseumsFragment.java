@@ -18,7 +18,7 @@ import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Activities.Search.SearchMuseumActivity;
 import com.asgatech.sharjahmuseums.Adapters.AllMuseumsAdapter;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
-import com.asgatech.sharjahmuseums.Models.PagingModel;
+import com.asgatech.sharjahmuseums.Models.Request.PagingModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;

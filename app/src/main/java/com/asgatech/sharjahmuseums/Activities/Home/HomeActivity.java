@@ -136,14 +136,11 @@ public class HomeActivity extends AppCompatActivity implements
         toogleButtonActionBarDrawerToggle.setDrawerIndicatorEnabled(false);
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_side_menu, this.getTheme());
         toogleButtonActionBarDrawerToggle.setHomeAsUpIndicator(drawable);
-        toogleButtonActionBarDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mNavigationViewDrawerLayout.isDrawerVisible(GravityCompat.START)) {
-                    mNavigationViewDrawerLayout.closeDrawer(GravityCompat.START);
-                } else {
-                    mNavigationViewDrawerLayout.openDrawer(GravityCompat.START);
-                }
+        toogleButtonActionBarDrawerToggle.setToolbarNavigationClickListener(v -> {
+            if (mNavigationViewDrawerLayout.isDrawerVisible(GravityCompat.START)) {
+                mNavigationViewDrawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                mNavigationViewDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
     }
@@ -180,6 +177,11 @@ public class HomeActivity extends AppCompatActivity implements
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(Utils.getDarkColor(getResources().getColor(R.color.GreenLight)));
         }
+    }
+
+    @Override
+    public void openFragmentFromChild(Fragment fragment, Bundle bundle, boolean shouldAddToBackStack) {
+        mPresenter.openFragment(fragment, bundle, shouldAddToBackStack);
     }
 
     @Override

@@ -24,12 +24,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.asgatech.sharjahmuseums.Models.InsertDeviceTokenRequestModel;
+import com.asgatech.sharjahmuseums.Models.Request.InsertDeviceTokenRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -61,8 +63,7 @@ public class Utils {
 
     public static InsertDeviceTokenRequestModel insertDeviceToken(Context context) {
         String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-//        InsertDevicetokenRequestModel insertDevicetokenRequestModel=new InsertDevicetokenRequestModel(androidID, FirebaseInstanceId.getInstance().getToken());
-        return new InsertDeviceTokenRequestModel(androidID, "");
+        return new InsertDeviceTokenRequestModel(androidID, FirebaseInstanceId.getInstance().getToken());
     }
 
     public static Bitmap decodeUri(Uri selectedImage, Context context) throws FileNotFoundException {
@@ -172,6 +173,7 @@ public class Utils {
     public static void loadSimplePic(final Context context, Object url, final ImageView pic) {
         GlideApp.with(context).asBitmap()
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .load(url).into(new BitmapImageViewTarget(pic) {
             @Override
             protected void setResource(Bitmap resource) {

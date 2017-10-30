@@ -29,7 +29,7 @@ public class MuseumsDetailsModel extends RealmObject {
     private RealmList<OpeningHoursListEntity> OpeningHoursList;
     private RealmList<FaciltsEntity> Facilts;
     private RealmList<PriceCategorySublistEntity> PriceCategorySublist;
-    private RealmList<HightLightEntity> HightLight;
+    private RealmList<HighLightEntity> HightLight;
 
     public void setMus_ID(int Mus_ID) {
         this.Mus_ID = Mus_ID;
@@ -103,7 +103,7 @@ public class MuseumsDetailsModel extends RealmObject {
         this.PriceCategorySublist = PriceCategorySublist;
     }
 
-    public void setHightLight(RealmList<HightLightEntity> HightLight) {
+    public void setHightLight(RealmList<HighLightEntity> HightLight) {
         this.HightLight = HightLight;
     }
 
@@ -179,7 +179,7 @@ public class MuseumsDetailsModel extends RealmObject {
         return PriceCategorySublist;
     }
 
-    public RealmList<HightLightEntity> getHightLight() {
+    public RealmList<HighLightEntity> getHightLight() {
         return HightLight;
     }
 

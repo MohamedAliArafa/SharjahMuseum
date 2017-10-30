@@ -1,93 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="app_name">SharjahMuseums</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="AED">دينار</string>
 
-    <string name="vision">الرؤية</string>
-    <string name="mission">الرسالة</string>
-    <string name="policy">سياسات قسم متاحف الشارقة</string>
-    <!--side menu-->
-    <string name="home">الرئيسية</string>
-    <string name="our_museums">المتاحف</string>
-    <string name="plan_your_visit">خطط زيارتك</string>
-    <string name="Events">الفعاليات</string>
-    <string name="near_by_facilities">الأماكن القريبة</string>
-    <string name="education">التعليم</string>
-    <string name="about_us">عن الإدارة</string>
-    <string name="contact_us"> تواصل معنا</string>
-    <string name="notifications">الإشعارات</string>
-    <string name="setting">الاعدادات</string>
-    <string name="demo">عرض</string>
-
-    <string name="description">الوصف</string>
     <string name="Download_file">تنزيل الملف</string>
-    <string name="From_">من:</string>
-    <string name="To_">:إلى</string>
-    <string name="addto_Calender">إضافه إلى التقويم</string>
 
-    <!--errors-->
-    <string name="no_connection">لا يوجد انترنت حاليا برجاء المحاولة فى وقت اخر</string>
+    <string name="Events">الفعاليات</string>
+
+    <string name="From_">من:</string>
+
+    <string name="Group_visits">زيارات المجموعة</string>
+
+    <string name="To_">:إلى</string>
+
     <!-- museums details -->
     <string name="about_museums">عن المتحف</string>
-    <string name="opening_hours">ساعات العمل</string>
-    <string name="entry_fees">قيمةالدخول</string>
-    <string name="high_lights">المعالم</string>
-    <string name="our_facilities">الخدمات</string>
-    <string name="closed">مغلق</string>
-    <string name="opened">مفتوح</string>
-    <string name="language">اللغه</string>
-    <string name="arabic">العربيه</string>
+    <string name="about_us">عن الإدارة</string>
 
-    <!--nearby-->
-    <string name="cafe">كافيه</string>
-    <string name="resturant">مطاعم</string>
-    <string name="atm">ماكينة الصراف الآلي</string>
-    <string name="banks">البنوك</string>
-    <string name="book_store">متاجر الكتب</string>
-    <string name="parkings">مواقف سيارات</string>
-    <string name="bus_station">محطات الحافلات </string>
+    <string name="action_settings">الإعدادات</string>
+
+    <string name="add_review">إضافة تقييم</string>
+    <string name="add_your_review">إضافه تقييمك</string>
+
+    <string name="addto_Calender">إضافه إلى التقويم</string>
+
     <string name="airports">المطارات</string>
+
+    <string name="app_name">SharjahMuseums</string>
+
+    <string name="arabic">العربية</string>
+
+    <string name="atm">ماكينة الصراف الآلي</string>
+
+    <string name="banks">البنوك</string>
 
     <!--plan_visits-->
     <string name="book_nw">احجز الان</string>
-    <string name="Group_visits">زيارات المجموعة</string>
+    <string name="book_store">متاجر الكتب</string>
 
-    <!--titles-->
-    <string name="now">الأن</string>
-    <string name="sharjah_museums_department">Sharjah Museums Department</string>
+    <string name="bus_station">محطات الحافلات </string>
 
-    <!--addRate-->
-    <string name="rate_your_experience">قيم تجربتك </string>
-    <string name="visitors_reviews">تقييم الزوار</string>
-    <string name="add_your_review">إضافه تقييمك</string>
-    <string name="post">إرسال</string>
-    <string name="add_review">إضافة تقييم</string>
-    <string name="success_send_review">تم إرسال تقييمك بنجاح</string>
+    <!--nearby-->
+    <string name="cafe">كافيه</string>
+
+    <string name="closed">مغلق</string>
+
+    <string name="contact">تواصل معنا</string>
+    <string name="contact_us"> تواصل معنا</string>
+
+    <string name="demo">عرض</string>
+
+    <string name="description">الوصف</string>
+
+    <string name="duplicate_email">البريد الالكتروني مستخدم من قبل</string>
+
+    <string name="education">التعليم</string>
+
+    <string name="email">البريد الإلكترونى</string>
+    <string name="email_hint">من فضلك أدخل البريد الالكتروني</string>
+
+    <string name="entry_fees">قيمةالدخول</string>
+
     <string name="failed_send_review">فشل إرسال تقييمك </string>
 
+    <string name="high_lights">المعالم</string>
 
+    <!--side menu-->
+    <string name="home">الرئيسية</string>
 
+    <string name="info">البيانات</string>
+
+    <string name="invalid_email">من فضلك أدخل بريد الكتروني صحيح </string>
+
+    <string name="language">اللغه</string>
+
+    <string name="loading">"تحميل … "</string>
+
+    <string name="message">الرسالة</string>
+
+    <string name="messeage_hint">من فضلك اكتب رسالتك </string>
+
+    <string name="mission">الرسالة</string>
+
+    <string name="name">الإسم</string>
+    <string name="name_hint">من فضلك أدخل إسمك </string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="near_by_facilities">الأماكن القريبة</string>
+
+    <!--errors-->
+    <string name="no_connection">لا يوجد انترنت حاليا برجاء المحاولة فى وقت اخر</string>
     <!--//messages-->
     <string name="no_notification">لا يوجد اشعارات لك فى الوقت الحالى </string>
     <string name="no_reviews">لا يوجد لك فى الوقت الحالى تقييمات من الزوار</string>
-    <string name="contact">تواصل معنا</string>
-    <string name="send">إرسال</string>
-    <string name="message">الرسالة</string>
+
+    <string name="notifications">الإشعارات</string>
+
+    <!--titles-->
+    <string name="now">الأن</string>
+
+    <string name="opened">مفتوح</string>
+
+    <string name="opening_hours">ساعات العمل</string>
+
+    <string name="our_facilities">الخدمات</string>
+    <string name="our_museums">المتاحف</string>
+
+    <string name="parkings">مواقف سيارات</string>
+
     <string name="phone">الهاتف</string>
-    <string name="email">البريد الإلكترونى</string>
-    <string name="name">الإسم</string>
-    <string name="info">البيانات</string>
-    <string name="loading">"تحميل ... "</string>
+    <string name="phone_hint">من فضلك أدخل رقم الهاتف </string>
 
+    <string name="plan_your_visit">خطط زيارتك</string>
 
-    <string name="duplicate_email">البريد الالكتروني مستخدم من قبل</string>
+    <string name="policy">سياسات قسم متاحف الشارقة</string>
+
+    <string name="post">إرسال</string>
+
+    <!--addRate-->
+    <string name="rate_your_experience">قيم تجربتك </string>
+
+    <string name="resturant">مطاعم</string>
+
+    <string name="send">إرسال</string>
     <string name="send_messege_fail">فشل ارسال الرساله</string>
     <string name="send_messege_succsess"> تم إرسال الرساله بنجاح</string>
-    <string name="website_hint">من فضلك أدخل لينك الموقع</string>
-    <string name="email_hint">من فضلك أدخل البريد الالكتروني</string>
-    <string name="phone_hint">من فضلك أدخل رقم الهاتف </string>
-    <string name="name_hint">من فضلك أدخل إسمك </string>
-    <string name="messeage_hint">من فضلك اكتب رسالتك </string>
-    <string name="invalid_email">من فضلك أدخل بريد الكتروني صحيح </string>
+
+    <string name="setting">الاعدادات</string>
+
+    <string name="sharjah_museums_department">Sharjah Museums Department</string>
+
+    <string name="success_send_review">تم إرسال تقييمك بنجاح</string>
+
     <string name="title_btn_skip">تخطى</string>
+    <string name="title_filter_all">الجميع</string>
+    <string name="title_from">من</string>
+    <string name="title_to">إلى</string>
+
+    <string name="vision">الرؤية</string>
+
+    <string name="visitors_reviews">تقييم الزوار</string>
+
+    <string name="website_hint">من فضلك أدخل لينك الموقع</string>
+
+    <string name="welcome">مرحبا</string>
 </resources>

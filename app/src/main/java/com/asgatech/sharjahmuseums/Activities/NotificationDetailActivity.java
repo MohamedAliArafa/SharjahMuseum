@@ -9,25 +9,27 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
-import com.asgatech.sharjahmuseums.Models.UpdateRequestModel;
+import com.asgatech.sharjahmuseums.Models.Request.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
+import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import okhttp3.ResponseBody;
 
-public class NotificationDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class NotificationDetailActivity extends AppCompatActivity implements View.OnClickListener {
     public ImageView toolbarHomeImageView;
     private CircleImageView ivMainimage;
-    private TextViewBold tvTitle,ToolbarTitleTextView;
+    private TextViewBold tvTitle, ToolbarTitleTextView;
     private TextViewLight tvDescription;
 
-    String title,text,image;
+    String title, text, image;
     int id;
 
 
@@ -41,10 +43,10 @@ public class NotificationDetailActivity extends AppCompatActivity implements Vie
     }
 
     public void setToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
-        ToolbarTitleTextView=findViewById(R.id.tv_toolbar_title);
+        toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
+        ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
         toolbarHomeImageView.setOnClickListener(this);
 
@@ -54,48 +56,49 @@ public class NotificationDetailActivity extends AppCompatActivity implements Vie
     }
 
 
-void setUpView(){
-    ivMainimage = (CircleImageView) findViewById(R.id.iv_mainimage);
-    tvTitle = (TextViewBold) findViewById(R.id.tv_title);
-    tvDescription = (TextViewLight) findViewById(R.id.tv_description);
+    void setUpView() {
+        ivMainimage = findViewById(R.id.iv_mainimage);
+        tvTitle = findViewById(R.id.tv_title);
+        tvDescription = findViewById(R.id.tv_description);
 
-    if (getIntent().hasExtra("title")){
-        title=getIntent().getStringExtra("title");
-    }
-    if (getIntent().hasExtra("text")){
-        text=getIntent().getStringExtra("text");
-    }
-    if (getIntent().hasExtra("image")){
-        image= getIntent().getStringExtra("image");
-    }
-    if (getIntent().hasExtra("id")){
-        id= getIntent().getIntExtra("id",0);
-    }
-    tvDescription.setText(text);
-    tvTitle.setText(title);
-//    Glide.with(this).load(URLS.URL_BASE + image).placeholder(R.drawable.image_m).into(ivMainimage);
-    UpdateRequestModel updateRequestModel= new UpdateRequestModel(id);
-    UpdateNotifiList(updateRequestModel);
+        if (getIntent().hasExtra("title")) {
+            title = getIntent().getStringExtra("title");
+        }
+        if (getIntent().hasExtra("text")) {
+            text = getIntent().getStringExtra("text");
+        }
+        if (getIntent().hasExtra("image")) {
+            image = getIntent().getStringExtra("image");
+        }
+        if (getIntent().hasExtra("id")) {
+            id = getIntent().getIntExtra("id", 0);
+        }
+        tvDescription.setText(text);
+        tvTitle.setText(title);
+        GlideApp.with(this).load(URLS.URL_BASE + image).placeholder(R.drawable.no_image).into(ivMainimage);
+        UpdateRequestModel updateRequestModel = new UpdateRequestModel(id);
+        UpdateNotifiList(updateRequestModel);
 
-}
-void UpdateNotifiList(UpdateRequestModel updateRequestModel){
-    ServerTool.UpdateNotificationList(NotificationDetailActivity.this, updateRequestModel, new ServerTool.APICallBack<Integer>() {
-        @Override
-        public void onSuccess(Integer response) {
-            if (response==1){
-             //   Toast.makeText(NotificationDetailActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
-            }else {
-              // Toast.makeText(NotificationDetailActivity.this, "fail", Toast.LENGTH_SHORT).show();
+    }
+
+    void UpdateNotifiList(UpdateRequestModel updateRequestModel) {
+        ServerTool.UpdateNotificationList(NotificationDetailActivity.this, updateRequestModel, new ServerTool.APICallBack<Integer>() {
+            @Override
+            public void onSuccess(Integer response) {
+                if (response == 1) {
+                    //   Toast.makeText(NotificationDetailActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Toast.makeText(NotificationDetailActivity.this, "fail", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailed(int statusCode, ResponseBody responseBody) {
 
             }
-        }
-
-        @Override
-        public void onFailed(int statusCode, ResponseBody responseBody) {
-
-        }
-    });
-}
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -116,7 +119,7 @@ void UpdateNotifiList(UpdateRequestModel updateRequestModel){
 
     @Override
     protected void onResume() {
-        new Localization().setLanguage(NotificationDetailActivity.this, new UserData().getLocalization(NotificationDetailActivity.this));
+        Localization.setLanguage(NotificationDetailActivity.this, UserData.getLocalization(NotificationDetailActivity.this));
         super.onResume();
     }
 

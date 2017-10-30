@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Models.HightLightEntity;
+import com.asgatech.sharjahmuseums.Models.HighLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -20,9 +20,9 @@ import java.util.List;
 
 public class HighLightAdapter extends BaseAdapter {
     private Context context;
-    private List<HightLightEntity> hightLightList = new ArrayList<>();
+    private List<HighLightEntity> hightLightList = new ArrayList<>();
 
-    public HighLightAdapter(Context context,List<HightLightEntity> hightLightList ) {
+    public HighLightAdapter(Context context,List<HighLightEntity> hightLightList ) {
         this.context = context;
         this.hightLightList=hightLightList;
     }
@@ -30,7 +30,7 @@ public class HighLightAdapter extends BaseAdapter {
     public HighLightAdapter() {
     }
 
-    public void setData(List<HightLightEntity> data) {
+    public void setData(List<HighLightEntity> data) {
         this.hightLightList = data;
     }
 
@@ -66,7 +66,7 @@ public class HighLightAdapter extends BaseAdapter {
         }
 
         ViewHolder holder = (ViewHolder) rowView.getTag();
-        Log.e("image Link", URLS.URL_BASE + hightLightList.get(position).getPhoto());
+        Log.e(context.getString(R.string.tag_image), URLS.URL_BASE + hightLightList.get(position).getPhoto());
         Utils.loadSimplePic(context, URLS.URL_BASE + hightLightList.get(position).getPhoto(), holder.image);
 
         return rowView;

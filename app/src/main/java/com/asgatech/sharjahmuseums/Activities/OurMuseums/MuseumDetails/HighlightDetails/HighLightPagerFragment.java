@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Models.HightLightEntity;
+import com.asgatech.sharjahmuseums.Models.HighLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 /**
@@ -25,9 +26,9 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
 
     String image;
 
-    HightLightEntity highlight;
+    HighLightEntity highlight;
 
-    public static HighLightPagerFragment newInstance(String image, HightLightEntity highlight) {
+    public static HighLightPagerFragment newInstance(String image, HighLightEntity highlight) {
         HighLightPagerFragment highLightPagerFragment = new HighLightPagerFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtils.IMAGE_PATH, image);
@@ -60,6 +61,7 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
         GlideApp.with(getActivity())
                 .load(URLS.URL_BASE + image).placeholder(R.drawable.no_image)
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into((coverImageView));
 
         return rootView;

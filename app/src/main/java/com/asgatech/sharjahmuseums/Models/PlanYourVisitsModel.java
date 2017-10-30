@@ -49,7 +49,7 @@ public class PlanYourVisitsModel {
         return GroupBookLink;
     }
 
-    public List<PlanVisteEntity> getPlanViste() {
+    public List<PlanVisteEntity> getPlanVist() {
         return PlanViste;
     }
 

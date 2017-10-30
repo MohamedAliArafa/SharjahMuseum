@@ -1,10 +1,13 @@
 package com.asgatech.sharjahmuseums.Models;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by esraa.reda on 10/10/2017.
  */
 
-public class ReviewVisitorsResponse {
+public class ReviewVisitorsResponse extends RealmObject{
     /**
      * ReviewID : 2
      * Email : 55Y
@@ -15,6 +18,7 @@ public class ReviewVisitorsResponse {
      * PageTotal : 1
      */
 
+    @PrimaryKey
     private int ReviewID;
     private String Email;
     private String Text;
@@ -32,59 +36,59 @@ public class ReviewVisitorsResponse {
         ShowReply = showReply;
     }
 
-    public void setReviewID(int ReviewID) {
-        this.ReviewID = ReviewID;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
-
-    public void setText(String Text) {
-        this.Text = Text;
-    }
-
-    public void setRate(int Rate) {
-        this.Rate = Rate;
-    }
-
-    public void setMus_ID(int Mus_ID) {
-        this.Mus_ID = Mus_ID;
-    }
-
-    public void setReply(String Reply) {
-        this.Reply = Reply;
-    }
-
-    public void setPageTotal(int PageTotal) {
-        this.PageTotal = PageTotal;
-    }
-
     public int getReviewID() {
         return ReviewID;
+    }
+
+    public void setReviewID(int ReviewID) {
+        this.ReviewID = ReviewID;
     }
 
     public String getEmail() {
         return Email;
     }
 
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
     public String getText() {
         return Text;
+    }
+
+    public void setText(String Text) {
+        this.Text = Text;
     }
 
     public int getRate() {
         return Rate;
     }
 
+    public void setRate(int Rate) {
+        this.Rate = Rate;
+    }
+
     public int getMus_ID() {
         return Mus_ID;
+    }
+
+    public void setMus_ID(int Mus_ID) {
+        this.Mus_ID = Mus_ID;
     }
 
     public String getReply() {
         return Reply;
     }
 
+    public void setReply(String Reply) {
+        this.Reply = Reply;
+    }
+
     public int getPageTotal() {
         return PageTotal;
+    }
+
+    public void setPageTotal(int PageTotal) {
+        this.PageTotal = PageTotal;
     }
 }

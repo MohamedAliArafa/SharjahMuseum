@@ -22,7 +22,9 @@ public class OpeningHoursListEntity extends RealmObject {
     private int Mus_ID;
     private String Title;
     private int From;
+    private int FormMinute;
     private int To;
+    private int ToMinute;
     private boolean ISCLOSED;
 
     public void setOpenID(int OpenID) {
@@ -59,6 +61,26 @@ public class OpeningHoursListEntity extends RealmObject {
 
     public String getTitle() {
         return Title;
+    }
+
+    public int getFormMinute() {
+        return FormMinute;
+    }
+
+    public void setFormMinute(int formMinute) {
+        FormMinute = formMinute;
+    }
+
+    public int getToMinute() {
+        return ToMinute;
+    }
+
+    public void setToMinute(int toMinute) {
+        ToMinute = toMinute;
+    }
+
+    public boolean isISCLOSED() {
+        return ISCLOSED;
     }
 
     public int getFrom() {

@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Adapters.NotificationListAdapter;
-import com.asgatech.sharjahmuseums.Models.NotificationListRequestModel;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
+import com.asgatech.sharjahmuseums.Models.Request.NotificationListRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
@@ -44,19 +44,19 @@ public class NotificationListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initRecyclerView(view);
-        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.notifications));
+        ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.notifications));
         String androidID = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
 //        AddDeviceModel addDeviceModel = new AddDeviceModel(androidID, FirebaseInstanceId.getInstance().getToken());
 
-        NotificationListRequestModel notificationListRequestModel=new NotificationListRequestModel(new UserData().getLocalization(getActivity()),androidID);
+        NotificationListRequestModel notificationListRequestModel = new NotificationListRequestModel(UserData.getLocalization(getActivity()), androidID);
 
         GetNotificationList(notificationListRequestModel);
 
     }
 
     private void initRecyclerView(View view) {
-        notificationRecycler = (RecyclerView) view.findViewById(R.id.notification_recycler);
-        notifiListErrorMessage = (TextViewBold) view.findViewById(R.id.notifi_list_error_message);
+        notificationRecycler = view.findViewById(R.id.notification_recycler);
+        notifiListErrorMessage = view.findViewById(R.id.notifi_list_error_message);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         notificationRecycler.setLayoutManager(linearLayoutManager);
         notificationRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -70,9 +70,9 @@ public class NotificationListFragment extends Fragment {
         ServerTool.GetNotificationList(getActivity(), notificationListRequestModel, new ServerTool.APICallBack<List<NotificationListResponseModel>>() {
             @Override
             public void onSuccess(List<NotificationListResponseModel> response) {
-                if (response.size()!=0){
+                if (response.size() != 0) {
                     setData(response);
-                }else {
+                } else {
                     notificationRecycler.setVisibility(View.GONE);
                     notifiListErrorMessage.setVisibility(View.VISIBLE);
                 }
@@ -88,7 +88,7 @@ public class NotificationListFragment extends Fragment {
     }
 
     private void setData(final List<NotificationListResponseModel> data) {
-        adapter = new NotificationListAdapter(getActivity(),data);
+        adapter = new NotificationListAdapter(getActivity(), data);
         notificationRecycler.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -99,7 +99,7 @@ public class NotificationListFragment extends Fragment {
         super.onResume();
         String androidID = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
 //        AddDeviceModel addDeviceModel = new AddDeviceModel(androidID, FirebaseInstanceId.getInstance().getToken());
-        NotificationListRequestModel notificationListRequestModel=new NotificationListRequestModel(new UserData().getLocalization(getActivity()),androidID);
+        NotificationListRequestModel notificationListRequestModel = new NotificationListRequestModel(UserData.getLocalization(getActivity()), androidID);
         GetNotificationList(notificationListRequestModel);
     }
 }

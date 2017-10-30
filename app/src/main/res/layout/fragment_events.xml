@@ -1,10 +1,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/auto_complete_search_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,8 +11,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/search_bar"
-        android:imeOptions="actionSearch"
         android:drawableStart="@drawable/ic_search"
+        android:imeOptions="actionSearch"
         android:maxLines="1"
         android:paddingLeft="@dimen/d10"
         android:paddingRight="@dimen/d10"
@@ -29,13 +28,12 @@
         android:layout_alignTop="@id/filter_layout"
         android:layout_below="@+id/auto_complete_search_event"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/event_switch_to_calender"
         app:layout_constraintTop_toBottomOf="@+id/auto_complete_search_event">
 
 
@@ -66,15 +64,18 @@
             android:layout_marginStart="2dp"
             android:background="@color/GrayLight" />
 
-        <ImageView
-            android:id="@+id/event_switch_to_calender"
-            android:layout_width="15dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_calender_tap" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/event_switch_to_calender"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_calender_tap"
+        app:layout_constraintBottom_toBottomOf="@+id/filter_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/filter_layout" />
 
     <include
         android:id="@+id/loading_layout"
@@ -84,7 +85,7 @@
         android:visibility="gone" />
 
 
-    <FrameLayout
+    <android.support.v4.view.ViewPager
         android:id="@+id/event_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -107,6 +108,8 @@
         android:background="@drawable/bg_event_filter_layout_background"
         android:orientation="vertical"
         android:padding="8dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/filter_layout"
+        app:layout_constraintTop_toBottomOf="@+id/filter_layout" />
 
 </android.support.constraint.ConstraintLayout>

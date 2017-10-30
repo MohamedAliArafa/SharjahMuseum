@@ -5,17 +5,21 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
-import com.asgatech.sharjahmuseums.Adapters.AutoCompleteAdapter;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.R;
@@ -28,10 +32,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Case;
+import io.realm.Realm;
 import io.realm.RealmList;
 import okhttp3.ResponseBody;
 
-public class EventsFragment extends Fragment implements View.OnClickListener{
+public class EventsFragment extends Fragment implements View.OnClickListener, EventsParentContract.ModelView {
 
     @BindView(R.id.filter_layout)
     LinearLayout filterLayout;
@@ -43,13 +49,18 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
     ImageView switchToCalender;
 
     @BindView(R.id.auto_complete_search_event)
-    AutoCompleteTextView autoCompleteSearchView;
+    EditText mSearchEditText;
 
     @BindView(R.id.loading_layout)
     View loadingView;
 
     @BindView(R.id.arrowIV)
     ImageView arrowImg;
+
+    @BindView(R.id.event_container)
+    ViewPager mEventViewPager;
+
+    MyFragmentPagerAdapter pagerAdapter;
 
     public EventsFragment() {
         // Required empty public constructor
@@ -63,7 +74,65 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
         ButterKnife.bind(this, view);
         ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.Events));
         assignControls();
-        getEventCategories(new UserData().getLocalization(getActivity()));
+        pagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager());
+        mEventViewPager.setAdapter(pagerAdapter);
+        mEventViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                switchToCalender.setImageDrawable(getResources()
+                        .getDrawable(position == 0 ? R.drawable.ic_calender_tap : R.drawable.ic_list_tap));
+//                ((EventsContract.ModelView) pagerAdapter
+//                        .getItem(position))
+//                        .updateView(Realm.getDefaultInstance()
+//                                .where(EventModel.class)
+//                                .findAll());
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switchToCalender.setImageDrawable(getResources()
+                        .getDrawable(position == 0 ? R.drawable.ic_calender_tap : R.drawable.ic_list_tap));
+//                ((EventsContract.ModelView) pagerAdapter
+//                        .getItem(position))
+//                        .updateView(Realm.getDefaultInstance()
+//                                .where(EventModel.class)
+//                                .findAll());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mSearchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().isEmpty())
+                    ((EventsContract.ModelView) pagerAdapter
+                            .getItem(mEventViewPager.getCurrentItem()))
+                            .updateView(Realm.getDefaultInstance()
+                                    .where(EventModel.class)
+                                    .findAll(), null);
+                else
+                    ((EventsContract.ModelView) pagerAdapter
+                            .getItem(mEventViewPager.getCurrentItem()))
+                            .updateView(Realm.getDefaultInstance().where(EventModel.class)
+                                    .contains("title", s.toString(), Case.INSENSITIVE)
+                                    .findAll(), null);
+
+            }
+        });
+        getEventCategories(UserData.getLocalization(getActivity()));
         return view;
     }
 
@@ -96,6 +165,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
                     }
                 }
             }
+
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
             }
@@ -103,8 +173,12 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
     }
 
     private void setData(List<EventModel> response) {
-        autoCompleteSearchView.setThreshold(1);
-        autoCompleteSearchView.setAdapter(new AutoCompleteAdapter(getActivity(), R.layout.custom_text_view, response));
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(0))
+                .updateView(response, null);
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(1))
+                .updateView(response, null);
     }
 
     private void setCategoryData(List<EventCategoryModel> list) {
@@ -119,15 +193,15 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
             itemView.setTag(list.get(i).getEventCatID());
             Drawable background = pallete.getBackground();
             if (list.get(i).getColor() != null) {
-                Log.e("colorCode", list.get(i).getTitle() + ":" + list.get(i).getColor());
+                Log.e(getString(R.string.tag_color_code), list.get(i).getTitle() + ":" + list.get(i).getColor());
                 background.setColorFilter(Color.parseColor(list.get(i).getColor()), PorterDuff.Mode.SRC_IN);
             }
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mainFilterLayout.setVisibility(View.GONE);
-                    getEvents(Integer.parseInt(itemView.getTag().toString()), 1, 15, new UserData().getLocalization(getActivity()));
-                }
+            itemView.setOnClickListener(view -> {
+                mainFilterLayout.setVisibility(View.GONE);
+                setData(Realm.getDefaultInstance()
+                        .where(EventModel.class)
+                        .equalTo("catId", Integer.parseInt(itemView.getTag().toString()))
+                        .findAll());
             });
             //otherwise throw exception java.lang.IllegalStateException: The specified
             // child already has a parent. You must call removeView() on the child's parent first.
@@ -143,17 +217,16 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
                 .inflate(R.layout.filter_recycler_row, null);
         CircleImageView pallete = itemView.findViewById(R.id.pallete_for_filter_item);
         TextView name = itemView.findViewById(R.id.name_for_filter_item);
-        name.setText("All");
+        name.setText(R.string.title_filter_all);
         itemView.setTag("#000000");
         Drawable background = pallete.getBackground();
-        Log.e("colorCode", "#000000");
+        Log.e(getString(R.string.tag_color_code), "#000000");
         background.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_IN);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainFilterLayout.setVisibility(View.GONE);
-                getEvents(0, 1, 15, new UserData().getLocalization(getActivity()));
-            }
+        itemView.setOnClickListener(view -> {
+            mainFilterLayout.setVisibility(View.GONE);
+            setData(Realm.getDefaultInstance()
+                    .where(EventModel.class)
+                    .findAll());
         });
         //otherwise throw exception java.lang.IllegalStateException: The specified
         // child already has a parent. You must call removeView() on the child's parent first.
@@ -186,9 +259,36 @@ public class EventsFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
             case R.id.event_switch_to_calender:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
+                mEventViewPager.setCurrentItem(mEventViewPager.getCurrentItem() == 0 ? 1 : 0);
+//                ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
                 break;
         }
     }
 
+    @Override
+    public void openList(List<EventModel> models) {
+        mEventViewPager.setCurrentItem(0);
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(mEventViewPager.getCurrentItem()))
+                .updateView(models, null);
+    }
+
+    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+
+        Fragment[] fragments = new Fragment[]{new EventsListFragment(), new EventCalenderFragment()};
+
+        MyFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments[position];
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    }
 }

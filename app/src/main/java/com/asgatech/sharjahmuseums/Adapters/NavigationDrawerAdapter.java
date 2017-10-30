@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.Events.EventsListFragment;
+import com.asgatech.sharjahmuseums.Activities.Events.EventsFragment;
 import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Activities.OurMuseums.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
@@ -71,60 +71,50 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         NavigationDrawerItem object = data.get(position);
-        final UserData userData = new UserData();
-        Log.d("local", userData.getLocalization(context) + "");
+        Log.d("local", UserData.getLocalization(context) + "");
         if (object != null) {
             switch (object.getType()) {
                 case HEADER_VIEW_TYPE:
-                    ((HeaderViewHolder) holder).menu.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            view.closeDrawer();
-
-                        }
-                    });
+                    ((HeaderViewHolder) holder).menu.setOnClickListener(v -> view.closeDrawer());
                     break;
                 case MENU_TYPE:
                     ((MenuViewHolder) holder).mTitle.setText(object.getTitle());
-                    ((MenuViewHolder) holder).linear.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            switch (position) {
-                                case 1:
-                                    presenter.openHome();
-                                    break;
-                                case 2:
-                                    presenter.openFragment(new OurMuseumsFragment(), null);
-                                    break;
-                                case 3:
-                                    presenter.openFragment(new PlanYourVisitFragment(), null);
-                                    break;
-                                case 4:
-                                    presenter.openFragment(new EventsListFragment(), null);
-                                    break;
-                                case 5:
-                                    presenter.openFragment(new NearbyFragment(), null);
-                                    break;
-                                case 6:
-                                    presenter.openFragment(new EducationListFragment(), null);
-                                    break;
-                                case 7:
-                                    presenter.openFragment(new AboutUsFragment(), null);
-                                    break;
-                                case 8:
-                                    presenter.openFragment(new ContactUsFragment(), null);
-                                    break;
+                    ((MenuViewHolder) holder).linear.setOnClickListener(v -> {
+                        switch (position) {
+                            case 1:
+                                presenter.openHome();
+                                break;
+                            case 2:
+                                presenter.openFragment(new OurMuseumsFragment(), null);
+                                break;
+                            case 3:
+                                presenter.openFragment(new PlanYourVisitFragment(), null);
+                                break;
+                            case 4:
+                                presenter.openFragment(new EventsFragment(), null);
+                                break;
+                            case 5:
+                                presenter.openFragment(new NearbyFragment(), null);
+                                break;
+                            case 6:
+                                presenter.openFragment(new EducationListFragment(), null);
+                                break;
+                            case 7:
+                                presenter.openFragment(new AboutUsFragment(), null);
+                                break;
+                            case 8:
+                                presenter.openFragment(new ContactUsFragment(), null);
+                                break;
 
-                                case 9:
-                                    presenter.openFragment(new NotificationListFragment(), null);
-                                    break;
-                                case 10:
-                                    presenter.openFragment(new SettingFragment(), null);
-                                    break;
-                                case 11:
-                                    presenter.openFragment(new DemoFragment(), null);
-                                    break;
-                            }
+                            case 9:
+                                presenter.openFragment(new NotificationListFragment(), null);
+                                break;
+                            case 10:
+                                presenter.openFragment(new SettingFragment(), null);
+                                break;
+                            case 11:
+                                presenter.openFragment(new DemoFragment(), null);
+                                break;
                         }
                     });
 

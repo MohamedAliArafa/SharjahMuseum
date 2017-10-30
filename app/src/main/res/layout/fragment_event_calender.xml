@@ -1,101 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <AutoCompleteTextView
-        android:id="@+id/auto_complete_search_event"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:maxLines="1"
-        android:background="@drawable/search_bar"
-        android:drawableLeft="@drawable/ic_search"
-        android:drawableStart="@drawable/ic_search"
-        android:paddingLeft="@dimen/d10"
-        android:paddingRight="@dimen/d10" />
 
-    <LinearLayout
-        android:id="@+id/filter_layout"
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+        android:id="@+id/month_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@id/filter_layout"
-        android:layout_below="@+id/auto_complete_search_event"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp">
+        android:textColor="@color/GreenDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:gravity="center"
-            android:text="Filter"
-            android:textColor="@color/GreenLight" />
-
-
-        <ImageView
-            android:id="@+id/arrowIV"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="2dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_dropdown_tap" />
-
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
-            android:layout_marginStart="2dp"
-            android:background="@color/GrayLight" />
-
-        <ImageView
-            android:id="@+id/event_switch_to_calender"
-            android:layout_width="15dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_calender_tap" />
-    </LinearLayout>
-
-
-    <include
-        android:id="@+id/loading_layout"
-        layout="@layout/loading_layout"
+    <View
+        android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="1dp"
+        android:background="@color/GrayLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/month_tv" />
 
-
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendarView"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
         android:layout_below="@id/filter_layout"
-        android:layout_marginTop="@dimen/dots_height"
-        android:layout_width="match_parent"
-        app:mcv_arrowColor="@color/colorPrimary"
-        android:layout_height="wrap_content" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:compactCalendarCurrentDayBackgroundColor="@color/GreenLight"
+        app:compactCalendarTargetHeight="250dp"
+        app:compactCalendarTextSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-    <LinearLayout
-        android:id="@+id/main_filter_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/auto_complete_search_event"
-        android:layout_alignStart="@id/filter_layout"
-        android:layout_below="@id/filter_layout"
-        android:background="@drawable/bg_event_filter_layout_background"
-        android:orientation="vertical"
-        android:padding="8dp"
-        android:visibility="gone"/>
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

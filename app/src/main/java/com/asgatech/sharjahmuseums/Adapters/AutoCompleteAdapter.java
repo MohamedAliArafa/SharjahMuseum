@@ -62,8 +62,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<EventModel> {
     Filter nameFilter = new Filter() {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            String str = ((EventModel) resultValue).getTitle();
-            return str;
+            return ((EventModel) resultValue).getTitle();
         }
 
         @Override

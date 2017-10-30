@@ -20,6 +20,7 @@ import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
@@ -79,13 +80,15 @@ public class AboutUsFragment extends Fragment {
                 if (Utils.validObject(response)) {
                     GlideApp.with(getActivity()).load(URLS.URL_BASE + response.getImage())
                             .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .placeholder(R.drawable.image_about_default).into(mainImage);
                     GlideApp.with(getActivity()).load(URLS.URL_BASE + response.getOfficialImage())
                             .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .placeholder(R.drawable.image_m).into(memberImage);
 
-                    Log.e("Image" , URLS.URL_BASE+response.getImage());
-                    Log.e("Image" , URLS.URL_BASE+response.getOfficialImage());
+                    Log.e(getString(R.string.tag_image) , URLS.URL_BASE+response.getImage());
+                    Log.e(getString(R.string.tag_image) , URLS.URL_BASE+response.getOfficialImage());
                     memberWords.setText(response.getOfficalWord());
                     missionTv.setText(response.getMisson());
                     visionTv.setText(response.getVision());

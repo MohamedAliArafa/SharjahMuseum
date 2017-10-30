@@ -23,6 +23,8 @@ public interface HomeContract {
 
         void openFragmentFromChild(Fragment fragment, Bundle bundle);
 
+        void openFragmentFromChild(Fragment fragment, Bundle bundle, boolean shouldAddToBackStack);
+
         void hideLogo();
 
         void showLogo();
@@ -36,6 +38,8 @@ public interface HomeContract {
 
     interface UserAction {
         void openFragment(Fragment fragment, Bundle bundle);
+
+        void openFragment(Fragment fragment, Bundle bundle, boolean shouldAddToBackStack);
 
         void openHome();
     }

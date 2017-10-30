@@ -18,7 +18,7 @@ public class ButtonLight extends android.support.v7.widget.AppCompatButton {
 
     public ButtonLight(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if (new UserData().getLocalization(context) == Localization.ARABIC_VALUE) {
+        if ( UserData.getLocalization(context) == Localization.ARABIC_VALUE) {
             setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/arabic_light.otf"));
         } else {
             setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/english_light.TTF"));

@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,11 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.asgatech.sharjahmuseums.Activities.Events.EventsFragment;
 import com.asgatech.sharjahmuseums.Activities.OurMuseums.OurMuseumsFragment;
 import com.asgatech.sharjahmuseums.Adapters.HomeSliderImagesAdapter;
 import com.asgatech.sharjahmuseums.Fragments.AboutUsFragment;
 import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
-import com.asgatech.sharjahmuseums.Activities.Events.EventsListFragment;
 import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
 import com.asgatech.sharjahmuseums.Fragments.PlanYourVisitFragment;
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
@@ -31,8 +32,6 @@ import com.booking.rtlviewpager.RtlViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,13 +48,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ImageView dot;
     private LinearLayout dotsLayout;
     private int currentPage = 0;
-    Timer timer;
-    private LinearLayout meusemsLinear,event_layout,planVisitsLinear,notifications_linear,about_us_layout,education_layout;
+    private ConstraintLayout meusemsLinear, event_layout, planVisitsLinear, notifications_linear, about_us_layout, education_layout;
+    Runnable mUpdateRunnable;
+    Handler mHandler;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mUpdateRunnable != null)
+            mHandler.removeCallbacks(mUpdateRunnable);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,13 +69,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        setupViews(view);
+        mHandler = new Handler();
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupViews(view);
     }
 
     private void setupViews(View view) {
@@ -89,22 +96,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         about_us_layout.setOnClickListener(this);
         education_layout.setOnClickListener(this);
 
-        getAllSlider( UserData.getLocalization(getActivity()));
+        getAllSlider(UserData.getLocalization(getActivity()));
     }
 
-    private void getAllSlider(int langauge) {
-        ServerTool.getAllSlider(getActivity(), langauge, new ServerTool.APICallBack<List<AllSliderModel>>() {
+    private void getAllSlider(int language) {
+        ServerTool.getAllSlider(getActivity(), language, new ServerTool.APICallBack<List<AllSliderModel>>() {
             @Override
             public void onSuccess(List<AllSliderModel> response) {
                 if (Utils.validList(response)) {
                     if (isAdded())
                         setData(response);
                 }
-
             }
 
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
+
             }
         });
     }
@@ -122,24 +129,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         HomeSliderImagesAdapter imagesAdapter = new HomeSliderImagesAdapter(getActivity(), response, 1);
         imagesViewPager.setAdapter(imagesAdapter);
         final int NUM_PAGES = response.size();
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == NUM_PAGES) {
-                    currentPage = 0;
-                }
-                imagesViewPager.setCurrentItem(currentPage++, true);
+        mUpdateRunnable = () -> {
+            if (currentPage == NUM_PAGES) {
+                currentPage = 0;
             }
+            imagesViewPager.setCurrentItem(currentPage++, true);
         };
-
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 1000, 2000);
+        mHandler.postDelayed(mUpdateRunnable, 2000);
         imagesViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -194,6 +190,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -204,7 +201,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ((HomeActivity) getActivity()).openFragmentFromChild(new OurMuseumsFragment(), null);
                 break;
             case R.id.event_layout:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new EventsListFragment(), null);
+                ((HomeActivity) getActivity()).openFragmentFromChild(new EventsFragment(), null);
                 break;
             case R.id.plan_visits_linear:
                 ((HomeActivity) getActivity()).openFragmentFromChild(new PlanYourVisitFragment(), null);

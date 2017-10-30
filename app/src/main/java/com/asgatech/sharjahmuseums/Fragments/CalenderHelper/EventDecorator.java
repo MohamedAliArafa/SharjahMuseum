@@ -1,9 +1,11 @@
 package com.asgatech.sharjahmuseums.Fragments.CalenderHelper;
 
+import com.asgatech.sharjahmuseums.Models.EventDecoratorModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -12,12 +14,15 @@ import java.util.HashSet;
  */
 public class EventDecorator implements DayViewDecorator {
 
-    private int color;
+    private ArrayList<Integer> colors = new ArrayList<>();
     private HashSet<CalendarDay> dates;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates) {
-        this.color = color;
+    public EventDecorator(ArrayList<Integer> colors, Collection<CalendarDay> dates) {
+        this.colors = colors;
         this.dates = new HashSet<>(dates);
+    }
+
+    public EventDecorator(ArrayList<EventDecoratorModel> decoratorModels) {
     }
 
     @Override
@@ -27,8 +32,6 @@ public class EventDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-
-        view.addSpan(new DotsSpan(4 , 2 ,new int[]{color} ));
-
+        view.addSpan(new DotsSpan(4, 2, colors));
     }
 }

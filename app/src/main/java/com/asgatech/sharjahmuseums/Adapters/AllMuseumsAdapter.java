@@ -44,7 +44,7 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Log.e("image Link", URLS.URL_BASE + allMuseumsList.get(position).getImage());
+        Log.e(context.getString(R.string.tag_image), URLS.URL_BASE + allMuseumsList.get(position).getImage());
         Utils.loadSimplePic(context, URLS.URL_BASE + allMuseumsList.get(position).getImage(), holder.museumsImageView);
 
         holder.museumsNameTextView.setText(allMuseumsList.get(position).getTitle());

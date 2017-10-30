@@ -31,9 +31,9 @@ import okhttp3.ResponseBody;
  * A simple {@link Fragment} subclass.
  */
 public class PlanYourVisitFragment extends Fragment {
-  private   RecyclerView recyclerView;
-    private  TextViewLight planDescriptionTextView,groupVisitsDescriptionTextView;
-    private  Button bookNowBtn;
+    private RecyclerView recyclerView;
+    private TextViewLight planDescriptionTextView, groupVisitsDescriptionTextView;
+    private Button bookNowBtn;
     private String bookLink;
     private LinearLayout groupVisitsLinear;
 
@@ -55,30 +55,27 @@ public class PlanYourVisitFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
         getPlanVisits(new UserData().getLocalization(getActivity()));
-        bookNowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), OpenWebViewActivity.class);
-                Log.e("bookLink",bookLink);
-                intent.putExtra("bookLink",bookLink);
-                startActivity(intent);
-            }
+        bookNowBtn.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(), OpenWebViewActivity.class);
+            Log.e("bookLink", bookLink);
+            intent.putExtra("bookLink", bookLink);
+            startActivity(intent);
         });
 
     }
 
     private void initView(View view) {
-        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.plan_your_visit));
-        groupVisitsLinear=view.findViewById(R.id.layout_group_visits);
+        ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.plan_your_visit));
+        groupVisitsLinear = view.findViewById(R.id.layout_group_visits);
         recyclerView = view.findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        planDescriptionTextView=view.findViewById(R.id.plan_txt);
-        groupVisitsDescriptionTextView=view.findViewById(R.id.describtion_group_visits);
+        recyclerView.setNestedScrollingEnabled(false);
+        planDescriptionTextView = view.findViewById(R.id.plan_txt);
+        groupVisitsDescriptionTextView = view.findViewById(R.id.describtion_group_visits);
         groupVisitsDescriptionTextView.setMovementMethod(new ScrollingMovementMethod());
-        bookNowBtn=view.findViewById(R.id.book_nw);
+        bookNowBtn = view.findViewById(R.id.book_nw);
 
 
     }
@@ -87,13 +84,12 @@ public class PlanYourVisitFragment extends Fragment {
         ServerTool.getPlanVisits(getActivity(), lang, new ServerTool.APICallBack<PlanYourVisitsModel>() {
             @Override
             public void onSuccess(PlanYourVisitsModel response) {
-
                 planDescriptionTextView.setText(response.getPlaneText());
                 groupVisitsDescriptionTextView.setText(response.getGrouptext());
-               bookLink= response.getGroupBookLink();
-                Log.e("",response.getPlanViste().size()+"");
-
-                 recyclerView.setAdapter(new PlanYourVisitAdapter(getActivity() , response.getPlanViste() ,recyclerView));
+                bookLink = response.getGroupBookLink();
+                Log.e("", response.getPlanVist().size() + "");
+                recyclerView.setAdapter(new PlanYourVisitAdapter(getActivity(), response.getPlanVist(), recyclerView));
+                recyclerView.setHasFixedSize(true);
                 groupVisitsLinear.setVisibility(View.VISIBLE);
             }
 

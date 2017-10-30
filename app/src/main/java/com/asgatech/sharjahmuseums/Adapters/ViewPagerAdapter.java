@@ -14,6 +14,7 @@ import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         ImageView img = layout.findViewById(R.id.view_paget_image);
         GlideApp.with(context).load(URLS.URL_BASE +items.get(position).getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.mipmap.ic_launcher).into(img);
 //        List<EventImage> list = new ArrayList<>();
 //        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerView);

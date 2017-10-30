@@ -48,9 +48,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mRunnable != null) {
-            mHandler.removeCallbacks(mRunnable);
-        }
+        if (mRunnable != null) mHandler.removeCallbacks(mRunnable);
     }
 
     private void animateFadeIN(ImageView imgv) {
@@ -75,5 +73,4 @@ public class SplashActivity extends AppCompatActivity {
         Localization.setLanguage(SplashActivity.this, UserData.getLocalization(SplashActivity.this));
         super.onResume();
     }
-
 }

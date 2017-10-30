@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Activities.NotificationDetailActivity;
-import com.asgatech.sharjahmuseums.Models.AllMuseumCategoryResponse;
+import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -26,9 +27,9 @@ import java.util.List;
 
 public class MuseumCategoryAdapter extends RecyclerView.Adapter<MuseumCategoryAdapter.MyViewHolder> {
     Context context;
-    private List<AllMuseumCategoryResponse> data;
+    private List<MuseumCategoryResponse> data;
 
-    public MuseumCategoryAdapter(Context context, List<AllMuseumCategoryResponse> data) {
+    public MuseumCategoryAdapter(Context context, List<MuseumCategoryResponse> data) {
         this.context = context;
         this.data = data;
     }
@@ -47,6 +48,7 @@ public class MuseumCategoryAdapter extends RecyclerView.Adapter<MuseumCategoryAd
 
         GlideApp.with(context).load(URLS.URL_BASE + data.get(position).getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.no_image).into(holder.categoryImageView);
 
         holder.itemView.setOnClickListener(view -> {

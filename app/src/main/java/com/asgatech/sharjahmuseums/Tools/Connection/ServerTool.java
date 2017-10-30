@@ -1,28 +1,31 @@
 package com.asgatech.sharjahmuseums.Tools.Connection;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 
 import com.asgatech.sharjahmuseums.Models.AboutUsModel;
-import com.asgatech.sharjahmuseums.Models.AddReviewRequest;
-import com.asgatech.sharjahmuseums.Models.AllMuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.Models.ContactUsModel;
 import com.asgatech.sharjahmuseums.Models.DemoImage;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
+import com.asgatech.sharjahmuseums.Models.EventDetailsResponseModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
-import com.asgatech.sharjahmuseums.Models.EventdetatailsResponceModel;
-import com.asgatech.sharjahmuseums.Models.InsertDeviceTokenRequestModel;
+import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
-import com.asgatech.sharjahmuseums.Models.NotificationListRequestModel;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
-import com.asgatech.sharjahmuseums.Models.PagingModel;
 import com.asgatech.sharjahmuseums.Models.PlanYourVisitsModel;
-import com.asgatech.sharjahmuseums.Models.ReviewVisitorsRequest;
+import com.asgatech.sharjahmuseums.Models.Request.AddReviewRequest;
+import com.asgatech.sharjahmuseums.Models.Request.InsertDeviceTokenRequestModel;
+import com.asgatech.sharjahmuseums.Models.Request.NotificationListRequestModel;
+import com.asgatech.sharjahmuseums.Models.Request.PagingModel;
+import com.asgatech.sharjahmuseums.Models.Request.ReviewVisitorsRequest;
+import com.asgatech.sharjahmuseums.Models.Request.SearchPagingModel;
+import com.asgatech.sharjahmuseums.Models.Request.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
-import com.asgatech.sharjahmuseums.Models.SearchPagingModel;
-import com.asgatech.sharjahmuseums.Models.UpdateRequestModel;
+import com.asgatech.sharjahmuseums.Tools.DialogTool.ErrorDialog;
+import com.asgatech.sharjahmuseums.Tools.DialogTool.loadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -48,7 +51,7 @@ public class ServerTool {
     public interface ApiInterface {
 
         @GET(URLS.URL_ALL_SLIDER)
-        Call<List<AllSliderModel>> getAllSlider(@Query("lang") int langauge);
+        Call<List<AllSliderModel>> getAllSlider(@Query("lang") int language);
 
         @POST(URLS.URL_ALL_MUSEUMS)
         Call<RealmList<MuseumsDetailsModel>> getAllMuseums(@Body PagingModel pagingModel);
@@ -57,7 +60,7 @@ public class ServerTool {
         Call<RealmList<MuseumsDetailsModel>> getMuseumWithSearch(@Body SearchPagingModel pagingModel);
 
         @GET(URLS.URL_MUSEUMS_DETAILS)
-        Call<MuseumsDetailsModel> getMuseumsDetails(@Query("Musid") int MuseumsID, @Query("lang") int langauge);
+        Call<MuseumsDetailsModel> getMuseumsDetails(@Query("Musid") int MuseumsID, @Query("lang") int language);
 
         @POST(URLS.URL_GET_EVENTS)
         Call<RealmList<EventModel>> getEvents(@Body JsonObject data);
@@ -68,7 +71,7 @@ public class ServerTool {
 
 
         @GET(URLS.URL_GET_EVENTS_DETAILS)
-        Call<EventdetatailsResponceModel> getEventsDetails(@Query("eventid") int eventId, @Query("lang") int lang);
+        Call<EventDetailsResponseModel> getEventsDetails(@Query("eventid") int eventId, @Query("lang") int lang);
 
         @GET(URLS.URL_GET_DEMO)
         Call<List<DemoImage>> getDemo(@Query("lang") int lang);
@@ -108,58 +111,65 @@ public class ServerTool {
         Call<Integer> UpdateNotificationList(@Body UpdateRequestModel updateRequestModel);
 
         @GET(URLS.URL_GET_ALLMUSEUM_CATEGORY)
-        Call<RealmList<AllMuseumCategoryResponse>> getALLMuseumCategray(@Query("lang") int lang);
+        Call<RealmList<MuseumCategoryResponse>> getALLMuseumCategory(@Query("lang") int lang);
 
     }
 
 
-    public static void getAllSlider(Context context, int langauge, final APICallBack apiCallBack) {
+    public static void getAllSlider(Context context, int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
-        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getAllSlider(langauge);
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getAllSlider(language);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getMuseumsDetails(Context context, int MuseumsID, int langauge, final APICallBack apiCallBack) {
+    public static void getMuseumsDetails(Context context, int MuseumsID, int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
-        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumsDetails(MuseumsID, langauge);
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumsDetails(MuseumsID, language);
+        MuseumsDetailsModel model = Realm.getDefaultInstance()
+                .where(MuseumsDetailsModel.class).equalTo("Mus_ID", MuseumsID)
+                .findFirst();
+        if (model != null)
+            apiCallBack.onSuccess(model);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
     public static void getAllMuseums(Context context, PagingModel pagingModel, final APICallBack apiCallBack) {
-        Log.d("langaugeRequest", new Gson().toJson(pagingModel) + "");
+        Log.d("languageRequest", new Gson().toJson(pagingModel) + "");
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getAllMuseums(pagingModel);
-        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance().where(MuseumsDetailsModel.class).findAll();
+        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance()
+                .where(MuseumsDetailsModel.class).findAll();
         if (model.isLoaded() && !model.isEmpty())
             apiCallBack.onSuccess(model);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
     public static void getMuseumWithSearch(Context context, SearchPagingModel pagingModel, final APICallBack apiCallBack) {
-        Log.d("langaugeRequest", new Gson().toJson(pagingModel) + "");
+        Log.d("languageRequest", new Gson().toJson(pagingModel) + "");
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumWithSearch(pagingModel);
-        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance().where(MuseumsDetailsModel.class).contains("Title", pagingModel.getKeyword(), Case.INSENSITIVE).findAll();
+        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance()
+                .where(MuseumsDetailsModel.class).contains("Title", pagingModel.getKeyword(), Case.INSENSITIVE).findAll();
         if (model.isLoaded() && !model.isEmpty())
             apiCallBack.onSuccess(model);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getEvents(Context context, int catId, int pageNumber, int pageSize, int langauge, final APICallBack apiCallBack) {
+    public static void getEvents(Context context, int catId, int pageNumber, int pageSize, int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
         obj.addProperty("ID", catId);
         obj.addProperty("pagenumber", pageNumber);
         obj.addProperty("pagesize", pageSize);
-        obj.addProperty("lang", langauge);
+        obj.addProperty("lang", language);
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getEvents(obj);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getEventsCategories(Context context, int langauge, final APICallBack apiCallBack) {
+    public static void getEventsCategories(Context context, int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
-        obj.addProperty("lang", langauge);
+        obj.addProperty("lang", language);
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getEventsCategories();
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
@@ -266,35 +276,36 @@ public class ServerTool {
 
     public static void getALLMuseumCategory(Context context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
-        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getALLMuseumCategray(lang);
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getALLMuseumCategory(lang);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    private static <M> void makeRequest(final Context context, Call call, final APICallBack apiCallBack, final RetrofitTool retrofitTool) {
-//        final Dialog dialogsLoading = new loadingDialog().showDialog(context);
-        call.enqueue(new RetrofitTool.APICallBack<M>() {
+    private static <Foo> void makeRequest(Context context, Call call, final APICallBack apiCallBack, final RetrofitTool retrofitTool) {
+        Dialog dialogsLoading = new loadingDialog().showDialog(context);
+        call.enqueue(new RetrofitTool.APICallBack<Foo>() {
             @Override
-            public void onSuccess(M response) {
+            public void onSuccess(Foo response) {
                 try {
-                    apiCallBack.onSuccess(response);
                     if (response instanceof RealmObject) {
                         Realm.getDefaultInstance().beginTransaction();
                         Realm.getDefaultInstance().copyToRealmOrUpdate((RealmObject) response);
                         Realm.getDefaultInstance().commitTransaction();
                     }else if (response instanceof RealmList){
                         Realm.getDefaultInstance().beginTransaction();
+                        Realm.getDefaultInstance().delete(((RealmList) response).get(0).getClass());
                         Realm.getDefaultInstance().copyToRealmOrUpdate((RealmList) response);
                         Realm.getDefaultInstance().commitTransaction();
                     }
                     //Hide loading
-//                    if (dialogsLoading != null) {
-//                        dialogsLoading.dismiss();
-//                    }
+                    if (dialogsLoading != null) {
+                        dialogsLoading.dismiss();
+                    }
+                    apiCallBack.onSuccess(response);
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    if (dialogsLoading != null) {
-//                        dialogsLoading.dismiss();
-//                    }
+                    if (dialogsLoading != null) {
+                        dialogsLoading.dismiss();
+                    }
                 }
             }
 
@@ -304,9 +315,9 @@ public class ServerTool {
                 try {
                     handleGeneralFailure(context, statusCode, responseBody, retrofitTool);
                     apiCallBack.onFailed(statusCode, responseBody);
-//                    if (dialogsLoading != null) {
-//                        dialogsLoading.dismiss();
-//                    }
+                    if (dialogsLoading != null) {
+                        dialogsLoading.dismiss();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -316,10 +327,11 @@ public class ServerTool {
 
     private static void handleGeneralFailure(Context context, int statusCode, ResponseBody responseBody, RetrofitTool retrofitTool) {
         Retrofit retrofit = retrofitTool.getRetrofit(URLS.URL_BASE);
+        new ErrorDialog().showDialog(context);
         Log.d("statusCode", statusCode + "");
     }
 
-    public static interface APICallBack<T> {
+    public interface APICallBack<T> {
         void onSuccess(T response);
 
         void onFailed(int statusCode, ResponseBody responseBody);

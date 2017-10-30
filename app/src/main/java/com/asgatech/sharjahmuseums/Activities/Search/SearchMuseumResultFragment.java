@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.asgatech.sharjahmuseums.Adapters.SearchMuseumsAdapter;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
-import com.asgatech.sharjahmuseums.Models.SearchPagingModel;
+import com.asgatech.sharjahmuseums.Models.Request.SearchPagingModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;

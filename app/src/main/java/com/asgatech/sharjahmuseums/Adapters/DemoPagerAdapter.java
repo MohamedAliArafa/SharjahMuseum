@@ -16,6 +16,7 @@ import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class DemoPagerAdapter extends PagerAdapter {
         if (UserData.getLocalization(context) == Localization.ARABIC_VALUE) {
             GlideApp.with(context).load(URLS.URL_BASE + items.get(position).getImage())
                     .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.mipmap.ic_launcher).into(img);
         }else {
             GlideApp.with(context).load(URLS.URL_BASE + items.get(position).getImage())

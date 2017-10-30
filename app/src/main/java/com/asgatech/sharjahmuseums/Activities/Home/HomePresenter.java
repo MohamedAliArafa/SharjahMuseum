@@ -44,6 +44,28 @@ public class HomePresenter implements HomeContract.UserAction {
     }
 
     @Override
+    public void openFragment(Fragment fragment, Bundle bundle, boolean shouldAddToBackStack) {
+        Fragment fragmentCheck = mFragmentManager.findFragmentById(R.id.content_main);
+        if (fragmentCheck.getClass() == fragment.getClass()) {
+            mView.closeDrawer();
+            return;
+        }
+        mView.showToolbar();
+        mView.changeToolbarTitle("");
+        mView.restToolbarColor();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+        transaction.replace(R.id.content_main, fragment);
+        if (shouldAddToBackStack)
+            transaction.addToBackStack(null);
+        transaction.commit();
+        mView.closeDrawer();
+        mView.hideLogo();
+    }
+
+    @Override
     public void openHome() {
         mView.showToolbar();
         mView.changeToolbarTitle("");

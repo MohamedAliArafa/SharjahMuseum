@@ -1,5 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.HighlightDetails;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,10 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Models.HightLightEntity;
+import com.asgatech.sharjahmuseums.Models.HighLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
+import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -21,9 +24,10 @@ import com.asgatech.sharjahmuseums.Tools.Utils;
 import java.util.ArrayList;
 
 public class HighlightsDetailActivity extends AppCompatActivity {
-    public ImageView toolbarHomeImageView;
-    ViewPager imagesViewPager;
-    ArrayList<HightLightEntity> highlightList;
+    ImageView mToolbarHomeImageView;
+    TextView mToolbarTitleTextView;
+    ViewPager mImagesViewPager;
+    ArrayList<HighLightEntity> mHighlightList;
     private int mPosition;
 
     @Override
@@ -38,34 +42,32 @@ public class HighlightsDetailActivity extends AppCompatActivity {
     public void setToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
-        toolbarHomeImageView.setVisibility(View.VISIBLE);
-        toolbarHomeImageView.setImageResource(R.drawable.ic_close_white);
-        toolbarHomeImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_sahre_white);
+        mToolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
+        mToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
+        mToolbarTitleTextView.setText(getString(R.string.title_activity_highlight_detail));
+        mToolbarHomeImageView.setVisibility(View.VISIBLE);
+        mToolbarHomeImageView.setImageResource(R.drawable.ic_close_white);
+        mToolbarHomeImageView.setOnClickListener(view -> onBackPressed());
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_sahre_white);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     void setUpView() {
-        imagesViewPager = findViewById(R.id.images_view_pager);
-        highlightList = getIntent().getParcelableArrayListExtra(ConstantUtils.HIGHLIGHT_LIST);
+        mImagesViewPager = findViewById(R.id.images_view_pager);
+        mHighlightList = getIntent().getParcelableArrayListExtra(ConstantUtils.HIGHLIGHT_LIST);
         mPosition = getIntent().getIntExtra(ConstantUtils.HIGHLIGHT_LIST_POSITION, 0);
         FragmentManager fm = getSupportFragmentManager();
-        MyFragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(fm, highlightList);
-        imagesViewPager.setAdapter(pagerAdapter);
-        imagesViewPager.setCurrentItem(mPosition);
+        MyFragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(fm, mHighlightList);
+        mImagesViewPager.setAdapter(pagerAdapter);
+        mImagesViewPager.setCurrentItem(mPosition);
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-        ArrayList<HightLightEntity> highlightList;
+        ArrayList<HighLightEntity> highlightList;
 
-        MyFragmentPagerAdapter(FragmentManager fm, ArrayList<HightLightEntity> highlightList) {
+        MyFragmentPagerAdapter(FragmentManager fm, ArrayList<HighLightEntity> highlightList) {
             super(fm);
             this.highlightList = highlightList;
         }
@@ -87,6 +89,15 @@ public class HighlightsDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 //icon share to
+                HighLightEntity entity = mHighlightList.get(mImagesViewPager.getCurrentItem());
+                Intent intentShare = new Intent(Intent.ACTION_SEND);
+                intentShare.setType("text/plain");
+                intentShare.putExtra(Intent.EXTRA_TEXT, entity.getTitle() + "\n" +
+                        "\n" + getResources().getString(R.string.description) + ":" + entity.getText()
+                        + "\n" + URLS.URL_BASE + entity.getPhoto());
+                Intent chooser = Intent.createChooser(intentShare, getString(R.string.title_share_via));
+                chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(chooser);
 //                onBackPressed();
                 return true;
         }
@@ -102,7 +113,7 @@ public class HighlightsDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        new Localization().setLanguage(HighlightsDetailActivity.this, UserData.getLocalization(HighlightsDetailActivity.this));
+        Localization.setLanguage(HighlightsDetailActivity.this, UserData.getLocalization(HighlightsDetailActivity.this));
         super.onResume();
     }
 }

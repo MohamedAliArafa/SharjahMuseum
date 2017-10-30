@@ -19,7 +19,6 @@
                 android:id="@+id/iv_mainimage"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:src="@drawable/image_m"
                 android:layout_height="@dimen/d250" />
 
             <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
@@ -28,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/GrayDark"
                 android:layout_margin="20dp"
-                android:text="title"
                 android:textSize="@dimen/font_size_xlarge"/>
 
 
@@ -39,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/GrayDark"
                 android:layout_margin="20dp"
-                android:text="@string/description"
                 android:textSize="@dimen/font_size_large"/>
 
         </LinearLayout>

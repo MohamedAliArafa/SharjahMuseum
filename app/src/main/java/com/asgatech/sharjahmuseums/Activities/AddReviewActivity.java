@@ -20,7 +20,7 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
-import com.asgatech.sharjahmuseums.Models.AddReviewRequest;
+import com.asgatech.sharjahmuseums.Models.Request.AddReviewRequest;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
@@ -29,6 +29,7 @@ import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.asgatech.sharjahmuseums.Tools.ValidationTool;
 
 import okhttp3.ResponseBody;
 
@@ -42,12 +43,14 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     float rateValue;
     private TextViewBold ToolbarTitleTextView;
     private String museumColor;
+    private ValidationTool validationTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_add_review);
+        validationTool = new ValidationTool(this);
         setToolBar();
         setUpView();
     }
@@ -62,7 +65,7 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         museumColor = getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
         Drawable background = toolbar.getBackground();
         if (museumColor != null) {
-            Log.e("museumColor", museumColor);
+            Log.e(getString(R.string.tag_musmeum_color), museumColor);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -93,37 +96,31 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
 
         Drawable background = postButton.getBackground();
         if (museumColor != null) {
-            Log.e("museumColor", museumColor);
+            Log.e(getString(R.string.tag_musmeum_color), museumColor);
             background.setColorFilter(Color.parseColor(museumColor), PorterDuff.Mode.SRC_IN);
         }
 
-        barReviewStars.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                rateValue = barReviewStars.getRating();
-                // System.out.println("Rate for Module is"+rateValue);
-                switch ((int) rateValue) {
-                    case 1:
-                        rateValue = 1;
-                        break;
-                    case 2:
-                        rateValue = 2;
-                        break;
-                    case 3:
-                        rateValue = 3;
-                        break;
-                    case 4:
-                        rateValue = 4;
-                        break;
-                    case 5:
-                        rateValue = 5;
-                        break;
-
-
-                }
-                Log.e("Rate for Module is", String.valueOf(rateValue));
+        barReviewStars.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            rateValue = barReviewStars.getRating();
+            // System.out.println("Rate for Module is"+rateValue);
+            switch ((int) rateValue) {
+                case 1:
+                    rateValue = 1;
+                    break;
+                case 2:
+                    rateValue = 2;
+                    break;
+                case 3:
+                    rateValue = 3;
+                    break;
+                case 4:
+                    rateValue = 4;
+                    break;
+                case 5:
+                    rateValue = 5;
+                    break;
             }
+            Log.e("Rate for Module is", String.valueOf(rateValue));
         });
 
 
@@ -135,7 +132,7 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
             public void onSuccess(Integer response) {
                 if (response == 1) {
                     Toast.makeText(AddReviewActivity.this, getString(R.string.success_send_review), Toast.LENGTH_SHORT).show();
-                    emptyFields();
+                    finish();
                 } else {
                     Toast.makeText(AddReviewActivity.this, getString(R.string.failed_send_review), Toast.LENGTH_SHORT).show();
                 }
@@ -176,22 +173,30 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onResume() {
-        new Localization().setLanguage(AddReviewActivity.this, new UserData().getLocalization(AddReviewActivity.this));
+        Localization.setLanguage(AddReviewActivity.this, UserData.getLocalization(AddReviewActivity.this));
         super.onResume();
+    }
+
+    private boolean isValid() {
+        boolean validName = validationTool.validateRequiredField(tvEmail, getString(R.string.invalid_email));
+        boolean validMail = validationTool.validateEmail(tvReview, getString(R.string.messeage_hint));
+        return validMail && validName;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_post:
-
-                if (getIntent().hasExtra(ConstantUtils.EXTRA_MUSEUMS_ID)) {
-                    museumsID = getIntent().getIntExtra((ConstantUtils.EXTRA_MUSEUMS_ID), 0);
-                    if (museumsID > 0) {
-                        AddReviewRequest addReviewRequest = new AddReviewRequest(tvEmail.getText().toString(), tvReview.getText().toString(), (int) rateValue, museumsID);
-                        AddReview(addReviewRequest);
-                    }
-                }
+                if (isValid())
+                    if (barReviewStars.getRating() > 0)
+                        if (getIntent().hasExtra(ConstantUtils.EXTRA_MUSEUMS_ID)) {
+                            museumsID = getIntent().getIntExtra((ConstantUtils.EXTRA_MUSEUMS_ID), 0);
+                            if (museumsID > 0) {
+                                AddReviewRequest addReviewRequest = new AddReviewRequest(tvEmail.getText().toString(), tvReview.getText().toString(), (int) rateValue, museumsID);
+                                AddReview(addReviewRequest);
+                            }
+                        } else
+                            Toast.makeText(this, R.string.rate_error_hint, Toast.LENGTH_SHORT).show();
 //                    if (nameEditText.getText()==null || nameEditText.getText().toString().trim().equals("")){
 //                        nameEditText.setError("Name required");
 //                        return;
