@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\FlowCoverLib\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\FlowCoverLib\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "5",
+                        "startColumns": "4",
+                        "startOffsets": "462",
+                        "endColumns": "51",
+                        "endOffsets": "509"
+                    }
+                }
+            ]
+        }
+    ]
+}
