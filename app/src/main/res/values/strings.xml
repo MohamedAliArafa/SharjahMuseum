@@ -74,7 +74,7 @@
 
     <string name="info">Info</string>
 
-    <string name="invalid_email"> email </string>
+    <string name="invalid_email">invalid  email </string>
     <string name="invalid_phone">invalid phone number</string>
 
     <string name="language">Language</string>

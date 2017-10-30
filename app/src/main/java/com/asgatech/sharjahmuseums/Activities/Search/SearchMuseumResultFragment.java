@@ -1,6 +1,7 @@
 package com.asgatech.sharjahmuseums.Activities.Search;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +47,12 @@ public class SearchMuseumResultFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((SearchMuseumActivity) getActivity()).setCurrentId(mCatID);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -53,7 +60,8 @@ public class SearchMuseumResultFragment extends Fragment {
         ButterKnife.bind(this, view);
         mMuseumsResultRecyclerView.setHasFixedSize(true);
         mMuseumsResultRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        pagingModel = new SearchPagingModel(1, 1000, UserData.getLocalization(getActivity()), mCatID, mKeyword);
+        pagingModel = new SearchPagingModel(1, 1000,
+                UserData.getLocalization(getActivity()), mCatID, mKeyword);
         getResultMuseums(pagingModel);
         return view;
     }
@@ -63,7 +71,8 @@ public class SearchMuseumResultFragment extends Fragment {
             @Override
             public void onSuccess(List<MuseumsDetailsModel> response) {
                 if (Utils.validList(response)) {
-                    SearchMuseumsAdapter museumsAdapter = new SearchMuseumsAdapter(getActivity(), response, ((SearchContract.ModelView) getActivity()).getPresenter());
+                    SearchMuseumsAdapter museumsAdapter = new SearchMuseumsAdapter(getActivity(),
+                            response, ((SearchContract.ModelView) getActivity()).getPresenter());
                     mMuseumsResultRecyclerView.setAdapter(museumsAdapter);
                 }
             }

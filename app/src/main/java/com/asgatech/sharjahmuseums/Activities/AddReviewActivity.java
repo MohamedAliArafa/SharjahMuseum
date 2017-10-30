@@ -178,8 +178,8 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     }
 
     private boolean isValid() {
-        boolean validName = validationTool.validateRequiredField(tvEmail, getString(R.string.invalid_email));
-        boolean validMail = validationTool.validateEmail(tvReview, getString(R.string.messeage_hint));
+        boolean validName = validationTool.validateEmail(tvEmail, getString(R.string.invalid_email));
+        boolean validMail = validationTool.validateRequiredField(tvReview, getString(R.string.messeage_hint));
         return validMail && validName;
     }
 

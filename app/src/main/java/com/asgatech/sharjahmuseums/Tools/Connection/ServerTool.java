@@ -65,10 +65,8 @@ public class ServerTool {
         @POST(URLS.URL_GET_EVENTS)
         Call<RealmList<EventModel>> getEvents(@Body JsonObject data);
 
-
         @GET(URLS.URL_GET_EVENTS_CATS)
         Call<List<EventCategoryModel>> getEventsCategories();
-
 
         @GET(URLS.URL_GET_EVENTS_DETAILS)
         Call<EventDetailsResponseModel> getEventsDetails(@Query("eventid") int eventId, @Query("lang") int lang);
@@ -79,14 +77,11 @@ public class ServerTool {
         @GET(URLS.URL_GET_ABOUT_US)
         Call<AboutUsModel> getAbout(@Query("lang") int lang);
 
-
         @POST(URLS.URL_SEND_FEEDBACK)
         Call<Integer> sendFeedback(@Body JsonObject data);
 
-
         @GET(URLS.URL_GET_CONTACTS)
         Call<ContactUsModel> getContactData(@Query("lang") int lang);
-
 
         @GET(URLS.URL_GET_EDUCATION_LIST)
         Call<List<EducationListModel>> getEducationList(@Query("lang") int lang);
@@ -146,16 +141,27 @@ public class ServerTool {
 
     public static void getMuseumWithSearch(Context context, SearchPagingModel pagingModel, final APICallBack apiCallBack) {
         Log.d("languageRequest", new Gson().toJson(pagingModel) + "");
-        final RetrofitTool retrofitTool = new RetrofitTool();
-        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumWithSearch(pagingModel);
-        RealmResults<MuseumsDetailsModel> model = Realm.getDefaultInstance()
-                .where(MuseumsDetailsModel.class).contains("Title", pagingModel.getKeyword(), Case.INSENSITIVE).findAll();
+//        final RetrofitTool retrofitTool = new RetrofitTool();
+//        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumWithSearch(pagingModel);
+        RealmResults<MuseumsDetailsModel> model;
+        if (pagingModel.getCatID() == 0)
+            model = Realm.getDefaultInstance()
+                    .where(MuseumsDetailsModel.class)
+                    .contains("Title", pagingModel.getKeyword(), Case.INSENSITIVE)
+                    .findAll();
+        else
+            model = Realm.getDefaultInstance()
+                    .where(MuseumsDetailsModel.class)
+                    .equalTo("CatID", pagingModel.getCatID())
+                    .contains("Title", pagingModel.getKeyword(), Case.INSENSITIVE)
+                    .findAll();
         if (model.isLoaded() && !model.isEmpty())
             apiCallBack.onSuccess(model);
-        makeRequest(context, call, apiCallBack, retrofitTool);
+//        makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getEvents(Context context, int catId, int pageNumber, int pageSize, int language, final APICallBack apiCallBack) {
+    public static void getEvents(Context context, int catId, int pageNumber, int pageSize,
+                                 int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
         obj.addProperty("ID", catId);
@@ -290,7 +296,7 @@ public class ServerTool {
                         Realm.getDefaultInstance().beginTransaction();
                         Realm.getDefaultInstance().copyToRealmOrUpdate((RealmObject) response);
                         Realm.getDefaultInstance().commitTransaction();
-                    }else if (response instanceof RealmList){
+                    } else if (response instanceof RealmList) {
                         Realm.getDefaultInstance().beginTransaction();
                         Realm.getDefaultInstance().delete(((RealmList) response).get(0).getClass());
                         Realm.getDefaultInstance().copyToRealmOrUpdate((RealmList) response);
@@ -301,6 +307,9 @@ public class ServerTool {
                         dialogsLoading.dismiss();
                     }
                     apiCallBack.onSuccess(response);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                    Realm.getDefaultInstance().commitTransaction();
                 } catch (Exception e) {
                     e.printStackTrace();
                     if (dialogsLoading != null) {

@@ -58,17 +58,18 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
         widget.setUseThreeLetterAbbreviation(true);
         widget.shouldDrawIndicatorsBelowSelectedDays(true);
-        mMonthTextView.setText(sdf.format( widget.getFirstDayOfCurrentMonth()));
+        mMonthTextView.setText(sdf.format(widget.getFirstDayOfCurrentMonth()));
         widget.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 String date = sdf.format(dateClicked);
-                ((EventsFragment) getParentFragment()).openList(
-                        Realm.getDefaultInstance()
-                                .where(EventModel.class)
-                                .equalTo("startDate", date)
-                                .findAll());
+                List<EventModel> models = Realm.getDefaultInstance()
+                        .where(EventModel.class)
+                        .equalTo("startDate", date)
+                        .findAll();
+                if (!models.isEmpty())
+                    ((EventsFragment) getParentFragment()).openList(models);
             }
 
             @Override
@@ -108,8 +109,12 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
 
     @Override
     public void updateView(List<EventModel> models, List<EventCategoryModel> categoryModels) {
-        if (models.isEmpty())
+        if (models.isEmpty()) {
             new NoDataDialog().showDialog(getContext());
+            setData(Realm.getDefaultInstance()
+                    .where(EventModel.class)
+                    .findAll());
+        }
         setData(models);
     }
 }

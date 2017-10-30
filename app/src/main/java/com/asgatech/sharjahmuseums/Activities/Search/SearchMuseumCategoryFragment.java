@@ -70,10 +70,8 @@ public class SearchMuseumCategoryFragment extends Fragment {
     }
 
     private void setData(final List<MuseumCategoryResponse> data) {
-        MuseumCategoryAdapter adapter = new MuseumCategoryAdapter(getContext(), data);
+        MuseumCategoryAdapter adapter = new MuseumCategoryAdapter(getContext(), data, getFragmentManager());
         mRecycleCategory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
-
 }

@@ -1,14 +1,15 @@
 package com.asgatech.sharjahmuseums.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.asgatech.sharjahmuseums.Activities.NotificationDetailActivity;
+import com.asgatech.sharjahmuseums.Activities.Search.SearchMuseumResultFragment;
 import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -26,12 +27,14 @@ import java.util.List;
  */
 
 public class MuseumCategoryAdapter extends RecyclerView.Adapter<MuseumCategoryAdapter.MyViewHolder> {
+    FragmentManager fragmentManager;
     Context context;
-    private List<MuseumCategoryResponse> data;
+    List<MuseumCategoryResponse> data;
 
-    public MuseumCategoryAdapter(Context context, List<MuseumCategoryResponse> data) {
+    public MuseumCategoryAdapter(Context context, List<MuseumCategoryResponse> data, FragmentManager fragmentManager) {
         this.context = context;
         this.data = data;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -52,11 +55,16 @@ public class MuseumCategoryAdapter extends RecyclerView.Adapter<MuseumCategoryAd
                 .placeholder(R.drawable.no_image).into(holder.categoryImageView);
 
         holder.itemView.setOnClickListener(view -> {
-            Intent intent= new Intent(context, NotificationDetailActivity.class);
-            intent.putExtra("title",data.get(position).getTitle());
-            intent.putExtra("image",data.get(position).getImage());
-            intent.putExtra("id",data.get(position).getID());
-            context.startActivity(intent);
+//            Intent intent= new Intent(context, NotificationDetailActivity.class);
+//            intent.putExtra("title",data.get(position).getTitle());
+//            intent.putExtra("image",data.get(position).getImage());
+//            intent.putExtra("id",data.get(position).getID());
+//            context.startActivity(intent);
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragment_container,
+                    SearchMuseumResultFragment.newInstance(data.get(position).getID(), ""));
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
     }
 

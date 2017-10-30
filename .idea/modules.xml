@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CompatCalenderLib/CompatCalenderLib.iml" filepath="$PROJECT_DIR$/CompatCalenderLib/CompatCalenderLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlowCoverLib/FlowCoverLib.iml" filepath="$PROJECT_DIR$/FlowCoverLib/FlowCoverLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Sharjah Museum.iml" filepath="$PROJECT_DIR$/Sharjah Museum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SharjahMuseum.iml" filepath="$PROJECT_DIR$/SharjahMuseum.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

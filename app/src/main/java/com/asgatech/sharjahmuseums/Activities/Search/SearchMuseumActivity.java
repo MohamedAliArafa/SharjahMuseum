@@ -26,6 +26,7 @@ public class SearchMuseumActivity extends AppCompatActivity implements SearchCon
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private SearchPresenter mPresenter;
+    private int catId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +42,20 @@ public class SearchMuseumActivity extends AppCompatActivity implements SearchCon
         ToolbarSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
             boolean handled = false;
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                search(ToolbarSearchEditText.getText().toString());
+                search(catId, ToolbarSearchEditText.getText().toString());
                 handled = true;
             }
             return handled;
         });
     }
 
-    private void search(String keyword) {
+    public void setCurrentId(int catId){
+        this.catId = catId;
+    }
+
+    public void search(int catId, String keyword) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, SearchMuseumResultFragment.newInstance(0, keyword));
+        transaction.replace(R.id.fragment_container, SearchMuseumResultFragment.newInstance(catId, keyword));
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -82,7 +87,8 @@ public class SearchMuseumActivity extends AppCompatActivity implements SearchCon
 
     @Override
     protected void onResume() {
-        Localization.setLanguage(SearchMuseumActivity.this, UserData.getLocalization(SearchMuseumActivity.this));
+        Localization.setLanguage(SearchMuseumActivity.this,
+                UserData.getLocalization(SearchMuseumActivity.this));
         super.onResume();
     }
 

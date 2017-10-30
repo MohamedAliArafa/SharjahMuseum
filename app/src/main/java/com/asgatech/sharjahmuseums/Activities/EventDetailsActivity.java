@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.asgatech.sharjahmuseums.Adapters.ViewPagerAdapter;
 import com.asgatech.sharjahmuseums.Models.EventDetailsResponseModel;
 import com.asgatech.sharjahmuseums.R;
+import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
@@ -157,6 +158,13 @@ public class EventDetailsActivity extends AppCompatActivity {
 
                     eventDescription.setText(model.getDescrption());
                     eventItemPlace.setText(model.getAdress());
+                    eventItemPlace.setOnClickListener(view -> {
+                        Intent intent1 = new Intent(EventDetailsActivity.this,
+                                ViewLocationMapActivity.class);
+                        intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_lATITUDE, Double.parseDouble(model.getLat()));
+                        intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_LONGTUDE, Double.parseDouble(model.getLong()));
+                        startActivity(intent1);
+                    });
                     attachUrl = model.getAttach();
                     eventImage = model.getEventImages().get(0).getImage();
                     viewpager.setAdapter(new ViewPagerAdapter(EventDetailsActivity.this, model.getEventImages()));

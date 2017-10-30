@@ -19,11 +19,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventsListFragment extends Fragment implements  EventsContract.ModelView {
+public class EventsListFragment extends Fragment implements EventsContract.ModelView {
 
 
     protected final String TAG = getClass().getSimpleName();
@@ -32,6 +33,7 @@ public class EventsListFragment extends Fragment implements  EventsContract.Mode
     RecyclerView recyclerView;
 
     EventsAdapter mAdapter;
+
     public EventsListFragment() {
         // Required empty public constructor
     }
@@ -50,10 +52,12 @@ public class EventsListFragment extends Fragment implements  EventsContract.Mode
     }
 
     public void setData(List<EventModel> list) {
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             new NoDataDialog().showDialog(getContext());
-        if (mAdapter != null)
-            mAdapter.updateSet(list);
+            setData(Realm.getDefaultInstance()
+                    .where(EventModel.class)
+                    .findAll());
+        } else if (mAdapter != null) mAdapter.updateSet(list);
     }
 
     @Override
