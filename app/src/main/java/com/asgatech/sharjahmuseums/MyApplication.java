@@ -14,8 +14,10 @@ import com.asgatech.sharjahmuseums.Models.Request.InsertDeviceTokenRequestModel;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.crashlytics.android.Crashlytics;
 import com.scand.realmbrowser.RealmBrowser;
 
+import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import okhttp3.ResponseBody;
@@ -29,6 +31,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
