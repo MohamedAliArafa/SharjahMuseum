@@ -41,7 +41,7 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.plan_your_visit_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_plan_your_visit, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -61,6 +61,7 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
         holder.titleTextView.setText(allPlanVisitsList.get(position).getTitle());
         //    holder.titleTextViewExpand.setText(allPlanVisitsList.get(position).getTitle());
         holder.descriptionTextView.setText(allPlanVisitsList.get(position).getText());
+        holder.titleTextViewExpand.setText(allPlanVisitsList.get(position).getTitle());
 
     }
 
@@ -69,7 +70,7 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
         holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.itemView.setActivated(isExpanded);
         if (!isExpanded) {
-            holder.arrowImageView.setRotation(0);
+            holder.arrowImageView.setRotation(180);
         }
         ChangeBounds transition = new ChangeBounds();
         transition.setDuration(125);

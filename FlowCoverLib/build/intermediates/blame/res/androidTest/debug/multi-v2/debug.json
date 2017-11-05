@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/FlowCoverLib/build/intermediates/res/merged/androidTest/debug/values_values.arsc.flat",
+            "outputFile": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\FlowCoverLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "/media/fantom/Локальный диск/Study/Android Studio Projects/SharjahMuseum/FlowCoverLib/build/intermediates/bundles/debug/res/values/values.xml",
+                    "source": "E:\\700Apps projects\\Arafa\\Sharjah Museum\\FlowCoverLib\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "from": {
                         "startLines": "5",
                         "startColumns": "4",

@@ -25,6 +25,7 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +63,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
         widget.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", new Locale("en"));
                 String date = sdf.format(dateClicked);
                 List<EventModel> models = Realm.getDefaultInstance()
                         .where(EventModel.class)

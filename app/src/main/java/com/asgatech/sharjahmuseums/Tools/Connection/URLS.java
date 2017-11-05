@@ -5,9 +5,9 @@ package com.asgatech.sharjahmuseums.Tools.Connection;
  */
 public class URLS {
 
-//        public static final String URL_BASE = "http://108.179.204.213:8071/"; // online
-//        public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
-    public static final String URL_BASE = "http://23.236.154.106:8075/"; // online
+//    public static final String URL_BASE = "http://108.179.204.213:8071/"; // online
+//    public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
+    public static final String URL_BASE = "http://23.236.154.106:8075/"; // Testing
 
 
 //    public static final String URL_BASE = "http://192.168.20.86:8070/"; // local
@@ -20,7 +20,7 @@ public class URLS {
     public static final String URL_ALL_SEARCH_MUSEUMS = "/api/Museum/GetALLMuseumsWithsearch";
     public static final String URL_MUSEUMS_DETAILS = "api/Museum/GetMuseumById";
     public static final String URL_GET_EVENTS = "api/Events/getAllEvents";
-    public static final String URL_GET_EVENTS_CATS = "api/EventCategray/GetEventCategrayList?lang=1";
+    public static final String URL_GET_EVENTS_CATS = "api/EventCategray/GetEventCategrayList";
     public static final String URL_GET_EVENTS_DETAILS = "api/Events/GetEventById";
     public static final String URL_GET_DEMO = "/api/Demo/GetAllDemo";
     public static final String URL_GET_ABOUT_US = "api/Settings/GetAboutUs";
@@ -35,7 +35,7 @@ public class URLS {
     public static final String URL_INSERT_DEVICE_Token = "/api/Notfcation/InsertDevicetoken";
     public static final String URL_UPDATE_NOTIFICATION_STATE = "/api/Notfcation/UpdateSate";
 
-    public static final String URL_GET_ALLMUSEUM_CATEGORY= "api/MuseumCategray/GetALLMuseumCategray";
+    public static final String URL_GET_ALLMUSEUM_CATEGORY = "api/MuseumCategray/GetALLMuseumCategray";
 
 //    api/MuseumCategray/GetALLMuseumCategray?lang=1
 

@@ -16,7 +16,7 @@ import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
-import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
+import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import java.util.List;
@@ -26,19 +26,17 @@ import java.util.List;
  */
 
 public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.ViewHolder> {
-    private HomeContract.UserAction presenter;
     private Context context;
     private List<MuseumsDetailsModel> allMuseumsList;
 
     public AllMuseumsAdapter(Context context, List<MuseumsDetailsModel> response, HomeContract.UserAction presenter) {
         this.context = context;
         this.allMuseumsList = response;
-        this.presenter = presenter;
-    }
+        }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_row_museums, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_museums, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -49,11 +47,6 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
 
         holder.museumsNameTextView.setText(allMuseumsList.get(position).getTitle());
         holder.museumsItemLinear.setOnClickListener(view -> {
-//                Bundle bundle = new Bundle();
-//                bundle.putInt(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
-//                bundle.putString(ConstantUtils.MUSEUM_TITLE, allMuseumsList.get(position).getTitle().trim());
-//                bundle.putString(ConstantUtils.MUSEUM_COLOR, allMuseumsList.get(position).getColor());
-//                presenter.openFragment(new MuseumDetailsFragment(), bundle);
             Intent intent = new Intent(context, MuseumsDetailsActivity.class);
             intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
             intent.putExtra(ConstantUtils.MUSEUM_TITLE,allMuseumsList.get(position).getTitle().trim());
@@ -72,15 +65,13 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         private FrameLayout museumsItemLinear;
         private ImageView museumsImageView;
-        private ImageView colorBackgroundImageView;
-        private TextViewBold museumsNameTextView;
+        private TextViewLight museumsNameTextView;
 
         ViewHolder(View view) {
             super(view);
-            museumsItemLinear = (FrameLayout) view.findViewById(R.id.museums_item_linear);
-            museumsImageView = (ImageView) view.findViewById(R.id.museums_image_view);
-//            colorBackgroundImageView = (ImageView) view.findViewById(R.id.color_background_image_view);
-            museumsNameTextView = (TextViewBold) view.findViewById(R.id.museums_name_text_view);
+            museumsItemLinear = view.findViewById(R.id.museums_item_linear);
+            museumsImageView = view.findViewById(R.id.museums_image_view);
+            museumsNameTextView = view.findViewById(R.id.museums_name_text_view);
         }
     }
 }

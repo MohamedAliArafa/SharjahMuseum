@@ -58,7 +58,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_header_navigation_view, parent, false);
                 return new HeaderViewHolder(view);
             case MENU_TYPE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_row_navigation_drawer, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_navigation_drawer, parent, false);
                 return new MenuViewHolder(view);
             case FOOTER_VIEW_TYPE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_footer_navigation_view, parent, false);

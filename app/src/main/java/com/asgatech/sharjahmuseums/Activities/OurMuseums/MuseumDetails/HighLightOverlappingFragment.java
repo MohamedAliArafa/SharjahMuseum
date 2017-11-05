@@ -29,13 +29,15 @@ public class HighLightOverlappingFragment extends Fragment {
 
     ArrayList<HighLightEntity> highlightList;
     private int mPosition;
+    private String highlightColor;
 
-    public static HighLightOverlappingFragment newInstance(String image, List<HighLightEntity> highlightList, int position) {
+    public static HighLightOverlappingFragment newInstance(String image, String mMuseumColor, List<HighLightEntity> highlightList, int position) {
         HighLightOverlappingFragment highLightOverlappingFragment = new HighLightOverlappingFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtils.IMAGE_PATH, image);
         ArrayList<HighLightEntity> list = new ArrayList<>();
         list.addAll(highlightList);
+        bundle.putString(ConstantUtils.HIGHLIGHT_COLOR, mMuseumColor);
         bundle.putParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST, list);
         bundle.putInt(ConstantUtils.HIGHLIGHT_LIST_POSITION, position);
         highLightOverlappingFragment.setArguments(bundle);
@@ -50,6 +52,7 @@ public class HighLightOverlappingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         image = getArguments().getString(ConstantUtils.IMAGE_PATH);
+        highlightColor = getArguments().getString(ConstantUtils.HIGHLIGHT_COLOR);
         highlightList = getArguments().getParcelableArrayList(ConstantUtils.HIGHLIGHT_LIST);
         mPosition = getArguments().getInt(ConstantUtils.HIGHLIGHT_LIST_POSITION, 0);
     }
@@ -71,6 +74,7 @@ public class HighLightOverlappingFragment extends Fragment {
             Intent intent1 = new Intent(getActivity(), HighlightsDetailActivity.class);
             intent1.putExtra(ConstantUtils.HIGHLIGHT_LIST, highlightList);
             intent1.putExtra(ConstantUtils.HIGHLIGHT_LIST_POSITION, mPosition);
+            intent1.putExtra(ConstantUtils.HIGHLIGHT_COLOR, highlightColor);
             startActivity(intent1);
         });
 

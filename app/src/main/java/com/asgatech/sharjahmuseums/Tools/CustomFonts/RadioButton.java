@@ -8,7 +8,7 @@ import android.util.AttributeSet;
  *  Created by halima.reda on 7/12/2016.
  */
 
-public class RadioButton extends android.widget.RadioButton {
+public class RadioButton extends android.support.v7.widget.AppCompatRadioButton {
     public RadioButton(Context context) {
         super(context);
     }

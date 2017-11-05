@@ -1,22 +1,26 @@
 package com.asgatech.sharjahmuseums.Tools.Connection;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 
+import com.asgatech.sharjahmuseums.Activities.SplashActivity;
 import com.asgatech.sharjahmuseums.Models.AboutUsModel;
-import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.Models.ContactUsModel;
 import com.asgatech.sharjahmuseums.Models.DemoImage;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventDetailsResponseModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
+import com.asgatech.sharjahmuseums.Models.HomeModel;
 import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
 import com.asgatech.sharjahmuseums.Models.PlanYourVisitsModel;
 import com.asgatech.sharjahmuseums.Models.Request.AddReviewRequest;
+import com.asgatech.sharjahmuseums.Models.Request.HomeSliderRequestModel;
 import com.asgatech.sharjahmuseums.Models.Request.InsertDeviceTokenRequestModel;
 import com.asgatech.sharjahmuseums.Models.Request.NotificationListRequestModel;
 import com.asgatech.sharjahmuseums.Models.Request.PagingModel;
@@ -25,7 +29,7 @@ import com.asgatech.sharjahmuseums.Models.Request.SearchPagingModel;
 import com.asgatech.sharjahmuseums.Models.Request.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
 import com.asgatech.sharjahmuseums.Tools.DialogTool.ErrorDialog;
-import com.asgatech.sharjahmuseums.Tools.DialogTool.loadingDialog;
+import com.asgatech.sharjahmuseums.Tools.DialogTool.LoadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -50,8 +54,8 @@ public class ServerTool {
 
     public interface ApiInterface {
 
-        @GET(URLS.URL_ALL_SLIDER)
-        Call<List<AllSliderModel>> getAllSlider(@Query("lang") int language);
+        @POST(URLS.URL_ALL_SLIDER)
+        Call<HomeModel> getAllSlider(@Body HomeSliderRequestModel model);
 
         @POST(URLS.URL_ALL_MUSEUMS)
         Call<RealmList<MuseumsDetailsModel>> getAllMuseums(@Body PagingModel pagingModel);
@@ -66,7 +70,7 @@ public class ServerTool {
         Call<RealmList<EventModel>> getEvents(@Body JsonObject data);
 
         @GET(URLS.URL_GET_EVENTS_CATS)
-        Call<List<EventCategoryModel>> getEventsCategories();
+        Call<List<EventCategoryModel>> getEventsCategories(@Query("lang") int lang);
 
         @GET(URLS.URL_GET_EVENTS_DETAILS)
         Call<EventDetailsResponseModel> getEventsDetails(@Query("eventid") int eventId, @Query("lang") int lang);
@@ -111,13 +115,15 @@ public class ServerTool {
     }
 
 
-    public static void getAllSlider(Context context, int language, final APICallBack apiCallBack) {
+    public static void getAllSlider(Activity context, int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
-        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getAllSlider(language);
+        String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getAllSlider(
+                new HomeSliderRequestModel(androidID, language));
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getMuseumsDetails(Context context, int MuseumsID, int language, final APICallBack apiCallBack) {
+    public static void getMuseumsDetails(Activity context, int MuseumsID, int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumsDetails(MuseumsID, language);
         MuseumsDetailsModel model = Realm.getDefaultInstance()
@@ -128,7 +134,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getAllMuseums(Context context, PagingModel pagingModel, final APICallBack apiCallBack) {
+    public static void getAllMuseums(Activity context, PagingModel pagingModel, final APICallBack apiCallBack) {
         Log.d("languageRequest", new Gson().toJson(pagingModel) + "");
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getAllMuseums(pagingModel);
@@ -139,7 +145,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getMuseumWithSearch(Context context, SearchPagingModel pagingModel, final APICallBack apiCallBack) {
+    public static void getMuseumWithSearch(Activity context, SearchPagingModel pagingModel, final APICallBack apiCallBack) {
         Log.d("languageRequest", new Gson().toJson(pagingModel) + "");
 //        final RetrofitTool retrofitTool = new RetrofitTool();
 //        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getMuseumWithSearch(pagingModel);
@@ -157,10 +163,12 @@ public class ServerTool {
                     .findAll();
         if (model.isLoaded() && !model.isEmpty())
             apiCallBack.onSuccess(model);
+        else
+            apiCallBack.onFailed(0, null);
 //        makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getEvents(Context context, int catId, int pageNumber, int pageSize,
+    public static void getEvents(Activity context, int catId, int pageNumber, int pageSize,
                                  int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
@@ -172,15 +180,15 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getEventsCategories(Context context, int language, final APICallBack apiCallBack) {
+    public static void getEventsCategories(Activity context, int language, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
         obj.addProperty("lang", language);
-        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getEventsCategories();
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getEventsCategories(language);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getEventsDetails(Context context, int eventId, int lang, final APICallBack apiCallBack) {
+    public static void getEventsDetails(Activity context, int eventId, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
         obj.addProperty("eventid", eventId);
@@ -189,7 +197,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getDemo(Context context, int lang, final APICallBack apiCallBack) {
+    public static void getDemo(Activity context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
         obj.addProperty("lang", lang);
@@ -197,7 +205,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getAbout(Context context, int lang, final APICallBack apiCallBack) {
+    public static void getAbout(Activity context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
         obj.addProperty("lang", lang);
@@ -205,7 +213,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void sendFeedback(Context context, String name, String email, String phone, String message, final APICallBack apiCallBack) {
+    public static void sendFeedback(Activity context, String name, String email, String phone, String message, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         JsonObject obj = new JsonObject();
         obj.addProperty("Name", name);
@@ -217,25 +225,25 @@ public class ServerTool {
     }
 
 
-    public static void getContactUs(Context context, int lang, final APICallBack apiCallBack) {
+    public static void getContactUs(Activity context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getContactData(lang);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getEducationList(Context context, int lang, final APICallBack apiCallBack) {
+    public static void getEducationList(Activity context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getEducationList(lang);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getPlanVisits(Context context, int lang, final APICallBack apiCallBack) {
+    public static void getPlanVisits(Activity context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getPlanVisits(lang);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void GetReviewList(Context context, ReviewVisitorsRequest reviewVisitorsRequest, final APICallBack apiCallBack) {
+    public static void GetReviewList(Activity context, ReviewVisitorsRequest reviewVisitorsRequest, final APICallBack apiCallBack) {
         //Show loading
         final Gson gson = new Gson();
         Log.d("getReviewListRequest", gson.toJson(reviewVisitorsRequest) + "");
@@ -244,7 +252,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void AddReview(Context context, AddReviewRequest addReviewRequest, final APICallBack apiCallBack) {
+    public static void AddReview(Activity context, AddReviewRequest addReviewRequest, final APICallBack apiCallBack) {
         //Show loading
         final Gson gson = new Gson();
         Log.d("addReviewRequest", gson.toJson(addReviewRequest) + "");
@@ -253,7 +261,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void GetNotificationList(Context context, NotificationListRequestModel notificationListRequestModel, final APICallBack apiCallBack) {
+    public static void GetNotificationList(Activity context, NotificationListRequestModel notificationListRequestModel, final APICallBack apiCallBack) {
         //Show loading
         final Gson gson = new Gson();
         Log.d("getNotificationList", gson.toJson(notificationListRequestModel) + "");
@@ -262,7 +270,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void InsertDeviceToken(Context context, InsertDeviceTokenRequestModel insertDevicetokenRequestModel, final APICallBack apiCallBack) {
+    public static void InsertDeviceToken(Activity context, InsertDeviceTokenRequestModel insertDevicetokenRequestModel, final APICallBack apiCallBack) {
         //Show loading
         final Gson gson = new Gson();
         Log.d("insertDeviceToken", gson.toJson(insertDevicetokenRequestModel) + "");
@@ -271,7 +279,7 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void UpdateNotificationList(Context context, UpdateRequestModel updateRequestModel, final APICallBack apiCallBack) {
+    public static void UpdateNotificationList(Activity context, UpdateRequestModel updateRequestModel, final APICallBack apiCallBack) {
         //Show loading
 //        final Gson gson = new Gson();
 //        Log.d("insertDeviceToken", gson.toJson(insertDevicetokenRequestModel) + "");
@@ -280,14 +288,22 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void getALLMuseumCategory(Context context, int lang, final APICallBack apiCallBack) {
+    public static void getALLMuseumCategory(Activity context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getALLMuseumCategory(lang);
+        RealmResults<MuseumCategoryResponse> models = Realm.getDefaultInstance()
+                .where(MuseumCategoryResponse.class)
+                .findAll();
+        if (models.isLoaded() && !models.isEmpty())
+            apiCallBack.onSuccess(models);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    private static <Foo> void makeRequest(Context context, Call call, final APICallBack apiCallBack, final RetrofitTool retrofitTool) {
-        Dialog dialogsLoading = new loadingDialog().showDialog(context);
+
+    private static <Foo> void makeRequest(Activity context, Call call, final APICallBack apiCallBack, final RetrofitTool retrofitTool) {
+        Dialog dialogsLoading = LoadingDialog.showDialog(context);
+        if (!(context instanceof SplashActivity))
+            dialogsLoading.show();
         call.enqueue(new RetrofitTool.APICallBack<Foo>() {
             @Override
             public void onSuccess(Foo response) {
@@ -303,7 +319,9 @@ public class ServerTool {
                         Realm.getDefaultInstance().commitTransaction();
                     }
                     //Hide loading
-                    if (dialogsLoading != null) {
+                    if (context.isDestroyed())
+                        return;
+                    if (dialogsLoading != null && dialogsLoading.isShowing()) {
                         dialogsLoading.dismiss();
                     }
                     apiCallBack.onSuccess(response);
@@ -312,7 +330,9 @@ public class ServerTool {
                     Realm.getDefaultInstance().commitTransaction();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    if (dialogsLoading != null) {
+                    if (context.isDestroyed())
+                        return;
+                    if (dialogsLoading != null && dialogsLoading.isShowing()) {
                         dialogsLoading.dismiss();
                     }
                 }
@@ -337,7 +357,7 @@ public class ServerTool {
     private static void handleGeneralFailure(Context context, int statusCode, ResponseBody responseBody, RetrofitTool retrofitTool) {
         Retrofit retrofit = retrofitTool.getRetrofit(URLS.URL_BASE);
         new ErrorDialog().showDialog(context);
-        Log.d("statusCode", statusCode + "");
+        Log.d("statusCode", statusCode + ":" + responseBody.toString());
     }
 
     public interface APICallBack<T> {

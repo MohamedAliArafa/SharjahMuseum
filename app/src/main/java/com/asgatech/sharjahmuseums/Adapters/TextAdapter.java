@@ -40,7 +40,7 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_row_text, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_text, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -49,31 +49,34 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.ViewHolder> {
         if (listType == 1) { // type to opening hours
             Calendar from = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa", Localization.getCurrentLocale(context));
-            from.set(Calendar.HOUR, openingHoursList.get(position).getFrom());
+            from.set(Calendar.HOUR_OF_DAY, openingHoursList.get(position).getFrom());
             from.set(Calendar.MINUTE, openingHoursList.get(position).getFormMinute());
             Calendar to = Calendar.getInstance();
-            to.set(Calendar.HOUR, openingHoursList.get(position).getTo());
+            to.set(Calendar.HOUR_OF_DAY, openingHoursList.get(position).getTo());
             to.set(Calendar.MINUTE, openingHoursList.get(position).getToMinute());
             if (openingHoursList.get(position).getISCLOSED()) {
                 holder.titleTextView.setText(String.format("%s:%s", openingHoursList.get(position).getTitle(), context.getResources().getString(R.string.closed)));
             } else {
-                holder.titleTextView.setText(String.format("%s: %s %s - %s %s",
+                holder.titleTextView.setText(String.format("%s: %s - %s",
                         openingHoursList.get(position).getTitle(),
-                        context.getString(R.string.From_),
                         sdf.format(from.getTime()),
-                        context.getString(R.string.To_),
                         sdf.format(to.getTime())));
             }
         } else if (listType == 2) { // type to entry fees
+            StringBuilder sublist = new StringBuilder();
             for (int i = 0; i < entryFeesList.get(position).getSublist().size(); i++) {
-                holder.titleTextView.setText(String.format(Localization.getCurrentLocale(context),
-                        "%s(%s):%d%s",
+                sublist.append(String.format(Localization.getCurrentLocale(context),
+                        (entryFeesList.get(position).getSublist().size() - 1) > i ?
+                                "%s (%s): %s%s\n" : "%s (%s): %s%s",
                         entryFeesList.get(position).getTitle(),
                         entryFeesList.get(position).getSublist().get(i).getTitle(),
-                        entryFeesList.get(position).getSublist().get(i).getPrice(),
-                        context.getString(R.string.AED)));
+                        entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? context.getString(R.string.title_free) :
+                                String.valueOf(entryFeesList.get(position).getSublist().get(i).getPrice()),
+                        entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? "" :
+                                context.getString(R.string.AED)
+                ));
             }
-
+            holder.titleTextView.setText(sublist.toString());
         }
 
     }

@@ -1,5 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities.Home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -34,6 +35,8 @@ public interface HomeContract {
         void hideToolbar();
 
         void showToolbar();
+
+        Context getContext();
     }
 
     interface UserAction {

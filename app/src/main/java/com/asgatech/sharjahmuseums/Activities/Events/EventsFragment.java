@@ -152,7 +152,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         });
     }
 
-    private void getEventCategories(final int langauge) {
+    private void getEventCategories(int langauge) {
         ServerTool.getEventsCategories(getActivity(), langauge, new ServerTool.APICallBack<List<EventCategoryModel>>() {
             @Override
             public void onSuccess(List<EventCategoryModel> response) {
@@ -188,7 +188,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
                     .inflate(R.layout.filter_recycler_row, null);
             CircleImageView pallete = itemView.findViewById(R.id.pallete_for_filter_item);
             TextView name = itemView.findViewById(R.id.name_for_filter_item);
-//            pallete.setSolidColor(list.get(i).getColor()); //throws exception becouse server data is dummy
+//            pallete.setSolidColor(list.get(i).getColor()); //throws exception because server data is dummy
             name.setText(list.get(i).getTitle().trim());
             itemView.setTag(list.get(i).getEventCatID());
             Drawable background = pallete.getBackground();

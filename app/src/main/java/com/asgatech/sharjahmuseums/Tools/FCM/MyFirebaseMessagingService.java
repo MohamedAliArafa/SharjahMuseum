@@ -7,9 +7,10 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.asgatech.sharjahmuseums.Activities.EventDetailsActivity;
+import com.asgatech.sharjahmuseums.Activities.Events.EventDetails.EventDetailsActivity;
 import com.asgatech.sharjahmuseums.Activities.NotificationDetailActivity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Localization;
@@ -19,7 +20,7 @@ import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-/**
+/*
  * Created by mohamed.arafa on 10/25/2017.
  */
 
@@ -68,6 +69,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             sendNotification(remoteMessage);
+
+            Intent intent = new Intent("myFunction");
+            // add data
+            if (Localization.getCurrentLanguageID(getApplicationContext()) == Localization.ARABIC_VALUE) {
+                intent.putExtra("title", remoteMessage.getData().get("title"));
+                intent.putExtra("text", remoteMessage.getData().get("Message"));
+            }else {
+                intent.putExtra("title", remoteMessage.getData().get("titleen"));
+                intent.putExtra("text", remoteMessage.getData().get("Messageen"));
+            }
+            intent.putExtra("image", remoteMessage.getData().get("img"));
+            intent.putExtra("id", Integer.parseInt(remoteMessage.getData().get("DesID")));
+            intent.putExtra("type", Integer.parseInt(remoteMessage.getData().get("type")));
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -118,6 +133,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         intent.putExtra("image", notification.getData().get("img"));
         intent.putExtra("id", Integer.parseInt(notification.getData().get("DesID")));
+        intent.putExtra("type", Integer.parseInt(notification.getData().get("type")));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

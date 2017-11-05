@@ -30,17 +30,12 @@ public class NearbyFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_nearby, container, false);
     }
-
-
-
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -50,15 +45,15 @@ public class NearbyFragment extends Fragment {
     }
     private void initView(View view){
         ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.near_by_facilities));
-        musuemsIv = (ImageView) view.findViewById(R.id.musuems_iv);
-        cafeIv = (ImageView) view.findViewById(R.id.cafe_iv);
-        resturantIv = (ImageView) view.findViewById(R.id.resturant_iv);
-        atmIv = (ImageView) view.findViewById(R.id.atm_iv);
-        banksIv = (ImageView) view.findViewById(R.id.banks_iv);
-        bookIv = (ImageView) view.findViewById(R.id.book_iv);
-        parkingsIv = (ImageView) view.findViewById(R.id.parkings_iv);
-        busIv = (ImageView) view.findViewById(R.id.bus_iv);
-        airportIv = (ImageView) view.findViewById(R.id.airport_iv);
+        musuemsIv = view.findViewById(R.id.musuems_iv);
+        cafeIv = view.findViewById(R.id.cafe_iv);
+        resturantIv = view.findViewById(R.id.resturant_iv);
+        atmIv = view.findViewById(R.id.atm_iv);
+        banksIv = view.findViewById(R.id.banks_iv);
+        bookIv = view.findViewById(R.id.book_iv);
+        parkingsIv = view.findViewById(R.id.parkings_iv);
+        busIv = view.findViewById(R.id.bus_iv);
+        airportIv = view.findViewById(R.id.airport_iv);
     }
 
 }

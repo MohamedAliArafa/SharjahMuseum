@@ -40,7 +40,7 @@ public class MuseumCategoryAdapter extends RecyclerView.Adapter<MuseumCategoryAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_search_category_list_row, parent, false);
+                .inflate(R.layout.row_search_category, parent, false);
         return new MyViewHolder(view);
     }
 

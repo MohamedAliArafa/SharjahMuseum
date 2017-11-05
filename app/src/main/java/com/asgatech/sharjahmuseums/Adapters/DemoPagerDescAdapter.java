@@ -39,7 +39,7 @@ public class DemoPagerDescAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.view_pager_item_textview, collection, false);
         TextView textView = layout.findViewById(R.id.view_pager_text);
-        textView.setText(items.get(position).getDescription());
+        textView.setText(items.get(position).getTitle());
         collection.addView(layout);
         return layout;
     }

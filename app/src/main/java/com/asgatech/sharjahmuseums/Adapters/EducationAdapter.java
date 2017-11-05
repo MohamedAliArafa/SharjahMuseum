@@ -2,6 +2,7 @@ package com.asgatech.sharjahmuseums.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.transition.ChangeBounds;
 import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.asgatech.sharjahmuseums.Activities.OpenWebViewActivity;
 import com.asgatech.sharjahmuseums.Models.EducationListModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -46,7 +46,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.education_list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_education_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -70,10 +70,14 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
         holder.titleTextViewExpand.setText(allMuseumsList.get(position).getTitle());
         holder.descriptionTextView.setText(allMuseumsList.get(position).getDescrption());
         holder.bookNowBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(context, OpenWebViewActivity.class);
-            Log.e("bookLink", bookLink);
-            intent.putExtra("bookLink", bookLink);
-            context.startActivity(intent);
+            if (!bookLink.startsWith("http://") && !bookLink.startsWith("https://"))
+                bookLink = "http://" + bookLink;
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bookLink));
+            context.startActivity(browserIntent);
+//            Intent intent = new Intent(context, OpenWebViewActivity.class);
+//            Log.e("bookLink", bookLink);
+//            intent.putExtra("bookLink", bookLink);
+//            context.startActivity(intent);
         });
 
         //expand
@@ -81,7 +85,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
         holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.itemView.setActivated(isExpanded);
         if (!isExpanded) {
-            holder.arrowImageView.setRotation(0);
+            holder.arrowImageView.setRotation(180);
         }
         ChangeBounds transition = new ChangeBounds();
         transition.setDuration(125);

@@ -6,28 +6,70 @@
     android:orientation="vertical"
     tools:context="com.asgatech.sharjahmuseums.Activities.Home.HomeFragment">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <com.booking.rtlviewpager.RtlViewPager
-            android:id="@+id/images_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbarStyle="insideInset" />
-
         <LinearLayout
             android:id="@+id/layout_dots"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="0.1"
             android:gravity="center"
-            android:orientation="horizontal" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.381"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.booking.rtlviewpager.RtlViewPager
+            android:id="@+id/images_view_pager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="0.9"
+            android:scrollbarStyle="insideInset"
+            app:layout_constraintBottom_toTopOf="@+id/layout_dots"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.383"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.booking.rtlviewpager.RtlViewPager>
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/sharjah_museum_authority"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="@+id/images_view_pager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/title_welcome"
+            android:textColor="@color/White"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -187,6 +229,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_event" />
 
+            <ImageView
+                android:id="@+id/iv_event_counter"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/counter_pallete_indecator"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_event_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/White"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_event_counter"
+                app:layout_constraintEnd_toEndOf="@+id/iv_event_counter"
+                app:layout_constraintStart_toStartOf="@+id/iv_event_counter"
+                app:layout_constraintTop_toTopOf="@+id/iv_event_counter" />
+
         </android.support.constraint.ConstraintLayout>
 
 
@@ -235,6 +298,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_notification" />
+
+            <ImageView
+                android:id="@+id/iv_notification_counter"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/counter_pallete_indecator"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_notification_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/White"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_notification_counter"
+                app:layout_constraintEnd_toEndOf="@+id/iv_notification_counter"
+                app:layout_constraintStart_toStartOf="@+id/iv_notification_counter"
+                app:layout_constraintTop_toTopOf="@+id/iv_notification_counter" />
 
 
         </android.support.constraint.ConstraintLayout>

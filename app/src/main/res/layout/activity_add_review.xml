@@ -1,87 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
 
+    android:background="@color/White"
     android:orientation="vertical">
 
-
-    <include layout="@layout/layout_toolbar" />
-
-    <LinearLayout
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="56dp"
+        android:background="@color/GreenLight">
 
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText
-            android:id="@+id/tv_email"
+
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/event_share_layout_background"
-            android:hint="@string/email"
-            android:maxLines="2"
-            android:padding="8dp"
-            android:scrollbars = "vertical"
-            android:layout_margin="8dp"
-            android:textColor="@color/GrayDark"
-            android:textColorHint="@color/GrayLight"
-            android:textSize="@dimen/font_size_large" />
-
-
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText
-            android:id="@+id/tv_review"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:gravity="top"
-            android:background="@drawable/event_share_layout_background"
-            android:hint="@string/add_review"
-            android:padding="8dp"
-            android:scrollbars = "vertical"
-            android:textColor="@color/GrayDark"
-            android:textColorHint="@color/GrayLight"
-            android:textSize="@dimen/font_size_large" />
+            android:gravity="center"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+                android:id="@+id/tv_toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start|center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="marquee"
+                android:gravity="start|center"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/White"
+                android:textSize="@dimen/font_size_xlarge"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/toolbar_home_image_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/toolbar_logo_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0.5"
+                android:contentDescription="@null"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo_bar" />
+
+
+            <ImageView
+                android:id="@+id/toolbar_home_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@null"
+                android:padding="@dimen/margin_20dp"
+                android:src="@drawable/ic_home_bar"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText
+        android:id="@+id/tv_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/event_share_layout_background"
+        android:hint="@string/email"
+        android:maxLines="2"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/GrayDark"
+        android:textColorHint="@color/GrayLight"
+        android:textSize="@dimen/font_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText
+        android:id="@+id/tv_review"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/event_share_layout_background"
+        android:gravity="top"
+        android:hint="@string/add_review"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/GrayDark"
+        android:textColorHint="@color/GrayLight"
+        android:textSize="@dimen/font_size_large"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
 
     <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-        android:layout_width="match_parent"
+        android:id="@+id/textViewLight"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity=""
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:paddingEnd="40dp"
-        android:paddingStart="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
         android:text="@string/add_your_review"
         android:textColor="@color/GrayDark"
         android:textColorHint="@color/GrayLight"
-        android:textSize="@dimen/font_size_large" />
+        android:textSize="@dimen/font_size_large"
+        app:layout_constraintBottom_toTopOf="@+id/bar_review_stars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RatingBar
         android:id="@+id/bar_review_stars"
-        android:layout_width="wrap_content"
         style="@style/myRatingBar"
-        android:layout_marginStart="40dp"
-        android:layout_height="12dp"
-        android:layout_marginTop="@dimen/d4"
-        android:stepSize="1.0"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:numStars="5"
-        android:layout_marginEnd="40dp" />
+        android:stepSize="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/btn_post"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_post"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_booknow"
         android:src="@drawable/event_share_layout_background"
         android:text="@string/post"
-        android:background="@color/GreenLight"
-        android:layout_margin="28dp"
-        android:layout_marginTop="@dimen/margin_16dp"
         android:textAllCaps="false"
-        android:textColor="@color/White" />
-</LinearLayout>
+        android:textColor="@color/White"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+</android.support.constraint.ConstraintLayout>

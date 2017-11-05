@@ -3,7 +3,6 @@ package com.asgatech.sharjahmuseums.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +39,15 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
+
         try {
             if (listType == 1) {
+                if (imageList == null)
+                    return 0;
                 return imageList.size();
             } else if (listType == 2) {
+                if (imagesList == null)
+                    return 0;
                 return imagesList.size();
             } else {
                 return 0;
@@ -61,7 +65,7 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((View) object);
+        return view == object;
     }
 
     @Override
@@ -69,8 +73,8 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
         LayoutInflater inflater = (LayoutInflater) container.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View convertView = inflater.inflate(R.layout.layout_row_image_slider, null);
-        ImageView imageItem = (ImageView) convertView.findViewById(R.id.image_view);
+        View convertView = inflater.inflate(R.layout.row_image_slider, null);
+        ImageView imageItem = convertView.findViewById(R.id.image_view);
         if (listType == 1) {
             if (imageList.get(position) != null) {
                 Log.e(activity.getString(R.string.tag_url), URLS.URL_BASE + imageList.get(position).getImage());
@@ -91,13 +95,12 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
             imageList.clear();
             notifyDataSetChanged();
         }
-
     }
 
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager) container).removeView((ViewGroup) object);
+        container.removeView((ViewGroup) object);
     }
 
 

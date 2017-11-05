@@ -107,9 +107,9 @@ public class ContactInnerFragment extends Fragment {
         boolean vaildName = validationTool.validateRequiredField(nameEditText, getString(R.string.name_hint));
         boolean vaildMail = validationTool.validateEmail(emailEditText, getString(R.string.invalid_email));
         boolean vaildMessage = validationTool.validateRequiredField(messageEditText, getString(R.string.messeage_hint));
-        boolean vaildPhone = validationTool.validateRequiredField(phoneEditText, getString(R.string.phone_hint));
+//        boolean vaildPhone = validationTool.validateRequiredField(phoneEditText, getString(R.string.phone_hint));
 
-        if (vaildMail && vaildName && vaildMessage && vaildPhone) {
+        if (vaildMail && vaildName && vaildMessage) {
             return true;
         } else {
             return false;

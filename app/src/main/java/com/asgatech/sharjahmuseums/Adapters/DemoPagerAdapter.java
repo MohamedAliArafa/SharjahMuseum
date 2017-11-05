@@ -53,7 +53,7 @@ public class DemoPagerAdapter extends PagerAdapter {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.mipmap.ic_launcher).into(img);
         }else {
-            GlideApp.with(context).load(URLS.URL_BASE + items.get(position).getImage())
+            GlideApp.with(context).load(URLS.URL_BASE + items.get(position).getImageEN())
                     .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                     .placeholder(R.mipmap.ic_launcher).into(img);
         }

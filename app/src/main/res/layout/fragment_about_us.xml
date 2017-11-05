@@ -30,14 +30,15 @@
 
     <TextView
         android:id="@+id/about_memberWords"
-        android:padding="@dimen/margin_10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/about_word_background"
-        android:layout_toEndOf="@id/about_memberImage"
-        android:layout_marginStart="15dp"
+        android:layout_alignTop="@id/about_memberImage"
         android:layout_marginEnd="15dp"
-        android:layout_alignTop="@id/about_memberImage"/>
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@id/about_memberImage"
+        android:background="@drawable/about_word_background"
+        android:padding="@dimen/margin_10dp"
+        android:textAlignment="center" />
 
     <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
         android:layout_width="120dp"

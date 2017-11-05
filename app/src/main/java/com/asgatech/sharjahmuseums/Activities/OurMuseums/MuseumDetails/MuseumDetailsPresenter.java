@@ -1,9 +1,9 @@
 package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails;
 
+import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
-import android.content.Context;
 
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
@@ -20,11 +20,11 @@ import okhttp3.ResponseBody;
 public class MuseumDetailsPresenter implements MuseumDetailsContract.UserAction, LifecycleObserver {
 
     private MuseumDetailsContract.ModelView mView;
-    private Context mContext;
+    private Activity mContext;
     private int mMuseumId;
     private int mLanguage;
 
-    MuseumDetailsPresenter(MuseumDetailsContract.ModelView mView, Context mContext, Lifecycle lifecycle, int mMuseumId) {
+    MuseumDetailsPresenter(MuseumDetailsContract.ModelView mView, Activity mContext, Lifecycle lifecycle, int mMuseumId) {
         this.mView = mView;
         lifecycle.addObserver(this);
         this.mContext = mContext;

@@ -1,5 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities.Search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText;
 import com.asgatech.sharjahmuseums.Tools.Localization;
@@ -39,6 +41,11 @@ public class SearchMuseumActivity extends AppCompatActivity implements SearchCon
         transaction.replace(R.id.fragment_container, new SearchMuseumCategoryFragment());
         transaction.commit();
         mPresenter = new SearchPresenter(getSupportFragmentManager(), this);
+        toolbarHomeImageView.setOnClickListener(v -> {
+            Intent in = new Intent(this, HomeActivity.class);
+            in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(in);
+        });
         ToolbarSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
             boolean handled = false;
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

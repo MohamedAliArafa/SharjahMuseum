@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
-import com.asgatech.sharjahmuseums.Models.Request.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
-import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
@@ -21,12 +19,10 @@ import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
-import okhttp3.ResponseBody;
-
 public class NotificationDetailActivity extends AppCompatActivity implements View.OnClickListener {
     public ImageView toolbarHomeImageView;
-    private CircleImageView ivMainimage;
-    private TextViewBold tvTitle, ToolbarTitleTextView;
+        private CircleImageView ivMainimage;
+    private TextViewBold ToolbarTitleTextView;
     private TextViewLight tvDescription;
 
     String title, text, image;
@@ -58,7 +54,7 @@ public class NotificationDetailActivity extends AppCompatActivity implements Vie
 
     void setUpView() {
         ivMainimage = findViewById(R.id.iv_mainimage);
-        tvTitle = findViewById(R.id.tv_title);
+//        tvTitle = findViewById(R.id.tv_title);
         tvDescription = findViewById(R.id.tv_description);
 
         if (getIntent().hasExtra("title")) {
@@ -74,30 +70,8 @@ public class NotificationDetailActivity extends AppCompatActivity implements Vie
             id = getIntent().getIntExtra("id", 0);
         }
         tvDescription.setText(text);
-        tvTitle.setText(title);
+        ToolbarTitleTextView.setText(title);
         GlideApp.with(this).load(URLS.URL_BASE + image).placeholder(R.drawable.no_image).into(ivMainimage);
-        UpdateRequestModel updateRequestModel = new UpdateRequestModel(id);
-        UpdateNotifiList(updateRequestModel);
-
-    }
-
-    void UpdateNotifiList(UpdateRequestModel updateRequestModel) {
-        ServerTool.UpdateNotificationList(NotificationDetailActivity.this, updateRequestModel, new ServerTool.APICallBack<Integer>() {
-            @Override
-            public void onSuccess(Integer response) {
-                if (response == 1) {
-                    //   Toast.makeText(NotificationDetailActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Toast.makeText(NotificationDetailActivity.this, "fail", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-
-            @Override
-            public void onFailed(int statusCode, ResponseBody responseBody) {
-
-            }
-        });
     }
 
     @Override

@@ -13,7 +13,7 @@
     <string name="To_">To:</string>
 
     <!-- museums details -->
-    <string name="about_museums">About Museums</string>
+    <string name="about_museums">About The Museum</string>
     <string name="about_us">About Us</string>
 
     <string name="action_settings">Settings</string>
@@ -47,9 +47,9 @@
     <string name="contact">Contact</string>
     <string name="contact_us">Contact Us</string>
 
-    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
-    <string name="demo">عرض</string>
+    <string name="demo">Demo</string>
 
     <string name="description">Description</string>
 
@@ -58,14 +58,14 @@
     <string name="email">Email</string>
     <string name="email_hint">Please enter your email</string>
 
-    <string name="english">English</string>
+    <string name="english" translatable="false">English</string>
 
     <string name="entry_fees">Entry Fees</string>
 
     <string name="failed_send_review">Failed to send Review </string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     <string name="high_lights">HighLights</string>
 
@@ -81,7 +81,7 @@
 
     <string name="loading">Loading .. please wait</string>
 
-    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s
+    <string name="lorem" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s
     </string>
 
     <string name="message">Message</string>
@@ -158,15 +158,24 @@
     <string name="tag_musmeum_color" translatable="false">museumColor</string>
     <string name="tag_url" translatable="false">url</string>
 
-    <string name="title_activity_add_review">AddReviewActivity</string>
+    <string name="title_activity_add_review" translatable="false">AddReviewActivity</string>
     <string name="title_activity_highlight_detail">Highlights</string>
-    <string name="title_activity_view_location_map">ViewLocationMapActivity</string>
+    <string name="title_activity_view_location_map" translatable="false">ViewLocationMapActivity</string>
     <string name="title_btn_skip">Skip</string>
-    <string name="title_filter_all">All</string>
     <string name="title_from">From</string>
-    <string name="title_share_via" translatable="false">Share via</string>
+    <string name="title_share_via">Share via</string>
 
     <string name="vision">Vision</string>
 
     <string name="your_email">Your Email</string>
+    <string name="title_downloading">Downloading:</string>
+    <string name="toast_download_complete">Download Complete</string>
+    <string name="title_free">Free</string>
+    <string name="toast_evet_expired">This Event is Expired</string>
+    <string name="sharjah_museum_authority">Sharjah Museum Authority</string>
+    <string name="title_welcome">Welcome</string>
+    <string name="title_to">To</string>
+    <string name="duplicate_email">Dublicated email or  email used before</string>
+    <string name="no_reviews">You do not have any  visitor reviews at this time</string>
+    <string name="title_filter_all">All</string>
 </resources>

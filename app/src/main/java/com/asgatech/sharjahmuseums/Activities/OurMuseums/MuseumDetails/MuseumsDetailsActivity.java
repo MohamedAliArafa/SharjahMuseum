@@ -35,7 +35,6 @@ import com.asgatech.sharjahmuseums.Models.HighLightEntity;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
-import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Localization;
@@ -46,6 +45,8 @@ import com.booking.rtlviewpager.RtlViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,6 +102,9 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
     private Handler mHandler;
     private Runnable mRunnable;
+
+    HomeSliderImagesAdapter imagesAdapter;
+    private MuseumsDetailsModel mMuseum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,7 +254,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 if (!mMuseumEmail.isEmpty()) {
                     Intent mailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", mMuseumEmail, null));
                     Log.e("mail", mMuseumEmail);
-                    mailIntent.putExtra(Intent.EXTRA_SUBJECT, " ");
+                    mailIntent.putExtra(Intent.EXTRA_SUBJECT, mMuseum.getTitle());
                     startActivity(Intent.createChooser(mailIntent, ""));
                 }
 
@@ -259,8 +263,9 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 Intent intentShare = new Intent(Intent.ACTION_SEND);
                 intentShare.setType("text/plain");
                 intentShare.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-                intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE + mMuseumsImage + "\n" +
-                        "\n" + getResources().getString(R.string.about_museums) + ":" + aboutMuseumsTextView.getText().toString());
+                intentShare.putExtra(Intent.EXTRA_TEXT, mMuseum.getUrl() + "\n" +
+                        "\n" + getResources().getString(R.string.about_museums) + ":" + aboutMuseumsTextView.getText().toString() + "\n" +
+                        mMuseum.getUrl());
                 Intent chooser = Intent.createChooser(intentShare, getString(R.string.title_share_via));
                 chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(chooser);
@@ -280,6 +285,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         mSingleDotImageView = null;
         mPagerDotList = null;
 
+        mMuseum = model;
         mMuseumTitle = model.getTitle();
         mMuseumColor = model.getColor();
 
@@ -307,13 +313,13 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             background.setColorFilter(Color.parseColor(mMuseumColor), PorterDuff.Mode.SRC_IN);
         }
 
-        if (mMuseumColor != null) {
-            int count = mActionsLinear.getChildCount();
-            for (int i = 0; i < count; i++) {
-                ImageView view = (ImageView) mActionsLinear.getChildAt(i);
-                view.getDrawable().setTint(Color.parseColor(mMuseumColor));
-            }
-        }
+//        if (mMuseumColor != null) {
+//            int count = mActionsLinear.getChildCount();
+//            for (int i = 0; i < count; i++) {
+//                ImageView view = (ImageView) mActionsLinear.getChildAt(i);
+//                view.getDrawable().setTint(Color.parseColor(mMuseumColor));
+//            }
+//        }
 
         if (mMuseumColor != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -349,16 +355,25 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             addDots(model.getImageList().size());
             selectDot(0, model.getImageList().size());
 
-            HomeSliderImagesAdapter imagesAdapter = new HomeSliderImagesAdapter(model.getImageList(), this, 2);
+            imagesAdapter = new HomeSliderImagesAdapter(model.getImageList(), this, 2);
             mSliderViewPager.setAdapter(imagesAdapter);
-            final int NUM_PAGES = model.getImageList().size();
-            mRunnable = () -> {
-                if (mCurrentPage == NUM_PAGES) {
+            int NUM_PAGES = model.getImageList().size();
+            Handler handler = new Handler();
+            Runnable Update = () -> {
+                if (mCurrentPage == NUM_PAGES - 1) {
                     mCurrentPage = 0;
                 }
                 mSliderViewPager.setCurrentItem(mCurrentPage++, true);
             };
-            mHandler.postDelayed(mRunnable, 2000);
+
+            Timer timer = new Timer(); // This will create a new Thread
+            timer.schedule(new TimerTask() { // task to be scheduled
+                @Override
+                public void run() {
+                    handler.post(Update);
+                }
+            }, 500, 2000);
+
             mSliderViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -416,7 +431,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
         @Override
         public Fragment getItem(int position) {
-            return HighLightOverlappingFragment.newInstance(highlightList.get(position).getPhoto(), highlightList, position);
+            return HighLightOverlappingFragment.newInstance(highlightList.get(position).getPhoto(),mMuseumColor, highlightList, position);
         }
 
         @Override

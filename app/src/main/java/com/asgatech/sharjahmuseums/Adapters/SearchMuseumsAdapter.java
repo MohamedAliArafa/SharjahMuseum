@@ -16,7 +16,7 @@ import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
-import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
+import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class SearchMuseumsAdapter extends RecyclerView.Adapter<SearchMuseumsAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_row_museums, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_museums, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -73,7 +73,7 @@ public class SearchMuseumsAdapter extends RecyclerView.Adapter<SearchMuseumsAdap
         private FrameLayout museumsItemLinear;
         private ImageView museumsImageView;
         private ImageView colorBackgroundImageView;
-        private TextViewBold museumsNameTextView;
+        private TextViewLight museumsNameTextView;
 
         ViewHolder(View view) {
             super(view);

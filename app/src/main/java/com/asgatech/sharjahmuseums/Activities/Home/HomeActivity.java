@@ -1,5 +1,6 @@
 package com.asgatech.sharjahmuseums.Activities.Home;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        mPresenter = new HomePresenter(this, getSupportFragmentManager());
+        mPresenter = new HomePresenter(this,getLifecycle(), getSupportFragmentManager());
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         initView();
         setupNavigationDrawer();
@@ -216,5 +217,10 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     public void showToolbar() {
         mToolbar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

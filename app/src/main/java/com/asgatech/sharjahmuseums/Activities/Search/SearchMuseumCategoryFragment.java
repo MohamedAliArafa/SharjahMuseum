@@ -54,7 +54,7 @@ public class SearchMuseumCategoryFragment extends Fragment {
     }
 
     void getALLMuseumCategory(int language) {
-        ServerTool.getALLMuseumCategory(getContext(), language, new ServerTool.APICallBack<List<MuseumCategoryResponse>>() {
+        ServerTool.getALLMuseumCategory(getActivity(), language, new ServerTool.APICallBack<List<MuseumCategoryResponse>>() {
             @Override
             public void onSuccess(List<MuseumCategoryResponse> response) {
                 if (response.size() != 0) {

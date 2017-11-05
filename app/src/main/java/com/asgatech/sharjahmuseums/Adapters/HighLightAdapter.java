@@ -57,7 +57,7 @@ public class HighLightAdapter extends BaseAdapter {
 
         if (rowView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.layout_row_image_slider, null);
+            rowView = inflater.inflate(R.layout.row_image_slider, null);
 
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.image = (ImageView) rowView

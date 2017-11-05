@@ -2,17 +2,14 @@ package com.asgatech.sharjahmuseums.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
-import com.asgatech.sharjahmuseums.Activities.ViewVisitorsReviewActivity;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
 import com.asgatech.sharjahmuseums.R;
-import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 
 import java.util.List;
@@ -33,7 +30,7 @@ public class ViewVisitorsReviewAdapter extends RecyclerView.Adapter<ViewVisitors
 
     @Override
     public ViewVisitorsReviewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_visitor_review_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_visitor_review_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -129,18 +126,18 @@ public class ViewVisitorsReviewAdapter extends RecyclerView.Adapter<ViewVisitors
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextViewLight tvReviewText;
-        private TextViewBold tvReviewNumber;
+        private TextViewLight tvReviewNumber;
         private RatingBar barReviewStars;
         private LinearLayout layoutMoreDesc;
         private TextViewLight tvReviewReply;
 
         public ViewHolder(View view) {
             super(view);
-            tvReviewText = (TextViewLight) view.findViewById(R.id.tv_review_text);
-            tvReviewNumber = (TextViewBold) view.findViewById(R.id.tv_review_number);
-            barReviewStars = (RatingBar) view.findViewById(R.id.bar_review_stars);
-            layoutMoreDesc = (LinearLayout) view.findViewById(R.id.layout_more_desc);
-            tvReviewReply = (TextViewLight) view.findViewById(R.id.tv_review_reply);
+            tvReviewText = view.findViewById(R.id.tv_review_text);
+            tvReviewNumber = view.findViewById(R.id.tv_review_number);
+            barReviewStars = view.findViewById(R.id.bar_review_stars);
+            layoutMoreDesc = view.findViewById(R.id.layout_more_desc);
+            tvReviewReply = view.findViewById(R.id.tv_review_reply);
         }
     }
 

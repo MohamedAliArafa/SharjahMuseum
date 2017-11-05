@@ -1,6 +1,10 @@
 package com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.HighlightDetails;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +35,7 @@ public class HighlightsDetailActivity extends AppCompatActivity {
     ViewPager mImagesViewPager;
     ArrayList<HighLightEntity> mHighlightList;
     private int mPosition;
+    private String mColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,17 @@ public class HighlightsDetailActivity extends AppCompatActivity {
         mToolbarHomeImageView.setVisibility(View.VISIBLE);
         mToolbarHomeImageView.setImageResource(R.drawable.ic_close_white);
         mToolbarHomeImageView.setOnClickListener(view -> onBackPressed());
+        mColor = getIntent().getStringExtra(ConstantUtils.HIGHLIGHT_COLOR);
+        if (mColor != null) {
+            Drawable background = toolbar.getBackground();
+            background.setColorFilter(Color.parseColor(mColor), PorterDuff.Mode.SRC_IN);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.setStatusBarColor(Utils.getDarkColor(Color.parseColor(mColor)));
+            }
+        }
         if (getSupportActionBar() != null)
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_sahre_white);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

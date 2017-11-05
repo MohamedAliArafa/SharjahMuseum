@@ -134,6 +134,10 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         callImageView.setOnClickListener(this);
         locationImageView.setOnClickListener(this);
 
+        emailTextView.setOnClickListener(this);
+        callTextView.setOnClickListener(this);
+        locationTextView.setOnClickListener(this);
+
     }
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
@@ -188,6 +192,31 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                 intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_lATITUDE, latitude);
                 intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_LONGTUDE, longtude);
                 startActivity(intent1);
+                break;
+
+            case R.id.call_txt:
+                if (tetephoneNum != null) {
+                    if (PermissionTool.checkPermission(getActivity(), PermissionTool.PERMISSION_PHONE_CALL)) {
+                        String uri = "tel:" + tetephoneNum.trim();
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse(uri));
+                        startActivity(intent);
+                    }
+                }
+
+                break;
+
+            case R.id.email_txt:
+                Intent mailIntent1 = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", emailString, null));
+                mailIntent1.putExtra(Intent.EXTRA_SUBJECT, " ");
+                startActivity(Intent.createChooser(mailIntent1, ""));
+                break;
+
+            case R.id.location_main:
+                Intent intent2 = new Intent(getActivity(), ViewLocationMapActivity.class);
+                intent2.putExtra(ConstantUtils.EXTRA_MUSEUMS_lATITUDE, latitude);
+                intent2.putExtra(ConstantUtils.EXTRA_MUSEUMS_LONGTUDE, longtude);
+                startActivity(intent2);
                 break;
 
             case R.id.fbImg:

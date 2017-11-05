@@ -51,21 +51,16 @@
 
     <string name="description">Description</string>
 
-    <string name="duplicate_email">Dublicated email or  email used before</string>
-
     <string name="education">Education</string>
 
     <string name="email">Email</string>
     <string name="email_hint">Please enter your email</string>
-
-    <string name="english">English</string>
 
     <string name="entry_fees">Entry Fees</string>
 
     <string name="failed_send_review">Failed to send Review </string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="high_lights">HighLights</string>
 
@@ -80,10 +75,6 @@
     <string name="language">Language</string>
 
     <string name="loading">Loading .. please wait</string>
-
-    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-</string>
 
     <string name="message">Message</string>
 
@@ -103,7 +94,6 @@
     <string name="no_connection">No Connection Now Please try again later</string>
     <!--//messages-->
     <string name="no_notification">You do not have any notifications at this time</string>
-    <string name="no_reviews">You do not have any  visitor reviews at this time</string>
 
     <string name="notifications">Notifications</string>
 
@@ -154,4 +144,20 @@
     <string name="welcome">WELCOME</string>
 
     <string name="your_email">Your Email</string>
+    <string name="title_share_via">Share via</string>
+    <string name="duplicate_email">Dublicated email or  email used before</string>
+    <string name="no_reviews">You do not have any  visitor reviews at this time</string>
+    <string name="title_filter_all">All</string>
+    <string name="title_from">From</string>
+    <string name="title_to">To</string>
+    <string name="search">Search</string>
+    <string name="rate_error_hint">Please add Rate</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="title_downloading">Downloading:</string>
+    <string name="toast_download_complete">Download Complete</string>
+    <string name="title_free">Free</string>
+    <string name="title_activity_highlight_detail">Highlights</string>
+    <string name="toast_evet_expired">This Event is Expired</string>
+    <string name="sharjah_museum_authority">Sharjah Museum Authority</string>
+    <string name="title_welcome">Welcome</string>
 </resources>

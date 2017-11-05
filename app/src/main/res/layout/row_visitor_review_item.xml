@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/White"
+
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:orientation="vertical">
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/tv_review_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:text=""
+            android:textColor="@color/GrayLight"
+            android:textSize="@dimen/font_size_large" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/margin_10dp">
+
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_review_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="20%"
+                android:textColor="@color/GrayDark"
+                android:textSize="@dimen/font_size_large" />
+
+            <RatingBar
+                android:id="@+id/bar_review_stars"
+                style="@style/myRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:numStars="5"
+                android:stepSize="1.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_more_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:background="@drawable/review_box_text_background"
+            android:padding="2dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_admain" />
+
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/tv_review_reply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/GrayLight"
+                android:textSize="@dimen/font_size_med" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height=".5dp"
+        android:background="@color/GrayLight"
+        android:contentDescription="@null" />
+
+</LinearLayout>

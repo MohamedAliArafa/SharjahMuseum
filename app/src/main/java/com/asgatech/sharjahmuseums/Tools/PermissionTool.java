@@ -42,12 +42,12 @@ public class PermissionTool {
     public static boolean checkPermission(final Activity context, final String permission) {
         if (!isPermissionGranted(context, permission)) {
 //            if (ActivityCompat.shouldShowRequestPermissionRationale(context, permission)) {
-//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context) ;
-//                alertDialog.setTitle("Pick Image From Gallery OR Camera");
+//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+//                alertDialog.setTitle("Permission Request");
 //                alertDialog.setMessage("Access Permission");
 //                alertDialog.setPositiveButton("OK", (dialog, which) -> {
-//                        Toast.makeText(context, "I need this permission", Toast.LENGTH_SHORT).show();
-//                ActivityCompat.requestPermissions(context, new String[]{permission}, 1);
+//                    Toast.makeText(context, "I need this permission", Toast.LENGTH_SHORT).show();
+//                    ActivityCompat.requestPermissions(context, new String[]{permission}, 1);
 //                    dialog.dismiss();
 //                });
 //                alertDialog.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());

@@ -18,8 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.asgatech.sharjahmuseums.Activities.EventDetailsActivity;
+import com.asgatech.sharjahmuseums.Activities.Events.EventDetails.EventDetailsActivity;
 import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
@@ -102,7 +103,7 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_row_event_recycler_item, parent, false);
+                .inflate(R.layout.row_event_recycler_item, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -112,9 +113,6 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
         startDate = model.getStartDate();
         endDate = model.getEndDate();
         holder.mTitleTextView.setText(model.getTitle());
-        //
-
-
         holder.mDateFromTextView.setText(Utils.spliteDate(startDate));
         holder.mDateToTextView.setText(Utils.spliteDate(endDate));
         holder.mPlaceTextView.setText(model.getAdress());
@@ -136,7 +134,7 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
             Intent intentShare = new Intent(Intent.ACTION_SEND);
             intentShare.setType("text/plain");
             intentShare.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
-            intentShare.putExtra(Intent.EXTRA_TEXT, URLS.URL_BASE + model.getImage() + "\n" +
+            intentShare.putExtra(Intent.EXTRA_TEXT, model.getUrl() + "\n" +
                     "\n" + context.getResources().getString(R.string.about_museums) + ":" + model.getTitle());
             Intent chooser = Intent.createChooser(intentShare, context.getString(R.string.title_share_via));
             chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -154,11 +152,16 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
     private void addToCalender(EventModel model) {
         if (PermissionTool.checkPermission(context, PermissionTool.PERMISSION_CALENDER)) {
             Calendar cal = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
             Intent intent = new Intent(Intent.ACTION_EDIT);
             intent.setType("vnd.android.cursor.item/event");
             try {
-                Date date = sdf.parse(model.getStartDate());
+                Date today = cal.getTime();
+                Date date = sdf.parse(model.getEndDate());
+                if (date.before(today)) {
+                    Toast.makeText(context, R.string.toast_evet_expired, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 cal.setTime(date);
                 intent.putExtra("beginTime", cal.getTimeInMillis());
                 date = sdf.parse(model.getEndDate());

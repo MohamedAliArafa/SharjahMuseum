@@ -1,17 +1,20 @@
 package com.asgatech.sharjahmuseums.Adapters;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.asgatech.sharjahmuseums.Activities.Events.EventDetails.EventDetailsActivity;
 import com.asgatech.sharjahmuseums.Activities.NotificationDetailActivity;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
+import com.asgatech.sharjahmuseums.Models.Request.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
+import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
@@ -22,15 +25,17 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
+
 /**
  * Created by Esraa on 10/5/2017.
  */
 
 public class NotificationListAdapter extends RecyclerView.Adapter<NotificationListAdapter.MyViewHolder> {
-    Context context;
+    Activity context;
     List<NotificationListResponseModel> data;
 
-    public NotificationListAdapter(Context context, List<NotificationListResponseModel> data) {
+    public NotificationListAdapter(Activity context, List<NotificationListResponseModel> data) {
         this.context = context;
         this.data = data;
     }
@@ -59,13 +64,38 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
                 .placeholder(R.drawable.no_image).into(holder.notificationIv);
 
         holder.itemView.setOnClickListener(view -> {
-            Intent intent= new Intent(context, NotificationDetailActivity.class);
-            intent.putExtra("title",data.get(position).getTitle());
-            intent.putExtra("text",data.get(position).getText());
-            intent.putExtra("image",data.get(position).getImage());
-            intent.putExtra("id",data.get(position).getUserNotfactionID());
-
+            Intent intent;
+            if (data.get(position).getNoticationType() == 1) {
+                intent = new Intent(context, NotificationDetailActivity.class);
+                intent.putExtra("id", data.get(position).getUserNotfactionID());
+            } else {
+                intent = new Intent(context, EventDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getDestiationID());
+            }
+            intent.putExtra("title", data.get(position).getTitle());
+            intent.putExtra("text", data.get(position).getText());
+            intent.putExtra("image", data.get(position).getImage());
+            UpdateRequestModel updateRequestModel = new UpdateRequestModel(data.get(position).getUserNotfactionID());
+            UpdateNotifiList(updateRequestModel);
             context.startActivity(intent);
+        });
+    }
+
+    void UpdateNotifiList(UpdateRequestModel updateRequestModel) {
+        ServerTool.UpdateNotificationList(context, updateRequestModel, new ServerTool.APICallBack<Integer>() {
+            @Override
+            public void onSuccess(Integer response) {
+                if (response == 1) {
+//                    Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show();
+                } else {
+//                    Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailed(int statusCode, ResponseBody responseBody) {
+
+            }
         });
     }
 
@@ -92,9 +122,9 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
         public MyViewHolder(View view) {
             super(view);
-            notificationIv = (CircleImageView) view.findViewById(R.id.notification_iv);
-            titleTv = (TextViewBold) view.findViewById(R.id.title_tv);
-            describtionTv = (TextViewLight) view.findViewById(R.id.describtion_tv);
+            notificationIv = view.findViewById(R.id.notification_iv);
+            titleTv = view.findViewById(R.id.title_tv);
+            describtionTv = view.findViewById(R.id.describtion_tv);
 
 
         }

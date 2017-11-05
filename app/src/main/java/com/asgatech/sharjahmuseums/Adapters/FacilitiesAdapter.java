@@ -30,7 +30,7 @@ public class FacilitiesAdapter extends RecyclerView.Adapter<FacilitiesAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_row_facilities_image, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_facilities_image, parent, false);
         return new ViewHolder(itemView);
     }
 

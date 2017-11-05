@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.asgatech.sharjahmuseums.Activities.Events.EventsFragment;
 import com.asgatech.sharjahmuseums.Activities.OurMuseums.OurMuseumsFragment;
@@ -24,14 +25,16 @@ import com.asgatech.sharjahmuseums.Fragments.EducationListFragment;
 import com.asgatech.sharjahmuseums.Fragments.NotificationListFragment;
 import com.asgatech.sharjahmuseums.Fragments.PlanYourVisitFragment;
 import com.asgatech.sharjahmuseums.Models.AllSliderModel;
+import com.asgatech.sharjahmuseums.Models.HomeModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
-import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.booking.rtlviewpager.RtlViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,18 +52,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private LinearLayout dotsLayout;
     private int currentPage = 0;
     private ConstraintLayout meusemsLinear, event_layout, planVisitsLinear, notifications_linear, about_us_layout, education_layout;
-    Runnable mUpdateRunnable;
-    Handler mHandler;
+    @BindView(R.id.tv_event_counter)
+    TextView mEventCounterTextView;
+    @BindView(R.id.tv_notification_counter)
+    TextView mNotificationCounterTextView;
+    @BindView(R.id.iv_event_counter)
+    ImageView mEventCounterImageView;
+    @BindView(R.id.iv_notification_counter)
+    ImageView mNotificationCounterImageView;
+    HomeSliderImagesAdapter imagesAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mUpdateRunnable != null)
-            mHandler.removeCallbacks(mUpdateRunnable);
     }
 
     @Override
@@ -70,7 +73,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         setupViews(view);
-        mHandler = new Handler();
         return view;
     }
 
@@ -96,17 +98,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         about_us_layout.setOnClickListener(this);
         education_layout.setOnClickListener(this);
 
+//        mEventCounterTextView.setText(String.valueOf(Realm.getDefaultInstance().where(EventModel.class).findAll().size()));
+
         getAllSlider(UserData.getLocalization(getActivity()));
     }
 
     private void getAllSlider(int language) {
-        ServerTool.getAllSlider(getActivity(), language, new ServerTool.APICallBack<List<AllSliderModel>>() {
+        ServerTool.getAllSlider(getActivity(), language, new ServerTool.APICallBack<HomeModel>() {
             @Override
-            public void onSuccess(List<AllSliderModel> response) {
-                if (Utils.validList(response)) {
-                    if (isAdded())
-                        setData(response);
-                }
+            public void onSuccess(HomeModel response) {
+                if (isAdded())
+                    setData(response);
             }
 
             @Override
@@ -123,19 +125,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onAttach(context);
     }
 
-    private void setData(final List<AllSliderModel> response) {
-        addDots(response);
-        selectDot(0, response);
-        HomeSliderImagesAdapter imagesAdapter = new HomeSliderImagesAdapter(getActivity(), response, 1);
+    private void setData(final HomeModel response) {
+        addDots(response.getSliderList());
+        selectDot(0, response.getSliderList());
+        imagesAdapter = new HomeSliderImagesAdapter(getActivity(), response.getSliderList(), 1);
         imagesViewPager.setAdapter(imagesAdapter);
-        final int NUM_PAGES = response.size();
-        mUpdateRunnable = () -> {
-            if (currentPage == NUM_PAGES) {
+        int NUM_PAGES = response.getSliderList().size();
+        Handler handler = new Handler();
+        Runnable Update = () -> {
+            if (currentPage == NUM_PAGES - 1) {
                 currentPage = 0;
             }
             imagesViewPager.setCurrentItem(currentPage++, true);
         };
-        mHandler.postDelayed(mUpdateRunnable, 2000);
+
+        Timer timer = new Timer(); // This will create a new Thread
+        timer.schedule(new TimerTask() { // task to be scheduled
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 500, 2000);
+
         imagesViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -144,13 +155,30 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onPageSelected(int position) {
-                selectDot(position, response);
+                selectDot(position, response.getSliderList());
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
+
+        if (response.getEventCount() > 0) {
+            mEventCounterImageView.setVisibility(View.VISIBLE);
+            mEventCounterTextView.setVisibility(View.VISIBLE);
+            mEventCounterTextView.setText(String.valueOf(response.getEventCount()));
+        } else {
+            mEventCounterImageView.setVisibility(View.GONE);
+            mEventCounterTextView.setVisibility(View.GONE);
+        }
+        if (response.getNotfactionCount() > 0) {
+            mNotificationCounterTextView.setVisibility(View.VISIBLE);
+            mNotificationCounterImageView.setVisibility(View.VISIBLE);
+            mNotificationCounterTextView.setText(String.valueOf(response.getNotfactionCount()));
+        } else {
+            mNotificationCounterImageView.setVisibility(View.GONE);
+            mNotificationCounterTextView.setVisibility(View.GONE);
+        }
     }
 
     public void addDots(List<AllSliderModel> imagesList) {

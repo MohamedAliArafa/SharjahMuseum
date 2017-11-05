@@ -48,16 +48,15 @@
                 android:layout_marginTop="@dimen/margin_8dp"
                 android:orientation="vertical">
 
-                <TextView
+                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
                     android:id="@+id/event_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:text="event title"
-                    android:textColor="@color/GrayDark"
-                    android:textSize="@dimen/font_size_xlarge"
-                    android:textStyle="bold" />
+                    android:textColor="@color/GrayLight"
+                    android:textSize="@dimen/font_size_xlarge" />
 
                 <LinearLayout
                     android:id="@+id/event_item_date_layout"
@@ -76,13 +75,13 @@
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_calender_from_to_page_eventdetails" />
 
-                    <TextView
+                    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/From_"
                         android:textSize="@dimen/font_size_med" />
 
-                    <TextView
+                    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                         android:id="@+id/event_item_date_from"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -92,13 +91,13 @@
                         android:text=""
                         android:textSize="@dimen/font_size_med" />
 
-                    <TextView
+                    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/To_"
                         android:textSize="@dimen/font_size_med" />
 
-                    <TextView
+                    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                         android:id="@+id/event_item_date_to"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -108,7 +107,7 @@
                         android:text=""
                         android:textSize="@dimen/font_size_med" />
 
-                    <TextView
+                    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                         android:id="@+id/tv_event_item_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -120,7 +119,7 @@
 
                 </LinearLayout>
 
-                <TextView
+                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                     android:id="@+id/event_item_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -137,18 +136,17 @@
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/font_size_med" />
 
-                <TextView
+                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:text="@string/description"
-                    android:textColor="@color/GrayDark"
-                    android:textSize="@dimen/font_size_large"
-                    android:textStyle="bold" />
+                    android:textColor="@color/GrayLight"
+                    android:textSize="@dimen/font_size_large" />
 
-                <TextView
+                <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                     android:id="@+id/event_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -171,13 +169,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_8dp"
-                        android:layout_marginLeft="@dimen/margin_16dp"
-                        android:layout_marginRight="@dimen/margin_8dp"
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_download" />
 
-                    <TextView
+                    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
                         android:id="@+id/download_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -17,7 +17,7 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/GreenLight"
         app:tabTextAppearance="@style/MyCustomTextAppearance"
-        app:tabTextColor="@color/Black" />
+        app:tabTextColor="@color/GrayDark" />
 
     <com.asgatech.sharjahmuseums.Tools.CustomViewPager
         android:id="@+id/viewpager"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,92 +9,98 @@
     android:background="@drawable/text_notification"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/title_notification"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/title_notification"
         android:weightSum="1.8">
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
 
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:background="@drawable/ic_logo_notification"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-            android:layout_width="wrap_content"
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1.5"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="marquee"
             android:gravity="start"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             android:text="@string/sharjah_museums_department"
             android:textAlignment="viewStart"
-            android:textColor="@color/White" />
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textViewBold"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewBold"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".3"
+            android:layout_marginEnd="8dp"
             android:gravity="start"
             android:text="@string/now"
             android:textAlignment="viewStart"
-            android:textColor="@color/White" />
-    </LinearLayout>
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:weightSum="3"
-        android:orientation="horizontal">
+        android:weightSum="3">
 
         <com.asgatech.sharjahmuseums.Tools.CircleImageView
             android:id="@+id/notification_iv"
             android:layout_width="100dp"
-            android:layout_margin="5dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
-            android:layout_height="80dp"
-            android:src="@drawable/no_image" />
+            android:src="@drawable/no_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-                android:id="@+id/title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:gravity="start"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:text=""
-                android:textAlignment="viewStart"
-                android:textColor="@color/White" />
-
-            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-                android:id="@+id/describtion_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:gravity="start"
-                android:text=""
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:textAlignment="viewStart"
-                android:textColor="@color/White" />
-        </LinearLayout>
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/describtion_tv"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="3"
+            android:text=""
+            android:textAlignment="viewStart"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/notification_iv"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

@@ -10,19 +10,19 @@
     android:padding="16dp">
 
     <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-        android:id="@+id/textView4"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Opps, Some Thing Went Wrong"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/tv_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-        android:id="@+id/textView5"
+        android:id="@+id/tv_desc"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -43,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/event_color_pallete_indicator_programmes"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/tv_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
