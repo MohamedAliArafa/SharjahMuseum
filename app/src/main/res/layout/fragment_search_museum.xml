@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.asgatech.sharjahmuseums.Activities.Search.SearchMuseumFragment">
+
+    <com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText
+        android:id="@+id/et_toolbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="start|center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/search_bar"
+        android:gravity="start|center"
+        android:hint="@string/search"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textAlignment="viewStart"
+        android:textColor="@color/GrayLight"
+        android:textSize="@dimen/font_size_xlarge" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/museum_result_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />-->
+</LinearLayout>
