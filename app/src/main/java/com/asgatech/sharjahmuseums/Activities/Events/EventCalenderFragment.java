@@ -63,6 +63,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
