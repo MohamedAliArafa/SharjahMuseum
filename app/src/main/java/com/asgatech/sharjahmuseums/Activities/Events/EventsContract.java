@@ -7,6 +7,7 @@ import com.asgatech.sharjahmuseums.Models.NewResponse;
 import java.util.List;
 
 /**
+ *
  * Created by mohamed.arafa on 10/26/2017.
  */
 interface EventsContract {
