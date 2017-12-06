@@ -215,6 +215,19 @@ public class Utils {
         }
 
     }
+    public static String convertTo12Hour(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("k:mm", Locale.ENGLISH);
+        SimpleDateFormat output = new SimpleDateFormat("hh:mma");
+        Date d = null;
+        try {
+            d = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedTime = output.format(d);
+        return formattedTime;
+    }
+
 
     public static Animation expand(final View item) {
         if (item.getVisibility() != View.VISIBLE) {
@@ -313,5 +326,14 @@ public class Utils {
         return formattedTime;
     }
 
-
+    public static Date convertString2Date(String dateString) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        Date date = null;
+        try {
+            date = sdf.parse(dateString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 }

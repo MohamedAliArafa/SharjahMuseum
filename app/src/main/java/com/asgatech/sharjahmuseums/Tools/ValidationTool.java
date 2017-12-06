@@ -5,7 +5,6 @@ import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 import com.asgatech.sharjahmuseums.R;
 
 
@@ -38,6 +37,19 @@ public class ValidationTool {
             }
         } else {
             editText.setError(context.getResources().getString(R.string.email_hint));
+            return false;
+        }
+    }
+
+    public boolean validateEmail(EditText editText) {
+        String email = editText.getText().toString();
+        if (isNotEmpty(email)) {
+            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
     }
@@ -144,6 +156,17 @@ public class ValidationTool {
         String content = editText.getText().toString();
         if (content.isEmpty()) {
             editText.setError(error);
+            //event_share_layout_background_red
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean validateRequiredField(EditText editText) {
+        String content = editText.getText().toString();
+        if (content.isEmpty()) {
+            //event_share_layout_background_red
             return false;
         } else {
             return true;

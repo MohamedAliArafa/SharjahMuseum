@@ -14,6 +14,11 @@
 
     <!-- museums details -->
     <string name="about_museums">About The Museum</string>
+    <string name="confirm">Confirm</string>
+    <string name="no_event">No Event Found</string>
+    <string name="no_museums">No Museums Found</string>
+    <string name="cancel">Cancel</string>
+    <string name="location">Location</string>
     <string name="about_us">About Us</string>
 
     <string name="action_settings">Settings</string>
@@ -25,7 +30,7 @@
 
     <string name="airports">Airports</string>
 
-    <string name="app_name">SharjahMuseums</string>
+    <string name="app_name">SMA</string>
 
     <string name="arabic">العربيه</string>
 
@@ -34,7 +39,8 @@
     <string name="banks">Banks</string>
 
     <!--plan_visits-->
-    <string name="book_nw">Book now</string>
+    <string name="book_nw2">Book Now </string>
+    <string name="book_nw">Book </string>
     <string name="book_store">Book stores</string>
 
     <string name="bus_station">Bus stations</string>
@@ -46,7 +52,7 @@
 
     <string name="contact">Contact</string>
     <string name="contact_us">Contact Us</string>
-
+    <string name="contact2">Contact</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
     <string name="demo">Demo</string>
@@ -118,6 +124,7 @@
     <string name="parkings">Parkings</string>
 
     <string name="phone">Phone</string>
+    <string name="optional">Phone(optional)</string>
     <string name="phone_hint">Please enter your phone number</string>
 
     <string name="plan_your_visit">Plan Your Visit</string>
@@ -137,7 +144,7 @@
 
     <string name="send">Send</string>
     <string name="send_messege_fail">Failed to send message</string>
-    <string name="send_messege_succsess">Message sent successfully</string>
+    <string name="send_messege_succsess">Feedback sent successfully</string>
 
     <string name="setting">الاعدادات</string>
 
@@ -171,11 +178,43 @@
     <string name="title_downloading">Downloading:</string>
     <string name="toast_download_complete">Download Complete</string>
     <string name="title_free">Free</string>
-    <string name="toast_evet_expired">This Event is Expired</string>
+    <string name="toast_evet_expired">This Event has been Expired</string>
     <string name="sharjah_museum_authority">Sharjah Museum Authority</string>
     <string name="title_welcome">Welcome</string>
     <string name="title_to">To</string>
     <string name="duplicate_email">Dublicated email or  email used before</string>
     <string name="no_reviews">You do not have any  visitor reviews at this time</string>
     <string name="title_filter_all">All</string>
+
+    <!--GeoFence-->
+    <string name="geofences_added">Geofences added</string>
+    <string name="geofences_removed">Geofences removed</string>
+    <!-- Error strings -->
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        GeoFence transition error: invalid transition type %1$d
+    </string>
+
+    <string name="geofence_transition_entered1">You are</string>
+    <string name="geofence_transition_entered2">meters away from</string>
+    <string name="geofence_transition_entered3">get directions ?</string>
+    <string name="geofence_transition_exited">Exit</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_transition_notification_text">
+        Click notification to return to app
+    </string>
+
+    <string name="insufficient_permissions">Insufficient permissions.</string>
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+
 </resources>

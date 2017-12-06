@@ -8,7 +8,6 @@ class Events {
 
     private final List<Event> events;
     private final long timeInMillis;
-
     Events(long timeInMillis, List<Event> events) {
         this.timeInMillis = timeInMillis;
         this.events = events;
@@ -17,6 +16,7 @@ class Events {
     long getTimeInMillis() {
         return timeInMillis;
     }
+
 
     List<Event> getEvents() {
         return events;

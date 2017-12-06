@@ -2,7 +2,6 @@ package com.asgatech.sharjahmuseums.Activities.Home;
 
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +28,7 @@ import com.asgatech.sharjahmuseums.Models.HomeModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
+import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.booking.rtlviewpager.RtlViewPager;
 
 import java.util.ArrayList;
@@ -47,17 +47,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.images_view_pager)
     RtlViewPager imagesViewPager;
-    private List<ImageView> dots;
+    List<ImageView> dots;
     private ImageView dot;
     private LinearLayout dotsLayout;
     private int currentPage = 0;
     private ConstraintLayout meusemsLinear, event_layout, planVisitsLinear, notifications_linear, about_us_layout, education_layout;
     @BindView(R.id.tv_event_counter)
     TextView mEventCounterTextView;
+
     @BindView(R.id.tv_notification_counter)
+
     TextView mNotificationCounterTextView;
+
     @BindView(R.id.iv_event_counter)
     ImageView mEventCounterImageView;
+
     @BindView(R.id.iv_notification_counter)
     ImageView mNotificationCounterImageView;
     HomeSliderImagesAdapter imagesAdapter;
@@ -98,9 +102,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         about_us_layout.setOnClickListener(this);
         education_layout.setOnClickListener(this);
 
-//        mEventCounterTextView.setText(String.valueOf(Realm.getDefaultInstance().where(EventModel.class).findAll().size()));
-
-        getAllSlider(UserData.getLocalization(getActivity()));
+        if (Utils.isNetworkAvailable(getActivity())) {
+            getAllSlider(UserData.getLocalization(getActivity()));
+        }
     }
 
     private void getAllSlider(int language) {
@@ -133,7 +137,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         int NUM_PAGES = response.getSliderList().size();
         Handler handler = new Handler();
         Runnable Update = () -> {
-            if (currentPage == NUM_PAGES - 1) {
+            if (currentPage == NUM_PAGES) {
                 currentPage = 0;
             }
             imagesViewPager.setCurrentItem(currentPage++, true);
@@ -209,11 +213,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void selectDot(int idx, List<AllSliderModel> imageList) {
         try {
-            Resources res = getResources();
+//            Resources res = getResources();
             if (imageList != null && imageList.size() != 0) {
                 for (int i = 0; i < imageList.size(); i++) {
                     int drawableId = (i == idx) ? (R.drawable.dot_slider_active) : (R.drawable.dot_slider_unactive);
-                    Drawable drawable = res.getDrawable(drawableId);
+                    Drawable drawable = getResources().getDrawable(drawableId);
                     dots.get(i).setImageDrawable(drawable);
                 }
             }
@@ -226,22 +230,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.meusems_linear:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new OurMuseumsFragment(), null);
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    ((HomeActivity) getActivity()).openFragmentFromChild(new OurMuseumsFragment(), null);
+                }
                 break;
             case R.id.event_layout:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new EventsFragment(), null);
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    ((HomeActivity) getActivity()).openFragmentFromChild(new EventsFragment(), null);
+                }
                 break;
             case R.id.plan_visits_linear:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new PlanYourVisitFragment(), null);
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    ((HomeActivity) getActivity()).openFragmentFromChild(new PlanYourVisitFragment(), null);
+                }
                 break;
             case R.id.notifications_linear:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new NotificationListFragment(), null);
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    ((HomeActivity) getActivity()).openFragmentFromChild(new NotificationListFragment(), null);
+                }
                 break;
             case R.id.education_layout:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new EducationListFragment(), null);
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    ((HomeActivity) getActivity()).openFragmentFromChild(new EducationListFragment(), null);
+                }
                 break;
             case R.id.about_us_layout:
-                ((HomeActivity) getActivity()).openFragmentFromChild(new AboutUsFragment(), null);
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    ((HomeActivity) getActivity()).openFragmentFromChild(new AboutUsFragment(), null);
+                }
                 break;
         }
     }

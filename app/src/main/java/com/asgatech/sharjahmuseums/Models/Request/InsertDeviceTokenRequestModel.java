@@ -16,6 +16,7 @@ public class InsertDeviceTokenRequestModel {
     public InsertDeviceTokenRequestModel(String deviceID, String deviceToken) {
         DeviceID = deviceID;
         DeviceToken = deviceToken;
+
     }
 
     public void setDeviceID(String DeviceID) {

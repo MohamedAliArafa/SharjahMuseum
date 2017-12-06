@@ -2,10 +2,12 @@ package com.asgatech.sharjahmuseums.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Activities.Events.EventDetails.EventDetailsActivity;
 import com.asgatech.sharjahmuseums.Activities.NotificationDetailActivity;
@@ -57,13 +59,13 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
         holder.describtionTv.setText(data.get(position).getText());
         holder.titleTv.setText(data.get(position).getTitle());
-//
+
         GlideApp.with(context).load(URLS.URL_BASE + data.get(position).getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.no_image).into(holder.notificationIv);
 
-        holder.itemView.setOnClickListener(view -> {
+        holder.linearLayout.setOnClickListener(view -> {
             Intent intent;
             if (data.get(position).getNoticationType() == 1) {
                 intent = new Intent(context, NotificationDetailActivity.class);
@@ -75,20 +77,28 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
             intent.putExtra("title", data.get(position).getTitle());
             intent.putExtra("text", data.get(position).getText());
             intent.putExtra("image", data.get(position).getImage());
+            context.startActivity(intent);
+        });
+        holder.deleteItem.setOnClickListener(view -> {
             UpdateRequestModel updateRequestModel = new UpdateRequestModel(data.get(position).getUserNotfactionID());
             UpdateNotifiList(updateRequestModel);
-            context.startActivity(intent);
         });
     }
 
-    void UpdateNotifiList(UpdateRequestModel updateRequestModel) {
+    private void UpdateNotifiList(UpdateRequestModel updateRequestModel) {
         ServerTool.UpdateNotificationList(context, updateRequestModel, new ServerTool.APICallBack<Integer>() {
             @Override
             public void onSuccess(Integer response) {
                 if (response == 1) {
-//                    Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show();
+                    for (int i = 0; i < data.size(); i++) {
+                        if (updateRequestModel.getID() == data.get(i).getUserNotfactionID()) {
+                            data.remove(i);
+                            notifyDataSetChanged();
+                            break;
+                        }
+
+                    }
                 } else {
-//                    Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -116,8 +126,10 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private CircleImageView notificationIv;
+        private ImageView deleteItem;
         private TextViewBold titleTv;
         private TextViewLight describtionTv;
+        private ConstraintLayout linearLayout;
 
 
         public MyViewHolder(View view) {
@@ -125,6 +137,8 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
             notificationIv = view.findViewById(R.id.notification_iv);
             titleTv = view.findViewById(R.id.title_tv);
             describtionTv = view.findViewById(R.id.describtion_tv);
+            deleteItem = view.findViewById(R.id.delete_item);
+            linearLayout = view.findViewById(R.id.linearLayout);
 
 
         }

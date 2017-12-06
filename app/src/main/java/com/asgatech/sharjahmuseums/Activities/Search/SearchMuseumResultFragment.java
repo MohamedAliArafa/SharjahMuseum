@@ -15,7 +15,6 @@ import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Models.Request.SearchPagingModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
-import com.asgatech.sharjahmuseums.Tools.DialogTool.NoDataDialog;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
@@ -76,13 +75,13 @@ public class SearchMuseumResultFragment extends Fragment {
                             response, ((SearchContract.ModelView) getActivity()).getPresenter());
                     mMuseumsResultRecyclerView.setAdapter(museumsAdapter);
                 } else {
-                    new NoDataDialog().showDialog(getContext());
+//                    new NoDataDialog().showDialog(getContext());
                 }
             }
 
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
-                new NoDataDialog().showDialog(getContext());
+//                new NoDataDialog().showDialog(getContext());
             }
         });
     }

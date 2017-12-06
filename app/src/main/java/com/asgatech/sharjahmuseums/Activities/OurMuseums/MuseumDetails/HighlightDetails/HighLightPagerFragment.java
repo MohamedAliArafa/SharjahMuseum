@@ -55,9 +55,17 @@ public class HighLightPagerFragment extends Fragment implements View.OnClickList
         View rootView = inflater.inflate(R.layout.fragment_high_light_pager, container, false);
         ImageView coverImageView = rootView.findViewById(R.id.image_cover);
         TextView titleTextView = rootView.findViewById(R.id.tv_title);
+        ImageView  imageright = rootView.findViewById(R.id. imageright);
+        ImageView  imageleft = rootView.findViewById(R.id. imageleft);
         TextView descTextView = rootView.findViewById(R.id.tv_text_desc);
         titleTextView.setText(highlight.getTitle());
         descTextView.setText(highlight.getText());
+        imageright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         GlideApp.with(getActivity())
                 .load(URLS.URL_BASE + image).placeholder(R.drawable.no_image)
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))

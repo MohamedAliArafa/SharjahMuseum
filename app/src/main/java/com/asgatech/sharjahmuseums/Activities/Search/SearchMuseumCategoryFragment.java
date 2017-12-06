@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.asgatech.sharjahmuseums.Adapters.MuseumCategoryAdapter;
 import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
@@ -70,8 +69,8 @@ public class SearchMuseumCategoryFragment extends Fragment {
     }
 
     private void setData(final List<MuseumCategoryResponse> data) {
-        MuseumCategoryAdapter adapter = new MuseumCategoryAdapter(getContext(), data, getFragmentManager());
-        mRecycleCategory.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        MuseumCategoryAdapter adapter = new MuseumCategoryAdapter(getContext(), data, getFragmentManager());
+//        mRecycleCategory.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
 }

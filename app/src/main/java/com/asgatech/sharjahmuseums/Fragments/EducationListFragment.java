@@ -3,6 +3,7 @@ package com.asgatech.sharjahmuseums.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,25 +40,28 @@ public class EducationListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_education_list, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_education_list, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+//        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.education));
-
-        getEducationList( UserData.getLocalization(getActivity()));
+        ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.education));
+        if (Utils.isNetworkAvailable(getActivity())) {
+            getEducationList(UserData.getLocalization(getActivity()));
+        }
         return view;
     }
 
 
-    private void getEducationList(int lang){
+    private void getEducationList(int lang) {
         ServerTool.getEducationList(getActivity(), lang, new ServerTool.APICallBack<List<EducationListModel>>() {
             @Override
             public void onSuccess(List<EducationListModel> response) {
-                if (Utils.validList(response)){
+                if (Utils.validList(response)) {
 
-                    recyclerView.setAdapter(new EducationAdapter(getActivity() , response , recyclerView));
+                    recyclerView.setAdapter(new EducationAdapter(getActivity(), response, recyclerView));
                 }
             }
 

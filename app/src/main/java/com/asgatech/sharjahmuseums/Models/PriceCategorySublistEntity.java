@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by mohamed.arafa on 10/22/2017.
  */
 
-public class PriceCategorySublistEntity extends RealmObject {
+public class PriceCategorySublistEntity extends RealmObject  {
     /**
      * sublist : [{"Price":50,"SubCatID":1,"Title":"oooiiiiiiii"}]
      * PriceCatID : 1
@@ -43,5 +43,6 @@ public class PriceCategorySublistEntity extends RealmObject {
     public RealmList<SublistEntity> getSublist() {
         return sublist;
     }
+
 }
 

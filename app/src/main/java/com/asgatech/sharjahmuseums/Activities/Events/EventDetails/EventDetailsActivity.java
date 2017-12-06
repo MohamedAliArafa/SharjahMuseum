@@ -18,10 +18,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Activities.ViewLocationMapActivity;
@@ -49,11 +49,14 @@ import java.util.TimerTask;
 
 import okhttp3.ResponseBody;
 
+import static com.asgatech.sharjahmuseums.Tools.AndroidDialogTools.customToastView;
+
 public class EventDetailsActivity extends AppCompatActivity {
     public ImageView toolbarHomeImageView;
     private ViewPager viewpager;
     private LinearLayout layoutDots;
     private TextView eventTitle;
+    private TextView eventTime;
     private TextView eventItemDateFrom;
     private TextView eventItemDateTo;
     private TextView eventItemPlace;
@@ -76,6 +79,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_event_details);
         eventTitleToolbar = getIntent().getStringExtra("title");
@@ -88,6 +93,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     public void setToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleMarginStart(-8);
         toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
         ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         ToolbarTitleTextView.setText(eventTitleToolbar);
@@ -112,6 +118,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         eventItemPlace = findViewById(R.id.event_item_place);
         eventDescription = findViewById(R.id.event_description);
         downloadText = findViewById(R.id.download_text);
+        eventTime = findViewById(R.id.tv_event_item_time);
         share = findViewById(R.id.share);
         call = findViewById(R.id.call);
         mail = findViewById(R.id.mail);
@@ -135,6 +142,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         dot = null;
         dots = null;
         downloadText.setPaintFlags(downloadText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        eventItemPlace.setPaintFlags(downloadText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
     BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
@@ -144,7 +152,8 @@ public class EventDetailsActivity extends AppCompatActivity {
             long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             if (referenceId != -1)
                 if (referenceId == downloadReference) {
-                    Toast.makeText(EventDetailsActivity.this, R.string.toast_download_complete, Toast.LENGTH_LONG).show();
+                    customToastView(EventDetailsActivity.this, context.getResources().getString(R.string.toast_download_complete));
+//                    Toast.makeText(EventDetailsActivity.this, R.string.toast_download_complete, Toast.LENGTH_LONG).show();
                 }
         }
     };
@@ -159,6 +168,8 @@ public class EventDetailsActivity extends AppCompatActivity {
                     eventItemDateTo.setText(Utils.spliteDate(model.getEndDate()));
                     eventDescription.setText(model.getDescrption());
                     eventItemPlace.setText(model.getAdress());
+                    String time = model.getStartTimeHours() + ":" + model.getStartTimeMin();
+                    eventTime.setText(Utils.convertTo12Hour(time));
                     eventItemPlace.setOnClickListener(view -> {
                         Intent intent1 = new Intent(EventDetailsActivity.this,
                                 ViewLocationMapActivity.class);
@@ -240,7 +251,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         Intent sharingIntent = new Intent(Intent.ACTION_DIAL);
         sharingIntent.setData(Uri.parse("tel:" + phone));
         startActivity(sharingIntent);
-
         startActivity(Intent.createChooser(sharingIntent, getString(R.string.title_share_via)));
     }
 
@@ -263,7 +273,8 @@ public class EventDetailsActivity extends AppCompatActivity {
                 Date today = cal.getTime();
                 Date date = sdf.parse(model.getEndDate());
                 if (date.before(today)) {
-                    Toast.makeText(this, R.string.toast_evet_expired, Toast.LENGTH_SHORT).show();
+                    customToastView(EventDetailsActivity.this, getResources().getString(R.string.toast_evet_expired));
+//                    Toast.makeText(this, R.string.toast_evet_expired, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 cal.setTime(date);
@@ -340,7 +351,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        new Localization().setLanguage(EventDetailsActivity.this, new UserData().getLocalization(EventDetailsActivity.this));
+        Localization.setLanguage(EventDetailsActivity.this, UserData.getLocalization(EventDetailsActivity.this));
         super.onResume();
     }
 

@@ -10,22 +10,30 @@
 
     <string name="Group_visits">زيارات المجموعة</string>
 
-    <string name="To_">:إلى</string>
+    <string name="To_">إلى :</string>
 
     <!-- museums details -->
     <string name="about_museums">عن المتحف</string>
-    <string name="about_us">عن الإدارة</string>
+    <string name="no_event">لا يوجد فعاليات</string>
+    <string name="confirm">تاكيد</string>
+    <string name="cancel">الغاء</string>
+    <string name="no_museums">لا يوجد متاحف</string>
+    <string name="location">العنوان</string>
+    <string name="about_us">عن الهيئه</string>
 
     <string name="action_settings">الإعدادات</string>
 
     <string name="add_review">إضافة تقييم</string>
-    <string name="add_your_review">إضافه تقييمك</string>
+    <string name="add_your_review">أضف تقييمك</string>
+    <string name="Filter">تصنيف</string>
+    <string name="share">مشاركة</string>
+
 
     <string name="addto_Calender">إضافه إلى التقويم</string>
 
     <string name="airports">المطارات</string>
 
-    <string name="app_name">SharjahMuseums</string>
+    <string name="app_name">SMA</string>
 
     <string name="arabic">العربية</string>
 
@@ -34,7 +42,8 @@
     <string name="banks">البنوك</string>
 
     <!--plan_visits-->
-    <string name="book_nw">احجز الان</string>
+    <string name="book_nw2">احجز</string>
+    <string name="book_nw">احجز </string>
     <string name="book_store">متاجر الكتب</string>
 
     <string name="bus_station">محطات الحافلات </string>
@@ -45,6 +54,7 @@
     <string name="closed">مغلق</string>
 
     <string name="contact">تواصل معنا</string>
+    <string name="contact2">اتصال</string>
     <string name="contact_us"> تواصل معنا</string>
 
     <string name="demo">دليل المستخدم</string>
@@ -58,11 +68,11 @@
     <string name="email">البريد الإلكترونى</string>
     <string name="email_hint">من فضلك أدخل البريد الالكتروني</string>
 
-    <string name="entry_fees">قيمةالدخول</string>
+    <string name="entry_fees">رسوم الدخول</string>
 
     <string name="failed_send_review">فشل إرسال تقييمك </string>
 
-    <string name="high_lights">المعالم</string>
+    <string name="high_lights">المقتنيات</string>
 
     <!--side menu-->
     <string name="home">الرئيسية</string>
@@ -102,14 +112,15 @@
 
     <string name="opened">مفتوح</string>
 
-    <string name="opening_hours">ساعات العمل</string>
+    <string name="opening_hours">أوقات الزيارة</string>
 
-    <string name="our_facilities">الخدمات</string>
+    <string name="our_facilities">المرافق</string>
     <string name="our_museums">المتاحف</string>
 
     <string name="parkings">مواقف سيارات</string>
 
     <string name="phone">الهاتف</string>
+    <string name="optional">الهاتف(إختيارى)</string>
     <string name="phone_hint">من فضلك أدخل رقم الهاتف </string>
 
     <string name="plan_your_visit">خطط زيارتك</string>
@@ -125,7 +136,7 @@
 
     <string name="send">إرسال</string>
     <string name="send_messege_fail">فشل ارسال الرساله</string>
-    <string name="send_messege_succsess"> تم إرسال الرساله بنجاح</string>
+    <string name="send_messege_succsess"> تم إرسال تقييمك</string>
 
     <string name="setting">الاعدادات</string>
 
@@ -134,28 +145,33 @@
     <string name="success_send_review">تم إرسال تقييمك بنجاح</string>
 
     <string name="title_btn_skip">تخطى</string>
-    <string name="title_filter_all">الجميع</string>
+    <string name="title_filter_all">الكل</string>
     <string name="title_from">من</string>
     <string name="title_to">إلى</string>
 
     <string name="vision">الرؤية</string>
 
-    <string name="visitors_reviews">تقييم الزوار</string>
+    <string name="visitors_reviews">أراءالزوار</string>
 
     <string name="website_hint">من فضلك أدخل لينك الموقع</string>
 
     <string name="welcome">مرحبا</string>
     <string name="rate_error_hint">من فضلك أدخل تقييم</string>
     <string name="search">بحث</string>
-    <string name="suggestions">مقترحات</string>
+    <string name="suggestions">الإقتراحات</string>
     <string name="title_downloading">تحميل:</string>
     <string name="toast_download_complete">إكتمل التحميل</string>
     <string name="title_free">مجانا</string>
     <string name="title_share_via">مشاركة</string>
     <string name="invalid_phone">رقم هاتف غير صحيح</string>
-    <string name="title_activity_highlight_detail">مقتطفات</string>
+    <string name="title_activity_highlight_detail">المقتنيات</string>
     <string name="your_email">بريدك الإلكترونى</string>
-    <string name="toast_evet_expired">إنتهت صلاحيه هذه الفعالية</string>
+    <string name="toast_evet_expired">تم إنتهاء تاريخ هذه الفاعلية</string>
     <string name="sharjah_museum_authority">هيئة الشارقة للمتاحف</string>
     <string name="title_welcome">مرحبا</string>
+    <string name="geofence_not_available">هذه الخدمه غير متاحه الأن</string>
+    <string name="geofence_too_many_geofences">تم تسجيل العديد من الأماكن</string>
+
+    <string name="geofence_transition_notification_text">إضغط للعودة للتطبيق</string>
+    <string name="insufficient_permissions">صلاحيات غير كافية</string>
 </resources>

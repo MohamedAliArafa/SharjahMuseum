@@ -6,70 +6,75 @@
     tools:context="com.asgatech.sharjahmuseums.Fragments.ContactInnerFragment">
 
 
-
     <EditText
-        android:layout_marginTop="40dp"
+        android:id="@+id/name_et"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:gravity="center|start"
-        android:paddingStart="5dp"
-        android:background="@drawable/event_share_layout_background"
         android:layout_marginEnd="@dimen/d20"
         android:layout_marginStart="@dimen/d20"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/event_share_layout_background"
+        android:gravity="center|start"
         android:hint="@string/name"
         android:inputType="text"
-        android:id="@+id/name_et"/>
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp" />
 
     <EditText
-        android:layout_marginTop="10dp"
+        android:id="@+id/email_et"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:gravity="center|start"
-        android:inputType="textEmailAddress"
-        android:paddingStart="5dp"
-        android:background="@drawable/event_share_layout_background"
         android:layout_marginEnd="@dimen/d20"
         android:layout_marginStart="@dimen/d20"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/event_share_layout_background"
+        android:gravity="center|start"
         android:hint="@string/email"
-        android:id="@+id/email_et"/>
+        android:inputType="textEmailAddress"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp" />
 
     <EditText
-        android:layout_marginTop="10dp"
+        android:id="@+id/phone_et"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@drawable/event_share_layout_background"
+        android:layout_gravity="start|center"
         android:layout_marginEnd="@dimen/d20"
-        android:gravity="center|start"
-        android:paddingStart="5dp"
-        android:inputType="phone"
         android:layout_marginStart="@dimen/d20"
-        android:hint="@string/phone"
-        android:id="@+id/phone_et"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/event_share_layout_background"
+        android:gravity="center|start"
+        android:hint="@string/optional"
+        android:inputType="phone"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:textAlignment="viewStart" />
 
     <EditText
-        android:layout_marginTop="10dp"
+        android:id="@+id/message_et"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/event_share_layout_background"
         android:layout_marginEnd="@dimen/d20"
-        android:inputType="text"
         android:layout_marginStart="@dimen/d20"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/event_share_layout_background"
         android:gravity="top|start"
-        android:paddingTop="5dp"
-        android:paddingStart="5dp"
         android:hint="@string/message"
-        android:id="@+id/message_et"/>
-    
+        android:inputType="text"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp" />
+
     <Button
+        android:id="@+id/send_btn"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@drawable/contact_button_green"
-        android:layout_marginTop="@dimen/d36"
         android:layout_marginEnd="@dimen/d20"
+        android:layout_marginStart="@dimen/d20"
+        android:layout_marginTop="@dimen/d36"
+        android:background="@drawable/contact_button_green"
         android:text="@string/send"
         android:textAllCaps="false"
-        android:textColor="@color/White"
-        android:layout_marginStart="@dimen/d20"
-        android:id="@+id/send_btn"/>
+        android:textColor="@color/White" />
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import com.asgatech.sharjahmuseums.Activities.Events.EventDetails.EventDetailsAc
 import com.asgatech.sharjahmuseums.Activities.NotificationDetailActivity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Localization;
+import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
@@ -68,23 +69,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage);
-
-            Intent intent = new Intent("myFunction");
-            // add data
-            if (Localization.getCurrentLanguageID(getApplicationContext()) == Localization.ARABIC_VALUE) {
-                intent.putExtra("title", remoteMessage.getData().get("title"));
-                intent.putExtra("text", remoteMessage.getData().get("Message"));
-            }else {
-                intent.putExtra("title", remoteMessage.getData().get("titleen"));
-                intent.putExtra("text", remoteMessage.getData().get("Messageen"));
+            Log.d(TAG, UserData.getNotificationState(this) + "");
+            if (UserData.getNotificationState(this)) {
+                sendNotification(remoteMessage);
+                Intent intent = new Intent("myFunction");
+                // add data
+                if (Localization.getCurrentLanguageID(getApplicationContext()) == Localization.ARABIC_VALUE) {
+                    intent.putExtra("title", remoteMessage.getData().get("title"));
+                    intent.putExtra("text", remoteMessage.getData().get("Message"));
+                } else {
+                    intent.putExtra("title", remoteMessage.getData().get("titleen"));
+                    intent.putExtra("text", remoteMessage.getData().get("Messageen"));
+                }
+                intent.putExtra("image", remoteMessage.getData().get("img"));
+                intent.putExtra("id", Integer.parseInt(remoteMessage.getData().get("DesID")));
+                intent.putExtra("type", Integer.parseInt(remoteMessage.getData().get("type")));
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             }
-            intent.putExtra("image", remoteMessage.getData().get("img"));
-            intent.putExtra("id", Integer.parseInt(remoteMessage.getData().get("DesID")));
-            intent.putExtra("type", Integer.parseInt(remoteMessage.getData().get("type")));
-            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
         }
-
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
@@ -123,11 +125,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             intent = new Intent(this, NotificationDetailActivity.class);
         else {
             intent = new Intent(this, EventDetailsActivity.class);
+
         }
         if (Localization.getCurrentLanguageID(getApplicationContext()) == Localization.ARABIC_VALUE) {
             intent.putExtra("title", notification.getData().get("title"));
             intent.putExtra("text", notification.getData().get("Message"));
-        }else {
+        } else {
             intent.putExtra("title", notification.getData().get("titleen"));
             intent.putExtra("text", notification.getData().get("Messageen"));
         }

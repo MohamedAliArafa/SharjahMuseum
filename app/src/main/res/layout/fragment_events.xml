@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:gravity="center"
-            android:text="Filter"
+            android:text="@string/Filter"
             android:textColor="@color/GreenLight" />
 
 
@@ -70,7 +70,7 @@
         android:id="@+id/event_switch_to_calender"
         android:layout_width="15dp"
         android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="30dp"
         android:layout_weight="1"
         android:src="@drawable/ic_calender_tap"
         app:layout_constraintBottom_toBottomOf="@+id/filter_layout"
@@ -100,16 +100,18 @@
 
     <LinearLayout
         android:id="@+id/main_filter_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@id/auto_complete_search_event"
         android:layout_alignStart="@id/filter_layout"
         android:layout_below="@id/filter_layout"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_event_filter_layout_background"
         android:orientation="vertical"
         android:padding="8dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/filter_layout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filter_layout" />
 
 </android.support.constraint.ConstraintLayout>

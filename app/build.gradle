@@ -58,10 +58,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.wang.avi:library:2.1.3'
+
     implementation 'com.github.bumptech.glide:glide:4.3.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
     // no @aar
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
+    compile 'com.gtomato.android.library:carouselview:2.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.gms:play-services-maps:11.4.2'
     implementation 'com.google.android.gms:play-services-location:11.4.2'
@@ -77,6 +79,7 @@ dependencies {
     //RTL Pager
     implementation 'com.booking:rtlviewpager:1.0.1'
     implementation 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
+//    compile 'com.github.moondroid.coverflow:library:1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
     //Expandable
     implementation 'com.thoughtbot:expandablerecyclerview:1.3'

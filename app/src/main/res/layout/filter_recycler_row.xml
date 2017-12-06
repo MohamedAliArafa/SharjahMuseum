@@ -16,7 +16,8 @@
     <com.asgatech.sharjahmuseums.Tools.CircleImageView
         android:id="@+id/pallete_for_filter_item"
         android:layout_width="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+
         android:background="@drawable/event_color_pallete_indicator_programmes"
         android:layout_height="8dp" />
     <TextView
@@ -25,6 +26,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="4dp"
         android:textSize="@dimen/font_size_med"
+        android:gravity="center"
         android:textColor="@color/GrayLight"
         android:id="@+id/name_for_filter_item"
         android:layout_marginLeft="4dp" />

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
@@ -16,6 +15,8 @@ import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.ValidationTool;
 
 import okhttp3.ResponseBody;
+
+import static com.asgatech.sharjahmuseums.Tools.AndroidDialogTools.customToastView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,23 +60,22 @@ public class ContactInnerFragment extends Fragment {
                     @Override
                     public void onSuccess(Integer response) {
                         if (response == 1) {
-                            Toast.makeText(getActivity(), getString(R.string.send_messege_succsess), Toast.LENGTH_SHORT).show();
+                            customToastView(getActivity(), getResources().getString(R.string.send_messege_succsess));
                             ((HomeActivity) getActivity()).getPresenter().openHome();
                         } else {
-
-                            Toast.makeText(getActivity(), getString(R.string.send_messege_fail), Toast.LENGTH_SHORT).show();
+                            customToastView(getActivity(), getResources().getString(R.string.send_messege_succsess));
                         }
                     }
 
                     @Override
                     public void onFailed(int statusCode, ResponseBody responseBody) {
-                        Toast.makeText(getActivity(), getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                        customToastView(getActivity(), getResources().getString(R.string.no_connection));
+//                        Toast.makeText(getActivity(), getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
             }
-
 
 
         });
@@ -104,14 +104,29 @@ public class ContactInnerFragment extends Fragment {
     }
 
     private boolean isValid() {
-        boolean vaildName = validationTool.validateRequiredField(nameEditText, getString(R.string.name_hint));
-        boolean vaildMail = validationTool.validateEmail(emailEditText, getString(R.string.invalid_email));
-        boolean vaildMessage = validationTool.validateRequiredField(messageEditText, getString(R.string.messeage_hint));
-//        boolean vaildPhone = validationTool.validateRequiredField(phoneEditText, getString(R.string.phone_hint));
-
-        if (vaildMail && vaildName && vaildMessage) {
-            return true;
+        boolean vaildName = validationTool.validateRequiredField(nameEditText);
+        boolean vaildMail = validationTool.validateEmail(emailEditText);
+        boolean vaildMessage = validationTool.validateRequiredField(messageEditText);
+        if (vaildName) {
+            nameEditText.setBackground(getResources().getDrawable(R.drawable.event_share_layout_background));
+            if (vaildMail) {
+                emailEditText.setBackground(getResources().getDrawable(R.drawable.event_share_layout_background));
+                if (vaildMessage) {
+                    messageEditText.setBackground(getResources().getDrawable(R.drawable.event_share_layout_background));
+                    return true;
+                } else {
+                    messageEditText.setBackground(getResources().getDrawable(R.drawable.event_share_layout_background_red));
+                    customToastView(getActivity(), getResources().getString(R.string.messeage_hint));
+                    return false;
+                }
+            } else {
+                emailEditText.setBackground(getResources().getDrawable(R.drawable.event_share_layout_background_red));
+                customToastView(getActivity(), getResources().getString(R.string.invalid_email));
+                return false;
+            }
         } else {
+            nameEditText.setBackground(getResources().getDrawable(R.drawable.event_share_layout_background_red));
+            customToastView(getActivity(), getResources().getString(R.string.name_hint));
             return false;
         }
     }

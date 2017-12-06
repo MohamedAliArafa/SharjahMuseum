@@ -6,8 +6,8 @@ package com.asgatech.sharjahmuseums.Tools.Connection;
 public class URLS {
 
 //    public static final String URL_BASE = "http://108.179.204.213:8071/"; // online
-//    public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
-    public static final String URL_BASE = "http://23.236.154.106:8075/"; // Testing
+    public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
+//    public static final String URL_BASE = "http://23.236.154.106:8075/"; // Testing
 
 
 //    public static final String URL_BASE = "http://192.168.20.86:8070/"; // local
@@ -31,12 +31,12 @@ public class URLS {
     public static final String URL_VISITOR_REVIEWS = "api/Reviews/GetAllMuseumReviews";
     public static final String URL_ADD_REVIEW = "api/Reviews/AddReviews";
     public static final String URL_GET_NOTIFICATION_LIST = "api/Notfcation/NotfactionList";
-
     public static final String URL_INSERT_DEVICE_Token = "/api/Notfcation/InsertDevicetoken";
     public static final String URL_UPDATE_NOTIFICATION_STATE = "/api/Notfcation/UpdateSate";
+    public static final String URL_GEOFENCING_LIST = "api/Geofinance/GetGeofinceList";
+    public static final String URL_DATE_LIST = "api/Events/GetEventListByDateAndCatId";
 
     public static final String URL_GET_ALLMUSEUM_CATEGORY = "api/MuseumCategray/GetALLMuseumCategray";
-
 //    api/MuseumCategray/GetALLMuseumCategray?lang=1
 
 }

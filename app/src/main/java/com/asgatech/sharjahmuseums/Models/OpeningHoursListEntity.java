@@ -94,4 +94,10 @@ public class OpeningHoursListEntity extends RealmObject {
     public boolean getISCLOSED() {
         return ISCLOSED;
     }
+
+
+    public OpeningHoursListEntity() {
+    }
+
+
 }

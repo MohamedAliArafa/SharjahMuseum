@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+<FrameLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-
     <ImageView
+        android:id="@+id/education_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d210"
-        android:scaleType="centerCrop"
         android:layout_marginBottom="@dimen/d4"
-        android:id="@+id/education_image"/>
-
-
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-        android:id="@+id/education_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="@dimen/d10"
-        android:layout_marginStart="@dimen/d30"
-        android:layout_marginTop="@dimen/d160"
-        android:layout_toLeftOf="@+id/arrowIV"
-        android:layout_toStartOf="@+id/arrowIV"
-        android:textAlignment="viewStart"
-        android:textColor="@color/White"
-        android:textSize="18sp" />
-
-
-    <ImageView
-        android:id="@+id/arrowIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/education_txt"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:layout_marginRight="14dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_arrow_collapse" />
-
+        android:scaleType="centerCrop" />
 
     <LinearLayout
-        android:layout_below="@id/education_image"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        android:weightSum="2"
+        android:background="@color/Black2"
+        android:orientation="horizontal">
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+            android:id="@+id/education_txt"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d10"
+            android:layout_marginStart="@dimen/d10"
+            android:textAlignment="viewStart"
+            android:layout_gravity="start|center"
+            android:gravity="start|center"
+            android:textColor="@color/White"
+            android:textSize="18sp" />
+
+
+        <ImageView
+            android:id="@+id/arrowIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_arrow_collapse" />
+
+    </LinearLayout>
+</FrameLayout>
+    <LinearLayout
+        android:id="@+id/expanded_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginBottom="@dimen/d4"
-        android:id="@+id/expanded_menu">
+        android:orientation="vertical">
 
 
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
@@ -56,33 +63,31 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/d30"
             android:layout_marginStart="@dimen/d30"
-            android:text="@string/hello_blank_fragment"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
             android:id="@+id/dsc_txt_expanded"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d30"
-            android:textSize="12sp"
-            android:layout_marginTop="@dimen/d4"
             android:layout_marginEnd="@dimen/d30"
-            android:text="@string/lorem" />
+            android:layout_marginStart="@dimen/d30"
+            android:layout_marginTop="@dimen/d4"
+            android:textSize="12sp" />
 
         <com.asgatech.sharjahmuseums.Tools.CustomFonts.ButtonBold
             android:id="@+id/book_nw"
             android:layout_width="100dp"
             android:layout_height="20dp"
-            android:text="@string/book_nw"
-            android:textColor="@color/White"
             android:layout_gravity="end"
-            android:textSize="10sp"
-            android:textAllCaps="false"
             android:layout_marginEnd="@dimen/d30"
+            android:layout_marginRight="@dimen/d30"
             android:background="@drawable/contact_button_green"
-            android:layout_marginRight="@dimen/d30" />
+            android:text="@string/book_nw"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            android:textSize="10sp" />
     </LinearLayout>
 
 
-
-</RelativeLayout>
+</LinearLayout>

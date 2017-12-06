@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Activities.Home.HomeContract;
 import com.asgatech.sharjahmuseums.Adapters.DemoPagerAdapter;
 import com.asgatech.sharjahmuseums.Adapters.DemoPagerDescAdapter;
@@ -70,8 +71,11 @@ public class DemoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_demo, container, false);
         ButterKnife.bind(this, view);
+        ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.demo));
         ((HomeContract.ModelView) getActivity()).hideLogo();
-        getData(UserData.getLocalization(getContext()));
+        if (Utils.isNetworkAvailable(getActivity())) {
+            getData(UserData.getLocalization(getContext()));
+        }
         return view;
     }
 
@@ -163,7 +167,7 @@ public class DemoFragment extends Fragment {
 
                     handler = new Handler();
                     Update = () -> {
-                        if (mCurrentPage == size - 1) {
+                        if (mCurrentPage == size) {
                             mCurrentPage = 0;
                         }
                         mDemoImageViewPager.setCurrentItem(mCurrentPage++, true);

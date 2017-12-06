@@ -9,10 +9,22 @@
     <color name="GrayLight">#939597</color>
     <color name="Blue">#00a4e3</color>
     <color name="White">#ffffff</color>
+    <color name="White6">#F2ffffff</color>
     <color name="Black">#000000</color>
+    <color name="Black2">#59000000</color>
     <color name="test">#ad4286f4</color>
     <color name="d">#FF3B5D</color>
     <color name="f">#e40d62</color>
+    <color name="overlay">#4d4e50</color>
+
+    <color name="overlay2">#ad4d4e50</color>
+    <color name="overlay3">#af4d4e50</color>
+    <color name="overlay4">#ae4d4e50</color>
+
+    <color name="overlay5">#da4d4e50</color>
+    <color name="overlay6">#fc4d4e50</color>
+    <color name="overlay7">#fd4d4e50</color>
+    <!--<color name="overlay">#9C9EA1</color>-->
 
     <color name="about_background">#f3f3f3</color>
 </resources>

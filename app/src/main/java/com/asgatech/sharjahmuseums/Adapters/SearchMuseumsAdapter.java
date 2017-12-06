@@ -36,6 +36,11 @@ public class SearchMuseumsAdapter extends RecyclerView.Adapter<SearchMuseumsAdap
         this.presenter = presenter;
     }
 
+    public SearchMuseumsAdapter(Context context, List<MuseumsDetailsModel> response) {
+        this.context = context;
+        this.allMuseumsList = response;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_museums, parent, false);
@@ -49,11 +54,6 @@ public class SearchMuseumsAdapter extends RecyclerView.Adapter<SearchMuseumsAdap
 
         holder.museumsNameTextView.setText(allMuseumsList.get(position).getTitle());
         holder.museumsItemLinear.setOnClickListener(view -> {
-//                Bundle bundle = new Bundle();
-//                bundle.putInt(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
-//                bundle.putString(ConstantUtils.MUSEUM_TITLE, allMuseumsList.get(position).getTitle().trim());
-//                bundle.putString(ConstantUtils.MUSEUM_COLOR, allMuseumsList.get(position).getColor());
-//                presenter.openFragment(new MuseumDetailsFragment(), bundle);
             Intent intent = new Intent(context, MuseumsDetailsActivity.class);
             intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
             intent.putExtra(ConstantUtils.MUSEUM_TITLE,allMuseumsList.get(position).getTitle().trim());

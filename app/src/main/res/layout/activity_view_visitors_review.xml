@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/White">
 
-   <android.support.design.widget.AppBarLayout
-    android:id="@+id/appbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar">
-    <include layout="@layout/layout_toolbar"
-        />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar">
+
+        <include layout="@layout/layout_toolbar" />
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/margin_20dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView_reviews"
@@ -28,6 +28,7 @@
             android:visibility="visible" />
 
     </LinearLayout>
+
     <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
         android:id="@+id/tv_error_message"
         android:layout_width="match_parent"
@@ -43,8 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_review_new"
-      />
+        android:src="@drawable/ic_add_review_new" />
 
 
 </android.support.design.widget.CoordinatorLayout>

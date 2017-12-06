@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:weightSum="2.2">
 
-            <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,9 +52,12 @@
                     android:id="@+id/event_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="start|center"
                     android:text="event title"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/GrayLight"
                     android:textSize="@dimen/font_size_xlarge" />
 
@@ -114,8 +117,8 @@
                         android:layout_marginEnd="@dimen/margin_8dp"
                         android:layout_marginRight="@dimen/margin_8dp"
                         android:layout_weight="1"
-                        android:text="10:00AM"
-                        android:textSize="@dimen/font_size_med" />
+                        android:textSize="@dimen/font_size_med"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -124,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/ic_location_page_eventsdetails"
                     android:drawablePadding="@dimen/d10"
@@ -134,13 +137,14 @@
                     android:paddingStart="2dp"
                     android:text=""
                     android:textAlignment="viewStart"
+                    android:textColor="@color/GreenLight"
                     android:textSize="@dimen/font_size_med" />
 
                 <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:text="@string/description"
                     android:textColor="@color/GrayLight"
@@ -150,9 +154,12 @@
                     android:id="@+id/event_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="@dimen/margin_8dp"
+                    android:gravity="start|center"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/GrayLight"
                     android:textSize="15sp" />
 
@@ -193,20 +200,6 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-
-                        <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/ic_share_event_detail" />
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:id="@+id/call"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -239,6 +232,21 @@
                             android:scaleType="centerInside"
                             android:src="@drawable/ic_mail_event_details" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_share_event_detail" />
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/mark"

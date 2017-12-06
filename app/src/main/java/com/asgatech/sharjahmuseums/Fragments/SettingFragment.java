@@ -3,6 +3,7 @@ package com.asgatech.sharjahmuseums.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,8 @@ public class SettingFragment extends Fragment {
     private RadioButton changeLanguageArabicRadioButton;
     private RadioButton changeLanguageEnglishRadioButton;
     private SwitchCompat toggleBtnNotificationState;
-    private int language, state;
+    private int language;
+    private boolean state;
 
 
     public SettingFragment() {
@@ -42,7 +44,7 @@ public class SettingFragment extends Fragment {
     }
 
     private void initView(View view) {
-        ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.setting));
+        ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.setting));
         changeLanguageRadioGroup = view.findViewById(R.id.change_language_radio_groub);
         changeLanguageArabicRadioButton = view.findViewById(R.id.change_language_arabic_radio_button);
         changeLanguageEnglishRadioButton = view.findViewById(R.id.change_language_english_radio_button);
@@ -63,13 +65,14 @@ public class SettingFragment extends Fragment {
         }
 
         state = UserData.getNotificationState(getActivity());
-        switch (state) {
-            case 1:
-                toggleBtnNotificationState.setChecked(true);
-                break;
-            case 0:
-                toggleBtnNotificationState.setChecked(false);
-                break;
+        Log.e("State", state + "");
+        if (state) {
+            toggleBtnNotificationState.setChecked(true);
+            UserData.saveNotificationState(getActivity(), true);
+        } else {
+            toggleBtnNotificationState.setChecked(false);
+            UserData.saveNotificationState(getActivity(), false);
+
         }
 
         changeLanguageRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
@@ -91,9 +94,9 @@ public class SettingFragment extends Fragment {
         toggleBtnNotificationState.setOnCheckedChangeListener((compoundButton, b) -> {
 
             if (b) {
-                UserData.saveNotificationState(getActivity(), 1);
+                UserData.saveNotificationState(getActivity(), true);
             } else {
-                UserData.saveNotificationState(getActivity(), 0);
+                UserData.saveNotificationState(getActivity(), false);
             }
 
         });

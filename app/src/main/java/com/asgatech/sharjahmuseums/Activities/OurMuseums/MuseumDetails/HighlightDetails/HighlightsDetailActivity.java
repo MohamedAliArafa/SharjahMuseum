@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -23,23 +24,30 @@ import com.asgatech.sharjahmuseums.Models.HighLightEntity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
+import com.asgatech.sharjahmuseums.Tools.GlideApp;
 import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
 public class HighlightsDetailActivity extends AppCompatActivity {
     ImageView mToolbarHomeImageView;
-    TextView mToolbarTitleTextView;
+    TextView mToolbarTitleTextView, titleTextView, descTextView;
     ViewPager mImagesViewPager;
+    ImageView coverImageView;
     ArrayList<HighLightEntity> mHighlightList;
     private int mPosition;
-    private String mColor;
+    private String mColor , url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_hight_light_detail);
         setToolBar();
@@ -49,13 +57,15 @@ public class HighlightsDetailActivity extends AppCompatActivity {
     public void setToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleMarginStart(-8);
         mToolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
         mToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
-        mToolbarTitleTextView.setText(getString(R.string.title_activity_highlight_detail));
+        mToolbarTitleTextView.setText(getString(R.string.high_lights));
         mToolbarHomeImageView.setVisibility(View.VISIBLE);
         mToolbarHomeImageView.setImageResource(R.drawable.ic_close_white);
         mToolbarHomeImageView.setOnClickListener(view -> onBackPressed());
         mColor = getIntent().getStringExtra(ConstantUtils.HIGHLIGHT_COLOR);
+        url = getIntent().getStringExtra(ConstantUtils.HIGHLIGHT_URL);
         if (mColor != null) {
             Drawable background = toolbar.getBackground();
             background.setColorFilter(Color.parseColor(mColor), PorterDuff.Mode.SRC_IN);
@@ -73,13 +83,64 @@ public class HighlightsDetailActivity extends AppCompatActivity {
     }
 
     void setUpView() {
-        mImagesViewPager = findViewById(R.id.images_view_pager);
         mHighlightList = getIntent().getParcelableArrayListExtra(ConstantUtils.HIGHLIGHT_LIST);
         mPosition = getIntent().getIntExtra(ConstantUtils.HIGHLIGHT_LIST_POSITION, 0);
-        FragmentManager fm = getSupportFragmentManager();
-        MyFragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(fm, mHighlightList);
-        mImagesViewPager.setAdapter(pagerAdapter);
-        mImagesViewPager.setCurrentItem(mPosition);
+        Log.e("position", mPosition + "");
+        coverImageView = findViewById(R.id.image_cover);
+        titleTextView = findViewById(R.id.tv_title);
+        ImageView imageRight = findViewById(R.id.imageright);
+        ImageView imageLeft = findViewById(R.id.imageleft);
+        descTextView = findViewById(R.id.tv_text_desc);
+        setData();
+        imageRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPosition == mHighlightList.size() - 1) {
+                    mPosition = 0;
+                } else {
+                    if(mHighlightList.size()>1) {
+                        mPosition++;
+                    }
+                }
+                setData();
+
+            }
+        });
+        imageLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPosition == mHighlightList.size() - 1) {
+                    if(mHighlightList.size()>1){
+                        mPosition--;
+                    }
+                } else {
+                    if (mPosition == 0) {
+                        mPosition = mHighlightList.size() - 1;
+                    } else {
+                        mPosition = 0;
+                    }
+
+                }
+                setData();
+
+            }
+        });
+
+
+//        FragmentManager fm = getSupportFragmentManager();
+//        MyFragmentPagerAdapter pagerAdapter = new MyFragmentPagerAdapter(fm, mHighlightList);
+//        mImagesViewPager.setAdapter(pagerAdapter);
+//        mImagesViewPager.setCurrentItem(mPosition);
+    }
+
+    private void setData() {
+        titleTextView.setText(mHighlightList.get(mPosition).getTitle());
+        descTextView.setText(mHighlightList.get(mPosition).getText());
+        GlideApp.with(this)
+                .load(URLS.URL_BASE + mHighlightList.get(mPosition).getPhoto()).placeholder(R.drawable.no_image)
+                .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into((coverImageView));
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -107,16 +168,17 @@ public class HighlightsDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 //icon share to
-                HighLightEntity entity = mHighlightList.get(mImagesViewPager.getCurrentItem());
+//                HighLightEntity entity = mHighlightList.get(mImagesViewPager.getCurrentItem());
                 Intent intentShare = new Intent(Intent.ACTION_SEND);
                 intentShare.setType("text/plain");
-                intentShare.putExtra(Intent.EXTRA_TEXT, entity.getTitle() + "\n" +
-                        "\n" + getResources().getString(R.string.description) + ":" + entity.getText()
-                        + "\n" + URLS.URL_BASE + entity.getPhoto());
+//                intentShare.putExtra(Intent.EXTRA_TEXT, mHighlightList.get(mPosition).getTitle() + "\n" +
+//                        "\n" + getResources().getString(R.string.description) + ":" + mHighlightList.get(mPosition).getText()
+//                        + "\n" + URLS.URL_BASE + mHighlightList.get(mPosition).getPhoto());
+                intentShare.putExtra(Intent.EXTRA_TEXT, mHighlightList.get(mPosition).getTitle() + "\n" +
+                     url);
                 Intent chooser = Intent.createChooser(intentShare, getString(R.string.title_share_via));
                 chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(chooser);
-//                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);

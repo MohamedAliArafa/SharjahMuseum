@@ -30,6 +30,9 @@ public class ContactUsModel {
     @SerializedName("Email")
     @Expose
     private String email;
+    @SerializedName("Address")
+    @Expose
+    private String address;
     @SerializedName("Latitude")
     @Expose
     private double latitude;
@@ -39,6 +42,14 @@ public class ContactUsModel {
 
     public String getFB() {
         return fB;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setFB(String fB) {

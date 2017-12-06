@@ -19,7 +19,6 @@ import com.asgatech.sharjahmuseums.Models.ContactUsModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
-import com.asgatech.sharjahmuseums.Tools.DialogTool.ErrorDialog;
 import com.asgatech.sharjahmuseums.Tools.PermissionTool;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
@@ -83,9 +82,10 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         ButterKnife.bind(this, view);
+        if (Utils.isNetworkAvailable(getActivity())) {
+            getContactData(UserData.getLocalization(getActivity()));
+        }
 
-
-        getContactData(UserData.getLocalization(getActivity()));
         return view;
     }
 
@@ -97,8 +97,9 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                 if (Utils.validObject(response)) {
                     callTextView.setText(response.getPhone());
                     emailTextView.setText(response.getEmail());
-                    locationTextView.setText(getCompleteAddressString(response.getLatitude(),
-                            response.getLongitute()));
+//                    locationTextView.setText(getCompleteAddressString(response.getLatitude(),
+//                            response.getLongitute()));
+                    locationTextView.setText(response.getAddress());
 
                     tetephoneNum = response.getPhone();
                     emailString = response.getEmail();
@@ -118,7 +119,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
-                new ErrorDialog().showDialog(getContext());
+//                new ErrorDialog().showDialog(getContext());
             }
         });
     }

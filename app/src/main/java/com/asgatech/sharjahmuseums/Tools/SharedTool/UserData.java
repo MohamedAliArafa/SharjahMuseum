@@ -14,7 +14,7 @@ public class UserData {
     public static String TAG_LOCALIZATION = "localization";
     public static String TAG_NOTIFICATION_STATE = "notification_state";
 
-    public static String TAG_CURRENCY = "Currency";
+    public static String TAG_DISTANCE = "distance";
     public static String TAG_USER_CODE = "user_code";
     public static String TAG_USER_PASSWORD = "user_password";
     public static String TAG_REMEMBER_ME = "remmeber_me";
@@ -50,19 +50,19 @@ public class UserData {
         return SharedPreferencesTool.getInt(context, TAG_LOCALIZATION);
     }
 
-    public static void saveNotificationState(Context context, int value) {
-        SharedPreferencesTool.setInt(context, TAG_NOTIFICATION_STATE, value);
+    public static void saveNotificationState(Context context, boolean value) {
+        SharedPreferencesTool.setBoolean(context, value, TAG_NOTIFICATION_STATE);
     }
-    public static int getNotificationState(Context context) {
-        return SharedPreferencesTool.getInt(context, TAG_NOTIFICATION_STATE);
-    }
-
-    public static void saveUserCurrencyID(Context context, int value) {
-        SharedPreferencesTool.setInt(context, TAG_CURRENCY, value);
+    public static boolean getNotificationState(Context context) {
+        return SharedPreferencesTool.getBooleanlang(context, TAG_NOTIFICATION_STATE);
     }
 
-    public static int getUserCurrencyID(Context context) {
-        return SharedPreferencesTool.getInt(context, TAG_CURRENCY);
+    public static void saveGeoDistance(Context context, int value) {
+        SharedPreferencesTool.setInt(context, TAG_DISTANCE, value);
+    }
+
+    public static int getGeoDistance(Context context) {
+        return SharedPreferencesTool.getInt(context, TAG_DISTANCE);
     }
     public static void saveUserStateOfInsertToken(Context context, boolean state,String value) {
         SharedPreferencesTool.setBoolean(context, state, value);

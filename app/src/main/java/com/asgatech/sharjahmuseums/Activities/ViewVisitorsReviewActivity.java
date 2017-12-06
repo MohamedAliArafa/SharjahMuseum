@@ -50,6 +50,8 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_view_visitors_review);
         setToolBar();
@@ -59,10 +61,10 @@ public class ViewVisitorsReviewActivity extends AppCompatActivity implements Vie
     public void setToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleMarginStart(-8);
         toolbarHomeImageView = (ImageView) findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
         toolbarHomeImageView.setOnClickListener(this);
-
         museumColor = getIntent().getStringExtra(ConstantUtils.MUSEUM_COLOR);
         Drawable background = toolbar.getBackground();
         if (museumColor != null) {

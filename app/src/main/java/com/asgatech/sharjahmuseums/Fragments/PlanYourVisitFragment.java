@@ -24,6 +24,7 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
+import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import okhttp3.ResponseBody;
 
@@ -35,6 +36,7 @@ public class PlanYourVisitFragment extends Fragment {
     private TextViewLight planDescriptionTextView, groupVisitsDescriptionTextView;
     private Button bookNowBtn;
     private String bookLink;
+    private LinearLayoutManager layoutManager;
     private LinearLayout groupVisitsLinear;
 
 
@@ -54,7 +56,9 @@ public class PlanYourVisitFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-        getPlanVisits(new UserData().getLocalization(getActivity()));
+        if (Utils.isNetworkAvailable(getActivity())) {
+            getPlanVisits(UserData.getLocalization(getActivity()));
+        }
         bookNowBtn.setOnClickListener(view1 -> {
             Intent intent = new Intent(getActivity(), OpenWebViewActivity.class);
             Log.e("bookLink", bookLink);
@@ -68,7 +72,7 @@ public class PlanYourVisitFragment extends Fragment {
         ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.plan_your_visit));
         groupVisitsLinear = view.findViewById(R.id.layout_group_visits);
         recyclerView = view.findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
@@ -89,7 +93,6 @@ public class PlanYourVisitFragment extends Fragment {
                 bookLink = response.getGroupBookLink();
                 Log.e("", response.getPlanVist().size() + "");
                 recyclerView.setAdapter(new PlanYourVisitAdapter(getActivity(), response.getPlanVist(), recyclerView));
-                recyclerView.setHasFixedSize(true);
                 groupVisitsLinear.setVisibility(View.VISIBLE);
             }
 

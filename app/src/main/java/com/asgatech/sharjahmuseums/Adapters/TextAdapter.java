@@ -55,10 +55,10 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.ViewHolder> {
             to.set(Calendar.HOUR_OF_DAY, openingHoursList.get(position).getTo());
             to.set(Calendar.MINUTE, openingHoursList.get(position).getToMinute());
             if (openingHoursList.get(position).getISCLOSED()) {
-                holder.titleTextView.setText(String.format("%s:%s", openingHoursList.get(position).getTitle(), context.getResources().getString(R.string.closed)));
+                holder.titleTextView.setText(String.format("%s:%s", openingHoursList.get(position).getTitle().trim(), context.getResources().getString(R.string.closed)));
             } else {
                 holder.titleTextView.setText(String.format("%s: %s - %s",
-                        openingHoursList.get(position).getTitle(),
+                        openingHoursList.get(position).getTitle().trim(),
                         sdf.format(from.getTime()),
                         sdf.format(to.getTime())));
             }
@@ -67,12 +67,12 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.ViewHolder> {
             for (int i = 0; i < entryFeesList.get(position).getSublist().size(); i++) {
                 sublist.append(String.format(Localization.getCurrentLocale(context),
                         (entryFeesList.get(position).getSublist().size() - 1) > i ?
-                                "%s (%s): %s%s\n" : "%s (%s): %s%s",
-                        entryFeesList.get(position).getTitle(),
-                        entryFeesList.get(position).getSublist().get(i).getTitle(),
+                                "%s(%s):%s%s\n" : "%s(%s):%s%s",
+                        entryFeesList.get(position).getTitle().trim(),
+                        entryFeesList.get(position).getSublist().get(i).getTitle().trim(),
                         entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? context.getString(R.string.title_free) :
-                                String.valueOf(entryFeesList.get(position).getSublist().get(i).getPrice()),
-                        entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? "" :
+                                String.valueOf(entryFeesList.get(position).getSublist().get(i).getPrice()) ,
+                        entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? ""  :
                                 context.getString(R.string.AED)
                 ));
             }

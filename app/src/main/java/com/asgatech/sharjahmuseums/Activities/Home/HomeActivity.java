@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,7 +42,7 @@ public class HomeActivity extends AppCompatActivity implements
     private ActionBarDrawerToggle toogleButtonActionBarDrawerToggle;
 
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+   public Toolbar mToolbar;
     @BindView(R.id.toolbar_logo_image_view)
     ImageView mToolbarLogoImageView;
     @BindView(R.id.toolbar_home_image_view)
@@ -57,9 +59,11 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        mPresenter = new HomePresenter(this,getLifecycle(), getSupportFragmentManager());
+        mPresenter = new HomePresenter(this, this, getLifecycle(), getSupportFragmentManager());
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         initView();
         setupNavigationDrawer();
@@ -107,7 +111,7 @@ public class HomeActivity extends AppCompatActivity implements
                 if ((fragment instanceof HomeFragment)) {
                     mToolbarTitleTextView.setText("");
                     showLogo();
-                }else {
+                } else {
                     hideLogo();
                 }
             }
@@ -154,6 +158,7 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     public void changeToolbarTitle(String title) {
         mToolbarTitleTextView.setText(title);
+        mToolbar.setTitleMarginStart(-2);
     }
 
     @Override
@@ -223,4 +228,24 @@ public class HomeActivity extends AppCompatActivity implements
     public Context getContext() {
         return this;
     }
+
+
+    public void openFragment(Class fragmentClass, Bundle bundle) {
+        Fragment fragment = null;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+        transaction.replace(R.id.content_main, fragment).addToBackStack(null).commit();
+        DrawerLayout navigationViewdrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationViewdrawerLayout.closeDrawer(GravityCompat.START);
+    }
+
 }

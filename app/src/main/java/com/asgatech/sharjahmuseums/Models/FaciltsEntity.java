@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by mohamed.arafa on 10/22/2017.
  */
 
-public class FaciltsEntity extends RealmObject {
+public class FaciltsEntity extends RealmObject{
     /**
      * FaciltsID : 4
      * Title : غرف أطفال
@@ -42,4 +42,6 @@ public class FaciltsEntity extends RealmObject {
     public String getImage() {
         return Image;
     }
+
+
 }

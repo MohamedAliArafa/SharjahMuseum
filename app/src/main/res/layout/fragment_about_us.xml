@@ -7,113 +7,114 @@
     tools:context="com.asgatech.sharjahmuseums.Fragments.AboutUsFragment">
 
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/about_mainImage"
-        android:scaleType="centerCrop"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d250" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/about_mainImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d250"
+            android:scaleType="centerCrop" />
 
 
-    <com.asgatech.sharjahmuseums.Tools.CircleImageView
-        android:layout_marginTop="@dimen/d20"
-        android:layout_width="@dimen/d80"
-        android:id="@+id/about_memberImage"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:scaleType="centerCrop"
-        android:layout_height="@dimen/d80"
-        android:layout_below="@id/about_mainImage"/>
+        <com.asgatech.sharjahmuseums.Tools.CircleImageView
+            android:id="@+id/about_memberImage"
+            android:layout_width="@dimen/d80"
+            android:layout_height="@dimen/d80"
+            android:layout_below="@id/about_mainImage"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/d20"
+            android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/about_memberWords"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/about_memberImage"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@id/about_memberImage"
-        android:background="@drawable/about_word_background"
-        android:padding="@dimen/margin_10dp"
-        android:textAlignment="center" />
+        <TextView
+            android:id="@+id/about_memberWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/about_memberImage"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/about_memberImage"
+            android:background="@drawable/about_word_background"
+            android:gravity="start|center"
+            android:padding="10dp"
+            android:textAlignment="viewStart"
+            android:textSize="12sp" />
 
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="11sp"
-
-        android:layout_below="@id/about_memberWords"
-        android:layout_alignEnd="@id/about_memberWords"
-        android:id="@+id/about_memberName"/>
-
-
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/about_visionHeader"
-        android:layout_alignLeft="@+id/about_memberImage"
-        android:layout_marginTop="20dp"
-        android:layout_alignStart="@+id/about_memberImage"
-        android:layout_below="@+id/about_memberName"
-        android:text="@string/vision" />
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/about_memberName"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/about_memberWords"
+            android:layout_below="@id/about_memberWords"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp" />
 
 
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/about_memberImage"
-        android:layout_marginTop="5dp"
-        android:id="@+id/about_visionMain"
-        android:layout_marginEnd="@dimen/d20"
-        android:layout_alignStart="@+id/about_memberImage"
-        android:layout_below="@+id/about_visionHeader" />
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+            android:id="@+id/about_visionHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/about_memberImage"
+            android:layout_alignStart="@+id/about_memberImage"
+            android:layout_below="@+id/about_memberName"
+            android:layout_marginTop="20dp"
+            android:text="@string/vision" />
 
 
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/about_missionHeader"
-        android:layout_alignLeft="@+id/about_memberImage"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:layout_alignStart="@+id/about_memberImage"
-        android:layout_below="@+id/about_visionMain"
-        android:text="@string/mission" />
-
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/about_memberImage"
-        android:layout_marginTop="5dp"
-        android:id="@+id/about_missionMain"
-        android:layout_marginEnd="@dimen/d20"
-        android:layout_alignStart="@+id/about_memberImage"
-        android:layout_below="@+id/about_missionHeader"/>
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/about_visionMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/about_memberImage"
+            android:layout_alignStart="@+id/about_memberImage"
+            android:layout_below="@+id/about_visionHeader"
+            android:layout_marginEnd="@dimen/d20"
+            android:layout_marginTop="5dp" />
 
 
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/about_policiesHeader"
-        android:layout_alignLeft="@+id/about_memberImage"
-        android:layout_marginTop="@dimen/margin_10dp"
-        android:layout_alignStart="@+id/about_memberImage"
-        android:layout_below="@+id/about_missionMain"
-        android:text="@string/policy" />
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+            android:id="@+id/about_missionHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/about_memberImage"
+            android:layout_alignStart="@+id/about_memberImage"
+            android:layout_below="@+id/about_visionMain"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/mission" />
 
-    <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/about_memberImage"
-        android:layout_marginTop="5dp"
-        android:id="@+id/about_policiesMain"
-        android:layout_marginEnd="@dimen/d20"
-        android:layout_alignStart="@+id/about_memberImage"
-        android:layout_below="@+id/about_policiesHeader"/>
-</RelativeLayout>
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/about_missionMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/about_memberImage"
+            android:layout_alignStart="@+id/about_memberImage"
+            android:layout_below="@+id/about_missionHeader"
+            android:layout_marginEnd="@dimen/d20"
+            android:layout_marginTop="5dp" />
+
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
+            android:id="@+id/about_policiesHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/about_memberImage"
+            android:layout_alignStart="@+id/about_memberImage"
+            android:layout_below="@+id/about_missionMain"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/policy" />
+
+        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+            android:id="@+id/about_policiesMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/about_memberImage"
+            android:layout_alignStart="@+id/about_memberImage"
+            android:layout_below="@+id/about_policiesHeader"
+            android:layout_marginEnd="@dimen/d20"
+            android:layout_marginTop="5dp" />
+    </RelativeLayout>
 
 </ScrollView>
 

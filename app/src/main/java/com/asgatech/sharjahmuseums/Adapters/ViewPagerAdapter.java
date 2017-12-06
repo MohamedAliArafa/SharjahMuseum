@@ -50,16 +50,6 @@ public class ViewPagerAdapter extends PagerAdapter {
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.mipmap.ic_launcher).into(img);
-//        List<EventImage> list = new ArrayList<>();
-//        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerView);
-//        for (int i = indexIndecator; i < indexIndecator + 4; i++) {
-//            if (i < items.size())
-//                list.add(items.get(i));
-//        }
-//        indexIndecator+=4;
-//        MainActivityPagerRecyclerAdapter adapter = new MainActivityPagerRecyclerAdapter(context, list);
-//        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-//        recyclerView.setAdapter(adapter);
         collection.addView(layout);
         return layout;
     }

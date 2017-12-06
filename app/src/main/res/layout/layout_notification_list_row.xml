@@ -43,19 +43,19 @@
             android:textAlignment="viewStart"
             android:textColor="@color/White"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textViewBold"
+            app:layout_constraintEnd_toStartOf="@+id/delete_item"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
-            android:id="@+id/textViewBold"
-            android:layout_width="0dp"
+        <ImageView
+            android:contentDescription="@null"
+            android:id="@+id/delete_item"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="start"
-            android:text="@string/now"
+            android:src="@drawable/ic_delet"
             android:textAlignment="viewStart"
-            android:textColor="@color/White"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

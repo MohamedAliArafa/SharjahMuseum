@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by mohamed.arafa on 10/22/2017.
  */
 
-public class ImageListEntity extends RealmObject {
+public class ImageListEntity extends RealmObject  {
     /**
      * ImageID : 1
      * Mus_ID : 1
@@ -41,4 +41,7 @@ public class ImageListEntity extends RealmObject {
     public String getImage() {
         return Image;
     }
+
+
+
 }

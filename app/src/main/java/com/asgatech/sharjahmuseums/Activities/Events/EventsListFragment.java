@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.asgatech.sharjahmuseums.Adapters.EventsAdapter;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
+import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.R;
-import com.asgatech.sharjahmuseums.Tools.DialogTool.NoDataDialog;
 
 import java.util.List;
 
@@ -53,15 +53,39 @@ public class EventsListFragment extends Fragment implements EventsContract.Model
 
     public void setData(List<EventModel> list) {
         if (list.isEmpty()) {
-            new NoDataDialog().showDialog(getContext());
+//            new NoDataDialog().showDialog(getContext());
             setData(Realm.getDefaultInstance()
                     .where(EventModel.class)
                     .findAll());
         } else if (mAdapter != null) mAdapter.updateSet(list);
     }
 
+    public void setDatas(List<NewResponse> list) {
+        if (list.isEmpty()) {
+//            new NoDataDialog().showDialog(getContext());
+            setData(Realm.getDefaultInstance()
+                    .where(EventModel.class)
+                    .findAll());
+        } else if (mAdapter != null) mAdapter.updateSets(list);
+    }
+
     @Override
     public void updateView(List<EventModel> models, List<EventCategoryModel> categoryModels) {
         setData(models);
+    }
+
+    @Override
+    public void updateViews(List<NewResponse> models, List<EventCategoryModel> categoryModels) {
+        setDatas(models);
+    }
+
+    @Override
+    public void showList() {
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideList() {
+        recyclerView.setVisibility(View.GONE);
     }
 }

@@ -11,9 +11,18 @@
     <string name="Group_visits">Group Visits</string>
 
     <string name="To_">To:</string>
+    <string name="Filter">Filter</string>
+    <string name="share">Share</string>
+
 
     <!-- museums details -->
-    <string name="about_museums">About Museums</string>
+    <string name="about_museums">About The Museum</string>
+    <string name="no_event">No Event Found</string>
+    <string name="no_museums">No Museums Found</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="location">Location</string>
+
     <string name="about_us">About Us</string>
 
     <string name="action_settings">Settings</string>
@@ -25,7 +34,7 @@
 
     <string name="airports">Airports</string>
 
-    <string name="app_name">SharjahMuseums</string>
+    <string name="app_name">SMA</string>
 
     <string name="arabic">العربيه</string>
 
@@ -34,7 +43,8 @@
     <string name="banks">Banks</string>
 
     <!--plan_visits-->
-    <string name="book_nw">Book now</string>
+    <string name="book_nw">Book </string>
+    <string name="book_nw2">Book Now </string>
     <string name="book_store">Book stores</string>
 
     <string name="bus_station">Bus stations</string>
@@ -45,6 +55,7 @@
     <string name="closed">Closed</string>
 
     <string name="contact">Contact</string>
+    <string name="contact2">Contact</string>
     <string name="contact_us">Contact Us</string>
 
     <string name="demo">Demo</string>
@@ -62,7 +73,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
 
-    <string name="high_lights">HighLights</string>
+    <string name="high_lights">Collections</string>
 
     <!--side menu-->
     <string name="home">Home</string>
@@ -88,7 +99,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
 
-    <string name="near_by_facilities">Nearby Facilities</string>
+    <string name="near_by_facilities">Nearby</string>
 
     <!--errors-->
     <string name="no_connection">No Connection Now Please try again later</string>
@@ -104,12 +115,14 @@
 
     <string name="opening_hours">Opening Hours</string>
 
-    <string name="our_facilities">Our Facilities</string>
+    <string name="our_facilities">Facilities</string>
     <string name="our_museums">Our Museums</string>
 
     <string name="parkings">Parkings</string>
 
     <string name="phone">Phone</string>
+    <string name="optional">Phone(optional)</string>
+
     <string name="phone_hint">Please enter your phone number</string>
 
     <string name="plan_your_visit">Plan Your Visit</string>
@@ -125,7 +138,7 @@
 
     <string name="send">Send</string>
     <string name="send_messege_fail">Failed to send message</string>
-    <string name="send_messege_succsess">Message sent successfully</string>
+    <string name="send_messege_succsess">Feedback sent successfully</string>
 
     <string name="setting">Setting</string>
 
@@ -157,7 +170,9 @@
     <string name="toast_download_complete">Download Complete</string>
     <string name="title_free">Free</string>
     <string name="title_activity_highlight_detail">Highlights</string>
-    <string name="toast_evet_expired">This Event is Expired</string>
+    <string name="toast_evet_expired">This Event has been Expired</string>
     <string name="sharjah_museum_authority">Sharjah Museum Authority</string>
     <string name="title_welcome">Welcome</string>
+
+
 </resources>

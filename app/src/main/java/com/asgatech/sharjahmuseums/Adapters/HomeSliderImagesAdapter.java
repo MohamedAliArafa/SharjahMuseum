@@ -3,7 +3,6 @@ package com.asgatech.sharjahmuseums.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,12 +76,12 @@ public class HomeSliderImagesAdapter extends PagerAdapter {
         ImageView imageItem = convertView.findViewById(R.id.image_view);
         if (listType == 1) {
             if (imageList.get(position) != null) {
-                Log.e(activity.getString(R.string.tag_url), URLS.URL_BASE + imageList.get(position).getImage());
+//                Log.e(activity.getString(R.string.tag_url), URLS.URL_BASE + imageList.get(position).getImage());
                 Utils.loadSimplePic(activity, URLS.URL_BASE + imageList.get(position).getImage(), imageItem);
             }
         } else if (listType == 2) {
             if (imagesList.get(position) != null) {
-                Log.e(activity.getString(R.string.tag_url), URLS.URL_BASE + imagesList.get(position).getImage());
+//                Log.e(activity.getString(R.string.tag_url), URLS.URL_BASE + imagesList.get(position).getImage());
                 Utils.loadSimplePic(activity, URLS.URL_BASE + imagesList.get(position).getImage(), imageItem);
             }
         }

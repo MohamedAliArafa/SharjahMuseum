@@ -2,7 +2,6 @@ package com.asgatech.sharjahmuseums.Adapters;
 
 import android.content.Context;
 import android.support.transition.ChangeBounds;
-import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,23 +48,26 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         fillView(holder, position);
         expandRecycle(holder, position);
+
     }
 
     private void fillView(final ViewHolder holder, final int position) {
 
         GlideApp.with(context).load(URLS.URL_BASE + allPlanVisitsList.get(position).getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.image).into(holder.planImageView);
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.planImageView);
 
         holder.titleTextView.setText(allPlanVisitsList.get(position).getTitle());
         //    holder.titleTextViewExpand.setText(allPlanVisitsList.get(position).getTitle());
         holder.descriptionTextView.setText(allPlanVisitsList.get(position).getText());
         holder.titleTextViewExpand.setText(allPlanVisitsList.get(position).getTitle());
+//        recyclerView.getLayoutManager().scrollToPosition(position);
+        recyclerView.scrollToPosition(position);
 
     }
 
     private void expandRecycle(final ViewHolder holder, final int position) {
+        recyclerView.smoothScrollToPosition(position);
         final boolean isExpanded = position == mExpandedPosition;
         holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.itemView.setActivated(isExpanded);
@@ -76,9 +78,9 @@ public class PlanYourVisitAdapter extends RecyclerView.Adapter<PlanYourVisitAdap
         transition.setDuration(125);
         holder.itemView.setOnClickListener(view -> {
             mExpandedPosition = isExpanded ? -1 : position;
-            TransitionManager.beginDelayedTransition(recyclerView, transition);
             notifyDataSetChanged();
             holder.arrowImageView.setRotation(holder.arrowImageView.getRotation() + 180);
+
         });
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.transition.ChangeBounds;
-import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,8 +56,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
 
         GlideApp.with(context).load(URLS.URL_BASE + allMuseumsList.get(position).getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.image).into(holder.edcationImageView);
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.edcationImageView);
 
         bookLink = allMuseumsList.get(position).getBooklink();
 //        Glide.with(context).load("https://www.frostburg.edu/fsu/assets/Image/dept/educ/education_sign_resized.jpg")
@@ -91,9 +89,9 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
         transition.setDuration(125);
         holder.itemView.setOnClickListener(view -> {
             mExpandedPosition = isExpanded ? -1 : position;
-            TransitionManager.beginDelayedTransition(recyclerView, transition);
             notifyDataSetChanged();
             holder.arrowImageView.setRotation(holder.arrowImageView.getRotation() + 180);
+            recyclerView.smoothScrollToPosition(position);
         });
     }
 

@@ -67,7 +67,9 @@ public class AboutUsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about_us, container, false);
         ButterKnife.bind(this, view);
         ((HomeActivity)getActivity()).changeToolbarTitle(getString(R.string.about_us));
-        getAboutUs(new UserData().getLocalization(getActivity()));
+        if (Utils.isNetworkAvailable(getActivity())) {
+            getAboutUs(UserData.getLocalization(getActivity()));
+        }
         return view;
     }
 

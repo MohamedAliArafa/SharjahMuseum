@@ -49,7 +49,7 @@ public class ContactUsFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new ContactInnerFragment(), getString(R.string.contact));
+        adapter.addFragment(new ContactInnerFragment(), getString(R.string.contact2));
         adapter.addFragment(new InfoFragment(), getString(R.string.info));
         viewPager.setAdapter(adapter);
     }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     android:background="@color/White"
     android:orientation="vertical"
     tools:context="com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.MuseumsDetailsActivity">
@@ -53,15 +54,15 @@
                 android:layout_height="30dp"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
-                android:layout_marginStart="8dp"
+                android:weightSum="5"
                 android:paddingBottom="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:paddingTop="5dp">
+
 
                 <ImageView
                     android:id="@+id/add_review_linear"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
@@ -70,13 +71,13 @@
 
                 <ImageView
                     android:id="@+id/location_linear"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_location" />
+                    android:src="@drawable/location" />
 
                 <ImageView
                     android:id="@+id/call_linear"
@@ -99,7 +100,8 @@
 
                 <ImageView
                     android:id="@+id/share_linear"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
@@ -119,7 +121,7 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -215,7 +217,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
@@ -231,12 +232,12 @@
                     android:textColor="@color/GrayDark" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:weightSum="2">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="150dp"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical"-->
+                <!--android:weightSum="2">-->
 
                 <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
                 <!--android:layout_width="match_parent"-->
@@ -244,20 +245,47 @@
                 <!--android:orientation="vertical">-->
 
 
-                <me.crosswall.lib.coverflow.core.PagerContainer
-                    android:id="@+id/pager_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:background="@color/White">
+                <!--<me.crosswall.lib.coverflow.core.PagerContainer-->
+                    <!--android:id="@+id/pager_container"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="130dp"-->
+                    <!--android:background="@color/White">-->
 
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/overlap_pager"
-                        android:layout_width="150dp"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center" />
+                    <!--<android.support.v4.view.ViewPager-->
+                        <!--android:id="@+id/overlap_pager"-->
+                        <!--android:layout_width="150dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_gravity="center" />-->
 
 
-                </me.crosswall.lib.coverflow.core.PagerContainer>
+                <!--</me.crosswall.lib.coverflow.core.PagerContainer>-->
+                <!--<FrameLayout-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="120dp"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow-->
+                        <!--android:id="@+id/coverflow"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:visibility="gone"-->
+                        <!--coverflow:coverHeight="120dp"-->
+                        <!--coverflow:coverWidth="120dp"-->
+                        <!--coverflow:maxScaleFactor="1.5"-->
+                        <!--coverflow:reflectionGap="300sp"-->
+                        <!--coverflow:rotationThreshold="2"-->
+                        <!--coverflow:scalingThreshold="2"-->
+                        <!--coverflow:spacing="0.77" />-->
+                <com.gtomato.android.ui.widget.CarouselView
+                    android:id="@+id/carousel"
+                    android:layout_width="260dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_height="100dp"/>
+                <!--</FrameLayout>-->
 
 
                 <LinearLayout
@@ -269,7 +297,7 @@
                     android:layout_weight="0.1"
                     android:gravity="center"
                     android:orientation="horizontal" />
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

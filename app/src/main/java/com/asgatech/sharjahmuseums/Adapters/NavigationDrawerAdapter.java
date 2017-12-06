@@ -113,6 +113,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                 presenter.openFragment(new SettingFragment(), null);
                                 break;
                             case 11:
+
                                 presenter.openFragment(new DemoFragment(), null);
                                 break;
                         }

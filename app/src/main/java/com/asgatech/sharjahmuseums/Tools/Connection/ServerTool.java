@@ -17,6 +17,8 @@ import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.Models.HomeModel;
 import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
+import com.asgatech.sharjahmuseums.Models.NewModel;
+import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
 import com.asgatech.sharjahmuseums.Models.PlanYourVisitsModel;
 import com.asgatech.sharjahmuseums.Models.Request.AddReviewRequest;
@@ -28,7 +30,7 @@ import com.asgatech.sharjahmuseums.Models.Request.ReviewVisitorsRequest;
 import com.asgatech.sharjahmuseums.Models.Request.SearchPagingModel;
 import com.asgatech.sharjahmuseums.Models.Request.UpdateRequestModel;
 import com.asgatech.sharjahmuseums.Models.ReviewVisitorsResponse;
-import com.asgatech.sharjahmuseums.Tools.DialogTool.ErrorDialog;
+import com.asgatech.sharjahmuseums.Models.geoFenceResponseModel;
 import com.asgatech.sharjahmuseums.Tools.DialogTool.LoadingDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -93,6 +95,12 @@ public class ServerTool {
         @GET(URLS.URL_GET_PLAN_YOUR_VISITS_LIST)
         Call<PlanYourVisitsModel> getPlanVisits(@Query("lang") int lang);
 
+        @GET(URLS.URL_GEOFENCING_LIST)
+        Call<geoFenceResponseModel> getGeoFencingList(@Query("lang") int lang);
+
+        @POST(URLS.URL_DATE_LIST)
+        Call<List<NewResponse>> getDateList(@Body NewModel newModel);
+
         @POST(URLS.URL_VISITOR_REVIEWS)
         Call<List<ReviewVisitorsResponse>> getReviewList(@Body ReviewVisitorsRequest reviewVisitorsRequest);
 
@@ -110,7 +118,7 @@ public class ServerTool {
         Call<Integer> UpdateNotificationList(@Body UpdateRequestModel updateRequestModel);
 
         @GET(URLS.URL_GET_ALLMUSEUM_CATEGORY)
-        Call<RealmList<MuseumCategoryResponse>> getALLMuseumCategory(@Query("lang") int lang);
+        Call<List<MuseumCategoryResponse>> getALLMuseumCategory(@Query("lang") int lang);
 
     }
 
@@ -176,6 +184,7 @@ public class ServerTool {
         obj.addProperty("pagenumber", pageNumber);
         obj.addProperty("pagesize", pageSize);
         obj.addProperty("lang", language);
+        Log.e("obj", new Gson().toJson(obj));
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getEvents(obj);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
@@ -243,6 +252,24 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
+//    public static void getGeoFencingList(Activity context, int lang, final APICallBack apiCallBack) {
+//        final RetrofitTool retrofitTool = new RetrofitTool();
+//        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getGeoFencingList(lang);
+//        makeRequest(context, call, apiCallBack, retrofitTool);
+//    }
+
+    public static void getGeoFencingList(int lang, final APICallBack apiCallBack) {
+        final RetrofitTool retrofitTool = new RetrofitTool();
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getGeoFencingList(2);
+        makeRequest(call, apiCallBack, retrofitTool);
+    }
+
+    public static void getDateList(NewModel newModel, final APICallBack apiCallBack) {
+        final RetrofitTool retrofitTool = new RetrofitTool();
+        Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getDateList(newModel);
+        makeRequest(call, apiCallBack, retrofitTool);
+    }
+
     public static void GetReviewList(Activity context, ReviewVisitorsRequest reviewVisitorsRequest, final APICallBack apiCallBack) {
         //Show loading
         final Gson gson = new Gson();
@@ -270,19 +297,16 @@ public class ServerTool {
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
-    public static void InsertDeviceToken(Activity context, InsertDeviceTokenRequestModel insertDevicetokenRequestModel, final APICallBack apiCallBack) {
+    public static void InsertDeviceToken(InsertDeviceTokenRequestModel insertDevicetokenRequestModel, final APICallBack apiCallBack) {
         //Show loading
         final Gson gson = new Gson();
         Log.d("insertDeviceToken", gson.toJson(insertDevicetokenRequestModel) + "");
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).insertDeviceToken(insertDevicetokenRequestModel);
-        makeRequest(context, call, apiCallBack, retrofitTool);
+        makeRequest(call, apiCallBack, retrofitTool);
     }
 
     public static void UpdateNotificationList(Activity context, UpdateRequestModel updateRequestModel, final APICallBack apiCallBack) {
-        //Show loading
-//        final Gson gson = new Gson();
-//        Log.d("insertDeviceToken", gson.toJson(insertDevicetokenRequestModel) + "");
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).UpdateNotificationList(updateRequestModel);
         makeRequest(context, call, apiCallBack, retrofitTool);
@@ -291,11 +315,11 @@ public class ServerTool {
     public static void getALLMuseumCategory(Activity context, int lang, final APICallBack apiCallBack) {
         final RetrofitTool retrofitTool = new RetrofitTool();
         Call call = retrofitTool.getAPIBuilder(URLS.URL_BASE).getALLMuseumCategory(lang);
-        RealmResults<MuseumCategoryResponse> models = Realm.getDefaultInstance()
-                .where(MuseumCategoryResponse.class)
-                .findAll();
-        if (models.isLoaded() && !models.isEmpty())
-            apiCallBack.onSuccess(models);
+//        RealmResults<MuseumCategoryResponse> models = Realm.getDefaultInstance()
+//                .where(MuseumCategoryResponse.class)
+//                .findAll();
+//        if (models.isLoaded() && !models.isEmpty())
+//            apiCallBack.onSuccess(models);
         makeRequest(context, call, apiCallBack, retrofitTool);
     }
 
@@ -354,9 +378,46 @@ public class ServerTool {
         });
     }
 
+    private static <Foo> void makeRequest(Call call, final APICallBack apiCallBack, final RetrofitTool retrofitTool) {
+        call.enqueue(new RetrofitTool.APICallBack<Foo>() {
+            @Override
+            public void onSuccess(Foo response) {
+                try {
+                    if (response instanceof RealmObject) {
+                        Realm.getDefaultInstance().beginTransaction();
+                        Realm.getDefaultInstance().copyToRealmOrUpdate((RealmObject) response);
+                        Realm.getDefaultInstance().commitTransaction();
+                    } else if (response instanceof RealmList) {
+                        Realm.getDefaultInstance().beginTransaction();
+                        Realm.getDefaultInstance().delete(((RealmList) response).get(0).getClass());
+                        Realm.getDefaultInstance().copyToRealmOrUpdate((RealmList) response);
+                        Realm.getDefaultInstance().commitTransaction();
+                    }
+                    apiCallBack.onSuccess(response);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                    Realm.getDefaultInstance().commitTransaction();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailed(int statusCode, ResponseBody responseBody) {
+                //Hide loading
+                try {
+//                    handleGeneralFailure(context, statusCode, responseBody, retrofitTool);
+                    apiCallBack.onFailed(statusCode, responseBody);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     private static void handleGeneralFailure(Context context, int statusCode, ResponseBody responseBody, RetrofitTool retrofitTool) {
         Retrofit retrofit = retrofitTool.getRetrofit(URLS.URL_BASE);
-        new ErrorDialog().showDialog(context);
+//        new ErrorDialog().showDialog(context);
         Log.d("statusCode", statusCode + ":" + responseBody.toString());
     }
 

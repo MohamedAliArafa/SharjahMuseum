@@ -7,6 +7,7 @@ package com.asgatech.sharjahmuseums.Adapters;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,10 +19,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asgatech.sharjahmuseums.Activities.Events.EventDetails.EventDetailsActivity;
+import com.asgatech.sharjahmuseums.Activities.ViewLocationMapActivity;
 import com.asgatech.sharjahmuseums.Models.EventModel;
+import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
@@ -45,9 +47,12 @@ import butterknife.ButterKnife;
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
+import static com.asgatech.sharjahmuseums.Tools.AndroidDialogTools.customToastView;
+
 public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAdapter.MyViewHolder> {
 
     private List<EventModel> mList = new ArrayList<>();
+    private List<NewResponse> mLists = new ArrayList<>();
     private String startDate, endDate;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -92,10 +97,25 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
         this.context = context;
     }
 
+//    public EventsAdapter(Activity context, RealmResults<NewResponse> list , String f) {
+//        super(list, true);
+//        if (list != null)
+//            mLists.addAll(list);
+//        this.context = context;
+//    }
+
     public void updateSet(List<EventModel> list) {
         if (mList != null) {
             mList.clear();
             mList.addAll(list);
+        }
+        this.notifyDataSetChanged();
+    }
+
+    public void updateSets(List<NewResponse> list) {
+        if (mLists != null) {
+            mLists.clear();
+            mLists.addAll(list);
         }
         this.notifyDataSetChanged();
     }
@@ -116,6 +136,15 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
         holder.mDateFromTextView.setText(Utils.spliteDate(startDate));
         holder.mDateToTextView.setText(Utils.spliteDate(endDate));
         holder.mPlaceTextView.setText(model.getAdress());
+        holder.mPlaceTextView.setPaintFlags(holder.mPlaceTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        holder.mPlaceTextView.setOnClickListener(view -> {
+            Intent intent1 = new Intent(context,
+                    ViewLocationMapActivity.class);
+            intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_lATITUDE, Double.parseDouble(model.getLat()));
+            intent1.putExtra(ConstantUtils.EXTRA_MUSEUMS_LONGTUDE, Double.parseDouble(model.getLong()));
+            context.startActivity(intent1);
+        });
         GlideApp.with(context).load(URLS.URL_BASE + model.getImage())
                 .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -135,7 +164,7 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
             intentShare.setType("text/plain");
             intentShare.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
             intentShare.putExtra(Intent.EXTRA_TEXT, model.getUrl() + "\n" +
-                    "\n" + context.getResources().getString(R.string.about_museums) + ":" + model.getTitle());
+                    "\n" + model.getTitle());
             Intent chooser = Intent.createChooser(intentShare, context.getString(R.string.title_share_via));
             chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(chooser);
@@ -159,7 +188,8 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
                 Date today = cal.getTime();
                 Date date = sdf.parse(model.getEndDate());
                 if (date.before(today)) {
-                    Toast.makeText(context, R.string.toast_evet_expired, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, R.string.toast_evet_expired, Toast.LENGTH_SHORT).show();
+                    customToastView(context, context.getResources().getString(R.string.toast_evet_expired));
                     return;
                 }
                 cal.setTime(date);
@@ -172,6 +202,7 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
             }
             intent.putExtra("allDay", true);
             intent.putExtra("title", model.getTitle());
+
             context.startActivity(intent);
         }
     }

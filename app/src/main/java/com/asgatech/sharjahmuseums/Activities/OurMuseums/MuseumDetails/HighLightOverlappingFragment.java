@@ -65,9 +65,6 @@ public class HighLightOverlappingFragment extends Fragment {
         ImageView coverImageView = rootView.findViewById(R.id.image_cover);
         GlideApp.with(getActivity()).load(URLS.URL_BASE + image).placeholder(R.drawable.no_image).into(coverImageView);
 
-//        GlideApp.with(this)
-//                .load(URLS.URL_BASE +image).transform(new RoundedCornersTransformation(getActivity(), 20, 0, "#e40d62", 50))
-//                .into(coverImageView);
 
         Log.e(getString(R.string.tag_image), URLS.URL_BASE + image);
         coverImageView.setOnClickListener(view -> {

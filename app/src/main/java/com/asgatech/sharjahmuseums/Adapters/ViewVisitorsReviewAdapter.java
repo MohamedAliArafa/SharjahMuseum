@@ -54,27 +54,32 @@ public class ViewVisitorsReviewAdapter extends RecyclerView.Adapter<ViewVisitors
             if (data.get(position).getRate() ==1) {
 
                 holder.tvReviewNumber.setText("20%");
-               holder.barReviewStars.setRating(5f);
-               holder.barReviewStars.setNumStars(1);
+                holder.barReviewStars.setRating(1);
+                holder.barReviewStars.setProgress(1);
+                holder.barReviewStars.setNumStars(5);
 
         }else if (data.get(position).getRate() ==2) {
                 holder.tvReviewNumber.setText("40%");
-                holder.barReviewStars.setNumStars(2);
-                holder.barReviewStars.setRating(5f);
+                holder.barReviewStars.setRating(2);
+                holder.barReviewStars.setProgress(2);
+                holder.barReviewStars.setNumStars(5);
 
           } else if (data.get(position).getRate() ==3) {
                 holder.tvReviewNumber.setText("60%");
-                holder.barReviewStars.setRating(5f);
-                holder.barReviewStars.setNumStars(3);
+                holder.barReviewStars.setRating(3);
+                holder.barReviewStars.setProgress(3);
+                holder.barReviewStars.setNumStars(5);
 
         } else if (data.get(position).getRate() ==4) {
                 holder.tvReviewNumber.setText("80%");
-                holder.barReviewStars.setRating(5f);
-                holder.barReviewStars.setNumStars(4);
+                holder.barReviewStars.setRating(4);
+                holder.barReviewStars.setProgress(4);
+                holder.barReviewStars.setNumStars(5);
 
             }else if (data.get(position).getRate() ==5){
                 holder.tvReviewNumber.setText("100%");
-                holder.barReviewStars.setRating(5f);
+                holder.barReviewStars.setRating(5);
+                holder.barReviewStars.setProgress(5);
                 holder.barReviewStars.setNumStars(5);
 
             }

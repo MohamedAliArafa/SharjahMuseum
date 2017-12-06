@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
-import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
@@ -21,7 +21,7 @@ import com.asgatech.sharjahmuseums.Tools.Utils;
 
 public class NotificationDetailActivity extends AppCompatActivity implements View.OnClickListener {
     public ImageView toolbarHomeImageView;
-        private CircleImageView ivMainimage;
+    private ImageView ivMainimage;
     private TextViewBold ToolbarTitleTextView;
     private TextViewLight tvDescription;
 
@@ -32,6 +32,8 @@ public class NotificationDetailActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_notification_detail);
         setToolBar();
@@ -41,6 +43,7 @@ public class NotificationDetailActivity extends AppCompatActivity implements Vie
     public void setToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleMarginStart(-8);
         toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
         ToolbarTitleTextView = findViewById(R.id.tv_toolbar_title);
         toolbarHomeImageView.setVisibility(View.VISIBLE);

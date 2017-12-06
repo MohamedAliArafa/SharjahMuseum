@@ -43,6 +43,7 @@
         </activity>
         <activity
             android:name=".Activities.Home.HomeActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.OurMuseums.MuseumDetails.MuseumsDetailsActivity"
@@ -63,8 +64,8 @@
         <activity android:name=".Activities.ViewLocationMapActivity" />
         <activity
             android:name=".Activities.AddReviewActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.NotificationDetailActivity"
             android:screenOrientation="portrait"
@@ -91,6 +92,16 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".Tools.Geofence.GeofenceTransitionsIntentService"/>
+        <receiver android:name=".Tools.Geofence.GeofenceAlarmReceiver"/>
+
+        <receiver android:name=".Tools.Geofence.SampleBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="io.fabric.ApiKey"

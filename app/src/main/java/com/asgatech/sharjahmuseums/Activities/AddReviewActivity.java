@@ -33,7 +33,10 @@ import com.asgatech.sharjahmuseums.Tools.ValidationTool;
 
 import okhttp3.ResponseBody;
 
+import static com.asgatech.sharjahmuseums.Tools.AndroidDialogTools.customToastView;
+
 public class AddReviewActivity extends AppCompatActivity implements View.OnClickListener {
+
     private ImageView toolbarHomeImageView;
     private EditText tvEmail;
     private EditText tvReview;
@@ -48,6 +51,8 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_add_review);
         validationTool = new ValidationTool(this);
@@ -58,6 +63,7 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     private void setToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleMarginStart(-8);
         toolbarHomeImageView = findViewById(R.id.toolbar_home_image_view);
         toolbarHomeImageView.setVisibility(View.VISIBLE);
         toolbarHomeImageView.setOnClickListener(this);
@@ -91,6 +97,7 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
         tvReview.setMovementMethod(new ScrollingMovementMethod());
 
         barReviewStars = findViewById(R.id.bar_review_stars);
+//        barReviewStars.setStarsSeparation(20, Dimension.DP);
         postButton = findViewById(R.id.btn_post);
         postButton.setOnClickListener(this);
 
@@ -131,15 +138,19 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onSuccess(Integer response) {
                 if (response == 1) {
-                    Toast.makeText(AddReviewActivity.this, getString(R.string.success_send_review), Toast.LENGTH_SHORT).show();
+                    customToastView(AddReviewActivity.this, getResources().getString(R.string.success_send_review));
+//                    Toast.makeText(AddReviewActivity.this, getString(R.string.success_send_review), Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(AddReviewActivity.this, getString(R.string.failed_send_review), Toast.LENGTH_SHORT).show();
+                    customToastView(AddReviewActivity.this, getResources().getString(R.string.failed_send_review));
+
+//                    Toast.makeText(AddReviewActivity.this, getString(R.string.failed_send_review), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailed(int statusCode, ResponseBody responseBody) {
+//                new ErrorDialog().showDialog(AddReviewActivity.this);
 
             }
         });
@@ -187,33 +198,17 @@ public class AddReviewActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_post:
-                if (isValid())
-                    if (barReviewStars.getRating() > 0)
-                        if (getIntent().hasExtra(ConstantUtils.EXTRA_MUSEUMS_ID)) {
-                            museumsID = getIntent().getIntExtra((ConstantUtils.EXTRA_MUSEUMS_ID), 0);
-                            if (museumsID > 0) {
-                                AddReviewRequest addReviewRequest = new AddReviewRequest(tvEmail.getText().toString(), tvReview.getText().toString(), (int) rateValue, museumsID);
-                                AddReview(addReviewRequest);
-                            }
-                        } else
-                            Toast.makeText(this, R.string.rate_error_hint, Toast.LENGTH_SHORT).show();
-//                    if (nameEditText.getText()==null || nameEditText.getText().toString().trim().equals("")){
-//                        nameEditText.setError("Name required");
-//                        return;
-//                    }
-//                    if (phoneEditText.getText()==null || phoneEditText.getText().toString().trim().equals("")){
-//                        phoneEditText.setError("phone required");
-//                        return;
-//                    }
-//                    if (emailEditText.getText()==null || emailEditText.getText().toString().trim().equals("")){
-//                        emailEditText.setError("email required");
-//                        return;
-//                    }
-//                    if (messageEditText.getText()==null || messageEditText.getText().toString().trim().equals("")){
-//                        messageEditText.setError("message required");
-//                        return;
-//                    }
-//                    AddReview()
+                if (Utils.isNetworkAvailable(AddReviewActivity.this))
+                    if (isValid())
+                        if (barReviewStars.getRating() > 0)
+                            if (getIntent().hasExtra(ConstantUtils.EXTRA_MUSEUMS_ID)) {
+                                museumsID = getIntent().getIntExtra((ConstantUtils.EXTRA_MUSEUMS_ID), 0);
+                                if (museumsID > 0) {
+                                    AddReviewRequest addReviewRequest = new AddReviewRequest(tvEmail.getText().toString(), tvReview.getText().toString(), (int) rateValue, museumsID);
+                                    AddReview(addReviewRequest);
+                                }
+                            } else
+                                Toast.makeText(this, R.string.rate_error_hint, Toast.LENGTH_SHORT).show();
                 break;
 
 

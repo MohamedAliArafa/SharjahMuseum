@@ -1,6 +1,5 @@
 package com.asgatech.sharjahmuseums.Activities.Search;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 
-import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.EditText;
 import com.asgatech.sharjahmuseums.Tools.Localization;
@@ -42,9 +40,12 @@ public class SearchMuseumActivity extends AppCompatActivity implements SearchCon
         transaction.commit();
         mPresenter = new SearchPresenter(getSupportFragmentManager(), this);
         toolbarHomeImageView.setOnClickListener(v -> {
-            Intent in = new Intent(this, HomeActivity.class);
-            in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(in);
+            if (ToolbarSearchEditText.getText().toString().length() > 0) {
+                ToolbarSearchEditText.setText("");
+            }
+//            Intent in = new Intent(this, HomeActivity.class);
+//            in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(in);
         });
         ToolbarSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
             boolean handled = false;
@@ -56,7 +57,7 @@ public class SearchMuseumActivity extends AppCompatActivity implements SearchCon
         });
     }
 
-    public void setCurrentId(int catId){
+    public void setCurrentId(int catId) {
         this.catId = catId;
     }
 
@@ -69,6 +70,7 @@ public class SearchMuseumActivity extends AppCompatActivity implements SearchCon
 
     private void setToolBar() {
         setSupportActionBar(toolbar);
+        toolbar.setTitleMarginStart(-8);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

@@ -18,6 +18,7 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
+import com.asgatech.sharjahmuseums.Tools.Utils;
 
 import java.util.List;
 
@@ -49,8 +50,9 @@ public class NotificationListFragment extends Fragment {
 //        AddDeviceModel addDeviceModel = new AddDeviceModel(androidID, FirebaseInstanceId.getInstance().getToken());
 
         NotificationListRequestModel notificationListRequestModel = new NotificationListRequestModel(UserData.getLocalization(getActivity()), androidID);
-
-        GetNotificationList(notificationListRequestModel);
+        if (Utils.isNetworkAvailable(getActivity())) {
+            GetNotificationList(notificationListRequestModel);
+        }
 
     }
 
@@ -97,9 +99,9 @@ public class NotificationListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        String androidID = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
+//        String androidID = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
 //        AddDeviceModel addDeviceModel = new AddDeviceModel(androidID, FirebaseInstanceId.getInstance().getToken());
-        NotificationListRequestModel notificationListRequestModel = new NotificationListRequestModel(UserData.getLocalization(getActivity()), androidID);
-        GetNotificationList(notificationListRequestModel);
+//        NotificationListRequestModel notificationListRequestModel = new NotificationListRequestModel(UserData.getLocalization(getActivity()), androidID);
+//        GetNotificationList(notificationListRequestModel);
     }
 }

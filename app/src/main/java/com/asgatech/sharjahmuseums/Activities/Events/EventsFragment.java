@@ -3,7 +3,9 @@ package com.asgatech.sharjahmuseums.Activities.Events;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +24,8 @@ import android.widget.TextView;
 import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
+import com.asgatech.sharjahmuseums.Models.NewModel;
+import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
@@ -36,6 +40,8 @@ import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmList;
 import okhttp3.ResponseBody;
+
+import static com.asgatech.sharjahmuseums.Tools.AndroidDialogTools.customToastView;
 
 public class EventsFragment extends Fragment implements View.OnClickListener, EventsParentContract.ModelView {
 
@@ -56,6 +62,8 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
 
     @BindView(R.id.arrowIV)
     ImageView arrowImg;
+    private boolean isBundle;
+    private String date;
 
     @BindView(R.id.event_container)
     ViewPager mEventViewPager;
@@ -74,6 +82,8 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         ButterKnife.bind(this, view);
         ((HomeActivity) getActivity()).changeToolbarTitle(getString(R.string.Events));
         assignControls();
+        if (getArguments() != null) {
+        }
         pagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager());
         mEventViewPager.setAdapter(pagerAdapter);
         mEventViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -115,6 +125,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
 
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().isEmpty())
@@ -172,7 +183,20 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         });
     }
 
+    private void setDatas(List<NewResponse> response) {
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(0))
+                .updateViews(response, null);
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(1))
+                .updateViews(response, null);
+    }
+
     private void setData(List<EventModel> response) {
+        mEventViewPager.setCurrentItem(0);
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(0)).showList();
+
         ((EventsContract.ModelView) pagerAdapter
                 .getItem(0))
                 .updateView(response, null);
@@ -198,10 +222,36 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
             }
             itemView.setOnClickListener(view -> {
                 mainFilterLayout.setVisibility(View.GONE);
-                setData(Realm.getDefaultInstance()
-                        .where(EventModel.class)
-                        .equalTo("catId", Integer.parseInt(itemView.getTag().toString()))
-                        .findAll());
+                if (isBundle) {
+                    NewModel newModel = new NewModel(Integer.parseInt(itemView.getTag().toString()),
+                            UserData.getLocalization(getActivity()), date);
+                    getDateList(newModel);
+                    Log.e("true", "true");
+                } else {
+                    List<EventModel> response = Realm.getDefaultInstance()
+                            .where(EventModel.class)
+                            .findAll();
+                    boolean isFound = false;
+                    if (Utils.validList(response)) {
+                        for (int j = 0; j < response.size(); j++) {
+                            if (Integer.parseInt(itemView.getTag().toString()) == (response.get(j).getCatId())) {
+                                isFound = true;
+                            }
+                        }
+                        if (isFound) {
+                            setData(Realm.getDefaultInstance()
+                                    .where(EventModel.class)
+                                    .equalTo("catId", Integer.parseInt(itemView.getTag().toString()))
+                                    .findAll());
+                        } else {
+                            mEventViewPager.setCurrentItem(0);
+                            ((EventsContract.ModelView) pagerAdapter
+                                    .getItem(mEventViewPager.getCurrentItem())).hideList();
+                            customToastView(getActivity(), getActivity().getString(R.string.no_event));
+                        }
+                    }
+                }
+
             });
             //otherwise throw exception java.lang.IllegalStateException: The specified
             // child already has a parent. You must call removeView() on the child's parent first.
@@ -212,21 +262,49 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         }
     }
 
+    private void getDateList(NewModel newModel) {
+        ServerTool.getDateList(newModel, new ServerTool.APICallBack<List<NewResponse>>() {
+            @Override
+            public void onSuccess(List<NewResponse> response) {
+                if (response.size() != 0) {
+                    setDatas(response);
+                } else {
+//                    recyclerViewReviews.setVisibility(View.GONE);
+//                    ErrorMessageTextView.setVisibility(View.VISIBLE);
+
+                }
+
+            }
+
+            @Override
+            public void onFailed(int statusCode, ResponseBody responseBody) {
+
+            }
+        });
+    }
+
+
     private void addReset() {
         final View itemView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.filter_recycler_row, null);
         CircleImageView pallete = itemView.findViewById(R.id.pallete_for_filter_item);
         TextView name = itemView.findViewById(R.id.name_for_filter_item);
         name.setText(R.string.title_filter_all);
-        itemView.setTag("#000000");
+        itemView.setTag("#939597");
         Drawable background = pallete.getBackground();
-        Log.e(getString(R.string.tag_color_code), "#000000");
-        background.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_IN);
+        Log.e(getString(R.string.tag_color_code), "#939597");
+        background.setColorFilter(Color.parseColor("#939597"), PorterDuff.Mode.SRC_IN);
         itemView.setOnClickListener(view -> {
             mainFilterLayout.setVisibility(View.GONE);
+//            if(isBundle){
+//                NewModel newModel = NewModel
+//                Log.e("true" , "true");
+//            }else {
             setData(Realm.getDefaultInstance()
                     .where(EventModel.class)
                     .findAll());
+//            }
+
         });
         //otherwise throw exception java.lang.IllegalStateException: The specified
         // child already has a parent. You must call removeView() on the child's parent first.
@@ -241,6 +319,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         switchToCalender.setOnClickListener(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -259,8 +338,13 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
                 }
                 break;
             case R.id.event_switch_to_calender:
+                if (mEventViewPager.getCurrentItem() == 0) {
+                    mSearchEditText.setVisibility(View.GONE);
+                } else {
+                    mSearchEditText.setVisibility(View.VISIBLE);
+                }
+                mainFilterLayout.setVisibility(View.GONE);
                 mEventViewPager.setCurrentItem(mEventViewPager.getCurrentItem() == 0 ? 1 : 0);
-//                ((HomeActivity) getActivity()).openFragmentFromChild(new EventCalenderFragment(), null);
                 break;
         }
     }
@@ -271,6 +355,16 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         ((EventsContract.ModelView) pagerAdapter
                 .getItem(mEventViewPager.getCurrentItem()))
                 .updateView(models, null);
+    }
+
+    @Override
+    public void setBundle(boolean bundle) {
+        isBundle = bundle;
+    }
+
+    @Override
+    public void setDate(String date) {
+        this.date = date;
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
