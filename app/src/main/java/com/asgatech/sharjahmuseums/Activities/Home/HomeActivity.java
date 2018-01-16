@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity implements
         mPresenter = new HomePresenter(this, this, getLifecycle(), getSupportFragmentManager());
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         initView();
-        Log.e("HomeActivity" , "HomeActivity");
+        Log.e("HomeActivity" , "HomeActivity ");
         setupNavigationDrawer();
     }
 
