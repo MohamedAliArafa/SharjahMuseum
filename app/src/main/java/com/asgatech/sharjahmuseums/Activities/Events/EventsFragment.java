@@ -296,18 +296,10 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         background.setColorFilter(Color.parseColor("#939597"), PorterDuff.Mode.SRC_IN);
         itemView.setOnClickListener(view -> {
             mainFilterLayout.setVisibility(View.GONE);
-//            if(isBundle){
-//                NewModel newModel = NewModel
-//                Log.e("true" , "true");
-//            }else {
             setData(Realm.getDefaultInstance()
                     .where(EventModel.class)
                     .findAll());
-//            }
-
         });
-        //otherwise throw exception java.lang.IllegalStateException: The specified
-        // child already has a parent. You must call removeView() on the child's parent first.
         if (itemView.getParent() != null) {
             ((ViewGroup) itemView.getParent()).removeView(itemView);
         }

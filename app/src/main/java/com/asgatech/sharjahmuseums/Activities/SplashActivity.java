@@ -79,23 +79,4 @@ public class SplashActivity extends AppCompatActivity {
         super.onResume();
     }
 
-//    private void insertDeviceToken(InsertDeviceTokenRequestModel insertDevicetokenRequestModel) {
-//        ServerTool.InsertDeviceToken(this, insertDevicetokenRequestModel, new ServerTool.APICallBack<Integer>() {
-//            @Override
-//            public void onSuccess(Integer response) {
-//                if (response == 1) {
-//                    Log.e("insertDeviceToken", "Success");
-//                    UserData.saveUserStateOfInsertToken(getApplicationContext(), true, UserData.TAG_INSERT_TOKEN);
-//                } else {
-//                    Log.e("insertDeviceToken", "failure to insert token");
-////                    Toast.makeText(HomeActivity.this, "failure to insert token", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailed(int statusCode, ResponseBody responseBody) {
-//
-//            }
-//        });
-//    }
 }

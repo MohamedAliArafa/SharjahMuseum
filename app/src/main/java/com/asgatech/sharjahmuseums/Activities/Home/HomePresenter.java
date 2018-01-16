@@ -158,10 +158,6 @@ public class HomePresenter implements HomeContract.UserAction, LifecycleObserver
             int type = intent.getIntExtra("type", 0);
             String desc = intent.getStringExtra("title");
             InnerLocationClass innerLocationClass = intent.getParcelableExtra("text");
-//            InnerLocationModel locationModel = intent.getParcelableExtra("text");
-//            Log.e("lat", locationModel.getLat() + "");
-//            Log.e("lang", locationModel.getLang() + "");
-
             if (mView.getContext() != null) {
                 new NotificationDialog().showDialogs(mView.getContext(), desc, innerLocationClass);
             }

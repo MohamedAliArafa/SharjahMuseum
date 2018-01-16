@@ -57,9 +57,6 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(DBContract.UserDates.TITLE, locationModels.get(i).getTitle());
             values.put(DBContract.UserDates.LANG, locationModels.get(i).getLang());
             values.put(DBContract.UserDates.LAT, locationModels.get(i).getLat());
-            Log.e("bnbnnnnnnnnnnnn", values.get(DBContract.UserDates.TITLE) + "");
-            Log.e("bnbnnnnnnnnnnnn", values.get(DBContract.UserDates.LANG) + "");
-            Log.e("bnbnnnnnnnnnnnn", values.get(DBContract.UserDates.LAT) + "");
 
         }
         long newRowId;
@@ -101,8 +98,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 InnerLocationModel reservationModels = new InnerLocationModel();
                 reservationModels.setLat(Double.parseDouble(cursor.getString(cursor.getColumnIndex(DBContract.UserDates.LAT))));
                 reservationModels.setLang(Double.parseDouble(cursor.getString(cursor.getColumnIndex(DBContract.UserDates.LANG))));
-                Log.e("bnbnnnnnnnnnnnn", cursor.getString(cursor.getColumnIndex(DBContract.UserDates.LAT)) + "");
-                Log.e("bnbnnnnnnnnnnnn", cursor.getString(cursor.getColumnIndex(DBContract.UserDates.LANG))+ "");
                 locationModels.add(reservationModels);
             } while (cursor.moveToNext());
         }

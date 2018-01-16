@@ -6,8 +6,8 @@ package com.asgatech.sharjahmuseums.Tools.Connection;
 public class URLS {
 
 //    public static final String URL_BASE = "http://108.179.204.213:8071/"; // online
-    public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
-//    public static final String URL_BASE = "http://23.236.154.106:8075/"; // Testing
+//    public static final String URL_BASE = "http://23.236.154.106:8070/"; // online
+    public static final String URL_BASE = "http://23.236.154.106:8075/"; // Testing
 
 
 //    public static final String URL_BASE = "http://192.168.20.86:8070/"; // local

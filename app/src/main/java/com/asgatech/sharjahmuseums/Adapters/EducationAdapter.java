@@ -72,10 +72,6 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.View
                 bookLink = "http://" + bookLink;
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bookLink));
             context.startActivity(browserIntent);
-//            Intent intent = new Intent(context, OpenWebViewActivity.class);
-//            Log.e("bookLink", bookLink);
-//            intent.putExtra("bookLink", bookLink);
-//            context.startActivity(intent);
         });
 
         //expand
