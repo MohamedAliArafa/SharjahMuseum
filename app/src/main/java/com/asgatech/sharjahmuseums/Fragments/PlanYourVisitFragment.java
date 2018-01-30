@@ -63,6 +63,7 @@ public class PlanYourVisitFragment extends Fragment {
             Intent intent = new Intent(getActivity(), OpenWebViewActivity.class);
             Log.e("bookLink", bookLink);
             intent.putExtra("bookLink", bookLink);
+            Log.e("bookLink" , bookLink);
             startActivity(intent);
         });
 

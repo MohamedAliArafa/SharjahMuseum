@@ -68,11 +68,11 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.ViewHolder> {
                 sublist.append(String.format(Localization.getCurrentLocale(context),
                         (entryFeesList.get(position).getSublist().size() - 1) > i ?
                                 "%s(%s):%s%s\n" : "%s(%s):%s%s",
-                        entryFeesList.get(position).getTitle().trim(),
-                        entryFeesList.get(position).getSublist().get(i).getTitle().trim(),
+                        entryFeesList.get(position).getTitle(),
+                        entryFeesList.get(position).getSublist().get(i).getTitle(),
                         entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? context.getString(R.string.title_free) :
-                                String.valueOf(entryFeesList.get(position).getSublist().get(i).getPrice()) ,
-                        entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? ""  :
+                                String.valueOf(entryFeesList.get(position).getSublist().get(i).getPrice()),
+                        entryFeesList.get(position).getSublist().get(i).getPrice() == 0 ? "" :
                                 context.getString(R.string.AED)
                 ));
             }

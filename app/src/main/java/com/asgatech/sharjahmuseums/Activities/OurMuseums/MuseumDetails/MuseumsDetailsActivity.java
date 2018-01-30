@@ -266,7 +266,10 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 Intent intentShare = new Intent(Intent.ACTION_SEND);
                 intentShare.setType("text/plain");
                 intentShare.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-                intentShare.putExtra(Intent.EXTRA_TEXT, mMuseum.getUrl() + "\n" + ToolbarTitleTextView.getText().toString());
+                intentShare.putExtra(Intent.EXTRA_TEXT, mMuseum.getUrl() + "\n" +
+                        ToolbarTitleTextView.getText().toString());
+//                        + "\n" + "https://play.google.com/store/apps/details?id=" +
+//                        getApplicationContext().getPackageName() + "&hl=en");
                 Intent chooser = Intent.createChooser(intentShare, getString(R.string.title_share_via));
                 chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(chooser);
@@ -399,10 +402,10 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             transformer.setYProjection(00f);
             carousel.setClipChildren(false);
             carousel.setScrollingAlignToViews(true);
-            if(model.getHightLight().size()>=3) {
+            if (model.getHightLight().size() >= 3) {
                 carousel.setExtraVisibleChilds(model.getHightLight().size());
                 carousel.setInfinite(true);
-            }else {
+            } else {
                 carousel.setExtraVisibleChilds(model.getHightLight().size());
                 carousel.setInfinite(false);
             }
@@ -411,7 +414,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 public void onItemClick(int position) {
                     ArrayList<HighLightEntity> list = new ArrayList<>();
                     list.addAll(model.getHightLight());
-                    Log.e("position" , position+"");
+                    Log.e("position", position + "");
                     Intent intent1 = new Intent(MuseumsDetailsActivity.this, HighlightsDetailActivity.class);
                     intent1.putExtra(ConstantUtils.HIGHLIGHT_LIST, list);
                     intent1.putExtra(ConstantUtils.HIGHLIGHT_URL, model.getUrl());

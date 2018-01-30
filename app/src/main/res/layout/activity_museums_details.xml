@@ -27,7 +27,7 @@
                 <com.booking.rtlviewpager.RtlViewPager
                     android:id="@+id/images_view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="220dp"
                     android:scrollbarStyle="insideInset" />
 
                 <LinearLayout
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="@string/about_museums"
+                android:layout_marginTop="6dp"
                 android:textColor="@color/GrayLight" />
 
             <LinearLayout
@@ -156,7 +156,7 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -180,6 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginRight="20dp" />
 
             <LinearLayout
@@ -188,7 +189,7 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -212,6 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginRight="20dp" />
 
             <LinearLayout
@@ -219,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
 
@@ -228,61 +230,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:layout_marginStart="12dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/high_lights"
                     android:textColor="@color/GrayDark" />
             </LinearLayout>
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="150dp"-->
-                <!--android:gravity="center"-->
-                <!--android:orientation="vertical"-->
-                <!--android:weightSum="2">-->
-
-                <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="150dp"-->
-                <!--android:orientation="vertical">-->
-
-
-                <!--<me.crosswall.lib.coverflow.core.PagerContainer-->
-                    <!--android:id="@+id/pager_container"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="130dp"-->
-                    <!--android:background="@color/White">-->
-
-                    <!--<android.support.v4.view.ViewPager-->
-                        <!--android:id="@+id/overlap_pager"-->
-                        <!--android:layout_width="150dp"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_gravity="center" />-->
-
-
-                <!--</me.crosswall.lib.coverflow.core.PagerContainer>-->
-                <!--<FrameLayout-->
-                    <!--android:layout_width="fill_parent"-->
-                    <!--android:layout_height="120dp"-->
-                    <!--android:layout_marginLeft="40dp"-->
-                    <!--android:layout_marginRight="40dp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow-->
-                        <!--android:id="@+id/coverflow"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:visibility="gone"-->
-                        <!--coverflow:coverHeight="120dp"-->
-                        <!--coverflow:coverWidth="120dp"-->
-                        <!--coverflow:maxScaleFactor="1.5"-->
-                        <!--coverflow:reflectionGap="300sp"-->
-                        <!--coverflow:rotationThreshold="2"-->
-                        <!--coverflow:scalingThreshold="2"-->
-                        <!--coverflow:spacing="0.77" />-->
                 <com.gtomato.android.ui.widget.CarouselView
                     android:id="@+id/carousel"
                     android:layout_width="260dp"
                     android:gravity="center"
+                    android:layout_marginTop="6dp"
                     android:layout_gravity="center"
                     android:layout_height="100dp"/>
                 <!--</FrameLayout>-->
@@ -302,6 +259,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:layout_margin="@dimen/margin_10dp"
                 android:orientation="horizontal">
 
@@ -321,6 +279,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_10dp"
                 android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginStart="20dp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -3,7 +3,6 @@ package com.asgatech.sharjahmuseums.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,12 @@ import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight;
-import com.asgatech.sharjahmuseums.Tools.Utils;
+import com.asgatech.sharjahmuseums.Tools.GlideApp;
+import com.asgatech.sharjahmuseums.Tools.Localization;
+import com.asgatech.sharjahmuseums.Tools.RotateTransformation;
+import com.bumptech.glide.load.Option;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -32,7 +36,7 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
     public AllMuseumsAdapter(Context context, List<MuseumsDetailsModel> response, HomeContract.UserAction presenter) {
         this.context = context;
         this.allMuseumsList = response;
-        }
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,16 +46,27 @@ public class AllMuseumsAdapter extends RecyclerView.Adapter<AllMuseumsAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Log.e(context.getString(R.string.tag_image), URLS.URL_BASE + allMuseumsList.get(position).getImage());
-        Utils.loadSimplePic(context, URLS.URL_BASE + allMuseumsList.get(position).getImage(), holder.museumsImageView);
+        if (Localization.getCurrentLanguageID(context) == Localization.ARABIC_VALUE)
+            GlideApp.with(context)
+                    .load(URLS.URL_BASE + allMuseumsList.get(position).getImage()).placeholder(R.drawable.no_image)
+                    .transform(new RotateTransformation(context))
+                    .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into((holder.museumsImageView));
+        else
+            GlideApp.with(context)
+                    .load(URLS.URL_BASE + allMuseumsList.get(position).getImage()).placeholder(R.drawable.no_image)
+                    .apply(RequestOptions.option(Option.memory(ConstantUtils.GLIDE_TIMEOUT), 0))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into((holder.museumsImageView));
 
         holder.museumsNameTextView.setText(allMuseumsList.get(position).getTitle());
         holder.museumsItemLinear.setOnClickListener(view -> {
             Intent intent = new Intent(context, MuseumsDetailsActivity.class);
             intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
-            intent.putExtra(ConstantUtils.MUSEUM_TITLE,allMuseumsList.get(position).getTitle().trim());
-            intent.putExtra(ConstantUtils.MUSEUM_COLOR,allMuseumsList.get(position).getColor());
-            intent.putExtra(ConstantUtils.MUSEUM_IMAGE,allMuseumsList.get(position).getImage());
+            intent.putExtra(ConstantUtils.MUSEUM_TITLE, allMuseumsList.get(position).getTitle().trim());
+            intent.putExtra(ConstantUtils.MUSEUM_COLOR, allMuseumsList.get(position).getColor());
+            intent.putExtra(ConstantUtils.MUSEUM_IMAGE, allMuseumsList.get(position).getImage());
             context.startActivity(intent);
         });
     }

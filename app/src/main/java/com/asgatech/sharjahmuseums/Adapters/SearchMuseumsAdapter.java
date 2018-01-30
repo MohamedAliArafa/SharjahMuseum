@@ -51,14 +51,13 @@ public class SearchMuseumsAdapter extends RecyclerView.Adapter<SearchMuseumsAdap
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.e(context.getString(R.string.tag_image), URLS.URL_BASE + allMuseumsList.get(position).getImage());
         Utils.loadSimplePic(context, URLS.URL_BASE + allMuseumsList.get(position).getImage(), holder.museumsImageView);
-
         holder.museumsNameTextView.setText(allMuseumsList.get(position).getTitle());
         holder.museumsItemLinear.setOnClickListener(view -> {
             Intent intent = new Intent(context, MuseumsDetailsActivity.class);
             intent.putExtra(ConstantUtils.EXTRA_MUSEUMS_ID, allMuseumsList.get(position).getMus_ID());
-            intent.putExtra(ConstantUtils.MUSEUM_TITLE,allMuseumsList.get(position).getTitle().trim());
-            intent.putExtra(ConstantUtils.MUSEUM_COLOR,allMuseumsList.get(position).getColor());
-            intent.putExtra(ConstantUtils.MUSEUM_IMAGE,allMuseumsList.get(position).getImage());
+            intent.putExtra(ConstantUtils.MUSEUM_TITLE, allMuseumsList.get(position).getTitle().trim());
+            intent.putExtra(ConstantUtils.MUSEUM_COLOR, allMuseumsList.get(position).getColor());
+            intent.putExtra(ConstantUtils.MUSEUM_IMAGE, allMuseumsList.get(position).getImage());
             context.startActivity(intent);
         });
     }

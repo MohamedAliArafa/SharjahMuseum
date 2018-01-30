@@ -241,6 +241,8 @@ public class EventDetailsActivity extends AppCompatActivity {
         intentShare.setType("text/plain");
         intentShare.putExtra(Intent.EXTRA_TEXT, eventUrl + "\n" +
                 "\n" + getResources().getString(R.string.description) + ":" + eventDescription.getText().toString());
+//        + "\n" + "https://play.google.com/store/apps/details?id=" +
+//                getApplicationContext().getPackageName() + "&hl=en");
         Intent chooser = Intent.createChooser(intentShare, getResources().getString(R.string.title_share_via));
         chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(chooser);

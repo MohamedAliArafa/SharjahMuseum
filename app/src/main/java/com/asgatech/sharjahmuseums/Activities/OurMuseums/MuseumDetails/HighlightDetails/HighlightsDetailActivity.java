@@ -41,7 +41,7 @@ public class HighlightsDetailActivity extends AppCompatActivity {
     ImageView coverImageView;
     ArrayList<HighLightEntity> mHighlightList;
     private int mPosition;
-    private String mColor , url;
+    private String mColor, url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +98,7 @@ public class HighlightsDetailActivity extends AppCompatActivity {
                 if (mPosition == mHighlightList.size() - 1) {
                     mPosition = 0;
                 } else {
-                    if(mHighlightList.size()>1) {
+                    if (mHighlightList.size() > 1) {
                         mPosition++;
                     }
                 }
@@ -110,7 +110,7 @@ public class HighlightsDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mPosition == mHighlightList.size() - 1) {
-                    if(mHighlightList.size()>1){
+                    if (mHighlightList.size() > 1) {
                         mPosition--;
                     }
                 } else {
@@ -174,8 +174,10 @@ public class HighlightsDetailActivity extends AppCompatActivity {
 //                intentShare.putExtra(Intent.EXTRA_TEXT, mHighlightList.get(mPosition).getTitle() + "\n" +
 //                        "\n" + getResources().getString(R.string.description) + ":" + mHighlightList.get(mPosition).getText()
 //                        + "\n" + URLS.URL_BASE + mHighlightList.get(mPosition).getPhoto());
-                intentShare.putExtra(Intent.EXTRA_TEXT, mHighlightList.get(mPosition).getTitle() + "\n" +
-                     url);
+                Log.e("getPackage", getApplicationContext().getPackageName() + "");
+                intentShare.putExtra(Intent.EXTRA_TEXT, mHighlightList.get(mPosition).getTitle());
+//                + "\n" + url + "\n" + "https://play.google.com/store/apps/details?id=" +
+//                        getApplicationContext().getPackageName() + "&hl=en");
                 Intent chooser = Intent.createChooser(intentShare, getString(R.string.title_share_via));
                 chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(chooser);
