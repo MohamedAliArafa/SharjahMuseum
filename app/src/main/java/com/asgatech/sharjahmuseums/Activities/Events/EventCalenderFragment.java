@@ -62,7 +62,12 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
         // Required empty public constructor
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isAdded())
+            ((EventsFragment) getParentFragment()).setBundle(false);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

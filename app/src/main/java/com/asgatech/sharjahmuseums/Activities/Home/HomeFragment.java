@@ -12,6 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.asgatech.sharjahmuseums.Models.AllSliderModel;
 import com.asgatech.sharjahmuseums.Models.HomeModel;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.Localization;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.booking.rtlviewpager.RtlViewPager;
@@ -56,8 +59,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     TextView mEventCounterTextView;
 
     @BindView(R.id.tv_notification_counter)
-
     TextView mNotificationCounterTextView;
+
+    @BindView(R.id.welcome_linear_layout)
+    LinearLayout mWelcomeLinearLayout;
 
     @BindView(R.id.iv_event_counter)
     ImageView mEventCounterImageView;
@@ -104,6 +109,80 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if (Utils.isNetworkAvailable(getActivity())) {
             getAllSlider(UserData.getLocalization(getActivity()));
+        }
+
+        if (Localization.getCurrentLanguageID(getContext()) == Localization.ARABIC_VALUE) {
+            Animation in = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_left);
+            Animation out = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_right);
+            out.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mWelcomeLinearLayout.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            in.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mWelcomeLinearLayout.startAnimation(out);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            mWelcomeLinearLayout.startAnimation(in);
+        }else {
+            Animation in = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_right);
+            Animation out = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_left);
+            out.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mWelcomeLinearLayout.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            in.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    new Handler().postDelayed(() -> mWelcomeLinearLayout.startAnimation(out), 2000);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            mWelcomeLinearLayout.startAnimation(in);
         }
     }
 

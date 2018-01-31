@@ -372,7 +372,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 public void run() {
                     handler.post(Update);
                 }
-            }, 500, 2000);
+            }, 500, 5000);
 
             mSliderViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
@@ -396,7 +396,10 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
         }
 
         if (Utils.validList(model.getHightLight())) {
-            CarouselView carousel = (CarouselView) findViewById(R.id.carousel);
+            CarouselView carousel = findViewById(R.id.carousel);
+            LinearLayout text = findViewById(R.id.highligh_linearlayout);
+            text.setVisibility(View.VISIBLE);
+            carousel.setVisibility(View.VISIBLE);
             CoverFlowViewTransformer transformer = new CoverFlowViewTransformer();
             carousel.setTransformer(transformer);
             transformer.setYProjection(00f);
@@ -423,6 +426,11 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                     startActivity(intent1);
                 }
             }));
+        } else {
+            CarouselView carousel = findViewById(R.id.carousel);
+            LinearLayout text = findViewById(R.id.highligh_linearlayout);
+            text.setVisibility(View.GONE);
+            carousel.setVisibility(View.GONE);
         }
 
         mLatitude = model.getLat();

@@ -43,31 +43,46 @@
 
         </com.booking.rtlviewpager.RtlViewPager>
 
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-            android:id="@+id/textView5"
+        <LinearLayout
+            android:id="@+id/welcome_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="@string/sharjah_museum_authority"
-            android:textColor="@color/White"
+            android:orientation="vertical"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/images_view_pager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
 
-        <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/title_welcome"
-            android:textColor="@color/White"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/title_welcome"
+                android:textColor="@color/White"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewLight
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/sharjah_museum_authority"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="@+id/images_view_pager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 
