@@ -25,10 +25,10 @@ public class NewResponse extends RealmObject {
         "Url": "http://www.sharjahmuseums.ae/",
         "PageTotal": 0
      */
-    private double Image ;
-    private double Adress ;
-    private double Lat ;
-    private double Long ;
+    private String Image ;
+    private String Adress ;
+    private String Lat ;
+    private String Long ;
     private int CatId ;
     private int PageTotal ;
     private int EventsID ;
@@ -42,35 +42,35 @@ public class NewResponse extends RealmObject {
     private String color ;
     private String Url ;
 
-    public double getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(double image) {
+    public void setImage(String image) {
         Image = image;
     }
 
-    public double getAdress() {
+    public String getAdress() {
         return Adress;
     }
 
-    public void setAdress(double adress) {
+    public void setAdress(String adress) {
         Adress = adress;
     }
 
-    public double getLat() {
+    public String getLat() {
         return Lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(String lat) {
         Lat = lat;
     }
 
-    public double getLong() {
+    public String getLong() {
         return Long;
     }
 
-    public void setLong(double aLong) {
+    public void setLong(String aLong) {
         Long = aLong;
     }
 

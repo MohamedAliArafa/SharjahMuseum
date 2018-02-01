@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.asgatech.sharjahmuseums.Activities.Events.EventDetails.EventDetailsActivity;
 import com.asgatech.sharjahmuseums.Activities.ViewLocationMapActivity;
 import com.asgatech.sharjahmuseums.Models.EventModel;
-import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ConstantUtils;
 import com.asgatech.sharjahmuseums.Tools.Connection.URLS;
@@ -52,7 +51,6 @@ import static com.asgatech.sharjahmuseums.Tools.AndroidDialogTools.customToastVi
 public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAdapter.MyViewHolder> {
 
     private List<EventModel> mList = new ArrayList<>();
-    private List<NewResponse> mLists = new ArrayList<>();
     private String startDate, endDate;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -108,14 +106,6 @@ public class EventsAdapter extends RealmRecyclerViewAdapter<EventModel, EventsAd
         if (mList != null) {
             mList.clear();
             mList.addAll(list);
-        }
-        this.notifyDataSetChanged();
-    }
-
-    public void updateSets(List<NewResponse> list) {
-        if (mLists != null) {
-            mLists.clear();
-            mLists.addAll(list);
         }
         this.notifyDataSetChanged();
     }

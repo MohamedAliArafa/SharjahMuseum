@@ -18,7 +18,6 @@ import com.asgatech.sharjahmuseums.Models.HomeModel;
 import com.asgatech.sharjahmuseums.Models.MuseumCategoryResponse;
 import com.asgatech.sharjahmuseums.Models.MuseumsDetailsModel;
 import com.asgatech.sharjahmuseums.Models.NewModel;
-import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.Models.NotificationListResponseModel;
 import com.asgatech.sharjahmuseums.Models.PlanYourVisitsModel;
 import com.asgatech.sharjahmuseums.Models.Request.AddReviewRequest;
@@ -99,7 +98,7 @@ public class ServerTool {
         Call<geoFenceResponseModel> getGeoFencingList(@Query("lang") int lang);
 
         @POST(URLS.URL_DATE_LIST)
-        Call<List<NewResponse>> getDateList(@Body NewModel newModel);
+        Call<List<EventModel>> getDateList(@Body NewModel newModel);
 
         @POST(URLS.URL_VISITOR_REVIEWS)
         Call<List<ReviewVisitorsResponse>> getReviewList(@Body ReviewVisitorsRequest reviewVisitorsRequest);

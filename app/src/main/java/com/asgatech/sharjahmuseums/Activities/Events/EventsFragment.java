@@ -25,10 +25,10 @@ import com.asgatech.sharjahmuseums.Activities.Home.HomeActivity;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
 import com.asgatech.sharjahmuseums.Models.NewModel;
-import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.CircleImageView;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
+import com.asgatech.sharjahmuseums.Tools.DialogTool.NoDataDialog;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 
@@ -40,8 +40,6 @@ import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmList;
 import okhttp3.ResponseBody;
-
-import static com.asgatech.sharjahmuseums.Tools.AndroidDialogTools.customToastView;
 
 public class EventsFragment extends Fragment implements View.OnClickListener, EventsParentContract.ModelView {
 
@@ -96,6 +94,8 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
 //                        .updateView(Realm.getDefaultInstance()
 //                                .where(EventModel.class)
 //                                .findAll());
+                if (position != 0)
+                    isBundle = false;
             }
 
             @Override
@@ -107,6 +107,8 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
 //                        .updateView(Realm.getDefaultInstance()
 //                                .where(EventModel.class)
 //                                .findAll());
+                if (position != 0)
+                    isBundle = false;
             }
 
             @Override
@@ -183,15 +185,6 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
         });
     }
 
-    private void setDatas(List<NewResponse> response) {
-        ((EventsContract.ModelView) pagerAdapter
-                .getItem(0))
-                .updateViews(response, null);
-        ((EventsContract.ModelView) pagerAdapter
-                .getItem(1))
-                .updateViews(response, null);
-    }
-
     private void setData(List<EventModel> response) {
         mEventViewPager.setCurrentItem(0);
         ((EventsContract.ModelView) pagerAdapter
@@ -247,7 +240,7 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
                             mEventViewPager.setCurrentItem(0);
                             ((EventsContract.ModelView) pagerAdapter
                                     .getItem(mEventViewPager.getCurrentItem())).hideList();
-                            customToastView(getActivity(), getActivity().getString(R.string.no_event));
+                            new NoDataDialog().showDialog(getContext());
                         }
                     }
                 }
@@ -263,15 +256,19 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
     }
 
     private void getDateList(NewModel newModel) {
-        ServerTool.getDateList(newModel, new ServerTool.APICallBack<List<NewResponse>>() {
+        ServerTool.getDateList(newModel, new ServerTool.APICallBack<List<EventModel>>() {
             @Override
-            public void onSuccess(List<NewResponse> response) {
+            public void onSuccess(List<EventModel> response) {
                 if (response.size() != 0) {
-                    setDatas(response);
+                    setData(response);
+                    mEventViewPager.setCurrentItem(0);
+                    ((EventsContract.ModelView) pagerAdapter
+                            .getItem(mEventViewPager.getCurrentItem())).showList();
                 } else {
-//                    recyclerViewReviews.setVisibility(View.GONE);
-//                    ErrorMessageTextView.setVisibility(View.VISIBLE);
-
+                    mEventViewPager.setCurrentItem(0);
+                    ((EventsContract.ModelView) pagerAdapter
+                            .getItem(mEventViewPager.getCurrentItem())).hideList();
+                    new NoDataDialog().showDialog(getContext());
                 }
 
             }
@@ -348,6 +345,21 @@ public class EventsFragment extends Fragment implements View.OnClickListener, Ev
                 .getItem(mEventViewPager.getCurrentItem()))
                 .updateView(models, null);
     }
+
+    @Override
+    public void showList() {
+        mEventViewPager.setCurrentItem(0);
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(0)).showList();
+    }
+
+    @Override
+    public void hideList() {
+        mEventViewPager.setCurrentItem(1);
+        ((EventsContract.ModelView) pagerAdapter
+                .getItem(0)).hideList();
+    }
+
 
     @Override
     public void setBundle(boolean bundle) {

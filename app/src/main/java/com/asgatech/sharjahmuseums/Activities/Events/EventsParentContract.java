@@ -10,6 +10,8 @@ import java.util.List;
 interface EventsParentContract {
     interface ModelView {
         void openList(List<EventModel> models);
+        void showList();
+        void hideList();
         void setBundle(boolean bundle);
         void setDate(String date);
     }

@@ -16,10 +16,10 @@ import com.asgatech.sharjahmuseums.Adapters.ColorAdapter;
 import com.asgatech.sharjahmuseums.Fragments.CalenderHelper.OneDayDecorator;
 import com.asgatech.sharjahmuseums.Models.EventCategoryModel;
 import com.asgatech.sharjahmuseums.Models.EventModel;
-import com.asgatech.sharjahmuseums.Models.NewResponse;
 import com.asgatech.sharjahmuseums.R;
 import com.asgatech.sharjahmuseums.Tools.Connection.ServerTool;
 import com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold;
+import com.asgatech.sharjahmuseums.Tools.DialogTool.NoDataDialog;
 import com.asgatech.sharjahmuseums.Tools.SharedTool.UserData;
 import com.asgatech.sharjahmuseums.Tools.Utils;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -38,7 +38,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 import okhttp3.ResponseBody;
 
 /**
@@ -62,12 +61,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
         // Required empty public constructor
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (isAdded())
-            ((EventsFragment) getParentFragment()).setBundle(false);
-    }
+    List<EventModel> eventModels;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,9 +81,9 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", new Locale("en"));
                 String date = sdf.format(dateClicked);
                 List<EventModel> models = new ArrayList<>();
-                List<EventModel> eventModels = Realm.getDefaultInstance()
-                        .where(EventModel.class)
-                        .findAll();
+//                List<EventModel> eventModels = Realm.getDefaultInstance()
+//                        .where(EventModel.class)
+//                        .findAll();
                 for (int i = 0; i < eventModels.size(); i++) {
                     boolean isValid;
                     try {
@@ -98,16 +92,16 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                         if (isValid) {
                             models.add(eventModels.get(i));
                         }
-                        if (!models.isEmpty())
-                            ((EventsFragment) getParentFragment()).setBundle(true);
-                        ((EventsFragment) getParentFragment()).openList(models);
-                        ((EventsFragment) getParentFragment()).setDate(date);
+
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
                 }
-
+                if (!models.isEmpty())
+                    ((EventsFragment) getParentFragment()).setBundle(true);
+                ((EventsFragment) getParentFragment()).openList(models);
+                ((EventsFragment) getParentFragment()).setDate(date);
             }
 
             @Override
@@ -143,6 +137,7 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
 
     private void setData(List<EventModel> models) {
         widget.removeAllEvents();
+        eventModels = models;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         for (int i = 0; i < models.size(); i++) {
             int color;
@@ -154,27 +149,6 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
                     if (sdf.parse(models.get(i).getStartDate()).getTime() + ((1000 * 60 * 60 * 24) * j) <= sdf.parse(models.get(i).getEndDate()).getTime()) {
                         Event event = new Event(color, sdf.parse(models.get(i).getStartDate()).getTime() + ((1000 * 60 * 60 * 24) * j), models.get(i).getTitle());
                         widget.addEvent(event, true);
-                    }
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    private void setDatas(List<NewResponse> models) {
-        widget.removeAllEvents();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        for (int i = 0; i < models.size(); i++) {
-            int color;
-            try {
-                color = Color.parseColor(models.get(i).getColor());
-                int days = daysBetween(sdf.parse(models.get(i).getStartDate()).getTime(), sdf.parse(models.get(i).getEndDate()).getTime());
-                Log.e("days", days + "");
-                for (int j = 0; j <= days; j++) {
-                    if (sdf.parse(models.get(i).getStartDate()).getTime() + ((1000 * 60 * 60 * 24) * j) <= sdf.parse(models.get(i).getEndDate()).getTime()) {
-                        Event eventt = new Event(color, sdf.parse(models.get(i).getStartDate()).getTime() + ((1000 * 60 * 60 * 24) * j), models.get(i).getTitle());
-                        widget.addEvent(eventt, true);
                     }
                 }
             } catch (Exception ex) {
@@ -209,23 +183,16 @@ public class EventCalenderFragment extends Fragment implements OnDateSelectedLis
     @Override
     public void updateView(List<EventModel> models, List<EventCategoryModel> categoryModels) {
         if (models.isEmpty()) {
-//            new NoDataDialog().showDialog(getContext());
-            setData(Realm.getDefaultInstance()
-                    .where(EventModel.class)
-                    .findAll());
-        }
-        setData(models);
-    }
+            new NoDataDialog().showDialog(getContext());
 
-    @Override
-    public void updateViews(List<NewResponse> models, List<EventCategoryModel> categoryModels) {
-        if (models.isEmpty()) {
-//            new NoDataDialog().showDialog(getContext());
-            setData(Realm.getDefaultInstance()
-                    .where(EventModel.class)
-                    .findAll());
+//            setData(Realm.getDefaultInstance()
+//                    .where(EventModel.class)
+//                    .findAll());
+            ((EventsParentContract.ModelView) getParentFragment()).hideList();
+        } else {
+            setData(models);
+            ((EventsParentContract.ModelView) getParentFragment()).showList();
         }
-        setDatas(models);
     }
 
     @Override
