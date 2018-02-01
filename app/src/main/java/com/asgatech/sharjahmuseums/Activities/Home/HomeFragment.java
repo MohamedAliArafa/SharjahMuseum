@@ -138,7 +138,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    mWelcomeLinearLayout.startAnimation(out);
+//                    mWelcomeLinearLayout.startAnimation(out);
+                    new Handler().postDelayed(() -> mWelcomeLinearLayout.startAnimation(out), 4000);
+
                 }
 
                 @Override
@@ -174,7 +176,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    new Handler().postDelayed(() -> mWelcomeLinearLayout.startAnimation(out), 2000);
+                    new Handler().postDelayed(() -> mWelcomeLinearLayout.startAnimation(out), 4000);
                 }
 
                 @Override

@@ -101,6 +101,8 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
     ImageView ivLine1;
     @BindView(R.id.iv_line2)
     ImageView ivLine2;
+    @BindView(R.id.highligh_linearlayout)
+    LinearLayout text;
 //    @BindView(R.id.pager_container)
 //    PagerContainer pagerContainer;
 
@@ -372,7 +374,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
                 public void run() {
                     handler.post(Update);
                 }
-            }, 500, 5000);
+            }, 500, 3000);
 
             mSliderViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
@@ -397,7 +399,7 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
 
         if (Utils.validList(model.getHightLight())) {
             CarouselView carousel = findViewById(R.id.carousel);
-            LinearLayout text = findViewById(R.id.highligh_linearlayout);
+
             text.setVisibility(View.VISIBLE);
             carousel.setVisibility(View.VISIBLE);
             CoverFlowViewTransformer transformer = new CoverFlowViewTransformer();
@@ -428,7 +430,6 @@ public class MuseumsDetailsActivity extends AppCompatActivity implements View.On
             }));
         } else {
             CarouselView carousel = findViewById(R.id.carousel);
-            LinearLayout text = findViewById(R.id.highligh_linearlayout);
             text.setVisibility(View.GONE);
             carousel.setVisibility(View.GONE);
         }

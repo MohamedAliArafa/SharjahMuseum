@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     android:background="@color/White"
     android:orientation="vertical"
     tools:context="com.asgatech.sharjahmuseums.Activities.OurMuseums.MuseumDetails.MuseumsDetailsActivity">
@@ -54,18 +53,18 @@
                 android:layout_height="30dp"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
-                android:weightSum="5"
                 android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:weightSum="5">
 
 
                 <ImageView
                     android:id="@+id/add_review_linear"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
+                    android:layout_weight="1"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_add_review" />
 
@@ -101,10 +100,10 @@
                 <ImageView
                     android:id="@+id/share_linear"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
+                    android:layout_weight="1"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_sahre" />
             </LinearLayout>
@@ -180,8 +179,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginRight="20dp" />
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="6dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -213,8 +212,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginRight="20dp" />
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="6dp" />
 
             <LinearLayout
                 android:id="@+id/highligh_linearlayout"
@@ -223,7 +222,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="6dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
 
                 <com.asgatech.sharjahmuseums.Tools.CustomFonts.TextViewBold
@@ -236,32 +236,33 @@
                     android:textColor="@color/GrayDark" />
             </LinearLayout>
 
-                <com.gtomato.android.ui.widget.CarouselView
-                    android:id="@+id/carousel"
-                    android:layout_width="260dp"
-                    android:gravity="center"
-                    android:layout_marginTop="6dp"
-                    android:layout_gravity="center"
-                    android:layout_height="100dp"/>
-                <!--</FrameLayout>-->
+            <com.gtomato.android.ui.widget.CarouselView
+                android:id="@+id/carousel"
+                android:layout_width="260dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:visibility="gone" />
+            <!--</FrameLayout>-->
 
 
-                <LinearLayout
-                    android:id="@+id/layout_dots_gallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="4dp"
-                    android:layout_weight="0.1"
-                    android:gravity="center"
-                    android:orientation="horizontal" />
+            <LinearLayout
+                android:id="@+id/layout_dots_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:orientation="horizontal" />
             <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
                 android:layout_margin="@dimen/margin_10dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
 
 
@@ -280,8 +281,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_10dp"
                 android:layout_marginEnd="@dimen/margin_10dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="20dp" />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
